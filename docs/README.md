@@ -2,6 +2,11 @@
 
 This folder contains the Genesis AI Engineering Handbook and supporting implementation specifications.
 
+## Master Context
+
+- [Genesis AI Master Context](genesis-master-context.md)
+- [Engineering Handbook](engineering-handbook.md)
+
 ## Sprint 1 Documentation Sets
 
 - Sprint 1A: Foundation

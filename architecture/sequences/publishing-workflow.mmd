@@ -1,0 +1,15 @@
+sequenceDiagram
+  autonumber
+  actor Founder
+  participant Orchestrator as Genesis Orchestrator
+  participant Publishing as Publishing Department
+  participant DB as Genesis Database
+  participant Provider as Publishing Provider
+
+  Orchestrator->>Publishing: Send approved marketing pack
+  Publishing->>DB: Load product, creative, and marketing assets
+  Publishing-->>Orchestrator: Return publishing package
+  Orchestrator->>Founder: Request publishing approval
+  Founder-->>Orchestrator: Approve manual publishing
+  Orchestrator->>Provider: Prepare publishing handoff
+  Orchestrator->>DB: Store publishing status

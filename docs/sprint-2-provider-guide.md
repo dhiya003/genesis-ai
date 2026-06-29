@@ -1,6 +1,6 @@
 # Sprint 2 Research Provider Guide
 
-Sprint 2 supports two research execution modes.
+Sprint 2 supports three research execution modes.
 
 ## Deterministic mode
 
@@ -12,6 +12,24 @@ python scripts/verify.py
 ```
 
 It executes EMP-001 to EMP-004 locally without secrets or paid APIs.
+
+## Live web mode
+
+This mode enables public web-backed market research without paid credentials.
+
+```bash
+export GENESIS_RESEARCH_PROVIDER=live_web
+python -m apps.cli.main submit "Create a coffee lovers product brand for India."
+```
+
+Live web mode uses a lightweight public web search client and attaches evidence to every employee output:
+
+- EMP-001: trend evidence
+- EMP-002: competitor evidence
+- EMP-003: customer demand evidence
+- EMP-004: product opportunity evidence
+
+Live web mode is not the default CI provider because public search can be unavailable, rate-limited, or blocked by network policy. CI remains deterministic so the build is stable.
 
 ## OpenAI mode
 
@@ -38,4 +56,4 @@ The Research Department also validates the combined report before storing it.
 
 ## Integration boundary
 
-Sprint 2 completes the executable Product Factory vertical slice. Live marketplace, Instagram, Amazon, and web research are not enabled by default because they require external APIs, credentials, rate-limit policies, and compliance controls.
+Sprint 2 now supports a live web provider, but marketplace-specific integrations such as Amazon, Instagram, Facebook, Shopify, and WhatsApp still require dedicated API connectors, credentials, rate-limit policies, and compliance controls.

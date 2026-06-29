@@ -1,0 +1,33 @@
+[
+  {
+    "caseId": "TR-001",
+    "name": "Evergreen niche with broad demand",
+    "input": {
+      "projectId": "00000000-0000-0000-0000-000000000001",
+      "businessId": "00000000-0000-0000-0000-000000000010",
+      "niche": "Coffee Lovers",
+      "country": "India",
+      "language": "en"
+    },
+    "expected": {
+      "reportType": "TREND_REPORT",
+      "recommendationAllowed": ["APPROVE", "NEEDS_INVESTIGATION"],
+      "requiredFields": ["trendScore", "growthScore", "seasonalityScore", "confidence", "summary", "evidence", "risks", "nextActions"]
+    }
+  },
+  {
+    "caseId": "TR-002",
+    "name": "Missing niche should fail validation",
+    "input": {
+      "projectId": "00000000-0000-0000-0000-000000000002",
+      "businessId": "00000000-0000-0000-0000-000000000010",
+      "niche": "",
+      "country": "India",
+      "language": "en"
+    },
+    "expected": {
+      "recommendationAllowed": ["NEEDS_INVESTIGATION"],
+      "mustMention": "missing niche"
+    }
+  }
+]

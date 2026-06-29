@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Genesis AI verification suite.
 
-Runs repository-level validation for Sprint 1 foundation assets.
-This script intentionally uses Python standard library only.
+Runs repository-level validation for Sprint 1 foundation assets and Sprint 2
+runtime bootstrap assets. This script intentionally uses Python standard
+library only.
 """
 
 from __future__ import annotations
 
 import json
-import os
 import shutil
 import subprocess
 import sys
@@ -57,6 +57,21 @@ REQUIRED_FILES = [
     "implementation/sprint-2-plan.md",
 ]
 
+RUNTIME_BOOTSTRAP_FILES = [
+    "apps/__init__.py",
+    "apps/api/__init__.py",
+    "apps/api/app.py",
+    "apps/worker/__init__.py",
+    "apps/worker/main.py",
+    "apps/cli/__init__.py",
+    "apps/cli/main.py",
+    "config/__init__.py",
+    "config/runtime.py",
+    "config/logging.py",
+    "tests/test_runtime_bootstrap.py",
+    "docs/runtime-bootstrap.md",
+]
+
 JSON_FILES = [
     "api/schemas/research-report.schema.json",
     "api/schemas/product-blueprint.schema.json",
@@ -91,6 +106,18 @@ def check_required_files() -> list[str]:
         fail_msg(f"Missing required files: {missing}")
     else:
         pass_msg("All required Sprint 1 files are present")
+    return missing
+
+
+def check_runtime_bootstrap_files() -> list[str]:
+    missing = []
+    for rel_path in RUNTIME_BOOTSTRAP_FILES:
+        if not (ROOT / rel_path).is_file():
+            missing.append(rel_path)
+    if missing:
+        fail_msg(f"Missing Sprint 2 runtime bootstrap files: {missing}")
+    else:
+        pass_msg("All Sprint 2 runtime bootstrap files are present")
     return missing
 
 
@@ -141,6 +168,23 @@ def check_schema_fixture_alignment() -> list[str]:
     return issues
 
 
+def check_runtime_bootstrap_tests() -> int:
+    result = subprocess.run(
+        [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    print(result.stdout)
+    print(result.stderr)
+    if result.returncode == 0:
+        pass_msg("Sprint 2 runtime bootstrap tests pass")
+    else:
+        fail_msg("Sprint 2 runtime bootstrap tests failed")
+    return result.returncode
+
+
 def check_optional_docker() -> int:
     docker = shutil.which("docker")
     if not docker:
@@ -164,14 +208,19 @@ def check_optional_docker() -> int:
 
 
 def main() -> int:
-    print("Genesis AI Sprint 1 Verification Suite")
+    print("Genesis AI Verification Suite")
     print(f"Repository root: {ROOT}")
 
     failures = []
     failures.extend(check_required_files())
+    failures.extend(check_runtime_bootstrap_files())
     failures.extend(check_json_syntax())
     failures.extend(check_openapi_basic())
     failures.extend(check_schema_fixture_alignment())
+
+    runtime_test_status = check_runtime_bootstrap_tests()
+    if runtime_test_status != 0:
+        failures.append("Sprint 2 runtime bootstrap tests failed")
 
     docker_status = check_optional_docker()
     if docker_status != 0:

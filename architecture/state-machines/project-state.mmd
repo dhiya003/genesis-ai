@@ -1,0 +1,15 @@
+stateDiagram-v2
+  [*] --> Created
+  Created --> Researching
+  Researching --> ResearchComplete
+  ResearchComplete --> OrchestratorReview
+  OrchestratorReview --> Approved
+  OrchestratorReview --> Rejected
+  Approved --> Planning
+  Planning --> Creative
+  Creative --> Marketing
+  Marketing --> Publishing
+  Publishing --> Analytics
+  Analytics --> Completed
+  Completed --> Archived
+  Rejected --> Archived

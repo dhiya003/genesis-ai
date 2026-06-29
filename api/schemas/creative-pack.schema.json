@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/creative-pack.schema.json",
+  "title": "Genesis Creative Pack",
+  "type": "object",
+  "required": ["reportType", "projectId", "version", "creativeBrief", "designPrompts", "mockupInstructions", "confidence"],
+  "properties": {
+    "reportType": { "const": "CREATIVE_PACK" },
+    "projectId": { "type": "string", "format": "uuid" },
+    "version": { "type": "string" },
+    "creativeBrief": { "type": "object" },
+    "designPrompts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["productName", "style", "prompt"],
+        "properties": {
+          "productName": { "type": "string" },
+          "style": { "type": "string" },
+          "prompt": { "type": "string" },
+          "negativePrompt": { "type": "string" },
+          "productionNotes": { "type": "string" }
+        }
+      }
+    },
+    "mockupInstructions": { "type": "array", "items": { "type": "object" } },
+    "brandGuidelines": { "type": "object" },
+    "qualityChecklist": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/creative-pack.schema.json",
+  "title": "Creative Pack",
+  "type": "object",
+  "required": ["projectId", "brandDirection", "copyAssets", "imagePrompts"],
+  "properties": {
+    "projectId": { "type": "string" },
+    "brandDirection": { "type": "object" },
+    "copyAssets": { "type": "object" },
+    "imagePrompts": { "type": "array", "items": { "type": "string" } },
+    "checks": { "type": "array", "items": { "type": "string" } }
+  }
+}

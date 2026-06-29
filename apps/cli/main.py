@@ -27,10 +27,33 @@ def build_parser() -> argparse.ArgumentParser:
     submit_parser.add_argument("idea", help="Plain-text founder idea or path when --from-file is used")
     submit_parser.add_argument("--from-file", action="store_true", help="Read idea from a text file")
     submit_parser.add_argument("--data-dir", help="Override Genesis data directory")
+    submit_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto", help="Approval gate mode after research")
 
     report_parser = subcommands.add_parser("report", help="Retrieve a stored research report")
     report_parser.add_argument("project_id", help="Project ID returned by submit")
     report_parser.add_argument("--data-dir", help="Override Genesis data directory")
+
+    resume_parser = subcommands.add_parser("resume", help="Resume a stored research workflow")
+    resume_parser.add_argument("workflow_id", help="Workflow ID returned by submit")
+    resume_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto", help="Approval gate mode if resume completes research")
+    resume_parser.add_argument("--data-dir", help="Override Genesis data directory")
+
+    approval_parser = subcommands.add_parser("approval", help="Approve or reject a pending approval gate")
+    approval_subcommands = approval_parser.add_subparsers(dest="approval_command", required=True)
+    approve_parser = approval_subcommands.add_parser("approve", help="Approve a pending gate")
+    approve_parser.add_argument("approval_id")
+    approve_parser.add_argument("--actor", default="founder")
+    approve_parser.add_argument("--note")
+    approve_parser.add_argument("--data-dir")
+    reject_parser = approval_subcommands.add_parser("reject", help="Reject a pending gate")
+    reject_parser.add_argument("approval_id")
+    reject_parser.add_argument("--actor", default="founder")
+    reject_parser.add_argument("--note")
+    reject_parser.add_argument("--data-dir")
+
+    metrics_parser = subcommands.add_parser("metrics", help="List persisted runtime metrics")
+    metrics_parser.add_argument("--limit", type=int)
+    metrics_parser.add_argument("--data-dir", help="Override Genesis data directory")
     return parser
 
 
@@ -71,7 +94,11 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "submit":
             idea = _read_text_arg(args.idea, args.from_file)
-            result = GenesisOrchestrator(_store(args.data_dir)).submit_idea(idea)
+            result = GenesisOrchestrator(_store(args.data_dir)).submit_idea(idea, approval_mode=args.approval_mode)
+            _print_json(result)
+            return 0
+        if args.command == "resume":
+            result = GenesisOrchestrator(_store(args.data_dir)).resume_research_workflow(args.workflow_id, approval_mode=args.approval_mode)
             _print_json(result)
             return 0
         if args.command == "report":
@@ -81,6 +108,17 @@ def main(argv: list[str] | None = None) -> int:
             except FileNotFoundError as exc:
                 raise not_found(f"Research report not found for project {args.project_id}") from exc
             _print_json(report)
+            return 0
+        if args.command == "approval":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.approval_command == "approve":
+                _print_json(orchestrator.approve_gate(args.approval_id, actor=args.actor, note=args.note))
+                return 0
+            if args.approval_command == "reject":
+                _print_json(orchestrator.reject_gate(args.approval_id, actor=args.actor, note=args.note))
+                return 0
+        if args.command == "metrics":
+            _print_json({"metrics": _store(args.data_dir).list_metrics(limit=args.limit)})
             return 0
     except GenesisError as exc:
         _print_json(exc.to_payload())

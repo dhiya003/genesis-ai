@@ -35,6 +35,15 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
         except json.JSONDecodeError as exc:
             raise bad_request("Request body must be valid JSON") from exc
 
+    def _read_optional_json(self) -> dict[str, Any]:
+        length = int(self.headers.get("Content-Length", "0"))
+        if length <= 0:
+            return {}
+        try:
+            return json.loads(self.rfile.read(length).decode("utf-8"))
+        except json.JSONDecodeError as exc:
+            raise bad_request("Request body must be valid JSON") from exc
+
     @property
     def store(self) -> JsonStore:
         return self.server.store  # type: ignore[attr-defined]
@@ -45,6 +54,18 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._send_json(200, config.health_payload("api"))
+                return
+            if parsed.path == "/metrics":
+                self._send_json(200, {"metrics": self.store.list_metrics()})
+                return
+            if parsed.path.startswith("/approvals/"):
+                approval_id = parsed.path.removeprefix("/approvals/").strip("/")
+                if not approval_id:
+                    raise bad_request("Approval ID is required")
+                try:
+                    self._send_json(200, self.store.get_approval(approval_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Approval not found: {approval_id}") from exc
                 return
             if parsed.path.startswith("/reports/"):
                 project_id = parsed.path.removeprefix("/reports/").strip("/")
@@ -67,12 +88,45 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 idea = payload.get("idea")
                 if not isinstance(idea, str):
                     raise bad_request("idea must be a string")
-                result = GenesisOrchestrator(self.store).submit_idea(idea)
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).submit_idea(idea, approval_mode=approval_mode)
                 self._send_json(201, result)
+                return
+            if parsed.path.startswith("/workflows/") and parsed.path.endswith("/resume"):
+                workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/resume").strip("/")
+                if not workflow_id:
+                    raise bad_request("Workflow ID is required")
+                payload = self._read_optional_json()
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).resume_research_workflow(workflow_id, approval_mode=approval_mode)
+                self._send_json(200, result)
+                return
+            if parsed.path.startswith("/approvals/") and (parsed.path.endswith("/approve") or parsed.path.endswith("/reject")):
+                action = "approve" if parsed.path.endswith("/approve") else "reject"
+                approval_id = parsed.path.removeprefix("/approvals/").removesuffix(f"/{action}").strip("/")
+                if not approval_id:
+                    raise bad_request("Approval ID is required")
+                payload = self._read_optional_json()
+                actor = payload.get("actor", "founder")
+                note = payload.get("note")
+                if not isinstance(actor, str):
+                    raise bad_request("actor must be a string")
+                if note is not None and not isinstance(note, str):
+                    raise bad_request("note must be a string")
+                orchestrator = GenesisOrchestrator(self.store)
+                result = orchestrator.approve_gate(approval_id, actor=actor, note=note) if action == "approve" else orchestrator.reject_gate(approval_id, actor=actor, note=note)
+                self._send_json(200, result)
                 return
             self._send_json(404, {"status": "not_found", "path": parsed.path})
         except GenesisError as exc:
             self._send_json(exc.status_code, exc.to_payload())
+        except FileNotFoundError as exc:
+            error = not_found(str(exc))
+            self._send_json(error.status_code, error.to_payload())
         except ValueError as exc:
             error = bad_request(str(exc))
             self._send_json(error.status_code, error.to_payload())

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/publishing-package.schema.json",
+  "title": "Publishing Package",
+  "type": "object",
+  "required": ["projectId", "destination", "payload", "publishingStatus"],
+  "properties": {
+    "projectId": { "type": "string" },
+    "destination": { "type": "string" },
+    "payload": { "type": "object" },
+    "publishingStatus": { "type": "string", "enum": ["draft", "ready", "published", "failed"] }
+  }
+}

@@ -1,0 +1,21 @@
+flowchart TD
+  A[Genesis API]
+  B[Project Service]
+  C[Workflow Service]
+  D[Report Service]
+  E[Prompt Service]
+  F[Genesis Orchestrator]
+  G[Research Runner]
+  H[(PostgreSQL)]
+
+  A --> B
+  A --> C
+  A --> D
+  C --> F
+  F --> G
+  G --> E
+  G --> D
+  B --> H
+  C --> H
+  D --> H
+  E --> H

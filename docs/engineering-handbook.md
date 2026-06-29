@@ -1,119 +1,350 @@
 # Genesis AI Engineering Handbook
 
-Version: 0.1.0
-Status: Living handbook
-Owner: Genesis AI Engineering
+From this point onward, Genesis AI is a product, not just a conversation. Every decision we make should contribute to a real, buildable system.
 
-## Product Principle
+## Genesis AI v1 Roadmap
 
-Genesis AI is an AI product factory, not a prompt collection. The system should behave like a digital company where departments own decisions, employees own responsibilities, and every output can be reviewed, stored, improved, and reused.
+### Phase 1 — Research Department
 
-## Operating Model
+Goal: Decide what to build.
 
-Genesis runs as departments connected by workflow gates.
+Employees:
 
-1. Research Department decides what to build.
-2. Product Department decides how to build it.
-3. Creative Department creates product and marketing assets.
-4. Marketing Department prepares selling material.
-5. Publishing Department sends approved products to channels.
-6. Analytics Department learns from market results and feeds the next cycle.
+- Trend Research AI
+- Competitor Research AI
+- Customer Research AI
+- Product Research AI
 
-Each department must produce a structured artifact that can be validated independently before the next department starts.
+Output: Research Report
 
-## Engineering Rules
+### Phase 2 — Product Department
+
+Goal: Decide how to build it.
+
+Employees:
+
+- Product Planner
+- Pricing Expert
+- POD Expert
+
+Output: Product Blueprint
+
+### Phase 3 — Creative Department
+
+Goal: Create assets.
+
+Employees:
+
+- Creative Director
+- Design Generator
+- Mockup Generator
+
+Output: Design Pack
+
+### Phase 4 — Marketing Department
+
+Goal: Sell the products.
+
+Employees:
+
+- Instagram Manager
+- Facebook Manager
+- Copywriter
+- SEO Writer
+
+Output: Marketing Pack
+
+### Phase 5 — Publishing Department
+
+Goal: Publish everywhere.
+
+Initially:
+
+- Qikink
+- Instagram
+- Facebook
+
+Later:
+
+- Amazon
+- Shopify
+- Etsy
+
+### Phase 6 — Analytics Department
+
+Goal: Learn from results.
+
+Outputs:
+
+- Best-selling niches
+- Best-performing designs
+- Winning colors
+- Winning products
+- Recommendations for the next cycle
+
+## Development Rules
+
+These are the engineering rules we'll follow throughout Genesis:
 
 - Manual first, automation second.
 - Every employee has one responsibility.
-- Every department output must be persisted.
-- Every recommendation should include evidence when possible.
-- Every automated decision should expose confidence and citations.
-- Every workflow transition that can affect spend, publishing, or production should support approval.
-- No vendor lock-in. Qikink is the first provider, not the only provider.
-- The deterministic provider must keep local development and CI usable without secrets.
+- Every decision must be backed by data when possible.
+- Every output is stored for future learning.
+- No vendor lock-in. Qikink is the first provider, not the only one.
 
-## Runtime Standards
+## Sprint 1 Deliverable
 
-The runtime must support:
+By the end of this sprint, Genesis should be able to do this:
 
-- Local execution through the CLI.
-- HTTP execution through the API.
-- File-backed persistence for local and CI workflows.
-- Stable schemas for reports and launch artifacts.
-- Retry and recovery for interrupted workflows.
-- Observability for workflow duration, employee runtime, errors, and provider usage.
+Input:
 
-Runtime code should avoid mandatory paid services in early sprints. Optional integrations may depend on credentials, but the default path must remain runnable on a clean machine.
-
-## Workflow Standards
-
-Workflow state must be explicit:
-
-- `CREATED`: workflow has been created but not started.
-- `RUNNING`: workflow is actively executing.
-- `COMPLETED`: workflow finished and stored its result.
-- `FAILED`: workflow failed with a persisted error.
-
-Recovery must preserve the original workflow ID and increment the attempt count. A workflow left in `RUNNING` can be resumed by marking it recoverable and running the department again. A `FAILED` workflow can be retried through the same recovery path.
-
-## Approval Standards
-
-Approval gates protect transitions between departments.
-
-Supported modes:
-
-- `auto`: system approval for local development and low-risk runs.
-- `manual`: founder approval before the next department proceeds.
-- `human`: explicit human review mode for production-like workflows.
-
-Approval records must include the project, workflow, gate, mode, status, requester, timestamps, and decision metadata.
-
-## Observability Standards
-
-Genesis should record lightweight metrics without requiring an external dashboard in early sprints.
-
-Minimum metric categories:
-
-- workflow created, running, completed, failed, retried, recovered
-- employee completed with runtime and score
-- research report stored with overall score and confidence
-
-Future production deployments can export the same events to a hosted dashboard without changing department logic.
-
-## Research Standards
-
-Research output must include:
-
-- market or trend analysis
-- competitor analysis
-- customer analysis
-- product research
-- confidence
-- citations
-- risks
-- next actions
-- cost or usage summary
-
-When official marketplace APIs are unavailable, live search may be used as a bridge, but the report must make the evidence level clear.
-
-## Testing Standards
-
-Every Sprint 2 runtime change should include focused tests for:
-
-- workflow state changes
-- persisted artifacts
-- CLI behavior
-- API behavior when applicable
-- report schema validity when report output changes
-
-The base validation command is:
-
-```bash
-python3 -m unittest discover -s tests
+```text
+Build a business around coffee lovers.
 ```
 
-## Sprint 2 Definition of Done
+Output:
 
-Sprint 2 is complete when Genesis can reliably accept a founder idea, run the Research Department, persist the report and employee outputs, expose confidence and citations, track runtime behavior, support approval before later departments, and recover from interrupted research workflows.
+- Market research report
+- Competition summary
+- Recommended products
+- Product concepts
+- Design prompts
+- Titles and descriptions
+- Social media captions
+- Ready-to-review package
 
-Official marketplace APIs, richer dashboards, and downstream department automation can land after this foundation is stable.
+No coding is required yet. We are validating the workflow and the quality of each employee.
+
+## Product Mindset
+
+Genesis should not become a collection of prompts.
+
+Genesis should become a digital company.
+
+When someone asks in the future:
+
+```text
+Who designed this product?
+```
+
+The answer should not be:
+
+```text
+ChatGPT
+```
+
+It should be:
+
+```text
+Creative Department - Genesis AI
+```
+
+When someone asks:
+
+```text
+Who decided to enter this niche?
+```
+
+The answer should be:
+
+```text
+Research Department - Genesis AI
+```
+
+That mindset keeps the architecture clean and makes it much easier to automate department by department.
+
+## Sprint 2 Remaining Work
+
+### Real Marketplace APIs
+
+Current implementation uses targeted live search, such as Amazon pages and Instagram pages, rather than official APIs.
+
+Still needed:
+
+- Amazon Product Advertising API
+- Shopify Storefront/Admin API
+- Etsy API
+- Meta Graph API for Instagram/Facebook
+- YouTube Data API
+- Google Trends API
+
+Status: Functional but not official integrations.
+
+### Search Aggregation Engine
+
+Instead of each employee searching independently:
+
+```text
+EMP1 -> Search
+EMP2 -> Search
+EMP3 -> Search
+EMP4 -> Search
+```
+
+Build:
+
+```text
+Search Manager
+  -> One unified search
+  -> Cache
+  -> Employees reuse results
+```
+
+Benefits:
+
+- Faster
+- Lower API usage
+- Better consistency
+
+Status: Pending.
+
+### Confidence Engine
+
+Research confidence should be calculated from:
+
+- Number of sources
+- Source diversity
+- Agreement between sources
+- Freshness
+- Data completeness
+
+Status: Pending.
+
+### Citation Engine
+
+Every recommendation should include citations such as:
+
+- Amazon listing
+- Instagram page
+- Competitor website
+- News article
+- Trend source
+
+Status: Partial.
+
+### Research Memory
+
+Avoid repeating searches.
+
+Need:
+
+```text
+Research Cache
+  -> Embeddings
+  -> Similarity Search
+  -> Reuse previous research
+```
+
+Status: Pending.
+
+### Cost Tracking
+
+Track:
+
+- OpenAI tokens
+- API costs
+- Search requests
+- Runtime
+- Per employee
+
+Status: Pending.
+
+### Observability
+
+Need dashboards for:
+
+- Workflow duration
+- Employee runtime
+- Errors
+- API latency
+
+Status: Pending.
+
+### Parallel Employee Execution
+
+Currently employees execute sequentially.
+
+Need:
+
+```text
+EMP1
+EMP2
+EMP3
+EMP4
+  -> Run simultaneously
+```
+
+This will significantly reduce runtime.
+
+Status: Pending.
+
+### Retry and Recovery
+
+Need:
+
+- Automatic retries
+- Backoff
+- Resume interrupted workflows
+
+Status: Basic workflow retry exists; comprehensive recovery does not.
+
+### Approval Workflow
+
+Support:
+
+- Auto
+- Manual
+- Human approval
+
+Approval should happen before proceeding to later departments.
+
+Status: Pending.
+
+## Sprint Split Recommendation
+
+Do not close Sprint 2 yet. Split the remaining work into three implementation phases.
+
+### Sprint 2A — Runtime
+
+Status: Approximately 95% complete.
+
+Completed:
+
+- Core runtime
+- Workflow
+- Research
+- API
+- Live web
+- Marketplace search
+
+### Sprint 2B — Intelligence
+
+Scope:
+
+- Confidence engine
+- Citation engine
+- Search aggregation
+- Research cache
+- Parallel execution
+
+### Sprint 2C — Production Readiness
+
+Scope:
+
+- Official marketplace/API integrations
+- Cost tracking
+- Observability
+- Approval workflow
+- End-to-end validation
+- CI verification
+
+## Completion Snapshot
+
+Based on the agreed Sprint 2 scope:
+
+- Core platform: 100%
+- Live research capability: 85-90%
+- Production-grade intelligence: approximately 60%
+- Overall Sprint 2: approximately 85% complete
+
+The remaining work turns a functioning research engine into a production-ready, scalable intelligence platform.

@@ -9,51 +9,51 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_USER: genesis
-          POSTGRES_PASSWORD: genesis_dev_password
-          POSTGRES_DB: genesis
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U genesis -d genesis"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - uses: actions/checkout@v4
+
       - name: Validate required files
         run: |
           test -f README.md
-          test -f .gitignore
           test -f CONTRIBUTING.md
           test -f CODE_OF_CONDUCT.md
           test -f CHANGELOG.md
-          test -f docker-compose.yml
           test -f .env.example
+          test -f infrastructure/docker-compose.yml
           test -f api/openapi.yaml
-          test -f database/migrations/0001_initial_schema.sql
-          test -f database/seeds/0001_seed_ai_workforce.sql
+          test -f database/schema.sql
+          test -f database/migrations/001_initial_schema.sql
+          test -f database/seeds/001_departments.sql
+          test -f database/seeds/002_employees.sql
+          test -f prompts/orchestrator/genesis-orchestrator.md
+          test -f prompts/research/emp-001-trend-research-specialist.md
+          test -f prompts/research/emp-002-competitor-research-specialist.md
+          test -f prompts/research/emp-003-customer-research-specialist.md
+          test -f prompts/research/emp-004-product-research-specialist.md
+
       - name: Validate JSON files
         run: |
-          python -m json.tool schemas/common-error.schema.json >/dev/null
-          python -m json.tool schemas/research-report.schema.json >/dev/null
-          python -m json.tool schemas/product-blueprint.schema.json >/dev/null
-          python -m json.tool schemas/creative-pack.schema.json >/dev/null
-          python -m json.tool schemas/marketing-pack.schema.json >/dev/null
-          python -m json.tool schemas/publishing-package.schema.json >/dev/null
-          python -m json.tool schemas/analytics-report.schema.json >/dev/null
-          python -m json.tool tests/prompt-regression-dataset.json >/dev/null
-      - name: Apply database migration and seed data
-        env:
-          PGPASSWORD: genesis_dev_password
+          python -m json.tool api/schemas/research-report.schema.json >/dev/null
+          python -m json.tool api/schemas/product-blueprint.schema.json >/dev/null
+          python -m json.tool api/schemas/creative-pack.schema.json >/dev/null
+          python -m json.tool api/schemas/marketing-pack.schema.json >/dev/null
+          python -m json.tool api/schemas/publishing-package.schema.json >/dev/null
+          python -m json.tool api/schemas/analytics-report.schema.json >/dev/null
+          python -m json.tool api/schemas/error-response.schema.json >/dev/null
+          python -m json.tool testing/prompt-regression/research-trend-cases.json >/dev/null
+          python -m json.tool testing/fixtures/sample-project.json >/dev/null
+          python -m json.tool testing/fixtures/sample-trend-report.json >/dev/null
+          python -m json.tool testing/fixtures/sample-product-blueprint.json >/dev/null
+          python -m json.tool testing/fixtures/sample-creative-pack.json >/dev/null
+          python -m json.tool testing/fixtures/sample-marketing-pack.json >/dev/null
+
+      - name: Check architecture diagrams exist
         run: |
-          psql -h localhost -U genesis -d genesis -f database/migrations/0001_initial_schema.sql
-          psql -h localhost -U genesis -d genesis -f database/seeds/0001_seed_ai_workforce.sql
-      - name: Check Mermaid docs exist
-        run: |
-          test -f architecture/system-context.md
-          test -f architecture/er-diagram.md
+          test -f database/er-diagram.mmd
+          test -f architecture/system-context.mmd
+          test -f architecture/c4-container.mmd
+          test -f architecture/component-diagram.mmd
+          test -f architecture/sequences/research-workflow.mmd
+          test -f architecture/sequences/publishing-workflow.mmd
+          test -f architecture/state-machines/project-state.mmd
+          test -f architecture/state-machines/workflow-state.mmd

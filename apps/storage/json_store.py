@@ -18,7 +18,22 @@ class JsonStore:
         self.reports_dir = self.root / "reports"
         self.approvals_dir = self.root / "approvals"
         self.metrics_dir = self.root / "metrics"
-        for directory in [self.projects_dir, self.workflows_dir, self.employee_outputs_dir, self.reports_dir, self.approvals_dir, self.metrics_dir]:
+        self.tasks_dir = self.root / "tasks"
+        self.deliverables_dir = self.root / "deliverables"
+        self.audit_logs_dir = self.root / "audit_logs"
+        self.execution_history_dir = self.root / "execution_history"
+        for directory in [
+            self.projects_dir,
+            self.workflows_dir,
+            self.employee_outputs_dir,
+            self.reports_dir,
+            self.approvals_dir,
+            self.metrics_dir,
+            self.tasks_dir,
+            self.deliverables_dir,
+            self.audit_logs_dir,
+            self.execution_history_dir,
+        ]:
             directory.mkdir(parents=True, exist_ok=True)
 
     def save_project(self, project: dict[str, Any]) -> None:
@@ -75,6 +90,54 @@ class JsonStore:
         if limit is None:
             return metrics
         return metrics[-limit:]
+
+    def save_task(self, task: dict[str, Any]) -> None:
+        self._write(self.tasks_dir / f"{task['id']}.json", task)
+
+    def list_tasks(self, project_id: str | None = None, workflow_id: str | None = None) -> list[dict[str, Any]]:
+        tasks = [self._read(path) for path in sorted(self.tasks_dir.glob("*.json"))]
+        if project_id is not None:
+            tasks = [task for task in tasks if task.get("projectId") == project_id]
+        if workflow_id is not None:
+            tasks = [task for task in tasks if task.get("workflowId") == workflow_id]
+        return tasks
+
+    def save_deliverable(self, deliverable: dict[str, Any]) -> None:
+        self._write(self.deliverables_dir / f"{deliverable['id']}.json", deliverable)
+
+    def list_deliverables(self, project_id: str | None = None, workflow_id: str | None = None) -> list[dict[str, Any]]:
+        deliverables = [self._read(path) for path in sorted(self.deliverables_dir.glob("*.json"))]
+        if project_id is not None:
+            deliverables = [deliverable for deliverable in deliverables if deliverable.get("projectId") == project_id]
+        if workflow_id is not None:
+            deliverables = [deliverable for deliverable in deliverables if deliverable.get("workflowId") == workflow_id]
+        return deliverables
+
+    def save_audit_log(self, audit_log: dict[str, Any]) -> None:
+        self._write(self.audit_logs_dir / f"{audit_log['id']}.json", audit_log)
+
+    def list_audit_logs(self, project_id: str | None = None, workflow_id: str | None = None, limit: int | None = None) -> list[dict[str, Any]]:
+        audit_logs = [self._read(path) for path in sorted(self.audit_logs_dir.glob("*.json"))]
+        if project_id is not None:
+            audit_logs = [audit_log for audit_log in audit_logs if audit_log.get("projectId") == project_id]
+        if workflow_id is not None:
+            audit_logs = [audit_log for audit_log in audit_logs if audit_log.get("workflowId") == workflow_id]
+        audit_logs.sort(key=lambda item: str(item.get("createdAt", "")))
+        if limit is None:
+            return audit_logs
+        return audit_logs[-limit:]
+
+    def save_execution_event(self, event: dict[str, Any]) -> None:
+        self._write(self.execution_history_dir / f"{event['id']}.json", event)
+
+    def list_execution_history(self, project_id: str | None = None, workflow_id: str | None = None) -> list[dict[str, Any]]:
+        events = [self._read(path) for path in sorted(self.execution_history_dir.glob("*.json"))]
+        if project_id is not None:
+            events = [event for event in events if event.get("projectId") == project_id]
+        if workflow_id is not None:
+            events = [event for event in events if event.get("workflowId") == workflow_id]
+        events.sort(key=lambda item: str(item.get("createdAt", "")))
+        return events
 
     def _write(self, path: Path, payload: dict[str, Any]) -> None:
         path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")

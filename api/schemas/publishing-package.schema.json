@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/publishing-package.schema.json",
+  "title": "Genesis Publishing Package",
+  "type": "object",
+  "required": ["reportType", "projectId", "version", "provider", "requiredAssets", "checklist", "confidence"],
+  "properties": {
+    "reportType": { "const": "PUBLISHING_PACKAGE" },
+    "projectId": { "type": "string", "format": "uuid" },
+    "version": { "type": "string" },
+    "provider": { "type": "string" },
+    "marketplace": { "type": "string" },
+    "requiredAssets": { "type": "array", "items": { "type": "string" } },
+    "checklist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "status"],
+        "properties": {
+          "item": { "type": "string" },
+          "status": { "type": "string", "enum": ["PENDING", "READY", "BLOCKED"] },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "compatibility": { "type": "object" },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

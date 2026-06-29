@@ -14,6 +14,11 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 - Sprint 1C: Operational Design
 - Sprint 1D: Engineering Design Pack
 
+## Sprint Documentation
+
+- [Sprint 3 Kickoff - Product Intelligence & Engineering](sprint-3-kickoff.md)
+- [Sprint 3 Phase 1 - Product Definition](sprint-3-phase-1-product-definition.md)
+
 ## Documentation Rule
 
 Every engineering artifact must map back to a business requirement, functional requirement, architecture decision, data contract, and test plan.

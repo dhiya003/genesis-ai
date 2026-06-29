@@ -1,0 +1,10 @@
+{
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "productName": "Tamil Heritage Quote Tee",
+  "targetCustomer": { "primary": "Tamil identity-driven buyer", "secondary": "gift buyer" },
+  "valueProposition": "A simple wearable Tamil identity product that can be launched with POD fulfillment.",
+  "productSpecs": { "type": "t-shirt", "print": "front typography", "variants": ["black", "white"] },
+  "pricing": { "launchPrice": 799, "currency": "INR" },
+  "fulfillment": { "method": "print-on-demand", "phase": "manual" },
+  "checks": ["margin checked", "mockup ready", "supplier selected"]
+}

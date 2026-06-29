@@ -1,4 +1,4 @@
-name: Genesis CI
+name: Genesis AI CI
 
 on:
   push:
@@ -7,26 +7,53 @@ on:
     branches: [main]
 
 jobs:
-  validate-repository:
-    name: Validate repository assets
+  validate:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: genesis
+          POSTGRES_PASSWORD: genesis_dev_password
+          POSTGRES_DB: genesis
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U genesis -d genesis"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Validate required files
         run: |
           test -f README.md
-          test -f database/schema.sql
+          test -f .gitignore
+          test -f CONTRIBUTING.md
+          test -f CODE_OF_CONDUCT.md
+          test -f CHANGELOG.md
+          test -f docker-compose.yml
+          test -f .env.example
           test -f api/openapi.yaml
-          test -f infrastructure/docker-compose.yml
-          test -f prompts/research/emp-001-trend-research-specialist.md
-          test -f testing/prompt-regression/research-trend-cases.json
-
+          test -f database/migrations/0001_initial_schema.sql
+          test -f database/seeds/0001_seed_ai_workforce.sql
       - name: Validate JSON files
         run: |
-          python -m json.tool testing/prompt-regression/research-trend-cases.json > /tmp/research-trend-cases.json
-
-      - name: Validate Mermaid files are present
+          python -m json.tool schemas/common-error.schema.json >/dev/null
+          python -m json.tool schemas/research-report.schema.json >/dev/null
+          python -m json.tool schemas/product-blueprint.schema.json >/dev/null
+          python -m json.tool schemas/creative-pack.schema.json >/dev/null
+          python -m json.tool schemas/marketing-pack.schema.json >/dev/null
+          python -m json.tool schemas/publishing-package.schema.json >/dev/null
+          python -m json.tool schemas/analytics-report.schema.json >/dev/null
+          python -m json.tool tests/prompt-regression-dataset.json >/dev/null
+      - name: Apply database migration and seed data
+        env:
+          PGPASSWORD: genesis_dev_password
         run: |
-          find architecture database -name "*.mmd" -type f -print
+          psql -h localhost -U genesis -d genesis -f database/migrations/0001_initial_schema.sql
+          psql -h localhost -U genesis -d genesis -f database/seeds/0001_seed_ai_workforce.sql
+      - name: Check Mermaid docs exist
+        run: |
+          test -f architecture/system-context.md
+          test -f architecture/er-diagram.md

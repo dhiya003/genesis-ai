@@ -1,10 +1,10 @@
 openapi: 3.1.0
 info:
   title: Genesis AI Internal API
-  version: 0.1.0
-  description: Sprint 1D API contract for AI Product Factory design pack.
+  version: 0.2.0
+  description: Sprint 2 API contract for the executable Product Factory research vertical slice.
 servers:
-  - url: http://localhost:3000/api
+  - url: http://127.0.0.1:8000
 paths:
   /health:
     get:
@@ -12,184 +12,21 @@ paths:
       responses:
         '200':
           description: Health status
-          content:
-            application/json:
-              schema:
-                type: object
-                required: [status]
-                properties:
-                  status:
-                    type: string
-                    enum: [ok]
   /projects:
     post:
-      summary: Create a Genesis project from founder requirement
-      operationId: createProject
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateProjectRequest'
+      summary: Submit an idea and run the research workflow
       responses:
         '201':
-          description: Project created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/research-report:
-    post:
-      summary: Store research report
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResearchReport'
+          description: Project, workflow, and research report created
+  /reports/{projectId}:
+    get:
+      summary: Retrieve a research report
       responses:
-        '201':
-          description: Research report created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/product-blueprint:
-    post:
-      summary: Store product blueprint
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductBlueprint'
-      responses:
-        '201':
-          description: Product blueprint created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/creative-pack:
-    post:
-      summary: Store creative pack
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreativePack'
-      responses:
-        '201':
-          description: Creative pack created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/marketing-pack:
-    post:
-      summary: Store marketing pack
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MarketingPack'
-      responses:
-        '201':
-          description: Marketing pack created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/publishing-package:
-    post:
-      summary: Store publishing package
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublishingPackage'
-      responses:
-        '201':
-          description: Publishing package created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
-  /projects/{projectId}/analytics-report:
-    post:
-      summary: Store analytics report
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AnalyticsReport'
-      responses:
-        '201':
-          description: Analytics report created
-        default:
-          $ref: '#/components/responses/ErrorResponse'
+        '200':
+          description: Research report
+        '404':
+          description: Not found
 components:
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-  responses:
-    ErrorResponse:
-      description: Standard error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CreateProjectRequest:
-      type: object
-      required: [title, founderRequirement]
-      properties:
-        title:
-          type: string
-        founderRequirement:
-          type: string
-        country:
-          type: string
-          default: India
-        language:
-          type: string
-          default: en
-    Project:
-      type: object
-      required: [id, title, status]
-      properties:
-        id:
-          type: string
-          format: uuid
-        title:
-          type: string
-        status:
-          type: string
-          enum: [draft, researching, blueprinting, creative_packaging, marketing_packaging, publishing_ready, published, analyzing, archived, failed]
     ResearchReport:
-      $ref: '../schemas/research-report.schema.json'
-    ProductBlueprint:
-      $ref: '../schemas/product-blueprint.schema.json'
-    CreativePack:
-      $ref: '../schemas/creative-pack.schema.json'
-    MarketingPack:
-      $ref: '../schemas/marketing-pack.schema.json'
-    PublishingPackage:
-      $ref: '../schemas/publishing-package.schema.json'
-    AnalyticsReport:
-      $ref: '../schemas/analytics-report.schema.json'
-    Error:
-      $ref: '../schemas/common-error.schema.json'
+      type: object

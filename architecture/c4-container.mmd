@@ -1,0 +1,33 @@
+flowchart TD
+  Founder[Founder]
+  Dashboard[Founder Dashboard]
+  API[Genesis API]
+  Orchestrator[Genesis Orchestrator]
+  Workflow[Workflow Engine]
+  Research[Research Department]
+  Product[Product Department]
+  Creative[Creative Department]
+  Marketing[Marketing Department]
+  Publishing[Publishing Department]
+  Analytics[Analytics Department]
+  DB[(PostgreSQL / Supabase)]
+  Storage[(Drive / Object Storage)]
+
+  Founder --> Dashboard
+  Dashboard --> API
+  API --> Orchestrator
+  Orchestrator --> Workflow
+  Workflow --> Research
+  Workflow --> Product
+  Workflow --> Creative
+  Workflow --> Marketing
+  Workflow --> Publishing
+  Workflow --> Analytics
+  Research --> DB
+  Product --> DB
+  Creative --> DB
+  Marketing --> DB
+  Publishing --> DB
+  Analytics --> DB
+  Creative --> Storage
+  Publishing --> Storage

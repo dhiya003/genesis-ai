@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/marketing-pack.schema.json",
+  "title": "Genesis Marketing Pack",
+  "type": "object",
+  "required": ["reportType", "projectId", "version", "seo", "social", "confidence"],
+  "properties": {
+    "reportType": { "const": "MARKETING_PACK" },
+    "projectId": { "type": "string", "format": "uuid" },
+    "version": { "type": "string" },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "titles": { "type": "array", "items": { "type": "string" } },
+        "descriptions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "instagram": { "type": "object" },
+        "facebook": { "type": "object" },
+        "hashtags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "launchCalendar": { "type": "array", "items": { "type": "object" } },
+    "actionPrompts": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

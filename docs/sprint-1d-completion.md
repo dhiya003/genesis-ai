@@ -5,55 +5,78 @@ Status: Complete
 
 ## Sprint goal
 
-Create the minimum engineering foundation for Genesis AI to act as the AI Product Factory brain before adding paid infrastructure such as Supabase, Meta API, VPS, Cloudflare, and automation-scale services in later phases.
+Create the Engineering Design Pack required before Sprint 2 implementation.
 
 ## Completed assets
 
-### 1. CEO AI answer model
+### Repository foundation
 
-CEO AI now has a defined source hierarchy:
+- README
+- CONTRIBUTING
+- CODE OF CONDUCT
+- CHANGELOG
+- Environment template
+- CI validation workflow
 
-1. User-approved Genesis strategy and project memory
-2. GitHub repository files and workflow state
-3. Connected tools and live business data
-4. Model reasoning, marked as recommendation when unsupported by data
+### Database
 
-### 2. Product Factory agent contract
+- PostgreSQL schema
+- Migration folder
+- Department seed data
+- Employee seed data
+- ER diagram
 
-The AI Product Factory agent is scoped to take a business/product requirement in plain text and convert it into:
+### API and contracts
 
-- product hypothesis
-- target customer
-- product catalog structure
-- landing-page copy
-- Instagram/Facebook content plan
-- manual fulfilment checklist
-- future automation hooks
+- OpenAPI contract
+- Research Report schema
+- Product Blueprint schema
+- Creative Pack schema
+- Marketing Pack schema
+- Publishing Package schema
+- Analytics Report schema
+- Error response schema
 
-### 3. Lean Phase 1 boundary
+### Architecture
 
-Phase 1 intentionally avoids paid infrastructure dependencies:
+- System context diagram
+- Container diagram
+- Component diagram
+- Research sequence diagram
+- Publishing sequence diagram
+- Project state machine
+- Workflow state machine
 
-- no Meta API dependency
-- no Supabase dependency
-- no VPS dependency
-- no Cloudflare dependency
-- no heavy backend dependency
+### AI workforce
 
-Phase 1 is designed to work from GitHub files, manual execution, ChatGPT, Shopify/manual website setup, and reusable prompts/workflows.
+- CEO AI system prompt
+- AI Product Factory agent prompt
+- Genesis Orchestrator prompt
+- EMP-001 Trend Research Specialist
+- EMP-002 Competitor Research Specialist
+- EMP-003 Customer Research Specialist
+- EMP-004 Product Research Specialist
 
-### 4. Sprint 2 handoff
+### Testing
 
-Sprint 2 starts with building a working AI Product Factory pipeline that can produce one store/product-line launch pack from a text requirement.
+- Prompt regression dataset
+- Prompt evaluation checklist
+- Sample project fixture
+- Sample trend report fixture
+- Sample product blueprint fixture
+- Sample creative pack fixture
+- Sample marketing pack fixture
+
+### Development handoff
+
+- Local development guide
+- Sprint 2 plan
+- Implementation backlog
+- ADR-001 Product Factory First
 
 ## Definition of done
 
-Sprint 1D is considered complete because the following are now committed:
-
-- CEO AI answer-source architecture
-- Product Factory prompt contract
-- Sprint 1D completion checklist
-- Sprint 2 kickoff plan
+Sprint 1D is complete because the repository now contains the minimum engineering assets needed to begin Sprint 2.
 
 ## Open risks carried into Sprint 2
 

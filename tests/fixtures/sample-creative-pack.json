@@ -1,0 +1,7 @@
+{
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "brandDirection": { "tone": "premium regional identity", "colors": ["black", "gold", "cream"] },
+  "copyAssets": { "headline": "Wear your roots with pride", "subheadline": "Tamil heritage products made for daily identity." },
+  "imagePrompts": ["premium t-shirt mockup with Tamil typography on neutral background"],
+  "checks": ["brand consistent", "copy usable", "prompt clear"]
+}

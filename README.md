@@ -11,26 +11,53 @@ Genesis AI is the founder/CEO intelligence layer for building the AI Product Fac
 
 ## Sprint 1D status
 
-Sprint 1D is complete.
+Sprint 1D is complete against the Engineering Design Pack baseline.
 
-Committed assets:
+Committed foundation assets include:
 
 - CEO AI answer-source model
 - CEO AI system prompt
 - AI Product Factory agent prompt
-- Sprint 1D completion checklist
+- Genesis Orchestrator prompt
+- Research employee prompts EMP-001 to EMP-004
+- PostgreSQL/Supabase-ready database schema
+- Database seed data
+- Migration structure
+- ER diagram
+- OpenAPI contract
+- JSON schemas for research, product, creative, marketing, publishing, analytics, and errors
+- Architecture diagrams
+- Sequence diagrams
+- State machines
+- Docker Compose local environment
+- CI validation workflow
+- Prompt regression dataset
+- Sample fixtures
+- Local development guide
 - Sprint 2 kickoff plan
 
 ## Repo structure
 
 ```text
+api/
+  openapi.yaml
+  schemas/
+architecture/
+  sequences/
+  state-machines/
+database/
+  migrations/
+  seeds/
 docs/
-  answer-sources.md
-  sprint-1d-completion.md
-  sprint-2-kickoff.md
+  adr/
+implementation/
+infrastructure/
 prompts/
-  ceo-ai-system.md
-  product-factory-agent.md
+  orchestrator/
+  research/
+testing/
+  fixtures/
+  prompt-regression/
 ```
 
 ## Operating principle

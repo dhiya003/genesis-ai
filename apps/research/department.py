@@ -7,6 +7,7 @@ from statistics import mean
 from typing import Any
 
 from apps.employees import EMPLOYEES, run_employee
+from apps.research.intelligence import CitationEngine, ConfidenceEngine, CostTracker, collect_parallel
 from apps.storage import JsonStore
 from scripts.validate_research_report import validate_research_report_payload
 
@@ -18,18 +19,23 @@ class ResearchDepartment:
 
     def __init__(self, store: JsonStore) -> None:
         self.store = store
+        self.confidence_engine = ConfidenceEngine()
+        self.citation_engine = CitationEngine()
+        self.cost_tracker = CostTracker()
 
     def execute(self, project: dict[str, Any], workflow: dict[str, Any]) -> dict[str, Any]:
         project_context = dict(project)
         project_context["workflowId"] = workflow["id"]
-        outputs = []
         LOGGER.info("research department started", extra={"event": "research.started", "project_id": project["id"], "workflow_id": workflow["id"], "status": "RUNNING"})
-        for employee_id in EMPLOYEES:
+
+        def execute_employee(employee_id: str) -> dict[str, Any]:
             LOGGER.info("employee execution started", extra={"event": "employee.started", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "RUNNING"})
             output = run_employee(employee_id, project_context)
             self.store.save_employee_output(output)
-            outputs.append(output)
             LOGGER.info("employee execution completed", extra={"event": "employee.completed", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "COMPLETED"})
+            return output
+
+        outputs = collect_parallel(EMPLOYEES, execute_employee)
         report = self.combine(project_context, workflow, outputs)
         validation_issues = validate_research_report_payload(report)
         if validation_issues:
@@ -41,17 +47,24 @@ class ResearchDepartment:
     def combine(self, project: dict[str, Any], workflow: dict[str, Any], outputs: list[dict[str, Any]]) -> dict[str, Any]:
         by_section = {output["section"]: output for output in outputs}
         overall_score = round(mean(output["score"] for output in outputs))
+        evidence = _collect_evidence(outputs)
+        confidence = self.confidence_engine.score(evidence)
+        citations = self.citation_engine.build(evidence)
+        self.cost_tracker.record("research_department", {"employees": len(outputs), "evidenceItems": len(evidence)})
         return {
             "reportType": "RESEARCH_REPORT",
             "projectId": project["id"],
             "workflowId": workflow["id"],
             "idea": project["idea"],
             "overallScore": overall_score,
+            "confidence": confidence,
+            "citations": citations,
+            "costSummary": self.cost_tracker.summary(),
             "trendAnalysis": by_section["trendAnalysis"],
             "competitorAnalysis": by_section["competitorAnalysis"],
             "customerAnalysis": by_section["customerAnalysis"],
             "productResearch": by_section["productResearch"],
-            "recommendation": _recommendation(overall_score),
+            "recommendation": _recommendation(overall_score, confidence),
             "risks": [
                 "Competitor saturation must be verified with live marketplace and Instagram checks.",
                 "The first offer may fail if it looks like generic merchandise.",
@@ -65,9 +78,23 @@ class ResearchDepartment:
         }
 
 
-def _recommendation(score: int) -> str:
-    if score >= 75:
+def _collect_evidence(outputs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    evidence: list[dict[str, Any]] = []
+    for output in outputs:
+        section = output.get("section")
+        for item in output.get("evidence", []):
+            normalized = dict(item)
+            normalized.setdefault("section", section)
+            evidence.append(normalized)
+    return evidence
+
+
+def _recommendation(score: int, confidence: dict[str, Any] | None = None) -> str:
+    confidence_level = (confidence or {}).get("level", "LOW")
+    if score >= 75 and confidence_level in {"HIGH", "MEDIUM"}:
         return "Proceed with a lean manual validation launch before investing in inventory or ads."
+    if score >= 75:
+        return "Promising, but proceed only after improving evidence confidence with live customer and competitor checks."
     if score >= 60:
         return "Proceed only after narrowing the target customer and improving differentiation."
     return "Do not proceed yet; gather stronger customer demand evidence first."

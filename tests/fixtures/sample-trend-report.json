@@ -1,0 +1,9 @@
+{
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "summary": "Tamil heritage products may appeal to identity-driven buyers, but demand must be validated with live marketplace and social data.",
+  "demandSignals": ["Tamil identity gifting", "regional language apparel", "heritage decor interest"],
+  "competition": ["Instagram POD sellers", "Amazon custom t-shirt sellers", "local print shops"],
+  "risks": ["crowded market", "weak differentiation", "ad spend without conversion"],
+  "confidenceScore": 55,
+  "sourceNotes": ["Fixture data for schema validation only"]
+}

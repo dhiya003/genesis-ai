@@ -5,6 +5,8 @@ Project: Genesis AI - Autonomous Business Operating System
 
 This document is the senior-engineer and Codex onboarding brief for Genesis AI. It captures the product vision, architecture, engineering standards, current progress, and expected development workflow. Treat this as the authoritative project brief unless superseded by the repository itself.
 
+Genesis is successful when it helps founders build better businesses through evidence-based decisions, while keeping the founder in control of strategic choices.
+
 ## 1. Vision
 
 Genesis is not a chatbot.
@@ -79,6 +81,132 @@ The founder provides one goal.
 Genesis builds the business.
 
 The founder only approves strategic decisions. Everything else should be autonomous.
+
+## 3.1 Founder DNA
+
+The founder does not ask Genesis for tasks.
+
+The founder defines:
+
+- Vision
+- Goals
+- Constraints
+- Budget
+- Risk appetite
+- Success criteria
+
+Genesis decides how to achieve them.
+
+Example:
+
+```text
+Founder:
+Build a INR 1 lakh/month toy business.
+
+Genesis:
+Research
+  -> Choose products
+  -> Design brand
+  -> Create packaging
+  -> Launch
+  -> Monitor
+  -> Optimize
+```
+
+This is fundamentally different from normal AI agents. The founder sets direction. Genesis operates the company.
+
+## 3.2 Business Memory
+
+Genesis should not merely remember conversations. Genesis should remember businesses.
+
+For every project, Genesis should preserve:
+
+- Research history
+- Decisions made
+- Why decisions were made
+- Failed ideas
+- Winning ideas
+- Costs
+- Suppliers
+- Customers
+- Experiments
+- Lessons learned
+
+This becomes organizational knowledge and should improve future business decisions.
+
+## 3.3 Decision Engine
+
+Genesis should not merely produce outputs. Genesis should justify them.
+
+Every recommendation should include:
+
+```text
+Decision
+  -> Reason
+  -> Evidence
+  -> Confidence
+  -> Risk
+  -> Alternative options
+```
+
+This makes Genesis auditable and trustworthy.
+
+## 3.4 Assumption Tracking
+
+Every assumption should be explicit.
+
+Example:
+
+```text
+Assumption:
+Parents prefer wooden toys.
+
+Evidence:
+Low.
+
+Action:
+Validate before manufacturing.
+```
+
+Genesis must distinguish facts from assumptions.
+
+## 3.5 Validation Before Scale
+
+Genesis should never recommend scaling before validation.
+
+The sequence is always:
+
+```text
+Research
+  -> Prototype
+  -> Customer validation
+  -> Small launch
+  -> Improve
+  -> Scale
+```
+
+This applies to products, marketing channels, suppliers, manufacturing, and business models.
+
+## 3.6 Cost-Aware Intelligence
+
+Genesis should not always choose the theoretical best option.
+
+Genesis should optimize for:
+
+- Cost
+- Time
+- Risk
+- Quality
+
+based on founder preferences, budget, constraints, and risk appetite.
+
+## 3.7 Quality Over Quantity
+
+Genesis should not generate more work.
+
+Genesis should generate better decisions.
+
+Volume is not success. Better evidence, sharper choices, lower risk, and stronger execution are success.
 
 ## 4. Roadmap
 
@@ -207,6 +335,32 @@ Mission
 
 Every future department should inherit this architecture unless a deliberate architecture decision says otherwise.
 
+## 7.1 Department KPIs
+
+Every department should have measurable KPIs.
+
+Examples:
+
+Research:
+
+- Evidence quality
+- Confidence
+- Source diversity
+- Freshness
+
+Marketing:
+
+- CTR
+- ROAS
+- CAC
+
+Creative:
+
+- Approval rate
+- Brand consistency
+
+KPIs are not decoration. They are how Genesis evaluates whether a department is improving the business.
+
 ## 8. Research Department
 
 Employees:
@@ -248,6 +402,39 @@ Every employee must have:
 - Validation
 
 This contract applies to Research employees and all future employees across Product, Manufacturing, Creative, Marketing, Publishing, Analytics, Finance, Legal, Operations, and Customer Support.
+
+## 8.2 Employee Performance Reviews
+
+Employees should be evaluated over time.
+
+Track:
+
+- Accuracy
+- Speed
+- Cost
+- Hallucination rate
+- Success rate
+
+Poor performers can be improved, retrained, reassigned, or replaced. Employee quality should improve as Genesis learns from real business outcomes.
+
+## 8.3 Tool Governance
+
+Every employee should have explicit tool permissions.
+
+Example:
+
+EMP-001 allowed:
+
+- Web Search
+- Google Trends
+
+EMP-001 not allowed:
+
+- Delete files
+- Spend money
+- Commit legal or financial obligations
+
+Least privilege is a core design principle. Employees should only receive the tools required for their role.
 
 ## 9. Future Departments
 
@@ -335,6 +522,64 @@ Workflow Engine
   -> Outputs
   -> Persistence
 ```
+
+## 14.1 Multi-Tenant Future
+
+Even if Genesis starts for one founder, the architecture should support:
+
+```text
+Organization
+  -> Founder
+  -> Departments
+  -> Projects
+```
+
+This prevents a costly redesign when Genesis becomes useful to multiple founders, brands, or businesses.
+
+## 14.2 Knowledge Graph
+
+Genesis should connect business knowledge across projects.
+
+```text
+Products
+  -> Suppliers
+  -> Competitors
+  -> Customers
+  -> Campaigns
+  -> Sales
+  -> Insights
+```
+
+This makes cross-project learning possible. The knowledge graph is how Genesis turns isolated business runs into compounding organizational intelligence.
+
+## 14.3 Self-Diagnostics
+
+Genesis should continuously check itself.
+
+Examples:
+
+- Broken workflow
+- Missing API key
+- Stale research
+- Low-confidence report
+- Failed employee
+- Slow execution
+
+Diagnostics should feed observability, recovery, alerts, and improvement workflows.
+
+## 14.4 Plugin Architecture
+
+Every future capability should be pluggable.
+
+Replaceable parts include:
+
+- Departments
+- Employees
+- Tools
+- Providers
+- Integrations
+
+The core runtime should not be tightly coupled to any one provider, marketplace, API, model, database, or channel.
 
 ## 15. Research Providers
 
@@ -461,6 +706,16 @@ Founder Mode means:
 
 Approval gates should exist for strategic decisions, spend, publishing, legal/compliance, brand direction, and other high-impact choices.
 
+Examples requiring explicit human approval:
+
+- Large purchases
+- Manufacturing
+- Hiring
+- Legal commitments
+- High-budget ads
+
+Everything else can become autonomous when the risk is low and the system has enough confidence.
+
 ## 16.4 Continuous Improvement Loop
 
 Genesis is never a one-time execution engine.
@@ -524,6 +779,45 @@ Codex should:
 - Update tests with every feature.
 - Update documentation with every feature.
 - Treat the Engineering Handbook as the source of truth.
+
+## 19.1 Explainability Standard
+
+Every output should answer:
+
+- Why?
+- Based on what?
+- What evidence?
+- What confidence?
+- What risks?
+- What alternatives?
+
+If Genesis cannot explain a recommendation, the recommendation is incomplete.
+
+## 19.2 Business Ethics And Compliance
+
+Genesis should:
+
+- Respect platform terms of service.
+- Respect copyright and trademarks.
+- Protect customer data.
+- Flag legal or regulatory risks rather than ignoring them.
+
+Compliance and ethics are not later-stage add-ons. They are part of business quality.
+
+## 19.3 Architecture Decision Records
+
+Future architecture decisions should be captured as ADRs in the handbook or `docs/adr/`.
+
+ADRs should record:
+
+- Context
+- Decision
+- Alternatives considered
+- Consequences
+- Date
+- Owner
+
+This protects institutional knowledge as Genesis evolves.
 
 ## 20. Sprint Completion Policy
 

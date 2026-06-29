@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: genesis-postgres
+    environment:
+      POSTGRES_USER: genesis
+      POSTGRES_PASSWORD: genesis_dev_password
+      POSTGRES_DB: genesis
+    ports:
+      - "5432:5432"
+    volumes:
+      - genesis_postgres_data:/var/lib/postgresql/data
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+
+  adminer:
+    image: adminer:latest
+    container_name: genesis-adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  genesis_postgres_data:

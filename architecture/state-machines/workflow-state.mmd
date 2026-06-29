@@ -1,0 +1,15 @@
+stateDiagram-v2
+  [*] --> Created
+  Created --> Queued
+  Queued --> Running
+  Running --> WaitingApproval
+  WaitingApproval --> Running
+  Running --> Completed
+  Running --> Failed
+  Failed --> Retry
+  Retry --> Running
+  Failed --> Escalated
+  Escalated --> WaitingApproval
+  Completed --> Archived
+  WaitingApproval --> Cancelled
+  Cancelled --> Archived

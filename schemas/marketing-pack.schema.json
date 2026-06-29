@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/marketing-pack.schema.json",
+  "title": "Marketing Pack",
+  "type": "object",
+  "required": ["projectId", "channelPlan", "contentCalendar", "adHooks", "dmScripts"],
+  "properties": {
+    "projectId": { "type": "string" },
+    "channelPlan": { "type": "object" },
+    "contentCalendar": { "type": "array", "items": { "type": "object" } },
+    "adHooks": { "type": "array", "items": { "type": "string" } },
+    "dmScripts": { "type": "array", "items": { "type": "string" } }
+  }
+}

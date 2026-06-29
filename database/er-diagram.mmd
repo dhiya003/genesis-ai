@@ -1,0 +1,50 @@
+erDiagram
+  BUSINESSES ||--o{ BRANDS : owns
+  BUSINESSES ||--o{ PROJECTS : contains
+  BRANDS ||--o{ PROJECTS : frames
+  BRANDS ||--o{ PRODUCTS : offers
+  PROJECTS ||--o{ WORKFLOWS : runs
+  PROJECTS ||--o{ REPORTS : produces
+  PROJECTS ||--o{ PRODUCTS : creates
+  DEPARTMENTS ||--o{ EMPLOYEES : contains
+  DEPARTMENTS ||--o{ REPORTS : approves
+  EMPLOYEES ||--o{ REPORTS : generates
+  EMPLOYEES ||--o{ PROMPTS : uses
+  WORKFLOWS ||--o{ REPORTS : records
+  WORKFLOWS ||--o{ AUDIT_EVENTS : logs
+  PRODUCTS ||--o{ CAMPAIGNS : marketed_by
+  PRODUCTS ||--o{ PUBLISHING_JOBS : published_by
+
+  BUSINESSES {
+    uuid id PK
+    text name
+    text industry
+    text status
+    text current_phase
+  }
+
+  PROJECTS {
+    uuid id PK
+    uuid business_id FK
+    uuid brand_id FK
+    text title
+    text niche
+    text status
+  }
+
+  REPORTS {
+    uuid id PK
+    uuid project_id FK
+    uuid workflow_id FK
+    text report_type
+    text status
+    jsonb payload
+  }
+
+  EMPLOYEES {
+    uuid id PK
+    uuid department_id FK
+    text employee_code
+    text title
+    text prompt_version
+  }

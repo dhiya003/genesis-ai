@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import logging
 from typing import Any
 from uuid import uuid4
 
 from apps.research import ResearchDepartment
 from apps.storage import JsonStore
 from apps.workflow import WorkflowEngine
+
+LOGGER = logging.getLogger("genesis.orchestrator")
 
 
 @dataclass
@@ -23,8 +26,10 @@ class GenesisOrchestrator:
             raise ValueError("Founder idea cannot be empty")
         project = {"id": str(uuid4()), "idea": idea, "status": "CREATED"}
         self.store.save_project(project)
+        LOGGER.info("project created", extra={"event": "project.created", "project_id": project["id"], "status": "CREATED"})
         engine = WorkflowEngine(self.store)
         workflow = engine.create(project["id"], "RESEARCH")
+        LOGGER.info("orchestrator routed project", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "RESEARCH"})
 
         department = ResearchDepartment(self.store)
 

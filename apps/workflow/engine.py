@@ -4,12 +4,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
+import logging
 from typing import Any, Callable
 from uuid import uuid4
 
 from apps.storage import JsonStore
 
 WorkflowStep = Callable[[dict[str, Any]], dict[str, Any]]
+LOGGER = logging.getLogger("genesis.workflow")
 
 
 def now_iso() -> str:
@@ -34,6 +36,7 @@ class WorkflowEngine:
             "error": None,
         }
         self.store.save_workflow(workflow)
+        LOGGER.info("workflow created", extra={"event": "workflow.created", "project_id": project_id, "workflow_id": workflow["id"], "status": "CREATED"})
         return workflow
 
     def run(self, workflow: dict[str, Any], step: WorkflowStep) -> dict[str, Any]:
@@ -41,6 +44,7 @@ class WorkflowEngine:
         workflow["status"] = "RUNNING"
         workflow["updatedAt"] = now_iso()
         self.store.save_workflow(workflow)
+        LOGGER.info("workflow running", extra={"event": "workflow.running", "project_id": workflow["projectId"], "workflow_id": workflow["id"], "status": "RUNNING"})
         try:
             result = step(workflow)
         except Exception as exc:  # noqa: BLE001
@@ -54,6 +58,7 @@ class WorkflowEngine:
         workflow["error"] = None
         workflow["updatedAt"] = now_iso()
         self.store.save_workflow(workflow)
+        LOGGER.info("workflow completed", extra={"event": "workflow.completed", "project_id": workflow["projectId"], "workflow_id": workflow["id"], "status": "COMPLETED"})
         return workflow
 
     def fail(self, workflow: dict[str, Any], error: str) -> dict[str, Any]:
@@ -62,6 +67,7 @@ class WorkflowEngine:
         workflow["error"] = {"message": error, "failedAt": now_iso()}
         workflow["updatedAt"] = now_iso()
         self.store.save_workflow(workflow)
+        LOGGER.info("workflow failed", extra={"event": "workflow.failed", "project_id": workflow["projectId"], "workflow_id": workflow["id"], "status": "FAILED"})
         return workflow
 
     def retry(self, workflow_id: str) -> dict[str, Any]:
@@ -73,4 +79,5 @@ class WorkflowEngine:
         workflow["error"] = None
         workflow["updatedAt"] = now_iso()
         self.store.save_workflow(workflow)
+        LOGGER.info("workflow retried", extra={"event": "workflow.retried", "project_id": workflow["projectId"], "workflow_id": workflow["id"], "status": "CREATED"})
         return workflow

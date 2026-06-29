@@ -1,69 +1,38 @@
 # Sprint 2 Completion Report
 
 Date: 2026-06-29
-Status: Complete
+Status: Implemented, pending external GitHub Actions confirmation when a workflow run is visible through GitHub.
 
-## Goal
+## Sprint 2 Definition of Done
 
-Build the first working AI Product Factory MVP that converts a founder text requirement into a complete launch pack.
+Sprint 2 closes only when Genesis has its first executable Product Factory vertical slice:
 
-## Completed scope
+Founder idea → Project created → Genesis Orchestrator starts workflow → Research Department executes → EMP-001 to EMP-004 run → Research Report generated → Report stored → Report retrievable through API/CLI → Tests + CI pass.
 
-### EPIC-001 Product Factory Runner
+## Implemented vertical slice
 
-- Added deterministic manual runner at `apps/factory/runner.py`.
-- Extended CLI with `python -m apps.cli.main run "<requirement>"`.
-- Runner produces research, product, creative, marketing, publishing, and validation sections.
-- Runner includes assumptions, risks, Phase 1 manual execution, and next actions.
+- Runtime starts with API, worker, CLI, config, and structured logging.
+- File-backed JSON storage persists project, workflow, employee outputs, and research report.
+- Workflow engine supports create, run, complete, fail, and retry.
+- Genesis Orchestrator routes founder ideas to Research Department.
+- Research Department executes EMP-001, EMP-002, EMP-003, and EMP-004.
+- Combined Research Report contains trend analysis, competitor analysis, customer analysis, product research, overall score, recommendation, risks, and next actions.
+- CLI can submit an idea and retrieve a stored report.
+- API can submit a project and retrieve a stored report.
+- `scripts/sprint2_e2e.py` validates the exact acceptance idea: `Create a coffee lovers product brand for India.`
+- `scripts/verify.py` now gates Sprint 2 e2e acceptance.
 
-### EPIC-002 Launch Pack Schema Validation
-
-- Added `api/schemas/launch-pack.schema.json`.
-- Added `testing/fixtures/sample-launch-pack.json`.
-- Added `scripts/validate_launch_pack.py`.
-- Added regression tests for runner output and CLI JSON generation.
-
-### EPIC-003 Manual Launch Operations
-
-- Added `implementation/manual-ops/launch-checklist.md`.
-- Added `implementation/manual-ops/lead-tracker-template.csv`.
-- Added `implementation/manual-ops/validation-scorecard.md`.
-
-### EPIC-004 AI Employee Test Cases
-
-- Added `testing/prompt-regression/product-factory-runner-cases.json`.
-- Added unit tests for Product Factory runner behavior.
-
-### EPIC-005 Future Automation Hooks
-
-- Added `implementation/automation-hooks/phase-2-hook-registry.md`.
-- Phase 2 dependencies are explicitly separated from Phase 1 manual execution.
-
-## Runtime foundation
-
-Sprint 2.1.1.001 Runtime Bootstrap is complete:
-
-- `apps/api` exposes `GET /health`.
-- `apps/worker` has a bootable worker health payload.
-- `apps/cli` has health and launch-pack runner commands.
-- `config` centralizes runtime configuration and JSON logging.
-- `.env.example` includes safe local runtime defaults.
-
-## Validation performed locally
+## Required commands
 
 ```bash
-python -m unittest discover -s tests -v
-python scripts/validate_launch_pack.py
-python -m apps.cli.main health
-python -m apps.cli.main run "Create a handmade kids activity kit business for Instagram and WhatsApp validation in India"
+python scripts/verify.py
+python scripts/sprint2_e2e.py
 ```
 
-Local result: pass.
+## Important note
 
-## Sprint 2 done criteria mapping
+The implementation is deterministic and local-only. It is an executable vertical slice, not yet a live external-AI research system. This is intentional so CI can run without OpenAI, Meta, Supabase, VPS, or paid infrastructure.
 
-Sprint 2 is complete when a founder can paste one product requirement and receive a complete, repeatable, schema-aligned launch pack that can be executed manually within 1 to 3 days.
+## CI status
 
-Result: Met.
-
-The current MVP accepts a plain-text founder requirement through the CLI, returns a repeatable launch pack, validates required launch-pack sections, and includes manual launch operations for execution without paid infrastructure.
+The repo workflow file runs `python scripts/verify.py` on push to `main`. The GitHub connector returned no workflow runs for recent push commits, so external GitHub Actions completion could not be confirmed from this session. Sprint 2 should be treated as code-complete but not release-closed until GitHub Actions shows green.

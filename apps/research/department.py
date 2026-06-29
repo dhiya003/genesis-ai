@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 from statistics import mean
 from typing import Any
 
 from apps.employees import EMPLOYEES, run_employee
 from apps.storage import JsonStore
+
+LOGGER = logging.getLogger("genesis.research")
 
 
 class ResearchDepartment:
@@ -19,12 +22,16 @@ class ResearchDepartment:
         project_context = dict(project)
         project_context["workflowId"] = workflow["id"]
         outputs = []
+        LOGGER.info("research department started", extra={"event": "research.started", "project_id": project["id"], "workflow_id": workflow["id"], "status": "RUNNING"})
         for employee_id in EMPLOYEES:
+            LOGGER.info("employee execution started", extra={"event": "employee.started", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "RUNNING"})
             output = run_employee(employee_id, project_context)
             self.store.save_employee_output(output)
             outputs.append(output)
+            LOGGER.info("employee execution completed", extra={"event": "employee.completed", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "COMPLETED"})
         report = self.combine(project_context, workflow, outputs)
         self.store.save_report(report)
+        LOGGER.info("research report stored", extra={"event": "research.report_stored", "project_id": project["id"], "workflow_id": workflow["id"], "status": "COMPLETED"})
         return report
 
     def combine(self, project: dict[str, Any], workflow: dict[str, Any], outputs: list[dict[str, Any]]) -> dict[str, Any]:

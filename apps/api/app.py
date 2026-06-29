@@ -1,18 +1,22 @@
-"""Minimal Genesis AI API runtime with a health endpoint."""
+"""Minimal Genesis AI API runtime with Sprint 2 research endpoints."""
 
 from __future__ import annotations
 
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
+from urllib.parse import urlparse
 
+from apps.errors import GenesisError, bad_request, not_found
+from apps.orchestrator import GenesisOrchestrator
+from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
-    """HTTP handler for Sprint 2 runtime bootstrap endpoints."""
+    """HTTP handler for Sprint 2 runtime bootstrap and research endpoints."""
 
-    server_version = "GenesisAI/0.1"
+    server_version = "GenesisAI/0.2"
 
     def _send_json(self, status_code: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, sort_keys=True).encode("utf-8")
@@ -22,12 +26,56 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _read_json(self) -> dict[str, Any]:
+        length = int(self.headers.get("Content-Length", "0"))
+        if length <= 0:
+            raise bad_request("Request body is required")
+        try:
+            return json.loads(self.rfile.read(length).decode("utf-8"))
+        except json.JSONDecodeError as exc:
+            raise bad_request("Request body must be valid JSON") from exc
+
+    @property
+    def store(self) -> JsonStore:
+        return self.server.store  # type: ignore[attr-defined]
+
     def do_GET(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         config: RuntimeConfig = self.server.runtime_config  # type: ignore[attr-defined]
-        if self.path == "/health":
-            self._send_json(200, config.health_payload("api"))
-            return
-        self._send_json(404, {"status": "not_found", "path": self.path})
+        parsed = urlparse(self.path)
+        try:
+            if parsed.path == "/health":
+                self._send_json(200, config.health_payload("api"))
+                return
+            if parsed.path.startswith("/reports/"):
+                project_id = parsed.path.removeprefix("/reports/").strip("/")
+                if not project_id:
+                    raise bad_request("Project ID is required")
+                try:
+                    self._send_json(200, self.store.get_report(project_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Research report not found for project {project_id}") from exc
+                return
+            self._send_json(404, {"status": "not_found", "path": parsed.path})
+        except GenesisError as exc:
+            self._send_json(exc.status_code, exc.to_payload())
+
+    def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
+        parsed = urlparse(self.path)
+        try:
+            if parsed.path == "/projects":
+                payload = self._read_json()
+                idea = payload.get("idea")
+                if not isinstance(idea, str):
+                    raise bad_request("idea must be a string")
+                result = GenesisOrchestrator(self.store).submit_idea(idea)
+                self._send_json(201, result)
+                return
+            self._send_json(404, {"status": "not_found", "path": parsed.path})
+        except GenesisError as exc:
+            self._send_json(exc.status_code, exc.to_payload())
+        except ValueError as exc:
+            error = bad_request(str(exc))
+            self._send_json(error.status_code, error.to_payload())
 
     def log_message(self, format: str, *args: object) -> None:  # noqa: A002
         logger = getattr(self.server, "runtime_logger", None)
@@ -41,6 +89,7 @@ def create_server(config: RuntimeConfig | None = None) -> ThreadingHTTPServer:
     server = ThreadingHTTPServer((runtime_config.api_host, runtime_config.api_port), GenesisApiHandler)
     server.runtime_config = runtime_config  # type: ignore[attr-defined]
     server.runtime_logger = logger  # type: ignore[attr-defined]
+    server.store = JsonStore(runtime_config.data_dir)  # type: ignore[attr-defined]
     return server
 
 

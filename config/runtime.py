@@ -21,6 +21,7 @@ class RuntimeConfig:
     api_host: str = "127.0.0.1"
     api_port: int = 8000
     worker_queue_name: str = "manual-launch-pack"
+    data_dir: str = ".genesis-data"
 
     @property
     def base_url(self) -> str:
@@ -63,4 +64,5 @@ def load_runtime_config(env: Mapping[str, str] | None = None) -> RuntimeConfig:
         api_host=source.get("GENESIS_API_HOST", "127.0.0.1"),
         api_port=_read_int(source, "GENESIS_API_PORT", 8000),
         worker_queue_name=source.get("GENESIS_WORKER_QUEUE", "manual-launch-pack"),
+        data_dir=source.get("GENESIS_DATA_DIR", ".genesis-data"),
     )

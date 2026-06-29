@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/product-blueprint.schema.json",
+  "title": "Product Blueprint",
+  "type": "object",
+  "required": ["projectId", "productName", "targetCustomer", "valueProposition", "productSpecs", "pricing", "fulfillment"],
+  "properties": {
+    "projectId": { "type": "string" },
+    "productName": { "type": "string" },
+    "targetCustomer": { "type": "object" },
+    "valueProposition": { "type": "string" },
+    "productSpecs": { "type": "object" },
+    "pricing": { "type": "object" },
+    "fulfillment": { "type": "object" },
+    "checks": { "type": "array", "items": { "type": "string" } }
+  }
+}

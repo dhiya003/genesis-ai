@@ -1,0 +1,20 @@
+{
+  "reportType": "MARKETING_PACK",
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "version": "1.0",
+  "seo": {
+    "keywords": ["coffee t-shirt", "coffee lover gift", "coffee quote tee"],
+    "titles": ["Coffee Lover Oversized T-Shirt"],
+    "descriptions": ["A clean everyday tee for people who love coffee culture."]
+  },
+  "social": {
+    "instagram": {
+      "caption": "For the ones who start every day with coffee."
+    },
+    "facebook": {},
+    "hashtags": ["coffee", "coffeelover", "tshirt"]
+  },
+  "launchCalendar": [],
+  "actionPrompts": ["Ask followers to vote on the first design"],
+  "confidence": 0.7
+}

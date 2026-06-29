@@ -1,0 +1,21 @@
+{
+  "reportType": "CREATIVE_PACK",
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "version": "1.0",
+  "creativeBrief": {
+    "direction": "Modern coffee lifestyle typography",
+    "audience": "Young urban coffee lovers"
+  },
+  "designPrompts": [
+    {
+      "productName": "Coffee Quote Oversized T-Shirt",
+      "style": "minimal typography",
+      "prompt": "Create a clean coffee-themed typography design suitable for a black oversized t-shirt.",
+      "productionNotes": "Use transparent background and avoid trademarked phrases."
+    }
+  ],
+  "mockupInstructions": [],
+  "brandGuidelines": {},
+  "qualityChecklist": ["No copyrighted text", "Readable at print size", "Transparent background"],
+  "confidence": 0.7
+}

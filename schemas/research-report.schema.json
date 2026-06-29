@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/research-report.schema.json",
+  "title": "Research Report",
+  "type": "object",
+  "required": ["projectId", "summary", "demandSignals", "competition", "risks", "confidenceScore"],
+  "properties": {
+    "projectId": { "type": "string", "format": "uuid" },
+    "summary": { "type": "string" },
+    "demandSignals": { "type": "array", "items": { "type": "string" } },
+    "competition": { "type": "array", "items": { "type": "string" } },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "confidenceScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "sourceNotes": { "type": "array", "items": { "type": "string" } }
+  }
+}

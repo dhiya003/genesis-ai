@@ -66,30 +66,38 @@ class ResearchDepartment:
         confidence = self.confidence_engine.score(evidence)
         citations = self.citation_engine.build(evidence)
         self.cost_tracker.record("research_department", {"employees": len(outputs), "evidenceItems": len(evidence)})
+        recommendation = _recommendation(overall_score, confidence)
+        risks = [
+            "Competitor saturation must be verified with live marketplace and Instagram checks.",
+            "The first offer may fail if it looks like generic merchandise.",
+            "Unit economics must include packaging, shipping, and damaged-return risk.",
+        ]
+        next_actions = [
+            "Check 10 India coffee/gifting competitors and record prices.",
+            "Create one starter kit mockup and publish an interest post.",
+            "Collect 5 serious customer conversations before buying inventory.",
+        ]
         return {
             "reportType": "RESEARCH_REPORT",
             "projectId": project["id"],
             "workflowId": workflow["id"],
             "idea": project["idea"],
+            "executiveSummary": f"Genesis Research Department evaluated '{project['idea']}' using EMP-001 to EMP-004 and recommends: {recommendation}",
             "overallScore": overall_score,
+            "opportunityScore": overall_score,
             "confidence": confidence,
+            "evidence": evidence,
             "citations": citations,
             "costSummary": self.cost_tracker.summary(),
             "trendAnalysis": by_section["trendAnalysis"],
             "competitorAnalysis": by_section["competitorAnalysis"],
             "customerAnalysis": by_section["customerAnalysis"],
             "productResearch": by_section["productResearch"],
-            "recommendation": _recommendation(overall_score, confidence),
-            "risks": [
-                "Competitor saturation must be verified with live marketplace and Instagram checks.",
-                "The first offer may fail if it looks like generic merchandise.",
-                "Unit economics must include packaging, shipping, and damaged-return risk.",
-            ],
-            "nextActions": [
-                "Check 10 India coffee/gifting competitors and record prices.",
-                "Create one starter kit mockup and publish an interest post.",
-                "Collect 5 serious customer conversations before buying inventory.",
-            ],
+            "productAnalysis": by_section["productResearch"],
+            "recommendation": recommendation,
+            "recommendations": [recommendation],
+            "risks": risks,
+            "nextActions": next_actions,
         }
 
 

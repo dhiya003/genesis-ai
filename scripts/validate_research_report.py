@@ -13,14 +13,21 @@ REQUIRED_TOP_LEVEL = [
     "projectId",
     "workflowId",
     "idea",
+    "executiveSummary",
     "trendAnalysis",
     "competitorAnalysis",
     "customerAnalysis",
+    "productAnalysis",
     "productResearch",
     "overallScore",
+    "opportunityScore",
+    "confidence",
+    "evidence",
     "recommendation",
+    "recommendations",
     "risks",
     "nextActions",
+    "citations",
 ]
 
 EMPLOYEE_SECTIONS = {
@@ -41,6 +48,15 @@ def validate_research_report_payload(data: dict[str, Any]) -> list[str]:
     score = data.get("overallScore")
     if not isinstance(score, (int, float)) or not 0 <= score <= 100:
         issues.append("overallScore must be a number from 0 to 100")
+    opportunity_score = data.get("opportunityScore")
+    if not isinstance(opportunity_score, (int, float)) or not 0 <= opportunity_score <= 100:
+        issues.append("opportunityScore must be a number from 0 to 100")
+    confidence = data.get("confidence")
+    if not isinstance(confidence, dict) or confidence.get("level") not in {"LOW", "MEDIUM", "HIGH"}:
+        issues.append("confidence.level must be LOW, MEDIUM, or HIGH")
+    for key in ["evidence", "citations", "recommendations"]:
+        if not isinstance(data.get(key), list):
+            issues.append(f"{key} must be a list")
     for key in ["risks", "nextActions"]:
         if not isinstance(data.get(key), list) or not data.get(key):
             issues.append(f"{key} must be a non-empty list")

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from hashlib import sha256
-from time import perf_counter
+from time import perf_counter, sleep
 from typing import Any, Callable
 
 from apps.research.providers import WebSearchClient, WebSearchResult
@@ -36,23 +36,36 @@ class SearchManager:
     """Aggregates and caches live search requests for a workflow."""
 
     client: WebSearchClient
+    rate_limit_seconds: float = 0.0
     cache: dict[str, list[WebSearchResult]] = field(default_factory=dict)
     usage: SearchUsage = field(default_factory=SearchUsage)
+    last_request_at: float | None = None
 
     def search(self, query: str, limit: int = 5) -> list[WebSearchResult]:
         key = _cache_key(query, limit)
         if key in self.cache:
             self.usage.cache_hits += 1
             return list(self.cache[key])
+        self._rate_limit()
         start = perf_counter()
         self.usage.requests += 1
         results = self.client.search(query, limit=limit)
+        self.last_request_at = perf_counter()
         self.usage.runtime_seconds += perf_counter() - start
         self.cache[key] = list(results)
         return results
 
     def search_many(self, queries: list[str], limit: int = 5) -> dict[str, list[WebSearchResult]]:
-        return {query: self.search(query, limit=limit) for query in queries}
+        unique_queries = list(dict.fromkeys(query.strip() for query in queries if query.strip()))
+        return {query: self.search(query, limit=limit) for query in unique_queries}
+
+    def _rate_limit(self) -> None:
+        if not self.rate_limit_seconds or self.last_request_at is None:
+            return
+        elapsed = perf_counter() - self.last_request_at
+        remaining = self.rate_limit_seconds - elapsed
+        if remaining > 0:
+            sleep(remaining)
 
 
 @dataclass(frozen=True)

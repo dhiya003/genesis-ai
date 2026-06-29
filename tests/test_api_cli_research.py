@@ -23,6 +23,14 @@ class ApiCliResearchTests(unittest.TestCase):
             submit_payload = json.loads(output.getvalue())
             project_id = submit_payload["project"]["id"]
 
+            project_output = StringIO()
+            with patch("sys.stdout", project_output):
+                self.assertEqual(cli_main(["project", project_id, "--data-dir", directory]), 0)
+            project_payload = json.loads(project_output.getvalue())
+            self.assertEqual(project_payload["project"]["id"], project_id)
+            self.assertTrue(project_payload["tasks"])
+            self.assertTrue(project_payload["deliverables"])
+
             report_output = StringIO()
             with patch("sys.stdout", report_output):
                 self.assertEqual(cli_main(["report", project_id, "--data-dir", directory]), 0)
@@ -30,6 +38,12 @@ class ApiCliResearchTests(unittest.TestCase):
             self.assertEqual(report["reportType"], "RESEARCH_REPORT")
             self.assertEqual(report["projectId"], project_id)
             self.assertIn("recommendation", report)
+            self.assertIn("executiveSummary", report)
+
+            version_output = StringIO()
+            with patch("sys.stdout", version_output):
+                self.assertEqual(cli_main(["version"]), 0)
+            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.2.0")
 
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

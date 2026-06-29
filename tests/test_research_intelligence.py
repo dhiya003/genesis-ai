@@ -27,6 +27,13 @@ class ResearchIntelligenceTests(unittest.TestCase):
         self.assertEqual(client.calls, 1)
         self.assertEqual(manager.usage.cache_hits, 1)
 
+    def test_search_manager_deduplicates_many_queries(self) -> None:
+        client = FakeSearchClient()
+        manager = SearchManager(client=client)
+        results = manager.search_many(["coffee", "coffee", " coffee ", "tea"], limit=2)
+        self.assertEqual(set(results), {"coffee", "tea"})
+        self.assertEqual(client.calls, 2)
+
     def test_confidence_engine_scores_evidence(self) -> None:
         confidence = ConfidenceEngine().score([
             {"source": "amazon", "url": "https://amazon.in/a", "snippet": "Review"},

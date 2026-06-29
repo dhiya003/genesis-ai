@@ -18,6 +18,16 @@
     "summary": "Competitors are likely split between generic merchandise sellers and premium coffee accessory brands.",
     "workflowId": "sample-workflow"
   },
+  "citations": [],
+  "confidence": {
+    "evidenceCount": 0,
+    "level": "LOW",
+    "reasons": [
+      "Sample fixture uses deterministic evidence."
+    ],
+    "score": 0.2,
+    "sourceCount": 0
+  },
   "customerAnalysis": {
     "employeeId": "EMP-003",
     "objections": [
@@ -37,13 +47,32 @@
     "summary": "Likely customers are urban coffee drinkers, gifting buyers, and office/home café enthusiasts.",
     "workflowId": "sample-workflow"
   },
+  "evidence": [],
+  "executiveSummary": "Genesis Research Department evaluated the coffee lovers India idea and recommends a lean manual validation launch.",
   "idea": "Create a coffee lovers product brand for India.",
   "nextActions": [
     "Check 10 India coffee/gifting competitors and record prices.",
     "Create one starter kit mockup and publish an interest post.",
     "Collect 5 serious customer conversations before buying inventory."
   ],
+  "opportunityScore": 77,
   "overallScore": 77,
+  "productAnalysis": {
+    "employeeId": "EMP-004",
+    "mvpRecommendation": "Launch one compact coffee-lover starter kit and test demand before expanding into mugs, apparel, or heavier products.",
+    "projectId": "sample-project",
+    "recommendedProducts": [
+      "Coffee quote sticker pack",
+      "Desk mini print or magnet",
+      "Coffee lover gift card",
+      "Starter hamper with one hero accessory"
+    ],
+    "score": 76,
+    "section": "productResearch",
+    "status": "COMPLETED",
+    "summary": "The first product set should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "workflowId": "sample-workflow"
+  },
   "productResearch": {
     "employeeId": "EMP-004",
     "mvpRecommendation": "Launch one compact coffee-lover starter kit and test demand before expanding into mugs, apparel, or heavier products.",
@@ -62,6 +91,9 @@
   },
   "projectId": "sample-project",
   "recommendation": "Proceed with a lean manual validation launch before investing in inventory or ads.",
+  "recommendations": [
+    "Proceed with a lean manual validation launch before investing in inventory or ads."
+  ],
   "reportType": "RESEARCH_REPORT",
   "risks": [
     "Competitor saturation must be verified with live marketplace and Instagram checks.",

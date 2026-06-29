@@ -8,9 +8,12 @@ from typing import Any
 from urllib.parse import urlparse
 
 from apps.errors import GenesisError, bad_request, not_found
+from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
+
+API_VERSION = "0.2.0"
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
@@ -55,8 +58,21 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
             if parsed.path == "/health":
                 self._send_json(200, config.health_payload("api"))
                 return
+            if parsed.path == "/version":
+                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 2 - Intelligent Research Engine"})
+                return
             if parsed.path == "/metrics":
-                self._send_json(200, {"metrics": self.store.list_metrics()})
+                metrics = self.store.list_metrics()
+                self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
+                return
+            if parsed.path.startswith("/projects/"):
+                project_id = parsed.path.removeprefix("/projects/").strip("/")
+                if not project_id:
+                    raise bad_request("Project ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_project(project_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Project not found: {project_id}") from exc
                 return
             if parsed.path.startswith("/approvals/"):
                 approval_id = parsed.path.removeprefix("/approvals/").strip("/")
@@ -91,8 +107,42 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 approval_mode = payload.get("approvalMode", "auto")
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
-                result = GenesisOrchestrator(self.store).submit_idea(idea, approval_mode=approval_mode)
+                constraints = payload.get("constraints", [])
+                preferences = payload.get("preferences", {})
+                if constraints is not None and not isinstance(constraints, list):
+                    raise bad_request("constraints must be a list")
+                if preferences is not None and not isinstance(preferences, dict):
+                    raise bad_request("preferences must be an object")
+                result = GenesisOrchestrator(self.store).submit_idea(
+                    idea,
+                    approval_mode=approval_mode,
+                    country=payload.get("country") if isinstance(payload.get("country"), str) else None,
+                    budget=payload.get("budget") if isinstance(payload.get("budget"), str) else None,
+                    timeline=payload.get("timeline") if isinstance(payload.get("timeline"), str) else None,
+                    constraints=constraints,
+                    preferences=preferences,
+                )
                 self._send_json(201, result)
+                return
+            if parsed.path.startswith("/workflows/") and parsed.path.endswith("/pause"):
+                workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/pause").strip("/")
+                if not workflow_id:
+                    raise bad_request("Workflow ID is required")
+                payload = self._read_optional_json()
+                reason = payload.get("reason", "manual pause")
+                if not isinstance(reason, str):
+                    raise bad_request("reason must be a string")
+                self._send_json(200, GenesisOrchestrator(self.store).pause_workflow(workflow_id, reason=reason))
+                return
+            if parsed.path.startswith("/workflows/") and parsed.path.endswith("/cancel"):
+                workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/cancel").strip("/")
+                if not workflow_id:
+                    raise bad_request("Workflow ID is required")
+                payload = self._read_optional_json()
+                reason = payload.get("reason", "manual cancel")
+                if not isinstance(reason, str):
+                    raise bad_request("reason must be a string")
+                self._send_json(200, GenesisOrchestrator(self.store).cancel_workflow(workflow_id, reason=reason))
                 return
             if parsed.path.startswith("/workflows/") and parsed.path.endswith("/resume"):
                 workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/resume").strip("/")

@@ -41,6 +41,8 @@ class ApprovalObservabilityTests(unittest.TestCase):
             metric_types = {metric["type"] for metric in payload["metrics"]}
             self.assertIn("workflow.completed", metric_types)
             self.assertIn("employee.completed", metric_types)
+            self.assertIn("summary", payload)
+            self.assertGreaterEqual(payload["summary"]["eventCount"], 1)
 
 
 if __name__ == "__main__":

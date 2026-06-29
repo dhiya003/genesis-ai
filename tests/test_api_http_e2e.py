@@ -37,8 +37,24 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     report = json.loads(response.read().decode("utf-8"))
 
+                with request.urlopen(f"http://{host}:{port}/projects/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    project_payload = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/version", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    version = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
+                self.assertIn("executiveSummary", report)
+                self.assertIn("opportunityScore", report)
+                self.assertIn("citations", report)
+                self.assertEqual(project_payload["project"]["id"], project_id)
+                self.assertTrue(project_payload["tasks"])
+                self.assertTrue(project_payload["deliverables"])
+                self.assertTrue(project_payload["auditLogs"])
+                self.assertEqual(version["version"], "0.2.0")
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

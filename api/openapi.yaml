@@ -2,13 +2,28 @@ openapi: 3.1.0
 info:
   title: Genesis AI Internal API
   version: 0.1.0
-  description: Internal API contracts for Genesis Product Factory MVP.
+  description: Sprint 1D API contract for AI Product Factory design pack.
 servers:
   - url: http://localhost:3000/api
 paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Health status
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
   /projects:
     post:
-      summary: Create a Genesis project from a founder request
+      summary: Create a Genesis project from founder requirement
       operationId: createProject
       requestBody:
         required: true
@@ -23,50 +38,128 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-  /research/run:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/research-report:
     post:
-      summary: Start research workflow for a project
-      operationId: runResearch
+      summary: Store research report
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WorkflowRequest'
+              $ref: '#/components/schemas/ResearchReport'
       responses:
-        '200':
-          description: Research workflow accepted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WorkflowResponse'
-  /reports/{reportId}:
-    get:
-      summary: Fetch a generated report
-      operationId: getReport
+        '201':
+          description: Research report created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/product-blueprint:
+    post:
+      summary: Store product blueprint
       parameters:
-        - name: reportId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductBlueprint'
       responses:
-        '200':
-          description: Report details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Report'
+        '201':
+          description: Product blueprint created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/creative-pack:
+    post:
+      summary: Store creative pack
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreativePack'
+      responses:
+        '201':
+          description: Creative pack created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/marketing-pack:
+    post:
+      summary: Store marketing pack
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketingPack'
+      responses:
+        '201':
+          description: Marketing pack created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/publishing-package:
+    post:
+      summary: Store publishing package
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishingPackage'
+      responses:
+        '201':
+          description: Publishing package created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /projects/{projectId}/analytics-report:
+    post:
+      summary: Store analytics report
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsReport'
+      responses:
+        '201':
+          description: Analytics report created
+        default:
+          $ref: '#/components/responses/ErrorResponse'
 components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    ErrorResponse:
+      description: Standard error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     CreateProjectRequest:
       type: object
-      required: [title, niche]
+      required: [title, founderRequirement]
       properties:
         title:
           type: string
-        niche:
+        founderRequirement:
           type: string
         country:
           type: string
@@ -74,69 +167,29 @@ components:
         language:
           type: string
           default: en
-        description:
-          type: string
     Project:
       type: object
-      required: [id, title, niche, status]
+      required: [id, title, status]
       properties:
         id:
           type: string
           format: uuid
         title:
           type: string
-        niche:
-          type: string
         status:
           type: string
-          enum: [CREATED, RESEARCHING, RESEARCH_COMPLETE, APPROVED, REJECTED, ARCHIVED]
-    WorkflowRequest:
-      type: object
-      required: [projectId]
-      properties:
-        projectId:
-          type: string
-          format: uuid
-        workflowType:
-          type: string
-          default: RESEARCH
-    WorkflowResponse:
-      type: object
-      required: [workflowId, status]
-      properties:
-        workflowId:
-          type: string
-          format: uuid
-        status:
-          type: string
-          enum: [QUEUED, RUNNING, COMPLETED, FAILED]
-    Report:
-      type: object
-      required: [id, projectId, reportType, status, payload]
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectId:
-          type: string
-          format: uuid
-        reportType:
-          type: string
-        status:
-          type: string
-        confidence:
-          type: number
-          minimum: 0
-          maximum: 1
-        payload:
-          type: object
+          enum: [draft, researching, blueprinting, creative_packaging, marketing_packaging, publishing_ready, published, analyzing, archived, failed]
+    ResearchReport:
+      $ref: '../schemas/research-report.schema.json'
+    ProductBlueprint:
+      $ref: '../schemas/product-blueprint.schema.json'
+    CreativePack:
+      $ref: '../schemas/creative-pack.schema.json'
+    MarketingPack:
+      $ref: '../schemas/marketing-pack.schema.json'
+    PublishingPackage:
+      $ref: '../schemas/publishing-package.schema.json'
+    AnalyticsReport:
+      $ref: '../schemas/analytics-report.schema.json'
     Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        severity:
-          type: string
-          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+      $ref: '../schemas/common-error.schema.json'

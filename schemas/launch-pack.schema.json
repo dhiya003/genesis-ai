@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/launch-pack.schema.json",
+  "title": "Genesis AI Product Factory Launch Pack",
+  "type": "object",
+  "required": [
+    "input_requirement",
+    "product_hypothesis",
+    "customer_segment",
+    "product_catalog",
+    "store_copy",
+    "social_content_pack",
+    "manual_operations_checklist",
+    "validation_plan",
+    "phase_2_automation_hooks",
+    "assumptions_and_risks"
+  ],
+  "properties": {
+    "input_requirement": {
+      "type": "string"
+    },
+    "product_hypothesis": {
+      "type": "object",
+      "required": ["what", "buyer", "why_now", "emotional_trigger", "price_range"],
+      "properties": {
+        "what": { "type": "string" },
+        "buyer": { "type": "string" },
+        "why_now": { "type": "string" },
+        "emotional_trigger": { "type": "string" },
+        "price_range": { "type": "string" }
+      }
+    },
+    "customer_segment": {
+      "type": "object",
+      "required": ["primary_buyer", "secondary_buyer", "pain_point", "desire", "objections", "trust_requirements"],
+      "properties": {
+        "primary_buyer": { "type": "string" },
+        "secondary_buyer": { "type": "string" },
+        "pain_point": { "type": "string" },
+        "desire": { "type": "string" },
+        "objections": { "type": "array", "items": { "type": "string" } },
+        "trust_requirements": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "product_catalog": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["category", "product_name", "price_suggestion", "fulfilment_method", "complexity", "margin_band"],
+        "properties": {
+          "category": { "type": "string" },
+          "product_name": { "type": "string" },
+          "description": { "type": "string" },
+          "price_suggestion": { "type": "string" },
+          "fulfilment_method": { "type": "string" },
+          "complexity": { "type": "string", "enum": ["low", "medium", "high"] },
+          "margin_band": { "type": "string" }
+        }
+      }
+    },
+    "store_copy": {
+      "type": "object",
+      "required": ["store_name_ideas", "hero_headline", "subheadline", "product_card_copy", "faq", "trust_badges", "shipping_return_copy"],
+      "properties": {
+        "store_name_ideas": { "type": "array", "items": { "type": "string" } },
+        "hero_headline": { "type": "string" },
+        "subheadline": { "type": "string" },
+        "product_card_copy": { "type": "array", "items": { "type": "string" } },
+        "faq": { "type": "array", "items": { "type": "object", "properties": { "question": { "type": "string" }, "answer": { "type": "string" } } } },
+        "trust_badges": { "type": "array", "items": { "type": "string" } },
+        "shipping_return_copy": { "type": "string" }
+      }
+    },
+    "social_content_pack": {
+      "type": "object",
+      "required": ["instagram_posts", "reels", "stories", "ad_hooks", "dm_templates"],
+      "properties": {
+        "instagram_posts": { "type": "array", "items": { "type": "string" } },
+        "reels": { "type": "array", "items": { "type": "string" } },
+        "stories": { "type": "array", "items": { "type": "string" } },
+        "ad_hooks": { "type": "array", "items": { "type": "string" } },
+        "dm_templates": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "manual_operations_checklist": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "validation_plan": {
+      "type": "object",
+      "required": ["first_7_days", "metrics", "kill_pivot_scale_rules", "minimum_signal"],
+      "properties": {
+        "first_7_days": { "type": "array", "items": { "type": "string" } },
+        "metrics": { "type": "array", "items": { "type": "string" } },
+        "kill_pivot_scale_rules": { "type": "array", "items": { "type": "string" } },
+        "minimum_signal": { "type": "string" }
+      }
+    },
+    "phase_2_automation_hooks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "assumptions_and_risks": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

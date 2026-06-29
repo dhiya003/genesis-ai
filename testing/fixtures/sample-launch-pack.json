@@ -1,0 +1,79 @@
+{
+  "createdAt": "2026-06-29T00:00:00+00:00",
+  "founderRequirement": "Create a handmade kids activity kit business for Instagram and WhatsApp validation in India",
+  "nextActions": [
+    "Complete competitor check.",
+    "Prepare the first offer asset.",
+    "Publish and track leads for 7 days."
+  ],
+  "phase1Manual": true,
+  "projectId": "d7d86795-0a82-5a5c-bf39-c0f0a5a77ba1",
+  "projectTitle": "Create A Handmade Kids Activity Kit",
+  "reportType": "LAUNCH_PACK",
+  "risks": [
+    "Demand may be overestimated without live competitor and customer checks.",
+    "Manual fulfillment can break if order tracking is not updated daily.",
+    "Creative may need iteration before paid ads make sense."
+  ],
+  "sections": {
+    "creative": {
+      "brandDirection": "trustworthy, clear, founder-led, launch-ready",
+      "contentAssets": [
+        "1 product promise post",
+        "1 how-it-works carousel",
+        "1 proof/behind-the-scenes reel",
+        "1 FAQ story set"
+      ]
+    },
+    "marketing": {
+      "channels": ["Instagram", "WhatsApp", "Google Form or manual lead sheet"],
+      "firstSevenDays": [
+        "Day 1: publish problem/promise post and collect interest.",
+        "Day 2: publish product explanation and DM warm leads.",
+        "Day 3: post proof, pricing, and limited launch slot.",
+        "Day 4: collect objections and update FAQ.",
+        "Day 5: run small manual outreach batch.",
+        "Day 6: publish customer/validation update.",
+        "Day 7: decide continue, change offer, or stop."
+      ]
+    },
+    "product": {
+      "mvpScope": ["One clear starter offer.", "One order/lead collection flow.", "One 7-day validation scorecard."],
+      "offer": "Create A Handmade Kids Activity Kit",
+      "pricingStrategy": {
+        "launchRule": "Start with an introductory price only if margin remains positive after packaging and shipping.",
+        "method": "cost-plus and competitor-anchor check"
+      }
+    },
+    "publishing": {
+      "automationReadyLater": true,
+      "manualSteps": [
+        "Create Instagram post/story assets from creative section.",
+        "Publish with a clear comment/DM call to action.",
+        "Track every lead in the lead tracker template.",
+        "Use WhatsApp for confirmation and payment instructions."
+      ]
+    },
+    "research": {
+      "assumptions": [
+        "Market truth must be verified manually before scaling ads.",
+        "The first version should avoid paid infrastructure dependencies."
+      ],
+      "competitorChecks": [
+        "Search Instagram reels/posts for similar offers and note price bands.",
+        "Check Amazon/Meesho/Etsy listings for commodity pressure.",
+        "Record at least 10 competitor hooks, prices, and review complaints."
+      ],
+      "summary": "Validate demand for: Create a handmade kids activity kit business for Instagram and WhatsApp validation in India",
+      "targetCustomerHypotheses": [
+        "Buyers already searching for a fast, low-risk solution.",
+        "Instagram and WhatsApp-first customers who need proof before purchase."
+      ]
+    },
+    "validation": {
+      "killCriteria": ["No qualified enquiries after 7 focused days.", "Customers only want a price below viable margin."],
+      "successMetrics": ["20 qualified profile visits or DMs", "5 serious enquiries", "1 paid order or clear preorder intent"]
+    }
+  },
+  "version": "0.1.0"
+}

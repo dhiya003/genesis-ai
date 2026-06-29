@@ -1,0 +1,7 @@
+[
+  {
+    "caseId": "PF-RUNNER-001",
+    "input": "Create a handmade kids activity kit business for Instagram and WhatsApp validation in India",
+    "expectedSections": ["research", "product", "creative", "marketing", "publishing", "validation"]
+  }
+]

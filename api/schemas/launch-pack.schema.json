@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/launch-pack.schema.json",
+  "title": "Genesis Launch Pack",
+  "type": "object",
+  "required": ["reportType", "projectId", "version", "createdAt", "founderRequirement", "projectTitle", "phase1Manual", "sections", "risks", "nextActions"],
+  "properties": {
+    "reportType": { "const": "LAUNCH_PACK" },
+    "projectId": { "type": "string", "format": "uuid" },
+    "version": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "founderRequirement": { "type": "string", "minLength": 1 },
+    "projectTitle": { "type": "string", "minLength": 1 },
+    "phase1Manual": { "type": "boolean" },
+    "sections": {
+      "type": "object",
+      "required": ["research", "product", "creative", "marketing", "publishing", "validation"],
+      "properties": {
+        "research": { "type": "object" },
+        "product": { "type": "object" },
+        "creative": { "type": "object" },
+        "marketing": { "type": "object" },
+        "publishing": { "type": "object" },
+        "validation": { "type": "object" }
+      }
+    },
+    "risks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "nextActions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}

@@ -37,6 +37,23 @@ Research
 Everything is built like a real company.
 
 ```text
+Founder
+  -> CEO
+  -> Departments
+  -> Managers
+  -> Employees
+```
+
+The operating model is not:
+
+```text
+User
+  -> AI Agent
+```
+
+It is:
+
+```text
 CEO
   -> Departments
   -> Managers
@@ -46,6 +63,14 @@ CEO
 ```
 
 Not prompts. Not agents. Actual virtual employees.
+
+Genesis is not a SaaS product in the ordinary sense. Genesis is an AI Company. Software is one tool Genesis uses, but the thing Genesis creates is businesses.
+
+All future design decisions should be judged against this question:
+
+```text
+Does this make Genesis a better AI Business Operating System?
+```
 
 ## 3. Product Goal
 
@@ -147,16 +172,40 @@ Founder
 
 - Research
 - Product
+- Manufacturing
+- Procurement
+- Branding
+- Design
+- Packaging
 - Creative
 - Marketing
 - Publishing
+- Sales
+- Customer Success
 - Analytics
 - Finance
 - Inventory
 - CRM
 - Operations
 - Legal
+- HR
+- Strategy
 - Customer Support
+
+Every department follows the same contract:
+
+```text
+Mission
+  -> Manager
+  -> Employees
+  -> Internal Workflow
+  -> Deliverables
+  -> Quality Validation
+  -> Approval
+  -> Output
+```
+
+Every future department should inherit this architecture unless a deliberate architecture decision says otherwise.
 
 ## 8. Research Department
 
@@ -175,6 +224,30 @@ Each employee produces:
 - Confidence
 - Sources
 - Report Section
+
+## 8.1 Employee Contract
+
+Every employee must have:
+
+- Employee ID
+- Name
+- Department
+- Role
+- Responsibilities
+- Input schema
+- Output schema
+- Prompt contract
+- Tool permissions
+- Retry policy
+- Timeout
+- Memory scope
+- KPIs
+- Cost tracking
+- Confidence score
+- Evidence
+- Validation
+
+This contract applies to Research employees and all future employees across Product, Manufacturing, Creative, Marketing, Publishing, Analytics, Finance, Legal, Operations, and Customer Support.
 
 ## 9. Future Departments
 
@@ -287,15 +360,131 @@ Genesis should eventually execute:
 ```text
 Founder Idea
   -> Research
-  -> Product
-  -> Brand
+  -> Product Design
+  -> Manufacturing
+  -> Creative
   -> Marketing
   -> Publishing
+  -> Sales
   -> Analytics
   -> Optimization
 ```
 
 without human intervention.
+
+The deeper Product Factory vision is:
+
+```text
+Research
+  -> Product Design
+  -> Manufacturing
+  -> Creative
+  -> Marketing
+  -> Publishing
+  -> Sales
+  -> Analytics
+  -> Optimization
+```
+
+Everything revolves around building businesses, not generating isolated artifacts.
+
+Genesis should be a universal business engine. It must not be specialized only for Amazon, Instagram, Shopify, Qikink, or any single provider. It should eventually support any viable business category, including:
+
+- Amazon businesses
+- Instagram businesses
+- Shopify businesses
+- Rental businesses
+- Manufacturing businesses
+- Toy companies
+- Fashion brands
+- Food brands
+- Service businesses
+- Local businesses
+
+The long-term vision is:
+
+```text
+The operating system for starting and running businesses.
+```
+
+The personal founder vision is:
+
+```text
+Build the world's best AI Business Operating System, not just another agent framework.
+```
+
+## 16.1 AI Workforce Hierarchy
+
+Genesis should evolve toward a company-like AI workforce hierarchy:
+
+```text
+CEO
+  -> COO
+  -> CTO
+  -> Department Managers
+  -> Senior Employees
+  -> Junior Employees
+```
+
+This hierarchy is not decorative. It defines responsibility, escalation, approval, validation, and accountability.
+
+## 16.2 Genesis Thinking Model
+
+Genesis should not answer immediately.
+
+Genesis should think and operate through this model:
+
+```text
+Receive Goal
+  -> Understand Goal
+  -> Plan
+  -> Assign Department
+  -> Assign Employees
+  -> Collect Outputs
+  -> Validate
+  -> Improve
+  -> Deliver
+```
+
+Planning-first execution is fundamental. Any implementation that jumps directly from founder input to final answer is architecturally incomplete.
+
+## 16.3 Founder Mode
+
+The founder should not micromanage the system.
+
+Founder Mode means:
+
+- Founder gives the business goal.
+- Genesis plans and executes the operating work.
+- Founder approves strategic decisions.
+- Genesis handles research, analysis, production steps, validation, and iteration.
+
+Approval gates should exist for strategic decisions, spend, publishing, legal/compliance, brand direction, and other high-impact choices.
+
+## 16.4 Continuous Improvement Loop
+
+Genesis is never a one-time execution engine.
+
+Every business should feed a learning loop:
+
+```text
+Business
+  -> Results
+  -> Analytics
+  -> Knowledge Base
+  -> Better Future Decisions
+```
+
+Genesis should always ask:
+
+```text
+Can this business become better?
+  -> Research again
+  -> Improve
+  -> Repeat
+```
+
+Every completed business, launch, campaign, and product should become training data for future decisions.
 
 ## 17. Deliverables
 
@@ -346,6 +535,19 @@ A sprint is complete only when:
 - Documentation is updated.
 - Engineering Handbook is updated.
 - No known critical defects remain.
+
+Sprint never ends with "code written." A sprint ends only after:
+
+```text
+Code
+  -> Tests
+  -> Validation
+  -> CI
+  -> Documentation
+  -> Handbook
+  -> Release
+  -> Complete
+```
 
 ## Instructions To Codex
 

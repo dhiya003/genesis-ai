@@ -1,0 +1,32 @@
+name: Genesis CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-repository:
+    name: Validate repository assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required files
+        run: |
+          test -f README.md
+          test -f database/schema.sql
+          test -f api/openapi.yaml
+          test -f infrastructure/docker-compose.yml
+          test -f prompts/research/emp-001-trend-research-specialist.md
+          test -f testing/prompt-regression/research-trend-cases.json
+
+      - name: Validate JSON files
+        run: |
+          python -m json.tool testing/prompt-regression/research-trend-cases.json > /tmp/research-trend-cases.json
+
+      - name: Validate Mermaid files are present
+        run: |
+          find architecture database -name "*.mmd" -type f -print

@@ -27,6 +27,23 @@ class WorkflowEngineTests(unittest.TestCase):
             self.assertEqual(retried["status"], "CREATED")
             self.assertEqual(retried["attempt"], 2)
 
+    def test_resume_recovers_running_workflow_and_records_metrics(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = JsonStore(directory)
+            engine = WorkflowEngine(store)
+            workflow = engine.create("project-1", "RESEARCH")
+            workflow["status"] = "RUNNING"
+            store.save_workflow(workflow)
+
+            resumed = engine.resume(workflow["id"], lambda current: {"workflowId": current["id"], "attempt": current["attempt"]})
+
+            self.assertEqual(resumed["status"], "COMPLETED")
+            self.assertEqual(resumed["attempt"], 2)
+            self.assertEqual(resumed["result"]["attempt"], 2)
+            metric_types = [metric["type"] for metric in store.list_metrics()]
+            self.assertIn("workflow.recovered", metric_types)
+            self.assertIn("workflow.completed", metric_types)
+
 
 if __name__ == "__main__":
     unittest.main()

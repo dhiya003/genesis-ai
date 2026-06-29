@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import logging
 from statistics import mean
+from time import perf_counter
 from typing import Any
 
 from apps.employees import EMPLOYEES, run_employee
+from apps.observability import MetricsRecorder
 from apps.research.intelligence import CitationEngine, ConfidenceEngine, CostTracker, collect_parallel
 from apps.storage import JsonStore
 from scripts.validate_research_report import validate_research_report_payload
@@ -30,8 +32,15 @@ class ResearchDepartment:
 
         def execute_employee(employee_id: str) -> dict[str, Any]:
             LOGGER.info("employee execution started", extra={"event": "employee.started", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "RUNNING"})
+            started = perf_counter()
             output = run_employee(employee_id, project_context)
             self.store.save_employee_output(output)
+            MetricsRecorder(self.store).record(
+                "employee.completed",
+                {"employeeId": employee_id, "runtimeSeconds": round(perf_counter() - started, 4), "score": output.get("score")},
+                project_id=project["id"],
+                workflow_id=workflow["id"],
+            )
             LOGGER.info("employee execution completed", extra={"event": "employee.completed", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "COMPLETED"})
             return output
 
@@ -41,6 +50,12 @@ class ResearchDepartment:
         if validation_issues:
             raise ValueError(f"Research report validation failed: {validation_issues}")
         self.store.save_report(report)
+        MetricsRecorder(self.store).record(
+            "research.report_stored",
+            {"overallScore": report["overallScore"], "confidence": report.get("confidence", {}).get("level")},
+            project_id=project["id"],
+            workflow_id=workflow["id"],
+        )
         LOGGER.info("research report stored", extra={"event": "research.report_stored", "project_id": project["id"], "workflow_id": workflow["id"], "status": "COMPLETED"})
         return report
 

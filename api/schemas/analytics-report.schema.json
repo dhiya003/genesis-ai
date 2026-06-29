@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/analytics-report.schema.json",
+  "title": "Genesis Analytics Report",
+  "type": "object",
+  "required": ["reportType", "projectId", "version", "metrics", "recommendations", "confidence"],
+  "properties": {
+    "reportType": { "const": "ANALYTICS_REPORT" },
+    "projectId": { "type": "string", "format": "uuid" },
+    "version": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "views": { "type": "integer", "minimum": 0 },
+        "clicks": { "type": "integer", "minimum": 0 },
+        "orders": { "type": "integer", "minimum": 0 },
+        "revenue": { "type": "number", "minimum": 0 },
+        "profit": { "type": "number" },
+        "conversionRate": { "type": "number", "minimum": 0 }
+      }
+    },
+    "recommendations": { "type": "array", "items": { "type": "string" } },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "sprint": "1D",
+  "cases": [
+    {
+      "id": "REG-001",
+      "employee": "EMP-001",
+      "input": "Research Tamil heritage POD products for India.",
+      "expected": ["demandSignals", "competition", "risks", "confidenceScore"]
+    },
+    {
+      "id": "REG-002",
+      "employee": "EMP-002",
+      "input": "Create a lean product blueprint from approved research.",
+      "expected": ["productName", "targetCustomer", "valueProposition", "pricing", "fulfillment"]
+    },
+    {
+      "id": "REG-003",
+      "employee": "EMP-003",
+      "input": "Create creative direction for a premium Tamil product.",
+      "expected": ["brandDirection", "copyAssets", "imagePrompts"]
+    },
+    {
+      "id": "REG-004",
+      "employee": "EMP-004",
+      "input": "Create a manual launch marketing pack.",
+      "expected": ["channelPlan", "contentCalendar", "adHooks", "dmScripts"]
+    }
+  ]
+}

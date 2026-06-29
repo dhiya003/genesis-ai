@@ -1,0 +1,24 @@
+{
+  "reportType": "PRODUCT_BLUEPRINT",
+  "projectId": "00000000-0000-0000-0000-000000000001",
+  "version": "1.0",
+  "recommendedProducts": [
+    {
+      "name": "Coffee Quote Oversized T-Shirt",
+      "category": "Apparel",
+      "priority": 1,
+      "estimatedPrice": 699,
+      "estimatedCost": 350,
+      "estimatedMargin": 349,
+      "rationale": "Simple MVP-compatible POD product with broad appeal."
+    }
+  ],
+  "pricingStrategy": {
+    "positioning": "affordable premium",
+    "currency": "INR"
+  },
+  "collections": [],
+  "launchSequence": ["Launch one apparel product first", "Validate response", "Add mugs and posters later"],
+  "risks": ["Crowded niche", "Needs differentiated design angle"],
+  "confidence": 0.7
+}

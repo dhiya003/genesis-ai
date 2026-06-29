@@ -8,6 +8,7 @@ from typing import Any
 
 from apps.employees import EMPLOYEES, run_employee
 from apps.storage import JsonStore
+from scripts.validate_research_report import validate_research_report_payload
 
 LOGGER = logging.getLogger("genesis.research")
 
@@ -30,6 +31,9 @@ class ResearchDepartment:
             outputs.append(output)
             LOGGER.info("employee execution completed", extra={"event": "employee.completed", "project_id": project["id"], "workflow_id": workflow["id"], "employee_id": employee_id, "status": "COMPLETED"})
         report = self.combine(project_context, workflow, outputs)
+        validation_issues = validate_research_report_payload(report)
+        if validation_issues:
+            raise ValueError(f"Research report validation failed: {validation_issues}")
         self.store.save_report(report)
         LOGGER.info("research report stored", extra={"event": "research.report_stored", "project_id": project["id"], "workflow_id": workflow["id"], "status": "COMPLETED"})
         return report

@@ -1,0 +1,22 @@
+{
+  "reportType": "TREND_REPORT",
+  "trendScore": 82,
+  "growthScore": 78,
+  "seasonalityScore": 45,
+  "confidence": 0.72,
+  "recommendation": "APPROVE",
+  "summary": "Coffee Lovers is treated as an evergreen niche with broad appeal. This fixture is for schema and workflow testing only, not real market validation.",
+  "evidence": [
+    "Evergreen consumer interest in coffee culture",
+    "Multiple product formats possible for POD testing"
+  ],
+  "risks": [
+    "Market may be crowded",
+    "Differentiation required"
+  ],
+  "nextActions": [
+    "Run competitor research",
+    "Identify emotional product angles",
+    "Validate product demand manually before spend"
+  ]
+}

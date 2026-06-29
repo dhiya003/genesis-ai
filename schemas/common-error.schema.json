@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dhiya003/genesis-ai/schemas/common-error.schema.json",
+  "title": "Common Error",
+  "type": "object",
+  "required": ["errorCode", "message", "severity"],
+  "properties": {
+    "errorCode": { "type": "string" },
+    "message": { "type": "string" },
+    "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+    "details": { "type": "object" },
+    "traceId": { "type": "string" }
+  }
+}

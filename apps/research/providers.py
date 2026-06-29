@@ -1,9 +1,10 @@
 """Research execution providers for Genesis employees.
 
-Sprint 2 supports three provider modes:
+Sprint 2 supports provider modes:
 
 - deterministic: credential-free local and CI execution
 - live_web: live public web search using a lightweight HTTP search client
+- marketplace: targeted marketplace/social live search for Amazon, Etsy, Instagram, Facebook, and Shopify-web evidence
 - openai: optional AI-backed execution when OpenAI credentials are configured
 """
 
@@ -247,6 +248,11 @@ def get_research_provider() -> ResearchProvider:
         if not api_key:
             raise RuntimeError("OPENAI_API_KEY is required when GENESIS_RESEARCH_PROVIDER=openai")
         return OpenAIResearchProvider(api_key=api_key, model=os.environ.get("GENESIS_RESEARCH_MODEL", "gpt-4.1-mini"))
+    if provider_name in {"marketplace", "marketplaces", "marketplace_web", "social_marketplace"}:
+        from apps.research.marketplaces import MarketplaceResearchProvider, SearchBackedMarketplaceClient
+
+        client = SearchBackedMarketplaceClient(search_client=DuckDuckGoLiteSearchClient())
+        return MarketplaceResearchProvider(client=client)
     if provider_name in {"live", "live_web", "web"}:
         return LiveWebResearchProvider(search_client=DuckDuckGoLiteSearchClient())
     return DeterministicResearchProvider()

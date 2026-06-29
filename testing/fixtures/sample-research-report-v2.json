@@ -1,0 +1,86 @@
+{
+  "competitorAnalysis": {
+    "competitorTypes": [
+      "Generic print-on-demand merchandise pages",
+      "Coffee roasters selling lifestyle accessories",
+      "Instagram gifting stores"
+    ],
+    "differentiation": [
+      "Focus on India-specific coffee lover identity.",
+      "Bundle products into launch kits instead of selling single commodity items.",
+      "Use founder-led validation content before ads."
+    ],
+    "employeeId": "EMP-002",
+    "projectId": "sample-project",
+    "score": 70,
+    "section": "competitorAnalysis",
+    "status": "COMPLETED",
+    "summary": "Competitors are likely split between generic merchandise sellers and premium coffee accessory brands.",
+    "workflowId": "sample-workflow"
+  },
+  "customerAnalysis": {
+    "employeeId": "EMP-003",
+    "objections": [
+      "Price must feel gift-worthy but not luxury-only.",
+      "Products must not look like generic marketplace merchandise.",
+      "Shipping and packaging quality affect trust."
+    ],
+    "projectId": "sample-project",
+    "score": 82,
+    "section": "customerAnalysis",
+    "segments": [
+      "Young professionals who identify as coffee lovers",
+      "Gift buyers looking for affordable premium hampers",
+      "Home café creators and content-friendly buyers"
+    ],
+    "status": "COMPLETED",
+    "summary": "Likely customers are urban coffee drinkers, gifting buyers, and office/home café enthusiasts.",
+    "workflowId": "sample-workflow"
+  },
+  "idea": "Create a coffee lovers product brand for India.",
+  "nextActions": [
+    "Check 10 India coffee/gifting competitors and record prices.",
+    "Create one starter kit mockup and publish an interest post.",
+    "Collect 5 serious customer conversations before buying inventory."
+  ],
+  "overallScore": 77,
+  "productResearch": {
+    "employeeId": "EMP-004",
+    "mvpRecommendation": "Launch one compact coffee-lover starter kit and test demand before expanding into mugs, apparel, or heavier products.",
+    "projectId": "sample-project",
+    "recommendedProducts": [
+      "Coffee quote sticker pack",
+      "Desk mini print or magnet",
+      "Coffee lover gift card",
+      "Starter hamper with one hero accessory"
+    ],
+    "score": 76,
+    "section": "productResearch",
+    "status": "COMPLETED",
+    "summary": "The first product set should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "workflowId": "sample-workflow"
+  },
+  "projectId": "sample-project",
+  "recommendation": "Proceed with a lean manual validation launch before investing in inventory or ads.",
+  "reportType": "RESEARCH_REPORT",
+  "risks": [
+    "Competitor saturation must be verified with live marketplace and Instagram checks.",
+    "The first offer may fail if it looks like generic merchandise.",
+    "Unit economics must include packaging, shipping, and damaged-return risk."
+  ],
+  "trendAnalysis": {
+    "employeeId": "EMP-001",
+    "projectId": "sample-project",
+    "score": 78,
+    "section": "trendAnalysis",
+    "signals": [
+      "Niche communities respond well to identity-led products.",
+      "Coffee culture supports repeatable content themes and bundles.",
+      "India launch can begin with Instagram and WhatsApp without paid infrastructure."
+    ],
+    "status": "COMPLETED",
+    "summary": "The idea fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+    "workflowId": "sample-workflow"
+  },
+  "workflowId": "sample-workflow"
+}

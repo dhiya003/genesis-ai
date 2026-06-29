@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-ai.local/schemas/research-report-v2.schema.json",
+  "title": "Genesis Sprint 2 Research Report",
+  "type": "object",
+  "required": ["reportType", "projectId", "workflowId", "idea", "trendAnalysis", "competitorAnalysis", "customerAnalysis", "productResearch", "overallScore", "recommendation", "risks", "nextActions"],
+  "properties": {
+    "reportType": { "const": "RESEARCH_REPORT" },
+    "projectId": { "type": "string" },
+    "workflowId": { "type": "string" },
+    "idea": { "type": "string" },
+    "trendAnalysis": { "type": "object" },
+    "competitorAnalysis": { "type": "object" },
+    "customerAnalysis": { "type": "object" },
+    "productResearch": { "type": "object" },
+    "overallScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "recommendation": { "type": "string" },
+    "risks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "nextActions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}

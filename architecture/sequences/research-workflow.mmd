@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  actor Founder
+  participant Orchestrator as Genesis Orchestrator
+  participant Research as Research Department
+  participant Trend as Trend Research Specialist
+  participant DB as Genesis Database
+
+  Founder->>Orchestrator: Submit niche idea
+  Orchestrator->>DB: Create project and workflow
+  Orchestrator->>Research: Queue research task
+  Research->>Trend: Assign trend research task
+  Trend->>DB: Load knowledge and historical reports
+  Trend-->>Research: Return Trend Report
+  Research->>DB: Store report
+  Research-->>Orchestrator: Research report ready
+  Orchestrator-->>Founder: Request review

@@ -1,7 +1,7 @@
-# Sprint 3 Kickoff - Product Intelligence & Engineering
+# Sprint 3 Kickoff - Product Factory
 
 Release: v0.3.0
-Status: Specification started
+Status: In implementation
 
 ## Sprint 3 mission
 
@@ -19,7 +19,7 @@ Sprint 3 answers:
 What exactly should we build?
 ```
 
-Sprint 3 is not the full AI Product Factory. It is the Product Intelligence and Engineering layer responsible for converting a validated opportunity into a production-ready product that can be manufactured, packaged, costed, sourced, and sold.
+Sprint 3 is the Product Factory sprint. It is responsible for converting a validated opportunity into a complete Product Blueprint that can support real manufacturer or supplier discussions.
 
 ## Business goal
 
@@ -53,7 +53,7 @@ Research Report
 
 ## Sprint 3 department
 
-Sprint 3 introduces the Product Department.
+Sprint 3 introduces the Product Department and supporting product factory capabilities across engineering, manufacturing, costing, packaging, supplier intelligence, and profitability.
 
 The Product Department designs products that are:
 
@@ -64,16 +64,26 @@ The Product Department designs products that are:
 
 The Product Department owns every engineering decision between a validated opportunity and the final Product Blueprint.
 
-## Product Manager
+## Product Director and employees
 
-The Product Manager is the department head for Sprint 3.
+The Product Director is the department head for Sprint 3. The Product Director orchestrates:
 
-Responsibilities:
+- EMP-101 Product Manager
+- EMP-102 Industrial Designer
+- EMP-103 Manufacturing Engineer
+- EMP-104 Material Engineer
+- EMP-105 BOM Engineer
+- EMP-106 Cost Engineer
+- EMP-107 Packaging Engineer
+- EMP-108 Supplier Analyst
+- EMP-109 Quality Engineer
+- EMP-110 Profitability Analyst
+
+Department-head responsibilities:
 
 - Read the Sprint 2 research report.
 - Identify the best product opportunity.
-- Create the Product Roadmap.
-- Assign Product Department work.
+- Assign employee work.
 - Validate every employee output.
 - Approve the Product Blueprint.
 
@@ -134,9 +144,12 @@ Those depend on a standardized Product Blueprint and belong to later sprints.
 Sprint 3 is complete only when:
 
 - Product Department runs from a stored Sprint 2 research report.
-- Product Department generates all Sprint 3 deliverables.
+- Product Department generates all Sprint 3 Product Blueprint deliverables.
+- EMP-101 through EMP-110 are implemented and executable.
 - Product Blueprint passes schema validation.
-- API and CLI can create and retrieve Product Department outputs.
+- API and CLI can create and retrieve Product Department outputs and Product Blueprint sections.
 - Unit, integration, and e2e tests pass.
 - CI is green.
 - Sprint 3 docs are committed.
+
+See [Sprint 3 Definition of Done](sprint-3-definition-of-done.md) for the authoritative exit criteria.

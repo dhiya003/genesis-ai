@@ -6,6 +6,8 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 
 - [Genesis AI Master Context](genesis-master-context.md)
 - [Engineering Handbook](engineering-handbook.md)
+- [Genesis Release Roadmap](genesis-release-roadmap.md)
+- [Live Data Credentials and Placeholders](live-data-credentials.md)
 
 ## Sprint 1 Documentation Sets
 
@@ -18,6 +20,7 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 
 - [Sprint 3 Kickoff - Product Intelligence & Engineering](sprint-3-kickoff.md)
 - [Sprint 3 Phase 1 - Product Definition](sprint-3-phase-1-product-definition.md)
+- [Sprint 3 Definition of Done](sprint-3-definition-of-done.md)
 
 ## Documentation Rule
 

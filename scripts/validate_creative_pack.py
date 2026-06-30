@@ -20,15 +20,25 @@ REQUIRED_TOP_LEVEL = [
     "brandNameRecommendation",
     "brandIdentity",
     "logoSystem",
+    "logoVariants",
+    "logoUsageRules",
     "colorPalette",
     "typography",
     "visualIdentityRules",
+    "visualSystem",
     "packagingDesignBrief",
+    "packagingProductionAssets",
     "productMockupBrief",
+    "productCreativeDeliverables",
     "marketplaceCreativePack",
     "socialMediaCreativePack",
+    "digitalAssets",
     "launchCopyPack",
+    "aiDeliverables",
+    "creativeAssetManifest",
+    "productionReadiness",
     "creativeQaReport",
+    "validationReport",
     "founderApprovalChecklist",
     "risks",
     "assumptions",
@@ -52,16 +62,37 @@ def validate_creative_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("department must be CREATIVE")
     if not data.get("brandIdentity", {}).get("brandName"):
         issues.append("brandIdentity.brandName is required")
+    for key in ["brandStory", "mission", "vision", "brandGuidelines"]:
+        if not data.get("brandIdentity", {}).get(key):
+            issues.append(f"brandIdentity.{key} is required")
+    if not data.get("logoVariants"):
+        issues.append("logoVariants is required")
+    if not data.get("visualSystem", {}).get("designTokens"):
+        issues.append("visualSystem.designTokens is required")
     if len(data.get("colorPalette", [])) < 3:
         issues.append("colorPalette must contain at least 3 colors")
     if not data.get("packagingDesignBrief", {}).get("panelContent"):
         issues.append("packagingDesignBrief.panelContent is required")
+    if not data.get("packagingProductionAssets", {}).get("printReadyDielines"):
+        issues.append("packagingProductionAssets.printReadyDielines is required")
     if not data.get("productMockupBrief", {}).get("variantMockups"):
         issues.append("productMockupBrief.variantMockups is required")
+    product_creatives = data.get("productCreativeDeliverables", {})
+    for key in ["heroImages", "lifestyleImages", "explodedViews", "productManuals", "instructionCards"]:
+        if not product_creatives.get(key):
+            issues.append(f"productCreativeDeliverables.{key} is required")
     if not data.get("marketplaceCreativePack", {}).get("imageConcepts"):
         issues.append("marketplaceCreativePack.imageConcepts is required")
     if not data.get("socialMediaCreativePack", {}).get("instagramPosts"):
         issues.append("socialMediaCreativePack.instagramPosts is required")
+    if not data.get("digitalAssets", {}).get("amazonImageSet"):
+        issues.append("digitalAssets.amazonImageSet is required")
+    if not data.get("aiDeliverables", {}).get("masterImagePrompts"):
+        issues.append("aiDeliverables.masterImagePrompts is required")
+    if not data.get("creativeAssetManifest"):
+        issues.append("creativeAssetManifest is required")
+    if not data.get("validationReport"):
+        issues.append("validationReport is required")
     if not data.get("launchCopyPack", {}).get("taglines"):
         issues.append("launchCopyPack.taglines is required")
     if not data.get("founderApprovalChecklist"):
@@ -95,4 +126,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

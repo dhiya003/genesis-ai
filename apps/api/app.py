@@ -65,6 +65,43 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
                 return
+            if parsed.path.startswith("/brand/"):
+                creative_id = parsed.path.removeprefix("/brand/").strip("/")
+                if not creative_id:
+                    raise bad_request("Creative ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_creative_brand(creative_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Brand identity not found: {creative_id}") from exc
+                return
+            if parsed.path.startswith("/packaging/"):
+                creative_id = parsed.path.removeprefix("/packaging/").strip("/")
+                if not creative_id:
+                    raise bad_request("Creative ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_creative_packaging(creative_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Packaging brief not found: {creative_id}") from exc
+                return
+            if parsed.path.startswith("/campaigns/"):
+                marketing_id = parsed.path.removeprefix("/campaigns/").strip("/")
+                if not marketing_id:
+                    raise bad_request("Marketing ID is required")
+                try:
+                    marketing = GenesisOrchestrator(self.store).get_marketing(marketing_id)
+                    self._send_json(200, {"advertisingPlan": marketing["ads"], "launchPlan": marketing["launch"], "aiDeliverables": marketing["marketingPack"].get("aiDeliverables", {})})
+                except FileNotFoundError as exc:
+                    raise not_found(f"Campaigns not found: {marketing_id}") from exc
+                return
+            if parsed.path.startswith("/content-calendar/"):
+                marketing_id = parsed.path.removeprefix("/content-calendar/").strip("/")
+                if not marketing_id:
+                    raise bad_request("Marketing ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_marketing_social(marketing_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Content calendar not found: {marketing_id}") from exc
+                return
             if parsed.path.startswith("/marketing/"):
                 marketing_path = parsed.path.removeprefix("/marketing/").strip("/")
                 parts = [part for part in marketing_path.split("/") if part]

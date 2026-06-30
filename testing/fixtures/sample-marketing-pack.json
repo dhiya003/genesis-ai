@@ -12,10 +12,24 @@
     "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
     "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
     "channelStrategy": { "instagram": "Trust and discovery", "marketplace": "Conversion" },
-    "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion"]
+    "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion"],
+    "goToMarketStrategy": "Founder-batch launch using organic trust-building and controlled paid testing.",
+    "launchRoadmap": ["Week 1: waitlist", "Week 2: demo content"],
+    "marketingBudget": { "currency": "INR", "pilotBudget": 50000 },
+    "channelPrioritization": [{ "channel": "Instagram", "priority": 1 }],
+    "customerAcquisitionStrategy": "Capture parent leads before paid conversion testing.",
+    "retentionStrategy": "Post-purchase activity tips and expansion-card drops.",
+    "referralStrategy": "Referral code for expansion-pack credit."
   },
   "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
   "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
+  "goToMarketStrategy": "Founder-batch launch using organic trust-building and controlled paid testing.",
+  "launchRoadmap": ["Week 1: waitlist", "Week 2: demo content"],
+  "marketingBudget": { "currency": "INR", "pilotBudget": 50000 },
+  "channelPrioritization": [{ "channel": "Instagram", "priority": 1 }],
+  "customerAcquisitionStrategy": "Capture parent leads before paid conversion testing.",
+  "retentionStrategy": "Post-purchase activity tips and expansion-card drops.",
+  "referralStrategy": "Referral code for expansion-pack credit.",
   "seoPlan": {
     "keywords": ["wooden educational toys India", "toys for 3 year olds"],
     "contentTopics": ["How screen-free toys build early logic"],
@@ -24,20 +38,70 @@
   },
   "socialMediaPlan": {
     "instagramCalendar": [{ "day": 1, "format": "carousel", "theme": "Problem awareness" }],
+    "facebookCalendar": [{ "day": 2, "format": "parent group post", "theme": "Screen-free play prompt" }],
+    "linkedinStrategy": "Use only for preschool partnerships.",
+    "pinterestStrategy": "Pin activity ideas and gift guides.",
+    "youtubeContentPlan": ["60-second product demo"],
+    "shortFormVideoIdeas": ["Pattern challenge"],
+    "storySequences": ["Problem poll"],
+    "reelScripts": [{ "title": "Pattern challenge", "script": "Show three cubes and reveal pattern." }],
     "captions": ["Screen-free play, made a little smarter."],
-    "hashtags": ["woodentoysindia", "educationaltoys"]
+    "hashtags": ["woodentoysindia", "educationaltoys"],
+    "captionLibrary": ["Try one pattern before breakfast."],
+    "hashtagLibrary": ["woodentoysindia", "educationaltoys"]
   },
   "advertisingPlan": {
     "metaAds": [{ "hook": "A premium wooden toy that teaches before it explains.", "cta": "Join the founding batch" }],
     "googleAds": [{ "headline": "Premium Wooden Learning Toys" }],
+    "amazonAdsStrategy": { "campaignType": "Sponsored Products placeholder", "status": "READY_FOR_SELLER_ACCOUNT" },
+    "keywordResearch": ["wooden educational toys India"],
     "audiences": ["Parents 25-40 in Indian metros"],
-    "testingPlan": ["Test learning benefit hook vs gifting hook"]
+    "testingPlan": ["Test learning benefit hook vs gifting hook"],
+    "audienceSegmentation": [{ "segment": "Learning parent", "message": "Build early logic" }],
+    "abTestMatrix": [{ "test": "Hook", "variantA": "Learning benefit", "variantB": "Premium gift" }]
   },
   "marketplaceListing": {
     "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
     "bullets": ["Builds logic, pattern recognition, and motor skills"],
     "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
-    "imageOrder": ["Hero", "What's in the box"]
+    "imageOrder": ["Hero", "What's in the box"],
+    "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+    "metaDescription": "Premium wooden educational toy for screen-free logic play.",
+    "comparisonTable": { "Starter": "6 cubes", "Standard": "12 cubes", "Premium": "24 cubes" }
+  },
+  "ecommerceDeliverables": {
+    "amazonListing": { "title": "LumaLearn Luma Logic Cubes" },
+    "shopifyProductPage": { "title": "LumaLearn Luma Logic Cubes", "description": "Premium educational wooden toy kit." },
+    "productDescriptions": ["Premium educational wooden toy kit."],
+    "comparisonTables": [{ "columns": ["Starter", "Standard", "Premium"] }]
+  },
+  "crmDeliverables": {
+    "welcomeEmailSequence": [{ "day": 0, "purpose": "Waitlist welcome" }],
+    "cartAbandonmentEmails": [{ "subject": "Still thinking about screen-free play?" }],
+    "postPurchaseEmails": [{ "subject": "How to start with your logic cubes" }],
+    "reviewRequestFlow": ["Day 14 review request"],
+    "whatsappAutomation": { "broadcasts": ["Founding batch opens soon."] },
+    "customerSegmentation": ["Waitlist parent", "Gift buyer"]
+  },
+  "salesFunnel": {
+    "funnelArchitecture": ["Instagram", "Landing page", "Waitlist", "Checkout"],
+    "landingPages": [{ "hero": { "headline": "Premium wooden play" } }],
+    "leadMagnets": ["Printable activity sheet"],
+    "upsells": ["Activity card expansion pack"],
+    "crossSells": ["Replacement cubes"],
+    "bundles": ["Starter", "Standard", "Premium"],
+    "subscriptionStrategy": "Monthly activity-card expansion after repeat demand is validated."
+  },
+  "analyticsPlan": {
+    "kpiDashboard": ["CAC", "ROAS", "CTR", "Conversion Rate", "AOV", "LTV", "Retention", "Funnel Drop-off"],
+    "cac": { "target": "Under INR 250" },
+    "roas": { "target": "2.0x" },
+    "ctr": { "target": "1.5%+" },
+    "conversionRate": { "target": "2-4%" },
+    "aov": { "target": "INR 1299-2499" },
+    "ltv": { "target": "Improve through expansion packs" },
+    "retentionMetrics": ["Repeat purchase"],
+    "funnelDropOffAnalysis": ["Ad click to landing"]
   },
   "landingPageCopy": {
     "hero": { "headline": "Premium wooden play for curious little minds", "cta": "Join the founding batch" },
@@ -65,6 +129,20 @@
     "launchPlan": ["Finalize founder approval", "Open waitlist"],
     "approvalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
     "risks": ["Compliance-sensitive claims need review before publishing."]
+  },
+  "aiDeliverables": {
+    "marketingPrompts": ["Generate launch calendar variants."],
+    "adPrompts": ["A premium wooden toy that teaches before it explains."],
+    "contentPrompts": ["Screen-free play, made a little smarter."],
+    "campaignTemplates": ["Founder batch launch"],
+    "automationWorkflows": [{ "name": "Waitlist nurture", "trigger": "Lead form submit" }]
+  },
+  "launchReadinessScore": {
+    "score": 82,
+    "threshold": 85,
+    "recommendation": "HOLD_FOR_FOUNDER_REVIEW",
+    "dimensions": { "researchQuality": 84, "productReadiness": 82 },
+    "blockingIssues": ["Confirm budget availability"]
   },
   "founderApprovalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
   "risks": [{ "risk": "Marketing Pack does not publish or spend budget in Sprint 5 MVP.", "severity": "LOW", "mitigation": "Use Sprint 6 Publishing Engine." }],

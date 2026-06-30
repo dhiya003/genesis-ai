@@ -102,6 +102,13 @@ def _strategy_output(context: dict[str, Any]) -> dict[str, Any]:
         ],
         "channelStrategy": {"instagram": "Trust and discovery", "marketplace": "Conversion", "whatsapp": "Warm lead follow-up", "email": "Waitlist nurturing"},
         "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion", "Review collection"],
+        "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+        "launchRoadmap": ["Week 1: waitlist and education", "Week 2: sample/demo content", "Week 3: founding batch offer", "Week 4: reviews and referrals"],
+        "marketingBudget": {"currency": "INR", "pilotBudget": 50000, "allocation": {"content": 10000, "samples": 10000, "metaAds": 20000, "influencers": 10000}},
+        "channelPrioritization": [{"channel": "Instagram", "priority": 1}, {"channel": "Marketplace", "priority": 2}, {"channel": "WhatsApp", "priority": 3}, {"channel": "SEO", "priority": 4}],
+        "customerAcquisitionStrategy": "Use educational content and founding-batch scarcity to capture parent leads before paid conversion testing.",
+        "retentionStrategy": "Post-purchase activity tips, expansion-card drops, review requests, and referral incentives.",
+        "referralStrategy": "Give founding parents a referral code for expansion-pack credit after first purchase.",
         "score": 86,
     }
 
@@ -124,8 +131,20 @@ def _social_output(context: dict[str, Any]) -> dict[str, Any]:
             {"day": 5, "format": "static", "theme": "Material trust", "caption": "Rounded wood, calm colors, thoughtful play."},
             {"day": 7, "format": "story", "theme": "Waitlist push", "caption": "Founding batch opens soon."},
         ],
+        "facebookCalendar": [
+            {"day": 2, "format": "parent group post", "theme": "Screen-free play prompt"},
+            {"day": 6, "format": "founder story", "theme": "Why we built this toy"},
+        ],
+        "linkedinStrategy": "Use only if targeting preschool partnerships or founder build-in-public credibility.",
+        "pinterestStrategy": "Pin activity ideas, gift guides, and Montessori-inspired play setups.",
+        "youtubeContentPlan": ["60-second product demo", "Parent guide walkthrough", "3 pattern activities for preschoolers"],
+        "shortFormVideoIdeas": ["Pattern challenge", "Unboxing", "Parent testimonial prompt", "Inside the box"],
+        "storySequences": ["Problem poll", "Material trust", "How it works", "Waitlist CTA"],
+        "reelScripts": [{"title": "Pattern challenge", "script": "Show three cubes, pause for child choice, reveal pattern, CTA to waitlist."}],
         "captions": ["Screen-free play, made a little smarter.", "Premium wooden play for curious little minds.", "The founding batch is almost ready."],
         "hashtags": ["woodentoysindia", "educationaltoys", "screenfreeplay", "toddlertoys", "earlylearning"],
+        "captionLibrary": ["Try one pattern before breakfast.", "A quieter kind of learning toy.", "Made for little hands and big curiosity."],
+        "hashtagLibrary": ["woodentoysindia", "educationaltoys", "screenfreeplay", "toddlertoys", "earlylearning", "montessoritoys"],
         "score": 84,
     }
 
@@ -138,8 +157,15 @@ def _ads_output(context: dict[str, Any]) -> dict[str, Any]:
             {"hook": "Screen-free play for ages 3-5.", "creative": f"{product} unboxing", "cta": "See the Starter kit"},
         ],
         "googleAds": [{"headline": "Premium Wooden Learning Toys", "description": "Logic cubes for ages 3-5. Gift-ready founding batch."}],
+        "amazonAdsStrategy": {"campaignType": "Sponsored Products placeholder", "keywords": ["wooden educational toys", "toys for 3 year olds"], "status": "READY_FOR_SELLER_ACCOUNT"},
+        "keywordResearch": ["wooden educational toys India", "Montessori toys India", "logic toys for kids", "screen free toys"],
         "audiences": ["Parents 25-40 in Indian metros", "Montessori and preschool interest", "Premium gifting buyers"],
         "testingPlan": ["Test learning benefit hook vs gifting hook", "Test Starter kit image vs parent-child lifestyle image"],
+        "audienceSegmentation": [{"segment": "Learning parent", "message": "Build early logic"}, {"segment": "Gift buyer", "message": "Premium useful gift"}],
+        "abTestMatrix": [
+            {"test": "Hook", "variantA": "Learning benefit", "variantB": "Premium gift"},
+            {"test": "Creative", "variantA": "Product hero", "variantB": "Parent-child lifestyle"},
+        ],
         "score": 81,
     }
 
@@ -152,6 +178,9 @@ def _listing_output(context: dict[str, Any]) -> dict[str, Any]:
         "bullets": ["Builds logic, pattern recognition, and motor skills", "Premium wooden pieces with rounded-edge design", "Gift-ready packaging for birthdays and early learning", "Includes activity cards for guided play"],
         "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
         "imageOrder": ["Hero", "What's in the box", "Learning benefits", "Material trust", "Variant comparison"],
+        "seoTitle": f"{brand} {product} for Ages 3-5",
+        "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+        "comparisonTable": {"Starter": "6 cubes", "Standard": "12 cubes", "Premium": "24 cubes and gift packaging"},
         "faq": [{"question": "What age is this for?", "answer": "Designed for children aged 3-5 with adult supervision."}],
         "score": 85,
     }
@@ -162,6 +191,9 @@ def _landing_output(context: dict[str, Any]) -> dict[str, Any]:
         "hero": {"headline": "Premium wooden play for curious little minds", "subheadline": "A screen-free logic kit for children aged 3-5.", "cta": "Join the founding batch"},
         "sections": ["Problem", "How it works", "Inside the box", "Why parents trust it", "Variants", "FAQ"],
         "cta": "Reserve early access",
+        "funnelRole": "Convert warm social and search traffic into waitlist leads before inventory commitment.",
+        "leadMagnet": "Printable screen-free pattern activity sheet",
+        "upsellCopy": "Add expansion activity cards for a longer play journey.",
         "faq": [{"question": "Is it certified?", "answer": "Certification and safety claims are reviewed before production release."}],
         "score": 84,
     }
@@ -214,4 +246,3 @@ def _qa_output(context: dict[str, Any]) -> dict[str, Any]:
         "risks": ["Ad performance cannot be estimated until live campaigns run.", "Compliance-sensitive claims need review before publishing."],
         "score": 82,
     }
-

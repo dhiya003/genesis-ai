@@ -104,6 +104,12 @@ class ApiHttpE2ETests(unittest.TestCase):
                 with request.urlopen(f"http://{host}:{port}/creative/{project_id}/brand", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     creative_brand = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/brand/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    brand_alias = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/packaging/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    packaging_alias = json.loads(response.read().decode("utf-8"))
 
                 marketing_request = request.Request(
                     f"http://{host}:{port}/marketing/generate",
@@ -121,6 +127,12 @@ class ApiHttpE2ETests(unittest.TestCase):
                 with request.urlopen(f"http://{host}:{port}/marketing/{project_id}/seo", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     marketing_seo = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/campaigns/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    campaigns_alias = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/content-calendar/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    calendar_alias = json.loads(response.read().decode("utf-8"))
 
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
@@ -146,9 +158,13 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertEqual(creative_run["creativePack"]["reportType"], "CREATIVE_PACK")
                 self.assertEqual(creative_pack["reportType"], "CREATIVE_PACK")
                 self.assertTrue(creative_brand["brandName"])
+                self.assertEqual(brand_alias["brandName"], creative_brand["brandName"])
+                self.assertTrue(packaging_alias["panelContent"])
                 self.assertEqual(marketing_run["marketingPack"]["reportType"], "MARKETING_PACK")
                 self.assertEqual(marketing_pack["reportType"], "MARKETING_PACK")
                 self.assertTrue(marketing_seo["keywords"])
+                self.assertTrue(campaigns_alias["advertisingPlan"]["metaAds"])
+                self.assertTrue(calendar_alias["instagramCalendar"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

@@ -20,10 +20,21 @@ REQUIRED_TOP_LEVEL = [
     "marketingStrategy",
     "launchPositioning",
     "customerPersonas",
+    "goToMarketStrategy",
+    "launchRoadmap",
+    "marketingBudget",
+    "channelPrioritization",
+    "customerAcquisitionStrategy",
+    "retentionStrategy",
+    "referralStrategy",
     "seoPlan",
     "socialMediaPlan",
     "advertisingPlan",
     "marketplaceListing",
+    "ecommerceDeliverables",
+    "crmDeliverables",
+    "salesFunnel",
+    "analyticsPlan",
     "landingPageCopy",
     "emailCampaign",
     "whatsappCampaign",
@@ -31,6 +42,8 @@ REQUIRED_TOP_LEVEL = [
     "hashtagPlan",
     "launchPlan",
     "campaignQaReport",
+    "aiDeliverables",
+    "launchReadinessScore",
     "founderApprovalChecklist",
     "risks",
     "assumptions",
@@ -53,12 +66,31 @@ def validate_marketing_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("department must be MARKETING")
     if not data.get("seoPlan", {}).get("keywords"):
         issues.append("seoPlan.keywords is required")
+    for key in ["goToMarketStrategy", "launchRoadmap", "marketingBudget", "retentionStrategy", "referralStrategy"]:
+        if not data.get(key):
+            issues.append(f"{key} is required")
     if not data.get("socialMediaPlan", {}).get("instagramCalendar"):
         issues.append("socialMediaPlan.instagramCalendar is required")
+    for key in ["facebookCalendar", "youtubeContentPlan", "reelScripts", "captionLibrary", "hashtagLibrary"]:
+        if not data.get("socialMediaPlan", {}).get(key):
+            issues.append(f"socialMediaPlan.{key} is required")
     if not data.get("advertisingPlan", {}).get("metaAds"):
         issues.append("advertisingPlan.metaAds is required")
+    for key in ["googleAds", "amazonAdsStrategy", "keywordResearch", "audienceSegmentation", "abTestMatrix"]:
+        if not data.get("advertisingPlan", {}).get(key):
+            issues.append(f"advertisingPlan.{key} is required")
     if not data.get("marketplaceListing", {}).get("title"):
         issues.append("marketplaceListing.title is required")
+    if not data.get("ecommerceDeliverables", {}).get("shopifyProductPage"):
+        issues.append("ecommerceDeliverables.shopifyProductPage is required")
+    if not data.get("crmDeliverables", {}).get("cartAbandonmentEmails"):
+        issues.append("crmDeliverables.cartAbandonmentEmails is required")
+    if not data.get("salesFunnel", {}).get("funnelArchitecture"):
+        issues.append("salesFunnel.funnelArchitecture is required")
+    analytics = data.get("analyticsPlan", {})
+    for key in ["kpiDashboard", "cac", "roas", "ctr", "conversionRate", "aov", "ltv", "retentionMetrics", "funnelDropOffAnalysis"]:
+        if not analytics.get(key):
+            issues.append(f"analyticsPlan.{key} is required")
     if not data.get("landingPageCopy", {}).get("hero"):
         issues.append("landingPageCopy.hero is required")
     if not data.get("emailCampaign", {}).get("sequence"):
@@ -67,6 +99,13 @@ def validate_marketing_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("whatsappCampaign.broadcasts is required")
     if not data.get("influencerStrategy", {}).get("creatorProfiles"):
         issues.append("influencerStrategy.creatorProfiles is required")
+    if not data.get("aiDeliverables", {}).get("automationWorkflows"):
+        issues.append("aiDeliverables.automationWorkflows is required")
+    readiness = data.get("launchReadinessScore", {})
+    if not isinstance(readiness.get("score"), (int, float)) or not 0 <= readiness.get("score", -1) <= 100:
+        issues.append("launchReadinessScore.score must be 0-100")
+    if "recommendation" not in readiness:
+        issues.append("launchReadinessScore.recommendation is required")
     if not data.get("founderApprovalChecklist"):
         issues.append("founderApprovalChecklist is required")
     employee_ids = {output.get("employeeId") for output in data.get("employeeOutputs", []) if isinstance(output, dict)}
@@ -98,4 +137,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

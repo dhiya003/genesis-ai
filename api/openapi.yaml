@@ -178,6 +178,22 @@ paths:
           description: Launch copy pack
         '404':
           description: Not found
+  /brand/{creativeId}:
+    get:
+      summary: Alias endpoint to retrieve Brand Identity
+      responses:
+        '200':
+          description: Brand identity
+        '404':
+          description: Not found
+  /packaging/{creativeId}:
+    get:
+      summary: Alias endpoint to retrieve Creative Packaging Brief
+      responses:
+        '200':
+          description: Packaging design brief
+        '404':
+          description: Not found
   /marketing/generate:
     post:
       summary: Generate a complete Marketing Pack from a stored Creative Pack
@@ -248,6 +264,22 @@ paths:
       responses:
         '200':
           description: Launch plan
+        '404':
+          description: Not found
+  /campaigns/{marketingId}:
+    get:
+      summary: Alias endpoint to retrieve campaign plans
+      responses:
+        '200':
+          description: Campaign plans
+        '404':
+          description: Not found
+  /content-calendar/{marketingId}:
+    get:
+      summary: Alias endpoint to retrieve content calendar
+      responses:
+        '200':
+          description: Content calendar
         '404':
           description: Not found
 components:

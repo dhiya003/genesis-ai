@@ -24,10 +24,15 @@
   },
   "brandIdentity": {
     "brandName": "LumaLearn",
+    "brandStory": "LumaLearn exists to make early learning feel calm, beautiful, and useful at home.",
+    "mission": "Help families turn everyday play into safe, screen-free learning moments.",
+    "vision": "Become India's most trusted premium early-learning play brand.",
     "positioning": "Premium screen-free learning toys for early childhood development in India",
     "targetAudience": { "primarySegment": "Parents of children aged 3-5 in India" },
+    "targetPersona": { "name": "Learning-focused urban parent", "priority": "Safe, premium play" },
     "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
     "personality": ["warm", "intelligent", "safe", "premium", "playful"],
+    "brandVoice": "Warm expert, clear parent guide, quietly playful",
     "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
     "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
     "colorPalette": [
@@ -36,13 +41,20 @@
       { "name": "Warm Ivory", "hex": "#FFF7E6", "usage": "Packaging base" }
     ],
     "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
-    "visualRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"]
+    "visualRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"],
+    "brandGuidelines": { "voiceRules": ["Lead with parent benefit"], "layoutRules": ["Show product first"], "claimRules": ["Avoid unsupported claims"] }
   },
   "logoSystem": {
     "primaryConcept": "LumaLearn wordmark with a cube/sun learning mark.",
     "secondaryConcept": "Stacked lockup for square packaging.",
     "iconMark": "Rounded cube with three path lines.",
     "usage": { "lightBackground": "Use forest green wordmark." }
+  },
+  "logoVariants": [{ "name": "Primary horizontal", "usage": "Website and box front", "fileName": "logo-primary-horizontal.svg" }],
+  "logoUsageRules": {
+    "clearSpaceRules": "Keep clear space equal to the icon height.",
+    "minimumSizeRules": "24 mm wide on packaging",
+    "backgroundRules": { "lightBackground": "Use forest green wordmark." }
   },
   "colorPalette": [
     { "name": "Forest Green", "hex": "#1F5A46", "usage": "Primary brand color" },
@@ -51,11 +63,30 @@
   ],
   "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
   "visualIdentityRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"],
+  "visualSystem": {
+    "iconLibrary": [{ "name": "Logic", "concept": "Path through rounded cube" }],
+    "illustrationStyle": "Soft geometric line illustrations.",
+    "photographyStyle": "Bright Indian home setting with natural light.",
+    "graphicElements": ["Cube path pattern"],
+    "designTokens": { "colors": { "Forest Green": "#1F5A46" }, "spacing": { "sm": 8 } }
+  },
   "packagingDesignBrief": {
     "concept": "Premium learning kit box with natural board texture.",
     "panelContent": { "front": ["Brand name", "Age 3-5"], "back": ["How children play"], "side": ["SKU placeholder"] },
     "materials": ["Rigid kraft board", "Paper pulp insert"],
     "compliancePlaceholders": ["Age grade", "Choking hazard review"]
+  },
+  "packagingProductionAssets": {
+    "boxDesign": { "concept": "Premium learning kit box" },
+    "labels": [{ "fileName": "label-age-safety.svg" }],
+    "stickers": [{ "fileName": "sticker-founder-batch.svg" }],
+    "hangTags": [{ "fileName": "hang-tag-learning-benefits.pdf" }],
+    "thankYouCards": [{ "fileName": "thank-you-card.pdf" }],
+    "warrantyCards": [{ "fileName": "care-and-warranty-card.pdf" }],
+    "qrIntegration": { "placement": "Back panel" },
+    "barcodePlacement": { "placement": "Bottom side panel" },
+    "printReadyDielines": [{ "fileName": "starter-box-dieline.ai", "status": "SPEC_READY" }],
+    "packagingSpecifications": { "materials": ["Rigid kraft board"] }
   },
   "productMockupBrief": {
     "variantMockups": [
@@ -65,6 +96,17 @@
     ],
     "lifestyleScenes": ["Parent and child solving a pattern"],
     "renderingGuidance": "Use bright natural light."
+  },
+  "productCreativeDeliverables": {
+    "productMockups": [{ "variant": "Starter", "brief": "Starter box, six cubes, activity cards." }],
+    "heroImages": [{ "name": "Main hero", "brief": "Box, cubes, and cards on white." }],
+    "lifestyleImages": [{ "name": "Parent-child activity", "brief": "Child arranging cubes." }],
+    "explodedViews": [{ "name": "What is inside", "components": ["Box", "Cubes", "Cards"] }],
+    "featureCallouts": ["Logic", "Motor skills"],
+    "sizeCharts": [{ "variant": "Starter", "packageSize": "180 x 120 x 60 mm" }],
+    "infographics": ["How to play in 3 steps"],
+    "productManuals": [{ "fileName": "manual-parent-guide.pdf" }],
+    "instructionCards": [{ "fileName": "instruction-cards-starter.pdf", "count": 12 }]
   },
   "marketplaceCreativePack": {
     "imageConcepts": [
@@ -81,6 +123,16 @@
     "reels": ["15-second pattern challenge"],
     "launchBanners": ["Founding batch now open"]
   },
+  "digitalAssets": {
+    "websiteBanners": [{ "fileName": "website-hero-banner.png" }],
+    "appAssets": [{ "fileName": "app-product-card.png" }],
+    "amazonImageSet": [{ "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }],
+    "shopifyImageSet": [{ "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }],
+    "socialMediaTemplates": [{ "format": "carousel", "hook": "A toy that teaches before it explains." }],
+    "storyTemplates": ["Poll: Which skill should playtime build?"],
+    "highlightCovers": [{ "name": "Play", "icon": "Logic cube" }],
+    "emailGraphics": [{ "fileName": "email-launch-header.png" }]
+  },
   "launchCopyPack": {
     "taglines": ["Play that builds little logic."],
     "packagingCopy": { "front": "LumaLearn Logic Cubes" },
@@ -88,11 +140,20 @@
     "featureBullets": ["Supports logic and pattern recognition"],
     "socialCaptions": ["Screen-free play, made a little smarter."]
   },
+  "aiDeliverables": {
+    "masterImagePrompts": ["Box, cubes, and cards on white."],
+    "styleGuidePrompts": ["Use warm ivory background and forest green typography."],
+    "brandConsistencyRules": ["Use real product visibility"],
+    "creativeAssetManifestRules": ["Every asset needs purpose and approval status."]
+  },
+  "creativeAssetManifest": [{ "assetId": "brand-guidelines", "name": "LumaLearn Brand Guidelines", "format": "pdf", "status": "SPEC_READY" }],
+  "productionReadiness": { "designerHandoff": "READY", "printerHandoff": "SPEC_READY", "requiresBinaryAssetGeneration": true },
   "creativeQaReport": {
     "checks": [{ "check": "Brand-product fit", "status": "PASS" }],
     "approvalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
     "risks": ["Certification claims must remain placeholders until verified."]
   },
+  "validationReport": { "brandConsistency": "PASS", "printSafety": "SPEC_READY", "accessibility": "PASS", "resolutionChecks": "PENDING_BINARY_ASSETS", "manufacturingReadiness": "SPEC_READY" },
   "founderApprovalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
   "risks": [{ "risk": "Final image files are not generated in deterministic MVP mode.", "severity": "MEDIUM", "mitigation": "Use approved provider." }],
   "assumptions": ["Sprint 4 MVP produces creative specifications and image-generation-ready briefs."],

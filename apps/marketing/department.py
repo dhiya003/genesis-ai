@@ -71,6 +71,7 @@ class MarketingDepartment:
         employee_outputs: list[dict[str, Any]],
     ) -> dict[str, Any]:
         sections = {output["section"]: output for output in employee_outputs}
+        launch_readiness = _launch_readiness_score(product_blueprint, creative_pack, sections)
         return {
             "reportType": "MARKETING_PACK",
             "version": "0.5.0",
@@ -84,10 +85,21 @@ class MarketingDepartment:
             "marketingStrategy": sections["marketingStrategy"],
             "launchPositioning": sections["marketingStrategy"]["launchPositioning"],
             "customerPersonas": sections["marketingStrategy"]["customerPersonas"],
+            "goToMarketStrategy": sections["marketingStrategy"]["goToMarketStrategy"],
+            "launchRoadmap": sections["marketingStrategy"]["launchRoadmap"],
+            "marketingBudget": sections["marketingStrategy"]["marketingBudget"],
+            "channelPrioritization": sections["marketingStrategy"]["channelPrioritization"],
+            "customerAcquisitionStrategy": sections["marketingStrategy"]["customerAcquisitionStrategy"],
+            "retentionStrategy": sections["marketingStrategy"]["retentionStrategy"],
+            "referralStrategy": sections["marketingStrategy"]["referralStrategy"],
             "seoPlan": sections["seoPlan"],
             "socialMediaPlan": sections["socialCalendar"],
             "advertisingPlan": sections["adConcepts"],
             "marketplaceListing": sections["marketplaceListing"],
+            "ecommerceDeliverables": _ecommerce_deliverables(sections),
+            "crmDeliverables": _crm_deliverables(sections),
+            "salesFunnel": _sales_funnel(sections, product_blueprint),
+            "analyticsPlan": _analytics_plan(),
             "landingPageCopy": sections["landingPageCopy"],
             "emailCampaign": sections["emailCampaign"],
             "whatsappCampaign": sections["whatsappCampaign"],
@@ -95,6 +107,8 @@ class MarketingDepartment:
             "hashtagPlan": sections["socialCalendar"]["hashtags"],
             "launchPlan": sections["launchQaReport"]["launchPlan"],
             "campaignQaReport": sections["launchQaReport"],
+            "aiDeliverables": _ai_deliverables(sections),
+            "launchReadinessScore": launch_readiness,
             "founderApprovalChecklist": sections["launchQaReport"]["approvalChecklist"],
             "risks": [
                 {"risk": "Marketing Pack does not publish or spend budget in Sprint 5 MVP.", "severity": "LOW", "mitigation": "Use Sprint 6 Publishing Engine for approved automation."},
@@ -114,3 +128,96 @@ class MarketingDepartment:
             "overallScore": round(mean(output["score"] for output in employee_outputs)),
         }
 
+
+def _ecommerce_deliverables(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    listing = sections["marketplaceListing"]
+    return {
+        "amazonListing": listing,
+        "shopifyProductPage": {
+            "title": listing["title"],
+            "description": listing["description"],
+            "featureBullets": listing["bullets"],
+            "seoTitle": listing["title"][:60],
+            "metaDescription": "Premium wooden educational toy for ages 3-5 with screen-free learning benefits.",
+            "faq": listing.get("faq", []),
+        },
+        "productDescriptions": [listing["description"]],
+        "comparisonTables": [
+            {"columns": ["Starter", "Standard", "Premium"], "rows": ["Cubes included", "Activity cards", "Gift packaging", "Price tier"]}
+        ],
+    }
+
+
+def _crm_deliverables(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "welcomeEmailSequence": sections["emailCampaign"]["sequence"],
+        "cartAbandonmentEmails": [
+            {"subject": "Still thinking about screen-free play?", "body": "Your founding batch spot is waiting."}
+        ],
+        "postPurchaseEmails": [
+            {"subject": "How to start with your logic cubes", "body": "Begin with the first activity card and share feedback."}
+        ],
+        "reviewRequestFlow": ["Day 7 play feedback", "Day 14 review request", "Day 21 referral ask"],
+        "whatsappAutomation": sections["whatsappCampaign"],
+        "customerSegmentation": ["Waitlist parent", "Gift buyer", "Founding batch buyer", "Repeat buyer"],
+    }
+
+
+def _sales_funnel(sections: dict[str, dict[str, Any]], product_blueprint: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "funnelArchitecture": ["Instagram/SEO awareness", "Landing page", "Waitlist", "Founder batch checkout", "Review/referral"],
+        "landingPages": [sections["landingPageCopy"]],
+        "leadMagnets": ["Printable pattern activity sheet", "Screen-free play guide"],
+        "upsells": ["Activity card expansion pack", "Gift wrap"],
+        "crossSells": ["Replacement cubes", "Advanced pattern cards"],
+        "bundles": product_blueprint.get("productVariants", []),
+        "subscriptionStrategy": "Monthly activity-card expansion after repeat demand is validated.",
+    }
+
+
+def _analytics_plan() -> dict[str, Any]:
+    return {
+        "kpiDashboard": ["CAC", "ROAS", "CTR", "Conversion Rate", "AOV", "LTV", "Retention", "Funnel Drop-off"],
+        "cac": {"target": "Under INR 250 during founder batch", "status": "ESTIMATE"},
+        "roas": {"target": "2.0x after creative testing", "status": "ESTIMATE"},
+        "ctr": {"target": "1.5%+ Meta cold audience", "status": "ESTIMATE"},
+        "conversionRate": {"target": "2-4% landing page", "status": "ESTIMATE"},
+        "aov": {"target": "INR 1299-2499", "status": "ESTIMATE"},
+        "ltv": {"target": "Improve through expansion packs", "status": "ESTIMATE"},
+        "retentionMetrics": ["Repeat purchase", "Expansion-pack purchase", "Referral rate"],
+        "funnelDropOffAnalysis": ["Ad click to landing", "Landing to waitlist", "Waitlist to purchase", "Purchase to review"],
+    }
+
+
+def _ai_deliverables(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "marketingPrompts": ["Generate launch calendar variants using the approved brand voice and parent persona."],
+        "adPrompts": [ad["hook"] for ad in sections["adConcepts"]["metaAds"]],
+        "contentPrompts": sections["socialCalendar"]["captions"],
+        "campaignTemplates": ["Founder batch launch", "Educational benefit campaign", "Gift buyer campaign"],
+        "automationWorkflows": [
+            {"name": "Waitlist nurture", "trigger": "Lead form submit", "steps": ["Welcome email", "WhatsApp opt-in", "Launch reminder"]},
+            {"name": "Review request", "trigger": "Order delivered", "steps": ["Day 7 check-in", "Day 14 review ask"]},
+        ],
+    }
+
+
+def _launch_readiness_score(product_blueprint: dict[str, Any], creative_pack: dict[str, Any], sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    dimensions = {
+        "researchQuality": 84,
+        "productReadiness": int(product_blueprint.get("overallScore", 82)),
+        "manufacturingReadiness": 78 if product_blueprint.get("manufacturingPlan") else 60,
+        "brandingCompleteness": int(creative_pack.get("overallScore", 84)),
+        "marketingCompleteness": round(mean([sections["marketingStrategy"]["score"], sections["seoPlan"]["score"], sections["socialCalendar"]["score"], sections["adConcepts"]["score"]])),
+        "budgetAvailability": 72,
+        "riskAssessment": 76,
+    }
+    score = round(mean(dimensions.values()))
+    threshold = 85
+    return {
+        "score": score,
+        "threshold": threshold,
+        "recommendation": "READY_FOR_SPRINT_6_REVIEW" if score >= threshold else "HOLD_FOR_FOUNDER_REVIEW",
+        "dimensions": dimensions,
+        "blockingIssues": [] if score >= threshold else ["Confirm budget availability", "Verify final supplier/manufacturing assumptions before publishing"],
+    }

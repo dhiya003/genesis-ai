@@ -14,7 +14,7 @@ from apps.storage import JsonStore
 from apps.worker.main import worker_health
 from config import RuntimeConfig, load_runtime_config
 
-CLI_VERSION = "0.2.0"
+CLI_VERSION = "0.3.0"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -44,6 +44,16 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser = subcommands.add_parser("report", help="Retrieve a stored research report")
     report_parser.add_argument("project_id", help="Project ID returned by submit")
     report_parser.add_argument("--data-dir", help="Override Genesis data directory")
+
+    product_parser = subcommands.add_parser("product", help="Run and retrieve Sprint 3 Product Department outputs")
+    product_subcommands = product_parser.add_subparsers(dest="product_command", required=True)
+    product_run_parser = product_subcommands.add_parser("run", help="Run Product Department Phase 1 from a stored research report")
+    product_run_parser.add_argument("project_id")
+    product_run_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
+    product_run_parser.add_argument("--data-dir")
+    product_definition_parser = product_subcommands.add_parser("definition", help="Retrieve a stored product definition")
+    product_definition_parser.add_argument("project_id")
+    product_definition_parser.add_argument("--data-dir")
 
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
@@ -113,7 +123,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "version":
             config = load_runtime_config()
-            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 2 - Intelligent Research Engine"})
+            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 3 - Product Intelligence & Engineering"})
             return 0
         if args.command == "run":
             requirement = _read_text_arg(args.requirement, args.from_file)
@@ -157,6 +167,20 @@ def main(argv: list[str] | None = None) -> int:
                 raise not_found(f"Research report not found for project {args.project_id}") from exc
             _print_json(report)
             return 0
+        if args.command == "product":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.product_command == "run":
+                try:
+                    _print_json(orchestrator.run_product_definition(args.project_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Project or research report not found for project {args.project_id}") from exc
+                return 0
+            if args.product_command == "definition":
+                try:
+                    _print_json(orchestrator.get_product_definition(args.project_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Product definition not found for project {args.project_id}") from exc
+                return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))
             if args.approval_command == "approve":

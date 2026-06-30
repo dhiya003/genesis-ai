@@ -45,6 +45,20 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     version = json.loads(response.read().decode("utf-8"))
 
+                product_request = request.Request(
+                    f"http://{host}:{port}/projects/{project_id}/product-definition",
+                    data=json.dumps({}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(product_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    product_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/product-definitions/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_definition = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -54,7 +68,11 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(project_payload["tasks"])
                 self.assertTrue(project_payload["deliverables"])
                 self.assertTrue(project_payload["auditLogs"])
-                self.assertEqual(version["version"], "0.2.0")
+                self.assertEqual(version["version"], "0.3.0")
+                self.assertEqual(product_run["productDefinition"]["reportType"], "PRODUCT_DEFINITION")
+                self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
+                self.assertEqual(product_definition["projectId"], project_id)
+                self.assertIn("variantMatrix", product_definition)
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

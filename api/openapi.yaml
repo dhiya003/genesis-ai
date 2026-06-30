@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: Genesis AI Internal API
-  version: 0.2.0
-  description: Sprint 2 API contract for the executable Product Factory research vertical slice.
+  version: 0.3.0
+  description: Sprint 3 API contract for research-driven Product Intelligence and Engineering.
 servers:
   - url: http://127.0.0.1:8000
 paths:
@@ -26,7 +26,25 @@ paths:
           description: Research report
         '404':
           description: Not found
+  /projects/{projectId}/product-definition:
+    post:
+      summary: Run Product Department Phase 1 from a stored research report
+      responses:
+        '201':
+          description: Product Definition created
+        '404':
+          description: Project or research report not found
+  /product-definitions/{projectId}:
+    get:
+      summary: Retrieve a Product Definition
+      responses:
+        '200':
+          description: Product Definition
+        '404':
+          description: Not found
 components:
   schemas:
     ResearchReport:
+      type: object
+    ProductDefinition:
       type: object

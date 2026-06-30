@@ -43,7 +43,21 @@ class ApiCliResearchTests(unittest.TestCase):
             version_output = StringIO()
             with patch("sys.stdout", version_output):
                 self.assertEqual(cli_main(["version"]), 0)
-            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.2.0")
+            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.3.0")
+
+            product_output = StringIO()
+            with patch("sys.stdout", product_output):
+                self.assertEqual(cli_main(["product", "run", project_id, "--data-dir", directory]), 0)
+            product_run = json.loads(product_output.getvalue())
+            self.assertEqual(product_run["productDefinition"]["reportType"], "PRODUCT_DEFINITION")
+            self.assertEqual(product_run["productDefinition"]["projectId"], project_id)
+
+            product_definition_output = StringIO()
+            with patch("sys.stdout", product_definition_output):
+                self.assertEqual(cli_main(["product", "definition", project_id, "--data-dir", directory]), 0)
+            product_definition = json.loads(product_definition_output.getvalue())
+            self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
+            self.assertEqual(product_definition["projectId"], project_id)
 
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

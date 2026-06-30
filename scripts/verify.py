@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genesis Sprint 2 verification suite."""
+"""Genesis verification suite."""
 
 from __future__ import annotations
 
@@ -16,32 +16,42 @@ REQUIRED_PATHS = [
     "apps/orchestrator/genesis_orchestrator.py",
     "apps/research/department.py",
     "apps/research/providers.py",
+    "apps/product/department.py",
     "apps/employees/research.py",
     "apps/workflow/engine.py",
     "apps/storage/json_store.py",
     "scripts/sprint2_e2e.py",
     "scripts/validate_launch_pack.py",
     "scripts/validate_research_report.py",
+    "scripts/validate_product_definition.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
+    "tests/test_product_department.py",
     "api/schemas/research-report-v2.schema.json",
+    "api/schemas/product-definition.schema.json",
     "testing/fixtures/sample-research-report-v2.json",
+    "testing/fixtures/sample-product-definition.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
+    "docs/sprint-3-kickoff.md",
+    "docs/sprint-3-phase-1-product-definition.md",
 ]
 
 JSON_PATHS = [
     "api/schemas/launch-pack.schema.json",
     "api/schemas/research-report-v2.schema.json",
+    "api/schemas/product-definition.schema.json",
     "testing/fixtures/sample-launch-pack.json",
     "testing/fixtures/sample-research-report-v2.json",
+    "testing/fixtures/sample-product-definition.json",
 ]
 
 COMMANDS = [
     ([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], "unit + integration + e2e tests"),
     ([sys.executable, "scripts/validate_launch_pack.py"], "launch pack validation"),
     ([sys.executable, "scripts/validate_research_report.py"], "research report validation"),
+    ([sys.executable, "scripts/validate_product_definition.py"], "product definition validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 
@@ -49,9 +59,9 @@ COMMANDS = [
 def check_required_paths() -> list[str]:
     missing = [path for path in REQUIRED_PATHS if not (ROOT / path).exists()]
     if missing:
-        print(f"FAIL: missing required Sprint 2 paths: {missing}")
+        print(f"FAIL: missing required Genesis paths: {missing}")
     else:
-        print("PASS: required Sprint 2 paths exist")
+        print("PASS: required Genesis paths exist")
     return missing
 
 
@@ -83,7 +93,7 @@ def run_command(command: list[str], label: str) -> bool:
 
 
 def main() -> int:
-    print("Genesis Sprint 2 Verification Suite")
+    print("Genesis Verification Suite")
     failures: list[str] = []
     failures.extend(check_required_paths())
     failures.extend(check_json_files())

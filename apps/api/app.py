@@ -1,4 +1,4 @@
-"""Minimal Genesis AI API runtime with Sprint 2 research endpoints."""
+"""Minimal Genesis AI API runtime with Sprint 3 product intelligence endpoints."""
 
 from __future__ import annotations
 
@@ -13,13 +13,13 @@ from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
-API_VERSION = "0.2.0"
+API_VERSION = "0.3.0"
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
-    """HTTP handler for Sprint 2 runtime bootstrap and research endpoints."""
+    """HTTP handler for runtime bootstrap, research, and product endpoints."""
 
-    server_version = "GenesisAI/0.2"
+    server_version = "GenesisAI/0.3"
 
     def _send_json(self, status_code: int, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, sort_keys=True).encode("utf-8")
@@ -59,7 +59,7 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 self._send_json(200, config.health_payload("api"))
                 return
             if parsed.path == "/version":
-                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 2 - Intelligent Research Engine"})
+                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 3 - Product Intelligence & Engineering"})
                 return
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()
@@ -92,6 +92,15 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 except FileNotFoundError as exc:
                     raise not_found(f"Research report not found for project {project_id}") from exc
                 return
+            if parsed.path.startswith("/product-definitions/"):
+                project_id = parsed.path.removeprefix("/product-definitions/").strip("/")
+                if not project_id:
+                    raise bad_request("Project ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_product_definition(project_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Product definition not found for project {project_id}") from exc
+                return
             self._send_json(404, {"status": "not_found", "path": parsed.path})
         except GenesisError as exc:
             self._send_json(exc.status_code, exc.to_payload())
@@ -122,6 +131,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     constraints=constraints,
                     preferences=preferences,
                 )
+                self._send_json(201, result)
+                return
+            if parsed.path.startswith("/projects/") and parsed.path.endswith("/product-definition"):
+                project_id = parsed.path.removeprefix("/projects/").removesuffix("/product-definition").strip("/")
+                if not project_id:
+                    raise bad_request("Project ID is required")
+                payload = self._read_optional_json()
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).run_product_definition(project_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path.startswith("/workflows/") and parsed.path.endswith("/pause"):

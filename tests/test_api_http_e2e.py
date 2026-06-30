@@ -88,6 +88,40 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     product_profitability = json.loads(response.read().decode("utf-8"))
 
+                creative_request = request.Request(
+                    f"http://{host}:{port}/creative/generate",
+                    data=json.dumps({"productId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(creative_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    creative_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/creative/{project_id}/pack", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    creative_pack = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/creative/{project_id}/brand", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    creative_brand = json.loads(response.read().decode("utf-8"))
+
+                marketing_request = request.Request(
+                    f"http://{host}:{port}/marketing/generate",
+                    data=json.dumps({"creativeId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(marketing_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    marketing_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/marketing/{project_id}/pack", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    marketing_pack = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/marketing/{project_id}/seo", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    marketing_seo = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -97,7 +131,7 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(project_payload["tasks"])
                 self.assertTrue(project_payload["deliverables"])
                 self.assertTrue(project_payload["auditLogs"])
-                self.assertEqual(version["version"], "0.3.0")
+                self.assertEqual(version["version"], "0.5.0")
                 self.assertEqual(product_run["productDefinition"]["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["projectId"], project_id)
@@ -109,6 +143,12 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertGreater(product_cost["landedCost"], 0)
                 self.assertTrue(product_suppliers["shortlist"])
                 self.assertGreater(product_profitability["profitPerUnit"], 0)
+                self.assertEqual(creative_run["creativePack"]["reportType"], "CREATIVE_PACK")
+                self.assertEqual(creative_pack["reportType"], "CREATIVE_PACK")
+                self.assertTrue(creative_brand["brandName"])
+                self.assertEqual(marketing_run["marketingPack"]["reportType"], "MARKETING_PACK")
+                self.assertEqual(marketing_pack["reportType"], "MARKETING_PACK")
+                self.assertTrue(marketing_seo["keywords"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

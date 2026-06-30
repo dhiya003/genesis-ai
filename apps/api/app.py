@@ -13,7 +13,7 @@ from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
-API_VERSION = "0.3.0"
+API_VERSION = "0.5.0"
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
@@ -59,7 +59,7 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 self._send_json(200, config.health_payload("api"))
                 return
             if parsed.path == "/version":
-                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 3 - Product Intelligence & Engineering"})
+                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 5 - Marketing Engine"})
                 return
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()

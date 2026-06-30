@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: Genesis AI Internal API
-  version: 0.3.0
-  description: Sprint 3 API contract for research-driven Product Intelligence and Engineering.
+  version: 0.5.0
+  description: Sprint 5 API contract for research, product, creative, and marketing workflows.
 servers:
   - url: http://127.0.0.1:8000
 paths:
@@ -98,6 +98,158 @@ paths:
           description: Profitability report
         '404':
           description: Not found
+  /creative/generate:
+    post:
+      summary: Generate a complete Creative Pack from a stored Product Blueprint
+      responses:
+        '201':
+          description: Creative Pack created
+        '404':
+          description: Product Blueprint not found
+  /creative/{creativeId}:
+    get:
+      summary: Retrieve creative record with Creative Pack and core creative reports
+      responses:
+        '200':
+          description: Creative bundle
+        '404':
+          description: Not found
+  /creative/{creativeId}/pack:
+    get:
+      summary: Retrieve Creative Pack
+      responses:
+        '200':
+          description: Creative Pack
+        '404':
+          description: Not found
+  /creative/{creativeId}/brand:
+    get:
+      summary: Retrieve Brand Identity
+      responses:
+        '200':
+          description: Brand identity
+        '404':
+          description: Not found
+  /creative/{creativeId}/logo:
+    get:
+      summary: Retrieve Logo System
+      responses:
+        '200':
+          description: Logo system
+        '404':
+          description: Not found
+  /creative/{creativeId}/packaging:
+    get:
+      summary: Retrieve Creative Packaging Brief
+      responses:
+        '200':
+          description: Packaging design brief
+        '404':
+          description: Not found
+  /creative/{creativeId}/mockups:
+    get:
+      summary: Retrieve Product Mockup Brief
+      responses:
+        '200':
+          description: Product mockup brief
+        '404':
+          description: Not found
+  /creative/{creativeId}/marketplace:
+    get:
+      summary: Retrieve Marketplace Creative Pack
+      responses:
+        '200':
+          description: Marketplace creative pack
+        '404':
+          description: Not found
+  /creative/{creativeId}/social:
+    get:
+      summary: Retrieve Social Media Creative Pack
+      responses:
+        '200':
+          description: Social media creative pack
+        '404':
+          description: Not found
+  /creative/{creativeId}/copy:
+    get:
+      summary: Retrieve Launch Copy Pack
+      responses:
+        '200':
+          description: Launch copy pack
+        '404':
+          description: Not found
+  /marketing/generate:
+    post:
+      summary: Generate a complete Marketing Pack from a stored Creative Pack
+      responses:
+        '201':
+          description: Marketing Pack created
+        '404':
+          description: Creative Pack not found
+  /marketing/{marketingId}:
+    get:
+      summary: Retrieve marketing record with Marketing Pack and core reports
+      responses:
+        '200':
+          description: Marketing bundle
+        '404':
+          description: Not found
+  /marketing/{marketingId}/pack:
+    get:
+      summary: Retrieve Marketing Pack
+      responses:
+        '200':
+          description: Marketing Pack
+        '404':
+          description: Not found
+  /marketing/{marketingId}/strategy:
+    get:
+      summary: Retrieve Marketing Strategy
+      responses:
+        '200':
+          description: Marketing strategy
+        '404':
+          description: Not found
+  /marketing/{marketingId}/seo:
+    get:
+      summary: Retrieve SEO Plan
+      responses:
+        '200':
+          description: SEO plan
+        '404':
+          description: Not found
+  /marketing/{marketingId}/social:
+    get:
+      summary: Retrieve Social Marketing Plan
+      responses:
+        '200':
+          description: Social marketing plan
+        '404':
+          description: Not found
+  /marketing/{marketingId}/ads:
+    get:
+      summary: Retrieve Advertising Plan
+      responses:
+        '200':
+          description: Advertising plan
+        '404':
+          description: Not found
+  /marketing/{marketingId}/listing:
+    get:
+      summary: Retrieve Marketplace Listing
+      responses:
+        '200':
+          description: Marketplace listing
+        '404':
+          description: Not found
+  /marketing/{marketingId}/launch:
+    get:
+      summary: Retrieve Launch Plan
+      responses:
+        '200':
+          description: Launch plan
+        '404':
+          description: Not found
 components:
   schemas:
     ResearchReport:
@@ -105,4 +257,8 @@ components:
     ProductDefinition:
       type: object
     ProductBlueprint:
+      type: object
+    CreativePack:
+      type: object
+    MarketingPack:
       type: object

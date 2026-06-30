@@ -24,6 +24,14 @@ jobs:
         run: |
           python scripts/validate_product_blueprint.py
 
+      - name: Validate Sprint 4 creative pack fixture
+        run: |
+          python scripts/validate_creative_pack.py
+
+      - name: Validate Sprint 5 marketing pack fixture
+        run: |
+          python scripts/validate_marketing_pack.py
+
       - name: Build Genesis API Docker image
         run: |
           docker build -t genesis-ai:test .

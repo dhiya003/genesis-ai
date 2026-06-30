@@ -14,7 +14,7 @@ from apps.storage import JsonStore
 from apps.worker.main import worker_health
 from config import RuntimeConfig, load_runtime_config
 
-CLI_VERSION = "0.3.0"
+CLI_VERSION = "0.5.0"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -153,7 +153,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "version":
             config = load_runtime_config()
-            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 3 - Product Intelligence & Engineering"})
+            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 5 - Marketing Engine"})
             return 0
         if args.command == "run":
             requirement = _read_text_arg(args.requirement, args.from_file)

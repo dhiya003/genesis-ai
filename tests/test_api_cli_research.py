@@ -43,7 +43,7 @@ class ApiCliResearchTests(unittest.TestCase):
             version_output = StringIO()
             with patch("sys.stdout", version_output):
                 self.assertEqual(cli_main(["version"]), 0)
-            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.3.0")
+            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.5.0")
 
             product_output = StringIO()
             with patch("sys.stdout", product_output):
@@ -74,6 +74,28 @@ class ApiCliResearchTests(unittest.TestCase):
             with patch("sys.stdout", product_cost_output):
                 self.assertEqual(cli_main(["product", "cost", project_id, "--data-dir", directory]), 0)
             self.assertGreater(json.loads(product_cost_output.getvalue())["landedCost"], 0)
+
+            creative_output = StringIO()
+            with patch("sys.stdout", creative_output):
+                self.assertEqual(cli_main(["creative", "generate", project_id, "--data-dir", directory]), 0)
+            creative_run = json.loads(creative_output.getvalue())
+            self.assertEqual(creative_run["creativePack"]["reportType"], "CREATIVE_PACK")
+
+            creative_brand_output = StringIO()
+            with patch("sys.stdout", creative_brand_output):
+                self.assertEqual(cli_main(["creative", "brand", project_id, "--data-dir", directory]), 0)
+            self.assertTrue(json.loads(creative_brand_output.getvalue())["brandName"])
+
+            marketing_output = StringIO()
+            with patch("sys.stdout", marketing_output):
+                self.assertEqual(cli_main(["marketing", "generate", project_id, "--data-dir", directory]), 0)
+            marketing_run = json.loads(marketing_output.getvalue())
+            self.assertEqual(marketing_run["marketingPack"]["reportType"], "MARKETING_PACK")
+
+            marketing_seo_output = StringIO()
+            with patch("sys.stdout", marketing_seo_output):
+                self.assertEqual(cli_main(["marketing", "seo", project_id, "--data-dir", directory]), 0)
+            self.assertTrue(json.loads(marketing_seo_output.getvalue())["keywords"])
 
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

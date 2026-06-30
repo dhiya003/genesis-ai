@@ -53,6 +53,17 @@ Sprint 4 Creative Studio:
 
 - Image generation or design providers: `OPENAI_API_KEY`, `CANVA_API_KEY`, `FIGMA_ACCESS_TOKEN`
 
+OpenAI Images are implemented as an optional Sprint 4 provider. Deterministic local PNG/SVG/PDF assets remain the default.
+
+```bash
+export GENESIS_CREATIVE_IMAGE_PROVIDER=openai
+export OPENAI_API_KEY=<your-key>
+export GENESIS_OPENAI_IMAGE_MODEL=gpt-image-2
+export GENESIS_OPENAI_IMAGE_LIMIT=3
+```
+
+`GENESIS_OPENAI_IMAGE_LIMIT` controls how many premium PNG assets are generated per Creative Pack. Remaining assets are still generated deterministically so the workflow stays complete.
+
 Sprint 5 Marketing Engine:
 
 - SEO/search providers: `GOOGLE_SEARCH_CONSOLE_CREDENTIALS`, `SEMRUSH_API_KEY`, `AHREFS_API_KEY`

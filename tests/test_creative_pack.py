@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import base64
+import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from apps.creative.assets import OpenAIImageClient, generate_creative_assets
 from apps.creative.employees import CREATIVE_EMPLOYEES, run_creative_employee, validate_creative_employee_output
 from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
@@ -106,6 +110,53 @@ class CreativePackTests(unittest.TestCase):
             self.assertTrue(creative_pack["validationReport"])
             self.assertTrue(creative_pack["creativeQaReport"]["checks"])
             self.assertTrue(creative_pack["founderApprovalChecklist"])
+
+    def test_openai_image_client_writes_png_from_response(self) -> None:
+        png_bytes = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAFgwJ/lQpq6wAAAABJRU5ErkJggg==")
+
+        class FakeResponse:
+            def __enter__(self) -> "FakeResponse":
+                return self
+
+            def __exit__(self, *_args: object) -> None:
+                return None
+
+            def read(self) -> bytes:
+                return json.dumps({"data": [{"b64_json": base64.b64encode(png_bytes).decode("ascii")}]}).encode("utf-8")
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "openai.png"
+            with patch("apps.creative.assets.request.urlopen", return_value=FakeResponse()) as urlopen:
+                OpenAIImageClient(api_key="test-key").generate_png(path, "Create a product hero image")
+
+            self.assertEqual(path.read_bytes(), png_bytes)
+            requested_url = urlopen.call_args.args[0].full_url
+            self.assertEqual(requested_url, "https://api.openai.com/v1/images/generations")
+
+    def test_generate_creative_assets_can_use_openai_for_raster_files(self) -> None:
+        class FakeImageClient:
+            def __init__(self) -> None:
+                self.prompts: list[str] = []
+
+            def generate_png(self, path: Path, prompt: str) -> None:
+                self.prompts.append(prompt)
+                path.write_bytes(b"fake-openai-png")
+
+        creative_pack = {
+            "productId": "product-1",
+            "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+            "brandIdentity": {"brandName": "LumaLearn"},
+            "colorPalette": [{"name": "Forest", "hex": "#1F6F50"}, {"name": "Marigold", "hex": "#F4B63F"}, {"name": "Ivory", "hex": "#FFF7E6"}],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            fake_client = FakeImageClient()
+            with patch.dict("os.environ", {"GENESIS_CREATIVE_IMAGE_PROVIDER": "openai", "GENESIS_OPENAI_IMAGE_LIMIT": "2"}):
+                manifest = generate_creative_assets(Path(directory), creative_pack, image_client=fake_client)  # type: ignore[arg-type]
+
+            self.assertEqual(manifest["provider"], "openai-images")
+            self.assertEqual(manifest["openaiImagesGenerated"], 2)
+            self.assertEqual(len(fake_client.prompts), 2)
+            self.assertGreaterEqual(manifest["summary"]["png"], 1)
 
 
 if __name__ == "__main__":

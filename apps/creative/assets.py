@@ -1,20 +1,54 @@
-"""Deterministic binary asset generation for Sprint 4 Creative Studio."""
+"""Binary asset generation for Sprint 4 Creative Studio."""
 
 from __future__ import annotations
 
+import base64
+from dataclasses import dataclass
+import json
+import os
 import re
 import struct
 import zlib
 from pathlib import Path
 from typing import Any
+from urllib import request
 
 
-def generate_creative_assets(output_dir: Path, creative_pack: dict[str, Any]) -> dict[str, Any]:
-    """Write no-credential creative assets and return their manifest."""
+@dataclass(frozen=True)
+class OpenAIImageClient:
+    """OpenAI Images API client used only when explicitly configured."""
+
+    api_key: str
+    model: str = "gpt-image-2"
+    timeout_seconds: int = 90
+
+    def generate_png(self, path: Path, prompt: str) -> None:
+        payload = {"model": self.model, "prompt": prompt}
+        req = request.Request(
+            "https://api.openai.com/v1/images/generations",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        with request.urlopen(req, timeout=self.timeout_seconds) as response:  # nosec B310 - fixed trusted API endpoint
+            data = json.loads(response.read().decode("utf-8"))
+        image_base64 = data["data"][0]["b64_json"]
+        path.write_bytes(base64.b64decode(image_base64))
+
+
+def generate_creative_assets(output_dir: Path, creative_pack: dict[str, Any], image_client: OpenAIImageClient | None = None) -> dict[str, Any]:
+    """Write creative assets and return their manifest."""
     output_dir.mkdir(parents=True, exist_ok=True)
     brand = creative_pack["brandIdentity"]["brandName"]
     product = creative_pack.get("sourceIdea", creative_pack["productId"])
     colors = _palette(creative_pack)
+    image_provider = os.environ.get("GENESIS_CREATIVE_IMAGE_PROVIDER", "deterministic").lower()
+    openai_limit = _openai_image_limit()
+    if image_provider == "openai" and image_client is None:
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            raise RuntimeError("OPENAI_API_KEY is required when GENESIS_CREATIVE_IMAGE_PROVIDER=openai")
+        image_client = OpenAIImageClient(api_key=api_key, model=os.environ.get("GENESIS_OPENAI_IMAGE_MODEL", "gpt-image-2"))
     assets: list[dict[str, Any]] = []
 
     logo_specs = [
@@ -37,10 +71,16 @@ def generate_creative_assets(output_dir: Path, creative_pack: dict[str, Any]) ->
         ("instagram-story.png", "Instagram Story", 512, 896),
         ("email-launch-header.png", "Email Launch Header", 640, 260),
     ]
+    openai_generated = 0
     for index, (file_name, title, width, height) in enumerate(image_specs):
         path = output_dir / file_name
-        _write_png(path, width, height, colors, index)
-        assets.append(_asset_record("raster", title, "image/png", path, "GENERATED"))
+        if image_provider == "openai" and image_client is not None and openai_generated < openai_limit:
+            image_client.generate_png(path, _image_prompt(creative_pack, title))
+            assets.append(_asset_record("raster", title, "image/png", path, "GENERATED_OPENAI"))
+            openai_generated += 1
+        else:
+            _write_png(path, width, height, colors, index)
+            assets.append(_asset_record("raster", title, "image/png", path, "GENERATED"))
 
     packaging_files = [
         ("starter-box-dieline.svg", "Starter Box Dieline", "image/svg+xml", _dieline_svg(brand, colors)),
@@ -58,8 +98,9 @@ def generate_creative_assets(output_dir: Path, creative_pack: dict[str, Any]) ->
 
     return {
         "assetRoot": str(output_dir),
-        "provider": "deterministic-local",
-        "mode": "NO_CREDENTIALS",
+        "provider": "openai-images" if openai_generated else "deterministic-local",
+        "mode": "OPENAI_IMAGES" if openai_generated else "NO_CREDENTIALS",
+        "openaiImagesGenerated": openai_generated,
         "summary": {
             "totalAssets": len(assets),
             "svg": len([asset for asset in assets if asset["format"] == "svg"]),
@@ -68,8 +109,8 @@ def generate_creative_assets(output_dir: Path, creative_pack: dict[str, Any]) ->
         },
         "assets": assets,
         "notes": [
-            "Assets are generated without external providers for deterministic CI.",
-            "PNG files are layout placeholders; premium lifestyle imagery still benefits from an image provider.",
+            "Deterministic assets keep CI stable and credential-free.",
+            "OpenAI image generation is opt-in through GENESIS_CREATIVE_IMAGE_PROVIDER=openai.",
             f"Source product context: {product}",
         ],
     }
@@ -94,6 +135,26 @@ def _palette(creative_pack: dict[str, Any]) -> list[str]:
     valid = [color for color in colors if re.fullmatch(r"#[0-9A-Fa-f]{6}", color)]
     fallback = ["#1F6F50", "#F4B63F", "#FFF7E6", "#2F2F2F"]
     return (valid + fallback)[:4]
+
+
+def _openai_image_limit() -> int:
+    raw_limit = os.environ.get("GENESIS_OPENAI_IMAGE_LIMIT", "3")
+    try:
+        return max(0, min(7, int(raw_limit)))
+    except ValueError:
+        return 3
+
+
+def _image_prompt(creative_pack: dict[str, Any], title: str) -> str:
+    brand = creative_pack["brandIdentity"]["brandName"]
+    product = creative_pack.get("sourceIdea", creative_pack["productId"])
+    palette = ", ".join(f"{item.get('name', 'Color')} {item.get('hex', '')}" for item in creative_pack.get("colorPalette", []) if isinstance(item, dict))
+    return (
+        f"Create a clean commercial product asset for {brand}. Asset: {title}. "
+        f"Product context: {product}. Use premium early-learning brand styling, visible product packaging, "
+        f"safe child-friendly presentation, Indian family market relevance, and this palette: {palette}. "
+        "No unsupported safety claims, no celebrity likeness, no copyrighted character style."
+    )
 
 
 def _logo_svg(brand: str, title: str, width: int, height: int, variant: str, colors: list[str]) -> str:

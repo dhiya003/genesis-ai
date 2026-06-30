@@ -8,6 +8,7 @@ from typing import Any
 from uuid import uuid4
 
 from apps.audit import now_iso, record_audit
+from apps.creative import CreativeDepartment
 from apps.product import ProductDepartment
 from apps.research import ResearchDepartment
 from apps.storage import JsonStore
@@ -214,6 +215,89 @@ class GenesisOrchestrator:
 
     def get_product_profitability(self, product_id: str) -> dict[str, Any]:
         return self.store.get_profitability_report(product_id)
+
+    def generate_creative_pack(self, product_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        product_blueprint = self.store.get_product_blueprint(product_id)
+        project = self.store.get_project(product_blueprint["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "CREATIVE_PACK")
+        workflow = engine.plan(workflow, reason="orchestrator selected Creative Studio")
+        task = self._create_task(project["id"], workflow["id"], "CREATIVE_STUDIO", "Generate complete Sprint 4 Creative Pack")
+        LOGGER.info("orchestrator routed project to creative studio", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "CREATIVE_PACK"})
+
+        department = CreativeDepartment(self.store)
+
+        def run_creative(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute(project, current_workflow, product_blueprint)
+
+        completed_workflow = engine.run(workflow, run_creative)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "CREATIVE_PACK_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["creativeId"] = product_blueprint["productId"]
+            project["creativeWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "CREATIVE_PACK"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "CREATIVE_PACK", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_CREATIVE_PACK_APPROVAL", mode=approval_mode)
+            project["creativeApprovalId"] = approval["id"]
+            project["creativeApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_CREATIVE_APPROVAL"
+        else:
+            project["status"] = "CREATIVE_PACK_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.creative_pack_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "creative": {"id": product_blueprint["productId"], "projectId": project["id"]},
+            "creativePack": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_creative(self, creative_id: str) -> dict[str, Any]:
+        creative_pack = self.store.get_creative_pack(creative_id)
+        return {
+            "creative": {"id": creative_id, "projectId": creative_pack["projectId"], "brandName": creative_pack["brandIdentity"]["brandName"]},
+            "creativePack": creative_pack,
+            "brand": self.store.get_brand_report(creative_id),
+            "logo": self.store.get_logo_report(creative_id),
+            "packaging": self.store.get_creative_packaging_report(creative_id),
+            "mockups": self.store.get_mockup_report(creative_id),
+            "marketplace": self.store.get_marketplace_creative_report(creative_id),
+            "social": self.store.get_social_creative_report(creative_id),
+            "copy": self.store.get_copy_report(creative_id),
+        }
+
+    def get_creative_pack(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_creative_pack(creative_id)
+
+    def get_creative_brand(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_brand_report(creative_id)
+
+    def get_creative_logo(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_logo_report(creative_id)
+
+    def get_creative_packaging(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_creative_packaging_report(creative_id)
+
+    def get_creative_mockups(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_mockup_report(creative_id)
+
+    def get_creative_marketplace(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_marketplace_creative_report(creative_id)
+
+    def get_creative_social(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_social_creative_report(creative_id)
+
+    def get_creative_copy(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_copy_report(creative_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

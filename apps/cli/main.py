@@ -63,6 +63,17 @@ def build_parser() -> argparse.ArgumentParser:
         section_parser.add_argument("product_id")
         section_parser.add_argument("--data-dir")
 
+    creative_parser = subcommands.add_parser("creative", help="Run and retrieve Sprint 4 Creative Studio outputs")
+    creative_subcommands = creative_parser.add_subparsers(dest="creative_command", required=True)
+    creative_generate_parser = creative_subcommands.add_parser("generate", help="Generate a Creative Pack from a stored Product Blueprint")
+    creative_generate_parser.add_argument("product_id")
+    creative_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
+    creative_generate_parser.add_argument("--data-dir")
+    for name in ["pack", "brand", "logo", "packaging", "mockups", "marketplace", "social", "copy"]:
+        section_parser = creative_subcommands.add_parser(name, help=f"Retrieve stored creative {name}")
+        section_parser.add_argument("creative_id")
+        section_parser.add_argument("--data-dir")
+
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
@@ -209,6 +220,38 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.product_command == "profitability":
                 _print_json(orchestrator.get_product_profitability(args.product_id))
+                return 0
+        if args.command == "creative":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.creative_command == "generate":
+                try:
+                    _print_json(orchestrator.generate_creative_pack(args.product_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Product Blueprint not found for product {args.product_id}") from exc
+                return 0
+            if args.creative_command == "pack":
+                _print_json(orchestrator.get_creative_pack(args.creative_id))
+                return 0
+            if args.creative_command == "brand":
+                _print_json(orchestrator.get_creative_brand(args.creative_id))
+                return 0
+            if args.creative_command == "logo":
+                _print_json(orchestrator.get_creative_logo(args.creative_id))
+                return 0
+            if args.creative_command == "packaging":
+                _print_json(orchestrator.get_creative_packaging(args.creative_id))
+                return 0
+            if args.creative_command == "mockups":
+                _print_json(orchestrator.get_creative_mockups(args.creative_id))
+                return 0
+            if args.creative_command == "marketplace":
+                _print_json(orchestrator.get_creative_marketplace(args.creative_id))
+                return 0
+            if args.creative_command == "social":
+                _print_json(orchestrator.get_creative_social(args.creative_id))
+                return 0
+            if args.creative_command == "copy":
+                _print_json(orchestrator.get_creative_copy(args.creative_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

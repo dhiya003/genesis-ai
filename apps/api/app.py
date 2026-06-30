@@ -65,6 +65,38 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
                 return
+            if parsed.path.startswith("/creative/"):
+                creative_path = parsed.path.removeprefix("/creative/").strip("/")
+                parts = [part for part in creative_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Creative ID is required")
+                creative_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_creative(creative_id))
+                    elif section == "pack":
+                        self._send_json(200, orchestrator.get_creative_pack(creative_id))
+                    elif section == "brand":
+                        self._send_json(200, orchestrator.get_creative_brand(creative_id))
+                    elif section == "logo":
+                        self._send_json(200, orchestrator.get_creative_logo(creative_id))
+                    elif section == "packaging":
+                        self._send_json(200, orchestrator.get_creative_packaging(creative_id))
+                    elif section == "mockups":
+                        self._send_json(200, orchestrator.get_creative_mockups(creative_id))
+                    elif section == "marketplace":
+                        self._send_json(200, orchestrator.get_creative_marketplace(creative_id))
+                    elif section == "social":
+                        self._send_json(200, orchestrator.get_creative_social(creative_id))
+                    elif section == "copy":
+                        self._send_json(200, orchestrator.get_creative_copy(creative_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Creative pack not found: {creative_id}") from exc
             if parsed.path.startswith("/products/"):
                 product_path = parsed.path.removeprefix("/products/").strip("/")
                 parts = [part for part in product_path.split("/") if part]
@@ -134,6 +166,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         parsed = urlparse(self.path)
         try:
+            if parsed.path == "/creative/generate":
+                payload = self._read_json()
+                product_id = payload.get("productId")
+                if not isinstance(product_id, str):
+                    raise bad_request("productId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_creative_pack(product_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
             if parsed.path == "/products/generate":
                 payload = self._read_json()
                 project_id = payload.get("projectId")

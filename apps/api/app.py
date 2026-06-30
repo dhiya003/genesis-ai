@@ -183,6 +183,8 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                         self._send_json(200, orchestrator.get_product_cost(product_id))
                     elif section == "suppliers":
                         self._send_json(200, orchestrator.get_product_suppliers(product_id))
+                    elif section == "packaging":
+                        self._send_json(200, orchestrator.get_product_packaging(product_id))
                     elif section == "profitability":
                         self._send_json(200, orchestrator.get_product_profitability(product_id))
                     else:

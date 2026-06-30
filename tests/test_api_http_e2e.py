@@ -84,6 +84,9 @@ class ApiHttpE2ETests(unittest.TestCase):
                 with request.urlopen(f"http://{host}:{port}/products/{project_id}/suppliers", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     product_suppliers = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/packaging", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_packaging = json.loads(response.read().decode("utf-8"))
                 with request.urlopen(f"http://{host}:{port}/products/{project_id}/profitability", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     product_profitability = json.loads(response.read().decode("utf-8"))
@@ -154,6 +157,7 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(product_bom["items"])
                 self.assertGreater(product_cost["landedCost"], 0)
                 self.assertTrue(product_suppliers["shortlist"])
+                self.assertTrue(product_packaging["packagingDimensions"])
                 self.assertGreater(product_profitability["profitPerUnit"], 0)
                 self.assertEqual(creative_run["creativePack"]["reportType"], "CREATIVE_PACK")
                 self.assertEqual(creative_pack["reportType"], "CREATIVE_PACK")

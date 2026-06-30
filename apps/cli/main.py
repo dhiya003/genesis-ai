@@ -58,7 +58,7 @@ def build_parser() -> argparse.ArgumentParser:
     product_definition_parser = product_subcommands.add_parser("definition", help="Retrieve a stored product definition")
     product_definition_parser.add_argument("project_id")
     product_definition_parser.add_argument("--data-dir")
-    for name in ["blueprint", "bom", "cost", "suppliers", "profitability"]:
+    for name in ["blueprint", "bom", "cost", "suppliers", "packaging", "profitability"]:
         section_parser = product_subcommands.add_parser(name, help=f"Retrieve stored product {name}")
         section_parser.add_argument("product_id")
         section_parser.add_argument("--data-dir")
@@ -228,6 +228,9 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.product_command == "suppliers":
                 _print_json(orchestrator.get_product_suppliers(args.product_id))
+                return 0
+            if args.product_command == "packaging":
+                _print_json(orchestrator.get_product_packaging(args.product_id))
                 return 0
             if args.product_command == "profitability":
                 _print_json(orchestrator.get_product_profitability(args.product_id))

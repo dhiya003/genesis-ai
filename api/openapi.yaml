@@ -90,6 +90,14 @@ paths:
           description: Supplier report
         '404':
           description: Not found
+  /products/{productId}/packaging:
+    get:
+      summary: Retrieve Product Packaging Specification
+      responses:
+        '200':
+          description: Packaging specification
+        '404':
+          description: Not found
   /products/{productId}/profitability:
     get:
       summary: Retrieve Product Profitability Report

@@ -199,6 +199,7 @@ class GenesisOrchestrator:
             "bom": self.store.get_bom_report(product_id),
             "cost": self.store.get_cost_report(product_id),
             "suppliers": self.store.get_supplier_report(product_id),
+            "packaging": self.store.get_packaging_report(product_id),
             "profitability": self.store.get_profitability_report(product_id),
         }
 
@@ -213,6 +214,9 @@ class GenesisOrchestrator:
 
     def get_product_suppliers(self, product_id: str) -> dict[str, Any]:
         return self.store.get_supplier_report(product_id)
+
+    def get_product_packaging(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_packaging_report(product_id)
 
     def get_product_profitability(self, product_id: str) -> dict[str, Any]:
         return self.store.get_profitability_report(product_id)

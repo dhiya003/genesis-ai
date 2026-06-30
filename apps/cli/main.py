@@ -69,7 +69,7 @@ def build_parser() -> argparse.ArgumentParser:
     creative_generate_parser.add_argument("product_id")
     creative_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
     creative_generate_parser.add_argument("--data-dir")
-    for name in ["pack", "brand", "logo", "packaging", "mockups", "marketplace", "social", "copy"]:
+    for name in ["pack", "brand", "logo", "packaging", "mockups", "marketplace", "social", "copy", "assets"]:
         section_parser = creative_subcommands.add_parser(name, help=f"Retrieve stored creative {name}")
         section_parser.add_argument("creative_id")
         section_parser.add_argument("--data-dir")
@@ -266,6 +266,9 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.creative_command == "copy":
                 _print_json(orchestrator.get_creative_copy(args.creative_id))
+                return 0
+            if args.creative_command == "assets":
+                _print_json(orchestrator.get_creative_assets(args.creative_id))
                 return 0
         if args.command == "marketing":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

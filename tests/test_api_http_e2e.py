@@ -107,6 +107,9 @@ class ApiHttpE2ETests(unittest.TestCase):
                 with request.urlopen(f"http://{host}:{port}/creative/{project_id}/brand", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     creative_brand = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/creative/{project_id}/assets", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    creative_assets = json.loads(response.read().decode("utf-8"))
                 with request.urlopen(f"http://{host}:{port}/brand/{project_id}", timeout=10) as response:
                     self.assertEqual(response.status, 200)
                     brand_alias = json.loads(response.read().decode("utf-8"))
@@ -162,6 +165,8 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertEqual(creative_run["creativePack"]["reportType"], "CREATIVE_PACK")
                 self.assertEqual(creative_pack["reportType"], "CREATIVE_PACK")
                 self.assertTrue(creative_brand["brandName"])
+                self.assertTrue(creative_assets["assets"])
+                self.assertGreaterEqual(creative_assets["summary"]["png"], 1)
                 self.assertEqual(brand_alias["brandName"], creative_brand["brandName"])
                 self.assertTrue(packaging_alias["panelContent"])
                 self.assertEqual(marketing_run["marketingPack"]["reportType"], "MARKETING_PACK")

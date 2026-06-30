@@ -36,6 +36,7 @@ REQUIRED_TOP_LEVEL = [
     "launchCopyPack",
     "aiDeliverables",
     "creativeAssetManifest",
+    "generatedAssets",
     "productionReadiness",
     "creativeQaReport",
     "validationReport",
@@ -91,6 +92,13 @@ def validate_creative_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("aiDeliverables.masterImagePrompts is required")
     if not data.get("creativeAssetManifest"):
         issues.append("creativeAssetManifest is required")
+    generated_assets = data.get("generatedAssets", {})
+    if not generated_assets.get("assets"):
+        issues.append("generatedAssets.assets is required")
+    generated_summary = generated_assets.get("summary", {})
+    for key in ["svg", "png", "pdf"]:
+        if not isinstance(generated_summary.get(key), int) or generated_summary.get(key, 0) < 1:
+            issues.append(f"generatedAssets.summary.{key} must be at least 1")
     if not data.get("validationReport"):
         issues.append("validationReport is required")
     if not data.get("launchCopyPack", {}).get("taglines"):

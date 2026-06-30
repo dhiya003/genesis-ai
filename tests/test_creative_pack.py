@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from pathlib import Path
 
 from apps.creative.employees import CREATIVE_EMPLOYEES, run_creative_employee, validate_creative_employee_output
 from apps.orchestrator import GenesisOrchestrator
@@ -53,6 +54,15 @@ class CreativePackTests(unittest.TestCase):
             self.assertTrue(store.get_marketplace_creative_report(product_blueprint["productId"])["imageConcepts"])
             self.assertTrue(store.get_social_creative_report(product_blueprint["productId"])["instagramPosts"])
             self.assertTrue(store.get_copy_report(product_blueprint["productId"])["taglines"])
+            generated_assets = creative_pack["generatedAssets"]
+            self.assertGreaterEqual(generated_assets["summary"]["svg"], 1)
+            self.assertGreaterEqual(generated_assets["summary"]["png"], 1)
+            self.assertGreaterEqual(generated_assets["summary"]["pdf"], 1)
+            for asset in generated_assets["assets"]:
+                asset_path = Path(asset["path"])
+                self.assertTrue(asset_path.exists(), asset_path)
+                self.assertGreater(asset_path.stat().st_size, 0)
+            self.assertTrue(orchestrator.get_creative_assets(product_blueprint["productId"])["assets"])
 
     def test_founder_acceptance_wooden_toy_creative_pack(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -90,6 +100,9 @@ class CreativePackTests(unittest.TestCase):
             self.assertTrue(creative_pack["launchCopyPack"]["taglines"])
             self.assertTrue(creative_pack["aiDeliverables"]["masterImagePrompts"])
             self.assertTrue(creative_pack["creativeAssetManifest"])
+            self.assertTrue(creative_pack["generatedAssets"]["assets"])
+            self.assertFalse(creative_pack["productionReadiness"]["requiresBinaryAssetGeneration"])
+            self.assertTrue(creative_pack["productionReadiness"]["assetFilesGenerated"])
             self.assertTrue(creative_pack["validationReport"])
             self.assertTrue(creative_pack["creativeQaReport"]["checks"])
             self.assertTrue(creative_pack["founderApprovalChecklist"])

@@ -32,6 +32,7 @@ class JsonStore:
         self.profitability_reports_dir = self.root / "profitability_reports"
         self.manufacturing_plans_dir = self.root / "manufacturing_plans"
         self.creative_packs_dir = self.root / "creative_packs"
+        self.creative_assets_dir = self.root / "creative_assets"
         self.brand_reports_dir = self.root / "brand_reports"
         self.logo_reports_dir = self.root / "logo_reports"
         self.creative_packaging_reports_dir = self.root / "creative_packaging_reports"
@@ -67,6 +68,7 @@ class JsonStore:
             self.profitability_reports_dir,
             self.manufacturing_plans_dir,
             self.creative_packs_dir,
+            self.creative_assets_dir,
             self.brand_reports_dir,
             self.logo_reports_dir,
             self.creative_packaging_reports_dir,
@@ -240,6 +242,11 @@ class JsonStore:
 
     def get_creative_pack(self, creative_id: str) -> dict[str, Any]:
         return self._read(self.creative_packs_dir / f"{creative_id}.json")
+
+    def creative_asset_dir(self, creative_id: str) -> Path:
+        path = self.creative_assets_dir / creative_id
+        path.mkdir(parents=True, exist_ok=True)
+        return path
 
     def save_brand_report(self, creative_id: str, report: dict[str, Any]) -> None:
         self._write(self.brand_reports_dir / f"{creative_id}.json", report)

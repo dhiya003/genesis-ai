@@ -7,6 +7,7 @@ from statistics import mean
 from time import perf_counter
 from typing import Any
 
+from apps.creative.assets import generate_creative_assets
 from apps.creative.employees import CREATIVE_EMPLOYEES, run_creative_employee
 from apps.observability import MetricsRecorder
 from apps.storage import JsonStore
@@ -41,6 +42,21 @@ class CreativeDepartment:
             )
 
         creative_pack = self.build_creative_pack(project, workflow, product_blueprint, employee_outputs)
+        generated_assets = generate_creative_assets(self.store.creative_asset_dir(creative_pack["creativeId"]), creative_pack)
+        creative_pack["generatedAssets"] = generated_assets
+        creative_pack["creativeAssetManifest"].extend(
+            {
+                "assetId": asset["assetId"],
+                "name": asset["name"],
+                "format": asset["format"],
+                "status": asset["status"],
+                "path": asset["path"],
+            }
+            for asset in generated_assets["assets"]
+        )
+        creative_pack["productionReadiness"]["requiresBinaryAssetGeneration"] = False
+        creative_pack["productionReadiness"]["assetFilesGenerated"] = True
+        creative_pack["validationReport"]["resolutionChecks"] = "PASS_DETERMINISTIC_ASSETS"
         issues = validate_creative_pack_payload(creative_pack)
         if issues:
             raise ValueError(f"Creative pack validation failed: {issues}")
@@ -144,22 +160,23 @@ class CreativeDepartment:
                 "manufacturerHandoff": "SPEC_READY",
                 "ecommerceHandoff": "READY",
                 "requiresBinaryAssetGeneration": True,
+                "assetFilesGenerated": False,
             },
             "creativeQaReport": sections["creativeQaReport"],
             "validationReport": _validation_report(),
             "founderApprovalChecklist": sections["creativeQaReport"]["approvalChecklist"],
             "risks": [
-                {"risk": "Final image files are not generated in deterministic MVP mode.", "severity": "MEDIUM", "mitigation": "Use the included prompts with an approved image or design provider."},
+                {"risk": "Deterministic image files are placeholder-grade until a premium image provider is connected.", "severity": "MEDIUM", "mitigation": "Use the generated files for layout validation and upgrade lifestyle imagery with an approved provider."},
                 {"risk": "Compliance claims require legal and certification review.", "severity": "HIGH", "mitigation": "Keep claims as placeholders until verified."},
             ],
             "assumptions": [
-                "Sprint 4 MVP produces creative specifications and image-generation-ready briefs.",
+                "Sprint 4 MVP produces creative specifications and deterministic binary asset files.",
                 "Canva, Figma, and image-generation integrations are optional later enhancements.",
                 "Founder approves the brand direction before production artwork begins.",
             ],
             "nextActions": [
                 "Founder approves brand name and positioning.",
-                "Generate logo and packaging visuals using the approved provider.",
+                "Review generated deterministic logo, packaging, mockup, and social files.",
                 "Hand Creative Pack to Sprint 5 Marketing Engine.",
             ],
             "assetGenerationPrompts": _asset_prompts(sections),

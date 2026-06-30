@@ -159,6 +159,8 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                         self._send_json(200, orchestrator.get_creative_social(creative_id))
                     elif section == "copy":
                         self._send_json(200, orchestrator.get_creative_copy(creative_id))
+                    elif section == "assets":
+                        self._send_json(200, orchestrator.get_creative_assets(creative_id))
                     else:
                         self._send_json(404, {"status": "not_found", "path": parsed.path})
                     return

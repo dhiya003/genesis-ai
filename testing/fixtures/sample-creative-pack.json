@@ -146,18 +146,35 @@
     "brandConsistencyRules": ["Use real product visibility"],
     "creativeAssetManifestRules": ["Every asset needs purpose and approval status."]
   },
-  "creativeAssetManifest": [{ "assetId": "brand-guidelines", "name": "LumaLearn Brand Guidelines", "format": "pdf", "status": "SPEC_READY" }],
-  "productionReadiness": { "designerHandoff": "READY", "printerHandoff": "SPEC_READY", "requiresBinaryAssetGeneration": true },
+  "creativeAssetManifest": [
+    { "assetId": "brand-guidelines", "name": "LumaLearn Brand Guidelines", "format": "pdf", "status": "SPEC_READY" },
+    { "assetId": "primary-logo", "name": "Primary Logo", "format": "svg", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/logo-primary-horizontal.svg" },
+    { "assetId": "product-hero", "name": "Product Hero", "format": "png", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/product-hero.png" },
+    { "assetId": "packaging-spec", "name": "Packaging Specification", "format": "pdf", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/packaging-spec.pdf" }
+  ],
+  "generatedAssets": {
+    "assetRoot": ".genesis-data/creative_assets/sample",
+    "provider": "deterministic-local",
+    "mode": "NO_CREDENTIALS",
+    "summary": { "totalAssets": 3, "svg": 1, "png": 1, "pdf": 1 },
+    "assets": [
+      { "assetId": "primary-logo", "kind": "logo", "name": "Primary Logo", "fileName": "logo-primary-horizontal.svg", "format": "svg", "contentType": "image/svg+xml", "path": ".genesis-data/creative_assets/sample/logo-primary-horizontal.svg", "sizeBytes": 1200, "status": "GENERATED" },
+      { "assetId": "product-hero", "kind": "raster", "name": "Product Hero", "fileName": "product-hero.png", "format": "png", "contentType": "image/png", "path": ".genesis-data/creative_assets/sample/product-hero.png", "sizeBytes": 2400, "status": "GENERATED" },
+      { "assetId": "packaging-spec", "kind": "document", "name": "Packaging Specification", "fileName": "packaging-spec.pdf", "format": "pdf", "contentType": "application/pdf", "path": ".genesis-data/creative_assets/sample/packaging-spec.pdf", "sizeBytes": 1800, "status": "GENERATED" }
+    ],
+    "notes": ["Sample fixture paths are illustrative; runtime generation writes real files."]
+  },
+  "productionReadiness": { "designerHandoff": "READY", "printerHandoff": "SPEC_READY", "requiresBinaryAssetGeneration": false, "assetFilesGenerated": true },
   "creativeQaReport": {
     "checks": [{ "check": "Brand-product fit", "status": "PASS" }],
     "approvalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
     "risks": ["Certification claims must remain placeholders until verified."]
   },
-  "validationReport": { "brandConsistency": "PASS", "printSafety": "SPEC_READY", "accessibility": "PASS", "resolutionChecks": "PENDING_BINARY_ASSETS", "manufacturingReadiness": "SPEC_READY" },
+  "validationReport": { "brandConsistency": "PASS", "printSafety": "SPEC_READY", "accessibility": "PASS", "resolutionChecks": "PASS_DETERMINISTIC_ASSETS", "manufacturingReadiness": "SPEC_READY" },
   "founderApprovalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
-  "risks": [{ "risk": "Final image files are not generated in deterministic MVP mode.", "severity": "MEDIUM", "mitigation": "Use approved provider." }],
-  "assumptions": ["Sprint 4 MVP produces creative specifications and image-generation-ready briefs."],
-  "nextActions": ["Founder approves brand name and positioning."],
+  "risks": [{ "risk": "Deterministic image files are placeholder-grade until a premium image provider is connected.", "severity": "MEDIUM", "mitigation": "Use approved provider for premium lifestyle imagery." }],
+  "assumptions": ["Sprint 4 MVP produces creative specifications and deterministic binary asset files."],
+  "nextActions": ["Founder approves brand name and reviews generated deterministic assets."],
   "assetGenerationPrompts": ["Box, cubes, and cards on white."],
   "employeeOutputs": [
     { "employeeId": "EMP-201" },

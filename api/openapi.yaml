@@ -186,6 +186,14 @@ paths:
           description: Launch copy pack
         '404':
           description: Not found
+  /creative/{creativeId}/assets:
+    get:
+      summary: Retrieve generated Creative Asset manifest
+      responses:
+        '200':
+          description: Generated asset manifest with local file paths
+        '404':
+          description: Not found
   /brand/{creativeId}:
     get:
       summary: Alias endpoint to retrieve Brand Identity

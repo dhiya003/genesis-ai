@@ -278,6 +278,7 @@ class GenesisOrchestrator:
             "marketplace": self.store.get_marketplace_creative_report(creative_id),
             "social": self.store.get_social_creative_report(creative_id),
             "copy": self.store.get_copy_report(creative_id),
+            "assets": creative_pack.get("generatedAssets", {}),
         }
 
     def get_creative_pack(self, creative_id: str) -> dict[str, Any]:
@@ -303,6 +304,9 @@ class GenesisOrchestrator:
 
     def get_creative_copy(self, creative_id: str) -> dict[str, Any]:
         return self.store.get_copy_report(creative_id)
+
+    def get_creative_assets(self, creative_id: str) -> dict[str, Any]:
+        return self.store.get_creative_pack(creative_id).get("generatedAssets", {})
 
     def generate_marketing_pack(self, creative_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         creative_pack = self.store.get_creative_pack(creative_id)

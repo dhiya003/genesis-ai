@@ -8,6 +8,7 @@ from typing import Any
 from uuid import uuid4
 
 from apps.audit import now_iso, record_audit
+from apps.product import ProductDepartment
 from apps.research import ResearchDepartment
 from apps.storage import JsonStore
 from apps.workflow import ApprovalManager, WorkflowEngine
@@ -95,7 +96,53 @@ class GenesisOrchestrator:
             "workflows": [workflow for workflow in self.store.list_workflows() if workflow.get("projectId") == project_id],
             "auditLogs": self.store.list_audit_logs(project_id=project_id),
             "executionHistory": self.store.list_execution_history(project_id=project_id),
+            "productKnowledge": self.store.list_product_knowledge(project_id=project_id),
         }
+
+    def run_product_definition(self, project_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        project = self.store.get_project(project_id)
+        report = self.store.get_report(project_id)
+        workflow = WorkflowEngine(self.store).create(project_id, "PRODUCT_DEFINITION")
+        workflow = WorkflowEngine(self.store).plan(workflow, reason="orchestrator selected Product Department Phase 1")
+        task = self._create_task(project_id, workflow["id"], "PRODUCT_DEPARTMENT", "Create Sprint 3 Phase 1 product definition")
+        LOGGER.info("orchestrator routed project to product department", extra={"event": "orchestrator.routed", "project_id": project_id, "workflow_id": workflow["id"], "status": "PRODUCT_DEFINITION"})
+
+        department = ProductDepartment(self.store)
+
+        def run_product(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute(project, current_workflow, report)
+
+        completed_workflow = WorkflowEngine(self.store).run(workflow, run_product)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "PRODUCT_DEFINITION_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": "PRODUCT_DEFINITION"})
+            deliverable = self._create_deliverable(project_id, completed_workflow["id"], "PRODUCT_DEFINITION", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project_id, completed_workflow["id"], "PRODUCT_BLUEPRINT_ENTRY", mode=approval_mode)
+            project["productWorkflowId"] = completed_workflow["id"]
+            project["productApprovalId"] = approval["id"]
+            project["productApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_PRODUCT_APPROVAL"
+        else:
+            project["status"] = "PRODUCT_DEFINITION_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.product_definition_finished", project_id=project_id, workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "productDefinition": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_product_definition(self, project_id: str) -> dict[str, Any]:
+        return self.store.get_product_definition(project_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

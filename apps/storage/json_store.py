@@ -22,6 +22,8 @@ class JsonStore:
         self.deliverables_dir = self.root / "deliverables"
         self.audit_logs_dir = self.root / "audit_logs"
         self.execution_history_dir = self.root / "execution_history"
+        self.product_definitions_dir = self.root / "product_definitions"
+        self.product_knowledge_dir = self.root / "product_knowledge"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -33,6 +35,8 @@ class JsonStore:
             self.deliverables_dir,
             self.audit_logs_dir,
             self.execution_history_dir,
+            self.product_definitions_dir,
+            self.product_knowledge_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -138,6 +142,24 @@ class JsonStore:
             events = [event for event in events if event.get("workflowId") == workflow_id]
         events.sort(key=lambda item: str(item.get("createdAt", "")))
         return events
+
+    def save_product_definition(self, product_definition: dict[str, Any]) -> None:
+        self._write(self.product_definitions_dir / f"{product_definition['projectId']}.json", product_definition)
+
+    def get_product_definition(self, project_id: str) -> dict[str, Any]:
+        return self._read(self.product_definitions_dir / f"{project_id}.json")
+
+    def save_product_knowledge(self, entry: dict[str, Any]) -> None:
+        project_id = entry["projectId"]
+        existing = self.list_product_knowledge(project_id=project_id)
+        sequence = len(existing) + 1
+        self._write(self.product_knowledge_dir / f"{project_id}__{sequence:03d}.json", entry)
+
+    def list_product_knowledge(self, project_id: str | None = None) -> list[dict[str, Any]]:
+        entries = [self._read(path) for path in sorted(self.product_knowledge_dir.glob("*.json"))]
+        if project_id is not None:
+            entries = [entry for entry in entries if entry.get("projectId") == project_id]
+        return entries
 
     def _write(self, path: Path, payload: dict[str, Any]) -> None:
         path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")

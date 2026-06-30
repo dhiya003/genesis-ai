@@ -1,0 +1,314 @@
+{
+  "approvalChecklist": [
+    {
+      "evidence": "Research report recommendation supports lean validation.",
+      "item": "Solves a real problem",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Product definition uses a starter kit and clear purpose.",
+      "item": "Buyer can understand quickly",
+      "status": "PASS"
+    }
+  ],
+  "constraintsReport": {
+    "constraints": [],
+    "country": "India",
+    "founderBudget": "Not specified",
+    "machineAvailability": "Avoid machine-dependent design in Phase 1.",
+    "manufacturingCapability": "Start with simple, low-tooling production until demand is proven.",
+    "moq": "Prefer low MOQ or manual pilot batch.",
+    "safety": "Validate category-specific safety and labeling before production.",
+    "shipping": "Keep the starter variant lightweight and compact.",
+    "storage": "Avoid bulky or fragile inventory.",
+    "targetMargin": "Target 55-65 percent gross margin before paid ads.",
+    "timeToMarket": "Pilot within 2-4 weeks"
+  },
+  "department": "PRODUCT",
+  "knowledgeBaseEntries": [
+    {
+      "futureImprovement": "Re-score after supplier, BOM, and packaging data are available.",
+      "lesson": "Start with a compact product family seed instead of a single-product dead end.",
+      "productName": "Brew Buddy Starter Kit",
+      "projectId": "sample-project",
+      "type": "GENERATED_PRODUCT"
+    },
+    {
+      "futureImprovement": "Revisit alternatives if manufacturing or supplier constraints change.",
+      "lesson": "Weak alternatives should be retained with reasons so future product decisions improve.",
+      "productName": "Rejected alternatives",
+      "projectId": "sample-project",
+      "rejectedProducts": [
+        {
+          "name": "Desk mini print or magnet",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        }
+      ],
+      "type": "REJECTED_PRODUCTS"
+    }
+  ],
+  "manager": "PRODUCT_MANAGER",
+  "opportunityReport": {
+    "evidenceReferences": [],
+    "overallOpportunityScore": 77,
+    "rankingRationale": "The selected product balances customer clarity, low manufacturing risk, shipping simplicity, and expansion potential.",
+    "rejectedAlternatives": [
+      {
+        "name": "Desk mini print or magnet",
+        "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+      }
+    ],
+    "scores": {
+      "competition": 69,
+      "customerValue": 83,
+      "differentiation": 81,
+      "inventoryRisk": 68,
+      "learningValue": 84,
+      "manufacturingDifficulty": 78,
+      "marketGap": 79,
+      "profit": 78,
+      "scalability": 80,
+      "shippingRisk": 82,
+      "supplierAvailability": 72
+    },
+    "selectedOpportunity": "Brew Buddy Starter Kit"
+  },
+  "productDefinitionDocument": {
+    "ageGroup": "18-35",
+    "assumptions": [
+      "Sprint 3 Phase 1 uses deterministic product intelligence until live supplier data is connected.",
+      "Manufacturing, BOM, and supplier validation happen in later Sprint 3 phases.",
+      "Founder should validate demand before inventory purchase."
+    ],
+    "category": "Lifestyle gifting",
+    "differentiator": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
+    "difficulty": "Easy",
+    "educationalDomain": [
+      "Customer learning",
+      "Market validation",
+      "Product-family testing"
+    ],
+    "evidence": [],
+    "futureRoadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Brew Buddy Starter Kit Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "packagingType": "Starter kit",
+    "problemSolved": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
+    "productName": "Brew Buddy Starter Kit",
+    "productStory": "Brew Buddy Starter Kit turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "projectId": "sample-project",
+    "purpose": "Help coffee lovers express their identity through an affordable, giftable starter kit.",
+    "recommendedMaterial": "Lightweight printable or packable materials selected for low-risk MVP validation.",
+    "sourceReportId": "sample-project",
+    "targetCustomer": {
+      "ageGroup": "18-35",
+      "buyer": "Young professionals who identify as coffee lovers",
+      "needs": [
+        "Clear product value",
+        "Affordable first purchase",
+        "Trustworthy packaging and delivery"
+      ],
+      "primarySegment": "Young professionals who identify as coffee lovers"
+    },
+    "useCase": "Starter purchase, gifting, validation launch, and later product-family expansion.",
+    "variants": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Brew Buddy Starter Kit Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Brew Buddy Starter Kit Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Brew Buddy Starter Kit Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Brew Buddy Starter Kit Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Brew Buddy Starter Kit Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Brew Buddy Starter Kit Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Brew Buddy Starter Kit Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ]
+  },
+  "productRoadmap": {
+    "accessories": [
+      "Replacement parts",
+      "Add-on cards",
+      "Gift wrap"
+    ],
+    "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+    "expansionOpportunities": [
+      "Bundles",
+      "Corporate gifting",
+      "Retail-ready packaging"
+    ],
+    "futureFeatures": [
+      "Seasonal themes",
+      "Personalization",
+      "Limited editions"
+    ],
+    "subscription": "Monthly themed drop if repeat demand is validated",
+    "version1": "Brew Buddy Starter Kit Starter validation kit",
+    "version2": "Gift-ready standard kit with improved packaging",
+    "version3": "Premium bundle with stronger brand story and add-ons"
+  },
+  "projectId": "sample-project",
+  "reportType": "PRODUCT_DEFINITION",
+  "riskRegister": [
+    {
+      "mitigation": "Run a manual validation launch before inventory purchase.",
+      "risk": "Competitor saturation must be verified with live marketplace and Instagram checks.",
+      "severity": "HIGH"
+    },
+    {
+      "mitigation": "Use variant strategy, packaging, and story to sharpen differentiation.",
+      "risk": "Product may look generic without a strong differentiator.",
+      "severity": "MEDIUM"
+    }
+  ],
+  "sourceIdea": "Create a coffee lovers product brand for India.",
+  "sourceReportId": "sample-project",
+  "sourceWorkflowId": "sample-workflow",
+  "successMetrics": {
+    "complexityScore": 32,
+    "customerValueScore": 83,
+    "expansionPotential": 80,
+    "innovationScore": 81,
+    "manufacturabilityScore": 78,
+    "overallProductScore": 74,
+    "packagingScore": 80,
+    "profitabilityScore": 78,
+    "shippingScore": 82
+  },
+  "variantMatrix": [
+    {
+      "contents": [
+        "Core product",
+        "Simple packaging"
+      ],
+      "level": "Starter",
+      "name": "Brew Buddy Starter Kit Starter",
+      "purpose": "Validate demand with minimum inventory risk"
+    },
+    {
+      "contents": [
+        "Core product",
+        "Bonus item",
+        "Gift-ready packaging"
+      ],
+      "level": "Standard",
+      "name": "Brew Buddy Starter Kit Standard",
+      "purpose": "Increase perceived value"
+    },
+    {
+      "contents": [
+        "Expanded product set",
+        "Premium packaging"
+      ],
+      "level": "Premium",
+      "name": "Brew Buddy Starter Kit Premium",
+      "purpose": "Serve gifting and higher-margin buyers"
+    },
+    {
+      "contents": [
+        "Multiple units",
+        "Occasion-based bundle"
+      ],
+      "level": "Bundle",
+      "name": "Brew Buddy Starter Kit Bundle",
+      "purpose": "Raise average order value"
+    },
+    {
+      "contents": [
+        "Recurring monthly variation"
+      ],
+      "level": "Subscription",
+      "name": "Brew Buddy Starter Kit Club",
+      "purpose": "Test repeat purchase potential"
+    },
+    {
+      "contents": [
+        "Replacement or add-on parts"
+      ],
+      "level": "Accessories",
+      "name": "Brew Buddy Starter Kit Accessories",
+      "purpose": "Create low-cost upsells"
+    },
+    {
+      "contents": [
+        "New themes",
+        "Advanced variants"
+      ],
+      "level": "Expansion Packs",
+      "name": "Brew Buddy Starter Kit Expansion Pack",
+      "purpose": "Build a product family"
+    }
+  ],
+  "version": "0.3.0",
+  "workflowId": "sample-product-workflow"
+}

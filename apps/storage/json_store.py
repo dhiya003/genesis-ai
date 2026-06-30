@@ -31,6 +31,14 @@ class JsonStore:
         self.packaging_reports_dir = self.root / "packaging_reports"
         self.profitability_reports_dir = self.root / "profitability_reports"
         self.manufacturing_plans_dir = self.root / "manufacturing_plans"
+        self.creative_packs_dir = self.root / "creative_packs"
+        self.brand_reports_dir = self.root / "brand_reports"
+        self.logo_reports_dir = self.root / "logo_reports"
+        self.creative_packaging_reports_dir = self.root / "creative_packaging_reports"
+        self.mockup_reports_dir = self.root / "mockup_reports"
+        self.marketplace_creative_reports_dir = self.root / "marketplace_creative_reports"
+        self.social_creative_reports_dir = self.root / "social_creative_reports"
+        self.copy_reports_dir = self.root / "copy_reports"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -51,6 +59,14 @@ class JsonStore:
             self.packaging_reports_dir,
             self.profitability_reports_dir,
             self.manufacturing_plans_dir,
+            self.creative_packs_dir,
+            self.brand_reports_dir,
+            self.logo_reports_dir,
+            self.creative_packaging_reports_dir,
+            self.mockup_reports_dir,
+            self.marketplace_creative_reports_dir,
+            self.social_creative_reports_dir,
+            self.copy_reports_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -204,6 +220,54 @@ class JsonStore:
 
     def get_manufacturing_plan(self, product_id: str) -> dict[str, Any]:
         return self._read(self.manufacturing_plans_dir / f"{product_id}.json")
+
+    def save_creative_pack(self, creative_pack: dict[str, Any]) -> None:
+        self._write(self.creative_packs_dir / f"{creative_pack['creativeId']}.json", creative_pack)
+
+    def get_creative_pack(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.creative_packs_dir / f"{creative_id}.json")
+
+    def save_brand_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.brand_reports_dir / f"{creative_id}.json", report)
+
+    def get_brand_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.brand_reports_dir / f"{creative_id}.json")
+
+    def save_logo_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.logo_reports_dir / f"{creative_id}.json", report)
+
+    def get_logo_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.logo_reports_dir / f"{creative_id}.json")
+
+    def save_creative_packaging_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.creative_packaging_reports_dir / f"{creative_id}.json", report)
+
+    def get_creative_packaging_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.creative_packaging_reports_dir / f"{creative_id}.json")
+
+    def save_mockup_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.mockup_reports_dir / f"{creative_id}.json", report)
+
+    def get_mockup_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.mockup_reports_dir / f"{creative_id}.json")
+
+    def save_marketplace_creative_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.marketplace_creative_reports_dir / f"{creative_id}.json", report)
+
+    def get_marketplace_creative_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.marketplace_creative_reports_dir / f"{creative_id}.json")
+
+    def save_social_creative_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.social_creative_reports_dir / f"{creative_id}.json", report)
+
+    def get_social_creative_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.social_creative_reports_dir / f"{creative_id}.json")
+
+    def save_copy_report(self, creative_id: str, report: dict[str, Any]) -> None:
+        self._write(self.copy_reports_dir / f"{creative_id}.json", report)
+
+    def get_copy_report(self, creative_id: str) -> dict[str, Any]:
+        return self._read(self.copy_reports_dir / f"{creative_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

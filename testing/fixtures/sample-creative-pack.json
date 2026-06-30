@@ -1,21 +1,114 @@
 {
   "reportType": "CREATIVE_PACK",
+  "version": "0.4.0",
   "projectId": "00000000-0000-0000-0000-000000000001",
-  "version": "1.0",
-  "creativeBrief": {
-    "direction": "Modern coffee lifestyle typography",
-    "audience": "Young urban coffee lovers"
+  "creativeId": "00000000-0000-0000-0000-000000000001",
+  "productId": "00000000-0000-0000-0000-000000000001",
+  "workflowId": "workflow-creative-fixture",
+  "sourceProductBlueprintId": "00000000-0000-0000-0000-000000000001",
+  "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+  "department": "CREATIVE",
+  "executiveSummary": "Genesis Creative Studio generated a launch-ready Creative Pack for Luma Logic Cubes.",
+  "brandStrategy": {
+    "positioning": "Premium screen-free learning toys for early childhood development in India",
+    "targetAudience": { "primarySegment": "Parents of children aged 3-5 in India" },
+    "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
+    "personality": ["warm", "intelligent", "safe", "premium", "playful"],
+    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
+    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation."
   },
-  "designPrompts": [
-    {
-      "productName": "Coffee Quote Oversized T-Shirt",
-      "style": "minimal typography",
-      "prompt": "Create a clean coffee-themed typography design suitable for a black oversized t-shirt.",
-      "productionNotes": "Use transparent background and avoid trademarked phrases."
-    }
+  "brandNameRecommendation": {
+    "recommendedName": "LumaLearn",
+    "nameOptions": ["LumaLearn", "TinkerLuma", "Little Logic Co"],
+    "rationale": "Short, memorable, warm, and extendable across future learning products."
+  },
+  "brandIdentity": {
+    "brandName": "LumaLearn",
+    "positioning": "Premium screen-free learning toys for early childhood development in India",
+    "targetAudience": { "primarySegment": "Parents of children aged 3-5 in India" },
+    "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
+    "personality": ["warm", "intelligent", "safe", "premium", "playful"],
+    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
+    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
+    "colorPalette": [
+      { "name": "Forest Green", "hex": "#1F5A46", "usage": "Primary brand color" },
+      { "name": "Marigold", "hex": "#F4B740", "usage": "Learning accent" },
+      { "name": "Warm Ivory", "hex": "#FFF7E6", "usage": "Packaging base" }
+    ],
+    "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
+    "visualRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"]
+  },
+  "logoSystem": {
+    "primaryConcept": "LumaLearn wordmark with a cube/sun learning mark.",
+    "secondaryConcept": "Stacked lockup for square packaging.",
+    "iconMark": "Rounded cube with three path lines.",
+    "usage": { "lightBackground": "Use forest green wordmark." }
+  },
+  "colorPalette": [
+    { "name": "Forest Green", "hex": "#1F5A46", "usage": "Primary brand color" },
+    { "name": "Marigold", "hex": "#F4B740", "usage": "Learning accent" },
+    { "name": "Warm Ivory", "hex": "#FFF7E6", "usage": "Packaging base" }
   ],
-  "mockupInstructions": [],
-  "brandGuidelines": {},
-  "qualityChecklist": ["No copyrighted text", "Readable at print size", "Transparent background"],
-  "confidence": 0.7
+  "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
+  "visualIdentityRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"],
+  "packagingDesignBrief": {
+    "concept": "Premium learning kit box with natural board texture.",
+    "panelContent": { "front": ["Brand name", "Age 3-5"], "back": ["How children play"], "side": ["SKU placeholder"] },
+    "materials": ["Rigid kraft board", "Paper pulp insert"],
+    "compliancePlaceholders": ["Age grade", "Choking hazard review"]
+  },
+  "productMockupBrief": {
+    "variantMockups": [
+      { "variant": "Starter", "brief": "Starter box, six cubes, activity cards." },
+      { "variant": "Standard", "brief": "Standard kit with expanded cubes." },
+      { "variant": "Premium", "brief": "Premium gift-ready box." }
+    ],
+    "lifestyleScenes": ["Parent and child solving a pattern"],
+    "renderingGuidance": "Use bright natural light."
+  },
+  "marketplaceCreativePack": {
+    "imageConcepts": [
+      { "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }
+    ],
+    "requirements": ["Readable on mobile"],
+    "qualityRules": ["Avoid tiny text"]
+  },
+  "socialMediaCreativePack": {
+    "instagramPosts": [
+      { "format": "carousel", "hook": "A toy that teaches before it explains." }
+    ],
+    "stories": ["Poll: Which skill should playtime build?"],
+    "reels": ["15-second pattern challenge"],
+    "launchBanners": ["Founding batch now open"]
+  },
+  "launchCopyPack": {
+    "taglines": ["Play that builds little logic."],
+    "packagingCopy": { "front": "LumaLearn Logic Cubes" },
+    "productHeadline": "Premium wooden logic cubes for children aged 3-5",
+    "featureBullets": ["Supports logic and pattern recognition"],
+    "socialCaptions": ["Screen-free play, made a little smarter."]
+  },
+  "creativeQaReport": {
+    "checks": [{ "check": "Brand-product fit", "status": "PASS" }],
+    "approvalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
+    "risks": ["Certification claims must remain placeholders until verified."]
+  },
+  "founderApprovalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
+  "risks": [{ "risk": "Final image files are not generated in deterministic MVP mode.", "severity": "MEDIUM", "mitigation": "Use approved provider." }],
+  "assumptions": ["Sprint 4 MVP produces creative specifications and image-generation-ready briefs."],
+  "nextActions": ["Founder approves brand name and positioning."],
+  "assetGenerationPrompts": ["Box, cubes, and cards on white."],
+  "employeeOutputs": [
+    { "employeeId": "EMP-201" },
+    { "employeeId": "EMP-202" },
+    { "employeeId": "EMP-203" },
+    { "employeeId": "EMP-204" },
+    { "employeeId": "EMP-205" },
+    { "employeeId": "EMP-206" },
+    { "employeeId": "EMP-207" },
+    { "employeeId": "EMP-208" },
+    { "employeeId": "EMP-209" },
+    { "employeeId": "EMP-210" }
+  ],
+  "overallScore": 85
 }

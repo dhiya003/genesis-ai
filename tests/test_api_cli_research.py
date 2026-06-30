@@ -119,6 +119,30 @@ class ApiCliResearchTests(unittest.TestCase):
                 self.assertEqual(cli_main(["businessos", "health", project_id, "--data-dir", directory]), 0)
             self.assertGreaterEqual(json.loads(health_output.getvalue())["overallBusinessHealthScore"], 0)
 
+            metrics_output = StringIO()
+            with patch("sys.stdout", metrics_output):
+                self.assertEqual(
+                    cli_main(
+                        [
+                            "businessos",
+                            "ingest-metrics",
+                            project_id,
+                            '{"revenue": 60000, "orders": 50, "adSpend": 40000, "inventoryOnHand": 12, "cash": 100000}',
+                            "--source",
+                            "cli-test",
+                            "--data-dir",
+                            directory,
+                        ]
+                    ),
+                    0,
+                )
+            self.assertTrue(json.loads(metrics_output.getvalue())["alerts"])
+
+            dashboard_output = StringIO()
+            with patch("sys.stdout", dashboard_output):
+                self.assertEqual(cli_main(["businessos", "dashboard", project_id, "--data-dir", directory]), 0)
+            self.assertEqual(json.loads(dashboard_output.getvalue())["reportType"], "BUSINESS_DASHBOARD")
+
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             store = JsonStore(directory)

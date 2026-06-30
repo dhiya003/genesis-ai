@@ -167,9 +167,13 @@ It produces:
 - Approval policy
 - Simulation results
 - Business health estimate
+- Metrics ingestion
+- Business dashboard
+- Alert generation
 - Opportunities
 - Risks
 - Recommendations
+- Knowledge capture from metric events
 - Learning engine plan
 - Self-improvement plan
 - Integration registry
@@ -189,6 +193,10 @@ It produces:
 - `GET /businessos/{id}/simulations`
 - `GET /businessos/{id}/health`
 - `GET /businessos/{id}/recommendations`
+- `POST /businessos/{id}/metrics`
+- `GET /businessos/{id}/dashboard`
+- `GET /businessos/{id}/alerts`
+- `GET /businessos/{id}/knowledge`
 
 ## CLI
 
@@ -201,13 +209,16 @@ python3 -m apps.cli.main businessos decisions <business-id>
 python3 -m apps.cli.main businessos simulations <business-id>
 python3 -m apps.cli.main businessos health <business-id>
 python3 -m apps.cli.main businessos recommendations <business-id>
+python3 -m apps.cli.main businessos ingest-metrics <business-id> '{"revenue": 60000, "orders": 50}'
+python3 -m apps.cli.main businessos dashboard <business-id>
+python3 -m apps.cli.main businessos alerts <business-id>
+python3 -m apps.cli.main businessos knowledge <business-id>
 ```
 
 ## Production DoD Remaining
 
 The foundation is not the full production v1.0 exit criteria yet. Remaining production-grade work includes:
 
-- Full Sprint 7 live metrics ingestion
 - Real dashboard UI
 - Production RBAC and tenant isolation
 - Live CRM, accounting, ERP, marketplace, ad, and store integrations
@@ -219,4 +230,3 @@ The foundation is not the full production v1.0 exit criteria yet. Remaining prod
 ## Exit Criteria
 
 Sprint 8 is complete only when Genesis is no longer a collection of AI agents. It must coordinate specialized AI departments to research, design, plan, execute, monitor, and continuously improve businesses while preserving human authority over strategy, ethics, legal commitments, and major financial decisions.
-

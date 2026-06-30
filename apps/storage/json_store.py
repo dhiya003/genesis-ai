@@ -59,6 +59,10 @@ class JsonStore:
         self.simulation_reports_dir = self.root / "simulation_reports"
         self.business_health_reports_dir = self.root / "business_health_reports"
         self.recommendation_reports_dir = self.root / "recommendation_reports"
+        self.business_metric_events_dir = self.root / "business_metric_events"
+        self.business_dashboards_dir = self.root / "business_dashboards"
+        self.business_alerts_dir = self.root / "business_alerts"
+        self.business_knowledge_dir = self.root / "business_knowledge"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -107,6 +111,10 @@ class JsonStore:
             self.simulation_reports_dir,
             self.business_health_reports_dir,
             self.recommendation_reports_dir,
+            self.business_metric_events_dir,
+            self.business_dashboards_dir,
+            self.business_alerts_dir,
+            self.business_knowledge_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -427,6 +435,34 @@ class JsonStore:
 
     def get_recommendation_report(self, business_id: str) -> dict[str, Any]:
         return self._read(self.recommendation_reports_dir / f"{business_id}.json")
+
+    def save_business_metric_event(self, event: dict[str, Any]) -> None:
+        self._write(self.business_metric_events_dir / f"{event['businessId']}__{event['id']}.json", event)
+
+    def list_business_metric_events(self, business_id: str) -> list[dict[str, Any]]:
+        events = [self._read(path) for path in sorted(self.business_metric_events_dir.glob(f"{business_id}__*.json"))]
+        events.sort(key=lambda item: str(item.get("observedAt", item.get("createdAt", ""))))
+        return events
+
+    def save_business_dashboard(self, business_id: str, dashboard: dict[str, Any]) -> None:
+        self._write(self.business_dashboards_dir / f"{business_id}.json", dashboard)
+
+    def get_business_dashboard(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_dashboards_dir / f"{business_id}.json")
+
+    def save_business_alerts(self, business_id: str, alerts: dict[str, Any]) -> None:
+        self._write(self.business_alerts_dir / f"{business_id}.json", alerts)
+
+    def get_business_alerts(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_alerts_dir / f"{business_id}.json")
+
+    def save_business_knowledge_entry(self, entry: dict[str, Any]) -> None:
+        self._write(self.business_knowledge_dir / f"{entry['businessId']}__{entry['id']}.json", entry)
+
+    def list_business_knowledge(self, business_id: str) -> list[dict[str, Any]]:
+        entries = [self._read(path) for path in sorted(self.business_knowledge_dir.glob(f"{business_id}__*.json"))]
+        entries.sort(key=lambda item: str(item.get("createdAt", "")))
+        return entries
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

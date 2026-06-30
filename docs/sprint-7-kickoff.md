@@ -53,3 +53,38 @@ Genesis should stop waiting for prompts after launch. It should observe availabl
 
 Sprint 7 consumes the launch package, launch report, channel mappings, campaign plans, asset manifests, and future live execution events created by Sprint 6.
 
+## Implemented Foundation
+
+Genesis now supports deterministic metrics ingestion and continuous monitoring outputs:
+
+- Business metric events
+- Business Dashboard
+- Department dashboards
+- Campaign dashboard
+- Sales dashboard
+- Inventory dashboard
+- Financial dashboard
+- Business health refresh
+- Alert generation
+- Recommendation refresh
+- Knowledge capture
+
+## APIs
+
+- `POST /businessos/{id}/metrics`
+- `GET /businessos/{id}/dashboard`
+- `GET /businessos/{id}/alerts`
+- `GET /businessos/{id}/knowledge`
+- `GET /businessos/{id}/metrics`
+
+## CLI
+
+```bash
+python3 -m apps.cli.main businessos ingest-metrics <business-id> '{"revenue": 60000, "orders": 50, "adSpend": 40000, "inventoryOnHand": 12}'
+python3 -m apps.cli.main businessos dashboard <business-id>
+python3 -m apps.cli.main businessos alerts <business-id>
+python3 -m apps.cli.main businessos knowledge <business-id>
+python3 -m apps.cli.main businessos metrics <business-id>
+```
+
+The foundation accepts manual or integration-provided metrics. Live connectors can post into the same metric ingestion boundary later.

@@ -186,6 +186,39 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     recommendations = json.loads(response.read().decode("utf-8"))
 
+                metrics_request = request.Request(
+                    f"http://{host}:{port}/businessos/{project_id}/metrics",
+                    data=json.dumps(
+                        {
+                            "source": "http-test",
+                            "metrics": {
+                                "revenue": 60000,
+                                "orders": 50,
+                                "adSpend": 40000,
+                                "clicks": 1200,
+                                "impressions": 60000,
+                                "inventoryOnHand": 12,
+                                "cash": 100000,
+                            },
+                        }
+                    ).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(metrics_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    metrics_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/dashboard", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    dashboard = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/alerts", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    alerts = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/knowledge", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    knowledge = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -230,6 +263,10 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(digital_twin["products"])
                 self.assertGreaterEqual(business_health["overallBusinessHealthScore"], 0)
                 self.assertTrue(recommendations["recommendations"])
+                self.assertEqual(metrics_run["dashboard"]["reportType"], "BUSINESS_DASHBOARD")
+                self.assertEqual(dashboard["reportType"], "BUSINESS_DASHBOARD")
+                self.assertTrue(alerts["alerts"])
+                self.assertTrue(knowledge["knowledge"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

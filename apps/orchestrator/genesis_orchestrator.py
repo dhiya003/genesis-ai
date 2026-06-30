@@ -7,6 +7,7 @@ import logging
 from typing import Any
 from uuid import uuid4
 
+from apps.analytics import AnalyticsRuntime
 from apps.audit import now_iso, record_audit
 from apps.businessos import BusinessOSRuntime
 from apps.creative import CreativeDepartment
@@ -549,6 +550,23 @@ class GenesisOrchestrator:
 
     def get_recommendations(self, business_id: str) -> dict[str, Any]:
         return self.store.get_recommendation_report(business_id)
+
+    def ingest_business_metrics(self, business_id: str, metrics: dict[str, Any], *, source: str = "manual", observed_at: str | None = None) -> dict[str, Any]:
+        result = AnalyticsRuntime(self.store).ingest_metrics(business_id, metrics, source=source, observed_at=observed_at)
+        record_audit(self.store, "business.metrics_ingested", project_id=business_id, details={"source": source, "metricEventId": result["event"]["id"], "alertCount": len(result["alerts"])})
+        return result
+
+    def get_business_dashboard(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_business_dashboard(business_id)
+
+    def get_business_alerts(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_business_alerts(business_id)
+
+    def get_business_knowledge(self, business_id: str) -> dict[str, Any]:
+        return {"businessId": business_id, "knowledge": self.store.list_business_knowledge(business_id)}
+
+    def list_business_metric_events(self, business_id: str) -> dict[str, Any]:
+        return {"businessId": business_id, "events": self.store.list_business_metric_events(business_id)}
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

@@ -183,6 +183,14 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                         self._send_json(200, orchestrator.get_business_health(business_id))
                     elif section == "recommendations":
                         self._send_json(200, orchestrator.get_recommendations(business_id))
+                    elif section == "dashboard":
+                        self._send_json(200, orchestrator.get_business_dashboard(business_id))
+                    elif section == "alerts":
+                        self._send_json(200, orchestrator.get_business_alerts(business_id))
+                    elif section == "knowledge":
+                        self._send_json(200, orchestrator.get_business_knowledge(business_id))
+                    elif section == "metrics":
+                        self._send_json(200, orchestrator.list_business_metric_events(business_id))
                     else:
                         self._send_json(404, {"status": "not_found", "path": parsed.path})
                     return
@@ -324,6 +332,23 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).generate_business_operating_plan(launch_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path.startswith("/businessos/") and parsed.path.endswith("/metrics"):
+                business_id = parsed.path.removeprefix("/businessos/").removesuffix("/metrics").strip("/")
+                if not business_id:
+                    raise bad_request("Business ID is required")
+                payload = self._read_json()
+                metrics = payload.get("metrics")
+                if not isinstance(metrics, dict):
+                    raise bad_request("metrics must be an object")
+                source = payload.get("source", "manual")
+                if not isinstance(source, str):
+                    raise bad_request("source must be a string")
+                observed_at = payload.get("observedAt")
+                if observed_at is not None and not isinstance(observed_at, str):
+                    raise bad_request("observedAt must be a string")
+                result = GenesisOrchestrator(self.store).ingest_business_metrics(business_id, metrics, source=source, observed_at=observed_at)
                 self._send_json(201, result)
                 return
             if parsed.path == "/creative/generate":

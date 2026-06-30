@@ -102,7 +102,14 @@ def build_parser() -> argparse.ArgumentParser:
     businessos_generate_parser.add_argument("launch_id")
     businessos_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="manual")
     businessos_generate_parser.add_argument("--data-dir")
-    for name in ["plan", "digital-twin", "knowledge-graph", "decisions", "simulations", "health", "recommendations"]:
+    businessos_metrics_parser = businessos_subcommands.add_parser("ingest-metrics", help="Ingest a business metrics JSON object and refresh dashboards")
+    businessos_metrics_parser.add_argument("business_id")
+    businessos_metrics_parser.add_argument("metrics", help="JSON metrics object or path when --from-file is used")
+    businessos_metrics_parser.add_argument("--from-file", action="store_true")
+    businessos_metrics_parser.add_argument("--source", default="manual")
+    businessos_metrics_parser.add_argument("--observed-at")
+    businessos_metrics_parser.add_argument("--data-dir")
+    for name in ["plan", "digital-twin", "knowledge-graph", "decisions", "simulations", "health", "recommendations", "dashboard", "alerts", "knowledge", "metrics"]:
         section_parser = businessos_subcommands.add_parser(name, help=f"Retrieve stored BusinessOS {name}")
         section_parser.add_argument("business_id")
         section_parser.add_argument("--data-dir")
@@ -366,6 +373,13 @@ def main(argv: list[str] | None = None) -> int:
                 except FileNotFoundError as exc:
                     raise not_found(f"Business Launch Package not found for launch {args.launch_id}") from exc
                 return 0
+            if args.businessos_command == "ingest-metrics":
+                metrics_text = _read_text_arg(args.metrics, args.from_file)
+                metrics = json.loads(metrics_text)
+                if not isinstance(metrics, dict):
+                    raise ValueError("metrics must be a JSON object")
+                _print_json(orchestrator.ingest_business_metrics(args.business_id, metrics, source=args.source, observed_at=args.observed_at))
+                return 0
             if args.businessos_command == "plan":
                 _print_json(orchestrator.get_business_operating_plan(args.business_id))
                 return 0
@@ -386,6 +400,18 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.businessos_command == "recommendations":
                 _print_json(orchestrator.get_recommendations(args.business_id))
+                return 0
+            if args.businessos_command == "dashboard":
+                _print_json(orchestrator.get_business_dashboard(args.business_id))
+                return 0
+            if args.businessos_command == "alerts":
+                _print_json(orchestrator.get_business_alerts(args.business_id))
+                return 0
+            if args.businessos_command == "knowledge":
+                _print_json(orchestrator.get_business_knowledge(args.business_id))
+                return 0
+            if args.businessos_command == "metrics":
+                _print_json(orchestrator.list_business_metric_events(args.business_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

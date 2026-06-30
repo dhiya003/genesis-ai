@@ -169,6 +169,7 @@ It produces:
 - Business health estimate
 - Metrics ingestion
 - Business dashboard
+- Founder dashboard HTML route
 - Alert generation
 - Opportunities
 - Risks
@@ -180,6 +181,9 @@ It produces:
 - Dashboard plan
 - Observability plan
 - Security plan
+- API-key authentication and RBAC guardrails
+- Tenant header enforcement
+- Sanitized integration readiness registry
 - Governance boundaries
 
 ## APIs
@@ -197,6 +201,8 @@ It produces:
 - `GET /businessos/{id}/dashboard`
 - `GET /businessos/{id}/alerts`
 - `GET /businessos/{id}/knowledge`
+- `GET /dashboard/businessos/{id}`
+- `GET /integrations/status`
 
 ## CLI
 
@@ -213,14 +219,27 @@ python3 -m apps.cli.main businessos ingest-metrics <business-id> '{"revenue": 60
 python3 -m apps.cli.main businessos dashboard <business-id>
 python3 -m apps.cli.main businessos alerts <business-id>
 python3 -m apps.cli.main businessos knowledge <business-id>
+python3 -m apps.cli.main integrations status
 ```
+
+## Production Guardrails Implemented
+
+The API supports optional production guardrails while keeping CI and local execution deterministic:
+
+- `GENESIS_AUTH_MODE=api_key` enables API-key authentication.
+- `GENESIS_API_KEYS` maps roles to keys using `founder=key,operator=key,viewer=key`.
+- `GENESIS_REQUIRE_TENANT_HEADER=true` requires `X-Genesis-Tenant-ID`.
+- `GENESIS_TENANT_ID` defines the allowed tenant boundary.
+- Founder and operator roles can create or mutate workflows.
+- Viewer roles can read protected resources.
+- Approval actions require the founder role.
+
+Secrets are not returned by health, integration, dashboard, or readiness endpoints.
 
 ## Production DoD Remaining
 
 The foundation is not the full production v1.0 exit criteria yet. Remaining production-grade work includes:
 
-- Real dashboard UI
-- Production RBAC and tenant isolation
 - Live CRM, accounting, ERP, marketplace, ad, and store integrations
 - Load, performance, security, chaos, and disaster recovery testing
 - Multi-business portfolio dashboards

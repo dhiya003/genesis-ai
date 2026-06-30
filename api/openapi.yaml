@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: Genesis AI Internal API
-  version: 0.5.0
-  description: Sprint 5 API contract for research, product, creative, and marketing workflows.
+  version: 1.0.0-foundation
+  description: Sprint 8 foundation API contract for research, product, creative, marketing, publishing, analytics, and BusinessOS workflows.
 servers:
   - url: http://127.0.0.1:8000
 paths:
@@ -298,7 +298,193 @@ paths:
           description: Content calendar
         '404':
           description: Not found
+  /launch/generate:
+    post:
+      summary: Generate a Business Launch Package from a Marketing Pack
+      responses:
+        '201':
+          description: Business Launch Package created
+        '404':
+          description: Marketing Pack not found
+  /launch/{launchId}:
+    get:
+      summary: Retrieve launch bundle
+      responses:
+        '200':
+          description: Launch bundle
+        '404':
+          description: Not found
+  /launch/{launchId}/package:
+    get:
+      summary: Retrieve Business Launch Package
+      responses:
+        '200':
+          description: Business Launch Package
+        '404':
+          description: Not found
+  /launch/{launchId}/status:
+    get:
+      summary: Retrieve launch status
+      responses:
+        '200':
+          description: Launch status
+        '404':
+          description: Not found
+  /launch/{launchId}/assets:
+    get:
+      summary: Retrieve launch asset manifest
+      responses:
+        '200':
+          description: Launch asset manifest
+        '404':
+          description: Not found
+  /launch/{launchId}/report:
+    get:
+      summary: Retrieve launch report
+      responses:
+        '200':
+          description: Launch report
+        '404':
+          description: Not found
+  /launch/{launchId}/checklist:
+    get:
+      summary: Retrieve launch checklist
+      responses:
+        '200':
+          description: Launch checklist
+        '404':
+          description: Not found
+  /businessos/generate:
+    post:
+      summary: Generate Business Operating Plan from a Business Launch Package
+      responses:
+        '201':
+          description: Business Operating Plan created
+        '404':
+          description: Launch Package not found
+  /businessos/{businessId}:
+    get:
+      summary: Retrieve BusinessOS bundle
+      responses:
+        '200':
+          description: BusinessOS bundle
+        '404':
+          description: Not found
+  /businessos/{businessId}/plan:
+    get:
+      summary: Retrieve Business Operating Plan
+      responses:
+        '200':
+          description: Business Operating Plan
+        '404':
+          description: Not found
+  /businessos/{businessId}/digital-twin:
+    get:
+      summary: Retrieve digital twin
+      responses:
+        '200':
+          description: Digital twin
+        '404':
+          description: Not found
+  /businessos/{businessId}/knowledge-graph:
+    get:
+      summary: Retrieve knowledge graph
+      responses:
+        '200':
+          description: Knowledge graph
+        '404':
+          description: Not found
+  /businessos/{businessId}/decisions:
+    get:
+      summary: Retrieve decision register
+      responses:
+        '200':
+          description: Decision register
+        '404':
+          description: Not found
+  /businessos/{businessId}/simulations:
+    get:
+      summary: Retrieve simulation report
+      responses:
+        '200':
+          description: Simulation report
+        '404':
+          description: Not found
+  /businessos/{businessId}/health:
+    get:
+      summary: Retrieve business health
+      responses:
+        '200':
+          description: Business health
+        '404':
+          description: Not found
+  /businessos/{businessId}/recommendations:
+    get:
+      summary: Retrieve recommendations
+      responses:
+        '200':
+          description: Recommendations
+        '404':
+          description: Not found
+  /businessos/{businessId}/metrics:
+    get:
+      summary: Retrieve metric events
+      responses:
+        '200':
+          description: Business metric events
+        '404':
+          description: Not found
+    post:
+      summary: Ingest business metrics and refresh dashboard, alerts, and knowledge
+      responses:
+        '201':
+          description: Metrics ingested
+        '404':
+          description: Business Operating Plan not found
+  /businessos/{businessId}/dashboard:
+    get:
+      summary: Retrieve BusinessOS JSON dashboard
+      responses:
+        '200':
+          description: Business dashboard
+        '404':
+          description: Not found
+  /businessos/{businessId}/alerts:
+    get:
+      summary: Retrieve BusinessOS alerts
+      responses:
+        '200':
+          description: Business alerts
+        '404':
+          description: Not found
+  /businessos/{businessId}/knowledge:
+    get:
+      summary: Retrieve BusinessOS knowledge entries
+      responses:
+        '200':
+          description: Business knowledge
+        '404':
+          description: Not found
+  /dashboard/businessos/{businessId}:
+    get:
+      summary: Render founder-facing BusinessOS dashboard HTML
+      responses:
+        '200':
+          description: HTML dashboard
+        '404':
+          description: Not found
+  /integrations/status:
+    get:
+      summary: Retrieve sanitized live integration readiness
+      responses:
+        '200':
+          description: Integration readiness without secret values
 components:
+  securitySchemes:
+    GenesisApiKey:
+      type: http
+      scheme: bearer
+      description: Enable with GENESIS_AUTH_MODE=api_key and provide Authorization Bearer token.
   schemas:
     ResearchReport:
       type: object
@@ -309,4 +495,12 @@ components:
     CreativePack:
       type: object
     MarketingPack:
+      type: object
+    BusinessLaunchPackage:
+      type: object
+    BusinessOperatingPlan:
+      type: object
+    BusinessDashboard:
+      type: object
+    IntegrationReadiness:
       type: object

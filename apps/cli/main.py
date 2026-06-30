@@ -8,6 +8,7 @@ from pathlib import Path
 
 from apps.errors import GenesisError, not_found
 from apps.factory.runner import build_launch_pack
+from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
@@ -121,6 +122,10 @@ def build_parser() -> argparse.ArgumentParser:
     drive_upload_parser.add_argument("--name")
     drive_upload_parser.add_argument("--mime-type")
 
+    integrations_parser = subcommands.add_parser("integrations", help="Inspect configured live integration readiness")
+    integrations_subcommands = integrations_parser.add_subparsers(dest="integrations_command", required=True)
+    integrations_subcommands.add_parser("status", help="Print sanitized integration readiness")
+
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
@@ -195,6 +200,10 @@ def main(argv: list[str] | None = None) -> int:
             requirement = _read_text_arg(args.requirement, args.from_file)
             _print_json(build_launch_pack(requirement))
             return 0
+        if args.command == "integrations":
+            if args.integrations_command == "status":
+                _print_json(integration_status())
+                return 0
         if args.command == "submit":
             idea = _read_text_arg(args.idea, args.from_file)
             result = GenesisOrchestrator(_store(args.data_dir)).submit_idea(

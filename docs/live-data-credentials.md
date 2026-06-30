@@ -79,6 +79,33 @@ OAuth client ID and client secret identify the Google app, but they are not enou
 
 Never commit Google OAuth client secrets, access tokens, refresh tokens, service account JSON, or downloaded credential files.
 
+## Implemented production guardrails
+
+API authentication is optional for local development and CI, but production deployments should enable:
+
+```bash
+export GENESIS_AUTH_MODE=api_key
+export GENESIS_API_KEYS=founder=<founder-key>,operator=<operator-key>,viewer=<viewer-key>
+export GENESIS_TENANT_ID=<tenant-id>
+export GENESIS_REQUIRE_TENANT_HEADER=true
+```
+
+Protected requests then require:
+
+```text
+Authorization: Bearer <key>
+X-Genesis-Tenant-ID: <tenant-id>
+```
+
+Do not commit API keys. Rotate them outside Git and inject them through deployment secrets.
+
+Integration readiness can be checked without exposing secrets:
+
+```bash
+python3 -m apps.cli.main integrations status
+curl /integrations/status
+```
+
 Sprint 5 Marketing Engine:
 
 - SEO/search providers: `GOOGLE_SEARCH_CONSOLE_CREDENTIALS`, `SEMRUSH_API_KEY`, `AHREFS_API_KEY`

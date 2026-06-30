@@ -22,6 +22,10 @@ class RuntimeConfig:
     api_port: int = 8000
     worker_queue_name: str = "manual-launch-pack"
     data_dir: str = ".genesis-data"
+    auth_mode: str = "off"
+    api_keys: str = ""
+    tenant_id: str = "default-org"
+    require_tenant_header: bool = False
 
     @property
     def base_url(self) -> str:
@@ -49,6 +53,18 @@ def _read_int(env: Mapping[str, str], key: str, default: int) -> int:
     return value
 
 
+def _read_bool(env: Mapping[str, str], key: str, default: bool) -> bool:
+    raw_value = env.get(key)
+    if raw_value in (None, ""):
+        return default
+    normalized = raw_value.strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"{key} must be a boolean")
+
+
 def load_runtime_config(env: Mapping[str, str] | None = None) -> RuntimeConfig:
     """Load runtime settings from environment variables.
 
@@ -65,4 +81,8 @@ def load_runtime_config(env: Mapping[str, str] | None = None) -> RuntimeConfig:
         api_port=_read_int(source, "GENESIS_API_PORT", 8000),
         worker_queue_name=source.get("GENESIS_WORKER_QUEUE", "manual-launch-pack"),
         data_dir=source.get("GENESIS_DATA_DIR", ".genesis-data"),
+        auth_mode=source.get("GENESIS_AUTH_MODE", "off").lower(),
+        api_keys=source.get("GENESIS_API_KEYS", ""),
+        tenant_id=source.get("GENESIS_TENANT_ID", "default-org"),
+        require_tenant_header=_read_bool(source, "GENESIS_REQUIRE_TENANT_HEADER", False),
     )

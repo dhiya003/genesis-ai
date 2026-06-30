@@ -7,9 +7,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.parse import urlparse
 
+from apps.dashboard import render_business_dashboard
 from apps.errors import GenesisError, bad_request, not_found
+from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
+from apps.security import ApiPrincipal, authenticate_request
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
@@ -28,6 +31,14 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _send_html(self, status_code: int, body: str) -> None:
+        encoded = body.encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(encoded)))
+        self.end_headers()
+        self.wfile.write(encoded)
 
     def _read_json(self) -> dict[str, Any]:
         length = int(self.headers.get("Content-Length", "0"))
@@ -51,6 +62,12 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
     def store(self) -> JsonStore:
         return self.server.store  # type: ignore[attr-defined]
 
+    def _authorize(self, roles: set[str]) -> ApiPrincipal:
+        config: RuntimeConfig = self.server.runtime_config  # type: ignore[attr-defined]
+        principal = authenticate_request(self.headers, config, roles)
+        self.server.current_principal = principal  # type: ignore[attr-defined]
+        return principal
+
     def do_GET(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         config: RuntimeConfig = self.server.runtime_config  # type: ignore[attr-defined]
         parsed = urlparse(self.path)
@@ -61,9 +78,26 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
             if parsed.path == "/version":
                 self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 8 - Genesis BusinessOS Foundation"})
                 return
+            self._authorize({"founder", "operator", "viewer"})
+            if parsed.path == "/integrations/status":
+                self._send_json(200, integration_status())
+                return
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
+                return
+            if parsed.path.startswith("/dashboard/businessos/"):
+                business_id = parsed.path.removeprefix("/dashboard/businessos/").strip("/")
+                if not business_id:
+                    raise bad_request("Business ID is required")
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    dashboard = orchestrator.get_business_dashboard(business_id)
+                    alerts = orchestrator.get_business_alerts(business_id)
+                    knowledge = orchestrator.get_business_knowledge(business_id)
+                    self._send_html(200, render_business_dashboard(dashboard, alerts, knowledge))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Business dashboard not found: {business_id}") from exc
                 return
             if parsed.path.startswith("/brand/"):
                 creative_id = parsed.path.removeprefix("/brand/").strip("/")
@@ -301,6 +335,10 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         parsed = urlparse(self.path)
         try:
+            if parsed.path.startswith("/approvals/"):
+                self._authorize({"founder"})
+            else:
+                self._authorize({"founder", "operator"})
             if parsed.path == "/marketing/generate":
                 payload = self._read_json()
                 creative_id = payload.get("creativeId")

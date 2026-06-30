@@ -19,6 +19,22 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertEqual(config.api_host, "127.0.0.1")
         self.assertEqual(config.api_port, 8000)
         self.assertEqual(config.base_url, "http://127.0.0.1:8000")
+        self.assertEqual(config.auth_mode, "off")
+        self.assertFalse(config.require_tenant_header)
+
+    def test_runtime_config_loads_production_guardrails(self) -> None:
+        config = load_runtime_config(
+            {
+                "GENESIS_AUTH_MODE": "api_key",
+                "GENESIS_API_KEYS": "founder=local-founder-key",
+                "GENESIS_TENANT_ID": "tenant-a",
+                "GENESIS_REQUIRE_TENANT_HEADER": "true",
+            }
+        )
+        self.assertEqual(config.auth_mode, "api_key")
+        self.assertEqual(config.api_keys, "founder=local-founder-key")
+        self.assertEqual(config.tenant_id, "tenant-a")
+        self.assertTrue(config.require_tenant_header)
 
     def test_runtime_config_validates_port(self) -> None:
         with self.assertRaises(ValueError):

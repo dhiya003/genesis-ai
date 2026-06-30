@@ -23,3 +23,11 @@ def not_found(message: str) -> GenesisError:
 
 def bad_request(message: str) -> GenesisError:
     return GenesisError(code="BAD_REQUEST", message=message, status_code=400)
+
+
+def unauthorized(message: str) -> GenesisError:
+    return GenesisError(code="UNAUTHORIZED", message=message, status_code=401)
+
+
+def forbidden(message: str) -> GenesisError:
+    return GenesisError(code="FORBIDDEN", message=message, status_code=403)

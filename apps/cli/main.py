@@ -14,7 +14,7 @@ from apps.storage import JsonStore
 from apps.worker.main import worker_health
 from config import RuntimeConfig, load_runtime_config
 
-CLI_VERSION = "0.5.0"
+CLI_VERSION = "0.6.0"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -83,6 +83,17 @@ def build_parser() -> argparse.ArgumentParser:
     for name in ["pack", "strategy", "seo", "social", "ads", "listing", "launch"]:
         section_parser = marketing_subcommands.add_parser(name, help=f"Retrieve stored marketing {name}")
         section_parser.add_argument("marketing_id")
+        section_parser.add_argument("--data-dir")
+
+    launch_parser = subcommands.add_parser("launch", help="Run and retrieve Sprint 6 Business Execution outputs")
+    launch_subcommands = launch_parser.add_subparsers(dest="launch_command", required=True)
+    launch_generate_parser = launch_subcommands.add_parser("generate", help="Generate a Business Launch Package from a stored Marketing Pack")
+    launch_generate_parser.add_argument("marketing_id")
+    launch_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="manual")
+    launch_generate_parser.add_argument("--data-dir")
+    for name in ["package", "status", "assets", "report", "checklist"]:
+        section_parser = launch_subcommands.add_parser(name, help=f"Retrieve stored launch {name}")
+        section_parser.add_argument("launch_id")
         section_parser.add_argument("--data-dir")
 
     drive_parser = subcommands.add_parser("drive", help="Google Drive integration utilities")
@@ -160,7 +171,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "version":
             config = load_runtime_config()
-            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 5 - Marketing Engine"})
+            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 6 - Business Execution & Publishing Engine"})
             return 0
         if args.command == "run":
             requirement = _read_text_arg(args.requirement, args.from_file)
@@ -312,6 +323,29 @@ def main(argv: list[str] | None = None) -> int:
             if args.drive_command == "upload":
                 client = GoogleDriveClient(google_drive_config_from_env())
                 _print_json(client.upload_file(Path(args.path), name=args.name, mime_type=args.mime_type))
+                return 0
+        if args.command == "launch":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.launch_command == "generate":
+                try:
+                    _print_json(orchestrator.generate_business_launch_package(args.marketing_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Marketing Pack not found for marketing {args.marketing_id}") from exc
+                return 0
+            if args.launch_command == "package":
+                _print_json(orchestrator.get_business_launch_package(args.launch_id))
+                return 0
+            if args.launch_command == "status":
+                _print_json(orchestrator.get_business_launch_status(args.launch_id))
+                return 0
+            if args.launch_command == "assets":
+                _print_json(orchestrator.get_business_launch_assets(args.launch_id))
+                return 0
+            if args.launch_command == "report":
+                _print_json(orchestrator.get_business_launch_report(args.launch_id))
+                return 0
+            if args.launch_command == "checklist":
+                _print_json(orchestrator.get_business_launch_checklist(args.launch_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

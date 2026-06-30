@@ -140,6 +140,29 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     calendar_alias = json.loads(response.read().decode("utf-8"))
 
+                launch_request = request.Request(
+                    f"http://{host}:{port}/launch/generate",
+                    data=json.dumps({"marketingId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(launch_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    launch_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/launch/{project_id}/package", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    launch_package = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/launch/{project_id}/status", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    launch_status = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/launch/{project_id}/assets", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    launch_assets = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/launch/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    launch_report = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -149,7 +172,7 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(project_payload["tasks"])
                 self.assertTrue(project_payload["deliverables"])
                 self.assertTrue(project_payload["auditLogs"])
-                self.assertEqual(version["version"], "0.5.0")
+                self.assertEqual(version["version"], "0.6.0")
                 self.assertEqual(product_run["productDefinition"]["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["projectId"], project_id)
@@ -174,6 +197,11 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(marketing_seo["keywords"])
                 self.assertTrue(campaigns_alias["advertisingPlan"]["metaAds"])
                 self.assertTrue(calendar_alias["instagramCalendar"])
+                self.assertEqual(launch_run["businessLaunchPackage"]["reportType"], "BUSINESS_LAUNCH_PACKAGE")
+                self.assertEqual(launch_package["reportType"], "BUSINESS_LAUNCH_PACKAGE")
+                self.assertIn(launch_status["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})
+                self.assertTrue(launch_assets["assets"])
+                self.assertTrue(launch_report["channelsPrepared"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

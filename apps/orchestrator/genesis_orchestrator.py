@@ -11,6 +11,7 @@ from apps.audit import now_iso, record_audit
 from apps.creative import CreativeDepartment
 from apps.marketing import MarketingDepartment
 from apps.product import ProductDepartment
+from apps.publishing import PublishingDepartment
 from apps.research import ResearchDepartment
 from apps.storage import JsonStore
 from apps.workflow import ApprovalManager, WorkflowEngine
@@ -387,6 +388,87 @@ class GenesisOrchestrator:
 
     def get_marketing_launch(self, marketing_id: str) -> dict[str, Any]:
         return self.store.get_launch_report(marketing_id)
+
+    def generate_business_launch_package(self, marketing_id: str, approval_mode: str = "manual") -> dict[str, Any]:
+        marketing_pack = self.store.get_marketing_pack(marketing_id)
+        creative_pack = self.store.get_creative_pack(marketing_pack["creativeId"])
+        product_blueprint = self.store.get_product_blueprint(marketing_pack["productId"])
+        project = self.store.get_project(marketing_pack["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "BUSINESS_LAUNCH_PACKAGE")
+        workflow = engine.plan(workflow, reason="orchestrator selected Publishing and Business Execution Engine")
+        task = self._create_task(project["id"], workflow["id"], "PUBLISHING_ENGINE", "Generate Sprint 6 Business Launch Package")
+        LOGGER.info("orchestrator routed project to publishing engine", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "BUSINESS_LAUNCH_PACKAGE"})
+
+        department = PublishingDepartment(self.store)
+
+        def run_publishing(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute(project, current_workflow, product_blueprint, creative_pack, marketing_pack)
+
+        completed_workflow = engine.run(workflow, run_publishing)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "BUSINESS_LAUNCH_PACKAGE_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["launchId"] = marketing_id
+            project["launchWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "BUSINESS_LAUNCH_PACKAGE"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "BUSINESS_LAUNCH_PACKAGE", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_BUSINESS_LAUNCH_APPROVAL", mode=approval_mode)
+            project["launchApprovalId"] = approval["id"]
+            project["launchApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_BUSINESS_LAUNCH_APPROVAL"
+        else:
+            project["status"] = "BUSINESS_LAUNCH_PACKAGE_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.business_launch_package_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "launch": {"id": marketing_id, "projectId": project["id"]},
+            "businessLaunchPackage": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_business_launch(self, launch_id: str) -> dict[str, Any]:
+        launch_package = self.store.get_business_launch_package(launch_id)
+        return {
+            "launch": {"id": launch_id, "projectId": launch_package["projectId"], "status": launch_package["launchStatus"]},
+            "businessLaunchPackage": launch_package,
+            "checklist": self.store.get_launch_checklist(launch_id),
+            "publishingPlan": self.store.get_publishing_plan(launch_id),
+            "assetManifest": self.store.get_asset_manifest(launch_id),
+            "launchReport": self.store.get_business_launch_report(launch_id),
+        }
+
+    def get_business_launch_package(self, launch_id: str) -> dict[str, Any]:
+        return self.store.get_business_launch_package(launch_id)
+
+    def get_business_launch_status(self, launch_id: str) -> dict[str, Any]:
+        launch_package = self.store.get_business_launch_package(launch_id)
+        return {
+            "launchId": launch_id,
+            "projectId": launch_package["projectId"],
+            "status": launch_package["launchStatus"],
+            "validation": launch_package["launchValidation"],
+            "approvalPlan": launch_package["approvalPlan"],
+            "nextActions": launch_package["nextActions"],
+        }
+
+    def get_business_launch_assets(self, launch_id: str) -> dict[str, Any]:
+        return self.store.get_asset_manifest(launch_id)
+
+    def get_business_launch_report(self, launch_id: str) -> dict[str, Any]:
+        return self.store.get_business_launch_report(launch_id)
+
+    def get_business_launch_checklist(self, launch_id: str) -> dict[str, Any]:
+        return self.store.get_launch_checklist(launch_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

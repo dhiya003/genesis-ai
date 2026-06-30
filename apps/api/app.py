@@ -1,4 +1,4 @@
-"""Minimal Genesis AI API runtime with Sprint 3 product intelligence endpoints."""
+"""Minimal Genesis AI API runtime with BusinessOS sprint endpoints."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
-API_VERSION = "0.5.0"
+API_VERSION = "0.6.0"
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
@@ -59,7 +59,7 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 self._send_json(200, config.health_payload("api"))
                 return
             if parsed.path == "/version":
-                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 5 - Marketing Engine"})
+                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 6 - Business Execution & Publishing Engine"})
                 return
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()
@@ -132,6 +132,32 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"Marketing pack not found: {marketing_id}") from exc
+            if parsed.path.startswith("/launch/"):
+                launch_path = parsed.path.removeprefix("/launch/").strip("/")
+                parts = [part for part in launch_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Launch ID is required")
+                launch_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_business_launch(launch_id))
+                    elif section == "package":
+                        self._send_json(200, orchestrator.get_business_launch_package(launch_id))
+                    elif section == "status":
+                        self._send_json(200, orchestrator.get_business_launch_status(launch_id))
+                    elif section == "assets":
+                        self._send_json(200, orchestrator.get_business_launch_assets(launch_id))
+                    elif section == "report":
+                        self._send_json(200, orchestrator.get_business_launch_report(launch_id))
+                    elif section == "checklist":
+                        self._send_json(200, orchestrator.get_business_launch_checklist(launch_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Business launch package not found: {launch_id}") from exc
             if parsed.path.startswith("/creative/"):
                 creative_path = parsed.path.removeprefix("/creative/").strip("/")
                 parts = [part for part in creative_path.split("/") if part]
@@ -246,6 +272,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).generate_marketing_pack(creative_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/launch/generate":
+                payload = self._read_json()
+                marketing_id = payload.get("marketingId")
+                if not isinstance(marketing_id, str):
+                    raise bad_request("marketingId must be a string")
+                approval_mode = payload.get("approvalMode", "manual")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_business_launch_package(marketing_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path == "/creative/generate":

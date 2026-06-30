@@ -43,7 +43,7 @@ class ApiCliResearchTests(unittest.TestCase):
             version_output = StringIO()
             with patch("sys.stdout", version_output):
                 self.assertEqual(cli_main(["version"]), 0)
-            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.5.0")
+            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.6.0")
 
             product_output = StringIO()
             with patch("sys.stdout", product_output):
@@ -96,6 +96,17 @@ class ApiCliResearchTests(unittest.TestCase):
             with patch("sys.stdout", marketing_seo_output):
                 self.assertEqual(cli_main(["marketing", "seo", project_id, "--data-dir", directory]), 0)
             self.assertTrue(json.loads(marketing_seo_output.getvalue())["keywords"])
+
+            launch_output = StringIO()
+            with patch("sys.stdout", launch_output):
+                self.assertEqual(cli_main(["launch", "generate", project_id, "--data-dir", directory]), 0)
+            launch_run = json.loads(launch_output.getvalue())
+            self.assertEqual(launch_run["businessLaunchPackage"]["reportType"], "BUSINESS_LAUNCH_PACKAGE")
+
+            launch_status_output = StringIO()
+            with patch("sys.stdout", launch_status_output):
+                self.assertEqual(cli_main(["launch", "status", project_id, "--data-dir", directory]), 0)
+            self.assertIn(json.loads(launch_status_output.getvalue())["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})
 
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

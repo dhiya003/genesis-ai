@@ -47,6 +47,11 @@ class JsonStore:
         self.ads_reports_dir = self.root / "ads_reports"
         self.listing_reports_dir = self.root / "listing_reports"
         self.launch_reports_dir = self.root / "launch_reports"
+        self.business_launch_packages_dir = self.root / "business_launch_packages"
+        self.business_launch_checklists_dir = self.root / "business_launch_checklists"
+        self.publishing_plans_dir = self.root / "publishing_plans"
+        self.asset_manifests_dir = self.root / "asset_manifests"
+        self.business_launch_reports_dir = self.root / "business_launch_reports"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -83,6 +88,11 @@ class JsonStore:
             self.ads_reports_dir,
             self.listing_reports_dir,
             self.launch_reports_dir,
+            self.business_launch_packages_dir,
+            self.business_launch_checklists_dir,
+            self.publishing_plans_dir,
+            self.asset_manifests_dir,
+            self.business_launch_reports_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -331,6 +341,36 @@ class JsonStore:
 
     def get_launch_report(self, marketing_id: str) -> dict[str, Any]:
         return self._read(self.launch_reports_dir / f"{marketing_id}.json")
+
+    def save_business_launch_package(self, launch_package: dict[str, Any]) -> None:
+        self._write(self.business_launch_packages_dir / f"{launch_package['launchId']}.json", launch_package)
+
+    def get_business_launch_package(self, launch_id: str) -> dict[str, Any]:
+        return self._read(self.business_launch_packages_dir / f"{launch_id}.json")
+
+    def save_launch_checklist(self, launch_id: str, checklist: dict[str, Any] | list[dict[str, Any]]) -> None:
+        self._write(self.business_launch_checklists_dir / f"{launch_id}.json", {"launchId": launch_id, "checklist": checklist})
+
+    def get_launch_checklist(self, launch_id: str) -> dict[str, Any]:
+        return self._read(self.business_launch_checklists_dir / f"{launch_id}.json")
+
+    def save_publishing_plan(self, launch_id: str, plan: dict[str, Any]) -> None:
+        self._write(self.publishing_plans_dir / f"{launch_id}.json", plan)
+
+    def get_publishing_plan(self, launch_id: str) -> dict[str, Any]:
+        return self._read(self.publishing_plans_dir / f"{launch_id}.json")
+
+    def save_asset_manifest(self, launch_id: str, manifest: dict[str, Any]) -> None:
+        self._write(self.asset_manifests_dir / f"{launch_id}.json", manifest)
+
+    def get_asset_manifest(self, launch_id: str) -> dict[str, Any]:
+        return self._read(self.asset_manifests_dir / f"{launch_id}.json")
+
+    def save_business_launch_report(self, launch_id: str, report: dict[str, Any]) -> None:
+        self._write(self.business_launch_reports_dir / f"{launch_id}.json", report)
+
+    def get_business_launch_report(self, launch_id: str) -> dict[str, Any]:
+        return self._read(self.business_launch_reports_dir / f"{launch_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

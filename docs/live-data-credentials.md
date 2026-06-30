@@ -26,7 +26,7 @@ Recommended optional credentials:
 | Supplier research | IndiaMART, Alibaba, TradeIndia, ExportersIndia where API access is approved | `INDIAMART_API_KEY`, `ALIBABA_API_KEY`, `TRADEINDIA_API_KEY`, `EXPORTERSINDIA_API_KEY` |
 | Shipping estimates | Shiprocket, Delhivery, India Post where available | `SHIPROCKET_EMAIL`, `SHIPROCKET_PASSWORD`, `DELHIVERY_API_KEY`, `INDIA_POST_API_KEY` |
 | Currency and tax assumptions | Exchange-rate provider, GST/tax source if used | `EXCHANGE_RATE_API_KEY`, `GST_DATA_API_KEY` |
-| Storage/docs | Google Drive, Google Sheets | `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_DRIVE_FOLDER_ID`, `GOOGLE_SHEETS_ID` |
+| Storage/docs | Google Drive, Google Sheets | `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_DRIVE_ACCESS_TOKEN`, `GOOGLE_DRIVE_REFRESH_TOKEN`, `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_DRIVE_FOLDER_ID`, `GOOGLE_SHEETS_ID` |
 
 ## Implemented live search backend
 
@@ -63,6 +63,21 @@ export GENESIS_OPENAI_IMAGE_LIMIT=3
 ```
 
 `GENESIS_OPENAI_IMAGE_LIMIT` controls how many premium PNG assets are generated per Creative Pack. Remaining assets are still generated deterministically so the workflow stays complete.
+
+## Implemented Google Drive upload boundary
+
+Google Drive upload is supported as an optional runtime integration for exporting generated assets, docs, and launch-pack files.
+
+```bash
+export GOOGLE_DRIVE_ACCESS_TOKEN=<oauth-access-token>
+export GOOGLE_DRIVE_FOLDER_ID=<optional-folder-id>
+
+python3 -m apps.cli.main drive upload .genesis-data/creative_assets/<creative-id>/product-hero.png --name product-hero.png
+```
+
+OAuth client ID and client secret identify the Google app, but they are not enough to upload files by themselves. A user consent flow must exchange them for an access token and, for longer-running automation, a refresh token. Genesis currently implements the upload boundary using `GOOGLE_DRIVE_ACCESS_TOKEN`; refresh-token automation can be added when the OAuth consent flow is introduced.
+
+Never commit Google OAuth client secrets, access tokens, refresh tokens, service account JSON, or downloaded credential files.
 
 Sprint 5 Marketing Engine:
 

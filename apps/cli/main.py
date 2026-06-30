@@ -85,6 +85,13 @@ def build_parser() -> argparse.ArgumentParser:
         section_parser.add_argument("marketing_id")
         section_parser.add_argument("--data-dir")
 
+    drive_parser = subcommands.add_parser("drive", help="Google Drive integration utilities")
+    drive_subcommands = drive_parser.add_subparsers(dest="drive_command", required=True)
+    drive_upload_parser = drive_subcommands.add_parser("upload", help="Upload a local file to Google Drive")
+    drive_upload_parser.add_argument("path")
+    drive_upload_parser.add_argument("--name")
+    drive_upload_parser.add_argument("--mime-type")
+
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
@@ -298,6 +305,13 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.marketing_command == "launch":
                 _print_json(orchestrator.get_marketing_launch(args.marketing_id))
+                return 0
+        if args.command == "drive":
+            from apps.integrations.google_drive import GoogleDriveClient, google_drive_config_from_env
+
+            if args.drive_command == "upload":
+                client = GoogleDriveClient(google_drive_config_from_env())
+                _print_json(client.upload_file(Path(args.path), name=args.name, mime_type=args.mime_type))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

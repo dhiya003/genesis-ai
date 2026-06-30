@@ -1,20 +1,86 @@
 {
   "reportType": "MARKETING_PACK",
+  "version": "0.5.0",
   "projectId": "00000000-0000-0000-0000-000000000001",
-  "version": "1.0",
-  "seo": {
-    "keywords": ["coffee t-shirt", "coffee lover gift", "coffee quote tee"],
-    "titles": ["Coffee Lover Oversized T-Shirt"],
-    "descriptions": ["A clean everyday tee for people who love coffee culture."]
+  "marketingId": "00000000-0000-0000-0000-000000000001",
+  "creativeId": "00000000-0000-0000-0000-000000000001",
+  "productId": "00000000-0000-0000-0000-000000000001",
+  "workflowId": "workflow-marketing-fixture",
+  "department": "MARKETING",
+  "executiveSummary": "Genesis Marketing Engine generated a launch-ready Marketing Pack for LumaLearn.",
+  "marketingStrategy": {
+    "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
+    "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
+    "channelStrategy": { "instagram": "Trust and discovery", "marketplace": "Conversion" },
+    "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion"]
   },
-  "social": {
-    "instagram": {
-      "caption": "For the ones who start every day with coffee."
-    },
-    "facebook": {},
-    "hashtags": ["coffee", "coffeelover", "tshirt"]
+  "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
+  "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
+  "seoPlan": {
+    "keywords": ["wooden educational toys India", "toys for 3 year olds"],
+    "contentTopics": ["How screen-free toys build early logic"],
+    "titles": ["Premium Wooden Logic Toys for Ages 3-5"],
+    "metaDescriptions": ["Explore premium wooden logic cubes for children aged 3-5."]
   },
-  "launchCalendar": [],
-  "actionPrompts": ["Ask followers to vote on the first design"],
-  "confidence": 0.7
+  "socialMediaPlan": {
+    "instagramCalendar": [{ "day": 1, "format": "carousel", "theme": "Problem awareness" }],
+    "captions": ["Screen-free play, made a little smarter."],
+    "hashtags": ["woodentoysindia", "educationaltoys"]
+  },
+  "advertisingPlan": {
+    "metaAds": [{ "hook": "A premium wooden toy that teaches before it explains.", "cta": "Join the founding batch" }],
+    "googleAds": [{ "headline": "Premium Wooden Learning Toys" }],
+    "audiences": ["Parents 25-40 in Indian metros"],
+    "testingPlan": ["Test learning benefit hook vs gifting hook"]
+  },
+  "marketplaceListing": {
+    "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+    "bullets": ["Builds logic, pattern recognition, and motor skills"],
+    "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+    "imageOrder": ["Hero", "What's in the box"]
+  },
+  "landingPageCopy": {
+    "hero": { "headline": "Premium wooden play for curious little minds", "cta": "Join the founding batch" },
+    "sections": ["Problem", "How it works"],
+    "cta": "Reserve early access",
+    "faq": [{ "question": "Is it certified?", "answer": "Certification claims are reviewed before production." }]
+  },
+  "emailCampaign": {
+    "subjects": ["A calmer way to build early logic"],
+    "sequence": [{ "day": 0, "purpose": "Waitlist welcome", "body": "Thanks for joining the founding batch list." }]
+  },
+  "whatsappCampaign": {
+    "broadcasts": ["Hi, our premium wooden logic toy founding batch is opening soon."],
+    "replyScripts": [{ "intent": "age", "reply": "Designed for children aged 3-5 with adult supervision." }]
+  },
+  "influencerStrategy": {
+    "creatorProfiles": ["Montessori parent educator"],
+    "outreachScript": "Hi, we are launching a premium screen-free wooden logic toy for ages 3-5.",
+    "collaborationPlan": ["Send sample after safety review"]
+  },
+  "hashtagPlan": ["woodentoysindia", "educationaltoys"],
+  "launchPlan": ["Finalize founder approval", "Open waitlist", "Run founding batch campaign"],
+  "campaignQaReport": {
+    "checks": [{ "check": "Strategy aligns with creative pack", "status": "PASS" }],
+    "launchPlan": ["Finalize founder approval", "Open waitlist"],
+    "approvalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
+    "risks": ["Compliance-sensitive claims need review before publishing."]
+  },
+  "founderApprovalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
+  "risks": [{ "risk": "Marketing Pack does not publish or spend budget in Sprint 5 MVP.", "severity": "LOW", "mitigation": "Use Sprint 6 Publishing Engine." }],
+  "assumptions": ["Sprint 5 MVP produces deterministic campaign plans and copy-ready assets."],
+  "nextActions": ["Founder approves marketing positioning and launch calendar."],
+  "employeeOutputs": [
+    { "employeeId": "EMP-301" },
+    { "employeeId": "EMP-302" },
+    { "employeeId": "EMP-303" },
+    { "employeeId": "EMP-304" },
+    { "employeeId": "EMP-305" },
+    { "employeeId": "EMP-306" },
+    { "employeeId": "EMP-307" },
+    { "employeeId": "EMP-308" },
+    { "employeeId": "EMP-309" },
+    { "employeeId": "EMP-310" }
+  ],
+  "overallScore": 83
 }

@@ -20,6 +20,7 @@ REQUIRED_PATHS = [
     "apps/creative/department.py",
     "apps/marketing/department.py",
     "apps/publishing/department.py",
+    "apps/businessos/runtime.py",
     "apps/employees/research.py",
     "apps/workflow/engine.py",
     "apps/storage/json_store.py",
@@ -31,6 +32,7 @@ REQUIRED_PATHS = [
     "scripts/validate_creative_pack.py",
     "scripts/validate_marketing_pack.py",
     "scripts/validate_business_launch_package.py",
+    "scripts/validate_business_operating_plan.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
@@ -39,6 +41,7 @@ REQUIRED_PATHS = [
     "tests/test_creative_pack.py",
     "tests/test_marketing_pack.py",
     "tests/test_publishing_engine.py",
+    "tests/test_businessos_runtime.py",
     "api/schemas/research-report-v2.schema.json",
     "api/schemas/product-definition.schema.json",
     "api/schemas/product-blueprint.schema.json",
@@ -57,6 +60,7 @@ REQUIRED_PATHS = [
     "docs/sprint-5-definition-of-done.md",
     "docs/sprint-6-definition-of-done.md",
     "docs/sprint-7-kickoff.md",
+    "docs/sprint-8-definition-of-done.md",
 ]
 
 JSON_PATHS = [

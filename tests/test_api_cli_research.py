@@ -43,7 +43,7 @@ class ApiCliResearchTests(unittest.TestCase):
             version_output = StringIO()
             with patch("sys.stdout", version_output):
                 self.assertEqual(cli_main(["version"]), 0)
-            self.assertEqual(json.loads(version_output.getvalue())["version"], "0.6.0")
+            self.assertEqual(json.loads(version_output.getvalue())["version"], "1.0.0-foundation")
 
             product_output = StringIO()
             with patch("sys.stdout", product_output):
@@ -107,6 +107,17 @@ class ApiCliResearchTests(unittest.TestCase):
             with patch("sys.stdout", launch_status_output):
                 self.assertEqual(cli_main(["launch", "status", project_id, "--data-dir", directory]), 0)
             self.assertIn(json.loads(launch_status_output.getvalue())["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})
+
+            businessos_output = StringIO()
+            with patch("sys.stdout", businessos_output):
+                self.assertEqual(cli_main(["businessos", "generate", project_id, "--data-dir", directory]), 0)
+            businessos_run = json.loads(businessos_output.getvalue())
+            self.assertEqual(businessos_run["businessOperatingPlan"]["reportType"], "BUSINESS_OPERATING_PLAN")
+
+            health_output = StringIO()
+            with patch("sys.stdout", health_output):
+                self.assertEqual(cli_main(["businessos", "health", project_id, "--data-dir", directory]), 0)
+            self.assertGreaterEqual(json.loads(health_output.getvalue())["overallBusinessHealthScore"], 0)
 
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

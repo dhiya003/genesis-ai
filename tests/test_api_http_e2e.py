@@ -163,6 +163,29 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     launch_report = json.loads(response.read().decode("utf-8"))
 
+                businessos_request = request.Request(
+                    f"http://{host}:{port}/businessos/generate",
+                    data=json.dumps({"launchId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(businessos_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    businessos_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/plan", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    businessos_plan = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/digital-twin", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    digital_twin = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/health", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    business_health = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/businessos/{project_id}/recommendations", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    recommendations = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -172,7 +195,7 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(project_payload["tasks"])
                 self.assertTrue(project_payload["deliverables"])
                 self.assertTrue(project_payload["auditLogs"])
-                self.assertEqual(version["version"], "0.6.0")
+                self.assertEqual(version["version"], "1.0.0-foundation")
                 self.assertEqual(product_run["productDefinition"]["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["projectId"], project_id)
@@ -202,6 +225,11 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertIn(launch_status["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})
                 self.assertTrue(launch_assets["assets"])
                 self.assertTrue(launch_report["channelsPrepared"])
+                self.assertEqual(businessos_run["businessOperatingPlan"]["reportType"], "BUSINESS_OPERATING_PLAN")
+                self.assertEqual(businessos_plan["reportType"], "BUSINESS_OPERATING_PLAN")
+                self.assertTrue(digital_twin["products"])
+                self.assertGreaterEqual(business_health["overallBusinessHealthScore"], 0)
+                self.assertTrue(recommendations["recommendations"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

@@ -13,7 +13,7 @@ from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
-API_VERSION = "0.6.0"
+API_VERSION = "1.0.0-foundation"
 
 
 class GenesisApiHandler(BaseHTTPRequestHandler):
@@ -59,7 +59,7 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 self._send_json(200, config.health_payload("api"))
                 return
             if parsed.path == "/version":
-                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 6 - Business Execution & Publishing Engine"})
+                self._send_json(200, {"app": config.app_name, "version": API_VERSION, "release": "Sprint 8 - Genesis BusinessOS Foundation"})
                 return
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()
@@ -158,6 +158,36 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"Business launch package not found: {launch_id}") from exc
+            if parsed.path.startswith("/businessos/"):
+                business_path = parsed.path.removeprefix("/businessos/").strip("/")
+                parts = [part for part in business_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Business ID is required")
+                business_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_businessos(business_id))
+                    elif section == "plan":
+                        self._send_json(200, orchestrator.get_business_operating_plan(business_id))
+                    elif section == "digital-twin":
+                        self._send_json(200, orchestrator.get_digital_twin(business_id))
+                    elif section == "knowledge-graph":
+                        self._send_json(200, orchestrator.get_knowledge_graph(business_id))
+                    elif section == "decisions":
+                        self._send_json(200, orchestrator.get_decisions(business_id))
+                    elif section == "simulations":
+                        self._send_json(200, orchestrator.get_simulations(business_id))
+                    elif section == "health":
+                        self._send_json(200, orchestrator.get_business_health(business_id))
+                    elif section == "recommendations":
+                        self._send_json(200, orchestrator.get_recommendations(business_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"BusinessOS plan not found: {business_id}") from exc
             if parsed.path.startswith("/creative/"):
                 creative_path = parsed.path.removeprefix("/creative/").strip("/")
                 parts = [part for part in creative_path.split("/") if part]
@@ -283,6 +313,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).generate_business_launch_package(marketing_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/businessos/generate":
+                payload = self._read_json()
+                launch_id = payload.get("launchId")
+                if not isinstance(launch_id, str):
+                    raise bad_request("launchId must be a string")
+                approval_mode = payload.get("approvalMode", "manual")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_business_operating_plan(launch_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path == "/creative/generate":

@@ -8,6 +8,7 @@ from typing import Any
 from uuid import uuid4
 
 from apps.audit import now_iso, record_audit
+from apps.businessos import BusinessOSRuntime
 from apps.creative import CreativeDepartment
 from apps.marketing import MarketingDepartment
 from apps.product import ProductDepartment
@@ -469,6 +470,85 @@ class GenesisOrchestrator:
 
     def get_business_launch_checklist(self, launch_id: str) -> dict[str, Any]:
         return self.store.get_launch_checklist(launch_id)
+
+    def generate_business_operating_plan(self, launch_id: str, approval_mode: str = "manual") -> dict[str, Any]:
+        launch_package = self.store.get_business_launch_package(launch_id)
+        project = self.store.get_project(launch_package["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "BUSINESS_OPERATING_PLAN")
+        workflow = engine.plan(workflow, reason="orchestrator selected Genesis CEO Runtime")
+        task = self._create_task(project["id"], workflow["id"], "BUSINESS_OS", "Generate Sprint 8 Business Operating Plan")
+        LOGGER.info("orchestrator routed project to businessos runtime", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "BUSINESS_OPERATING_PLAN"})
+
+        runtime = BusinessOSRuntime(self.store)
+
+        def run_businessos(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return runtime.execute(project, current_workflow, launch_package)
+
+        completed_workflow = engine.run(workflow, run_businessos)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "BUSINESS_OPERATING_PLAN_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["businessId"] = project["id"]
+            project["businessOSWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "BUSINESS_OPERATING_PLAN"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "BUSINESS_OPERATING_PLAN", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_BUSINESS_OS_APPROVAL", mode=approval_mode)
+            project["businessOSApprovalId"] = approval["id"]
+            project["businessOSApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_BUSINESS_OS_APPROVAL"
+        else:
+            project["status"] = "BUSINESS_OPERATING_PLAN_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.business_operating_plan_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "business": {"id": project["id"], "projectId": project["id"]},
+            "businessOperatingPlan": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_businessos(self, business_id: str) -> dict[str, Any]:
+        plan = self.store.get_business_operating_plan(business_id)
+        return {
+            "business": {"id": business_id, "projectId": plan["projectId"], "status": plan["digitalTwin"]["currentState"]},
+            "businessOperatingPlan": plan,
+            "digitalTwin": self.store.get_digital_twin(business_id),
+            "knowledgeGraph": self.store.get_knowledge_graph(business_id),
+            "decisionRegister": self.store.get_decision_register(business_id),
+            "simulations": self.store.get_simulation_report(business_id),
+            "businessHealth": self.store.get_business_health_report(business_id),
+            "recommendations": self.store.get_recommendation_report(business_id),
+        }
+
+    def get_business_operating_plan(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_business_operating_plan(business_id)
+
+    def get_digital_twin(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_digital_twin(business_id)
+
+    def get_knowledge_graph(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_knowledge_graph(business_id)
+
+    def get_decisions(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_decision_register(business_id)
+
+    def get_simulations(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_simulation_report(business_id)
+
+    def get_business_health(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_business_health_report(business_id)
+
+    def get_recommendations(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_recommendation_report(business_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

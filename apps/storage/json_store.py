@@ -52,6 +52,13 @@ class JsonStore:
         self.publishing_plans_dir = self.root / "publishing_plans"
         self.asset_manifests_dir = self.root / "asset_manifests"
         self.business_launch_reports_dir = self.root / "business_launch_reports"
+        self.business_operating_plans_dir = self.root / "business_operating_plans"
+        self.digital_twins_dir = self.root / "digital_twins"
+        self.knowledge_graphs_dir = self.root / "knowledge_graphs"
+        self.decision_registers_dir = self.root / "decision_registers"
+        self.simulation_reports_dir = self.root / "simulation_reports"
+        self.business_health_reports_dir = self.root / "business_health_reports"
+        self.recommendation_reports_dir = self.root / "recommendation_reports"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -93,6 +100,13 @@ class JsonStore:
             self.publishing_plans_dir,
             self.asset_manifests_dir,
             self.business_launch_reports_dir,
+            self.business_operating_plans_dir,
+            self.digital_twins_dir,
+            self.knowledge_graphs_dir,
+            self.decision_registers_dir,
+            self.simulation_reports_dir,
+            self.business_health_reports_dir,
+            self.recommendation_reports_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -371,6 +385,48 @@ class JsonStore:
 
     def get_business_launch_report(self, launch_id: str) -> dict[str, Any]:
         return self._read(self.business_launch_reports_dir / f"{launch_id}.json")
+
+    def save_business_operating_plan(self, plan: dict[str, Any]) -> None:
+        self._write(self.business_operating_plans_dir / f"{plan['businessId']}.json", plan)
+
+    def get_business_operating_plan(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_operating_plans_dir / f"{business_id}.json")
+
+    def save_digital_twin(self, business_id: str, digital_twin: dict[str, Any]) -> None:
+        self._write(self.digital_twins_dir / f"{business_id}.json", digital_twin)
+
+    def get_digital_twin(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.digital_twins_dir / f"{business_id}.json")
+
+    def save_knowledge_graph(self, business_id: str, knowledge_graph: dict[str, Any]) -> None:
+        self._write(self.knowledge_graphs_dir / f"{business_id}.json", knowledge_graph)
+
+    def get_knowledge_graph(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.knowledge_graphs_dir / f"{business_id}.json")
+
+    def save_decision_register(self, business_id: str, decision_register: dict[str, Any]) -> None:
+        self._write(self.decision_registers_dir / f"{business_id}.json", decision_register)
+
+    def get_decision_register(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.decision_registers_dir / f"{business_id}.json")
+
+    def save_simulation_report(self, business_id: str, simulation_report: dict[str, Any]) -> None:
+        self._write(self.simulation_reports_dir / f"{business_id}.json", simulation_report)
+
+    def get_simulation_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.simulation_reports_dir / f"{business_id}.json")
+
+    def save_business_health_report(self, business_id: str, health_report: dict[str, Any]) -> None:
+        self._write(self.business_health_reports_dir / f"{business_id}.json", health_report)
+
+    def get_business_health_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_health_reports_dir / f"{business_id}.json")
+
+    def save_recommendation_report(self, business_id: str, recommendation_report: dict[str, Any]) -> None:
+        self._write(self.recommendation_reports_dir / f"{business_id}.json", recommendation_report)
+
+    def get_recommendation_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.recommendation_reports_dir / f"{business_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

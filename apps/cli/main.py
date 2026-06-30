@@ -14,7 +14,7 @@ from apps.storage import JsonStore
 from apps.worker.main import worker_health
 from config import RuntimeConfig, load_runtime_config
 
-CLI_VERSION = "0.6.0"
+CLI_VERSION = "1.0.0-foundation"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -96,6 +96,17 @@ def build_parser() -> argparse.ArgumentParser:
         section_parser.add_argument("launch_id")
         section_parser.add_argument("--data-dir")
 
+    businessos_parser = subcommands.add_parser("businessos", help="Run and retrieve Sprint 8 BusinessOS outputs")
+    businessos_subcommands = businessos_parser.add_subparsers(dest="businessos_command", required=True)
+    businessos_generate_parser = businessos_subcommands.add_parser("generate", help="Generate a Business Operating Plan from a stored Business Launch Package")
+    businessos_generate_parser.add_argument("launch_id")
+    businessos_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="manual")
+    businessos_generate_parser.add_argument("--data-dir")
+    for name in ["plan", "digital-twin", "knowledge-graph", "decisions", "simulations", "health", "recommendations"]:
+        section_parser = businessos_subcommands.add_parser(name, help=f"Retrieve stored BusinessOS {name}")
+        section_parser.add_argument("business_id")
+        section_parser.add_argument("--data-dir")
+
     drive_parser = subcommands.add_parser("drive", help="Google Drive integration utilities")
     drive_subcommands = drive_parser.add_subparsers(dest="drive_command", required=True)
     drive_upload_parser = drive_subcommands.add_parser("upload", help="Upload a local file to Google Drive")
@@ -171,7 +182,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "version":
             config = load_runtime_config()
-            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 6 - Business Execution & Publishing Engine"})
+            _print_json({"app": config.app_name, "version": CLI_VERSION, "release": "Sprint 8 - Genesis BusinessOS Foundation"})
             return 0
         if args.command == "run":
             requirement = _read_text_arg(args.requirement, args.from_file)
@@ -346,6 +357,35 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.launch_command == "checklist":
                 _print_json(orchestrator.get_business_launch_checklist(args.launch_id))
+                return 0
+        if args.command == "businessos":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.businessos_command == "generate":
+                try:
+                    _print_json(orchestrator.generate_business_operating_plan(args.launch_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Business Launch Package not found for launch {args.launch_id}") from exc
+                return 0
+            if args.businessos_command == "plan":
+                _print_json(orchestrator.get_business_operating_plan(args.business_id))
+                return 0
+            if args.businessos_command == "digital-twin":
+                _print_json(orchestrator.get_digital_twin(args.business_id))
+                return 0
+            if args.businessos_command == "knowledge-graph":
+                _print_json(orchestrator.get_knowledge_graph(args.business_id))
+                return 0
+            if args.businessos_command == "decisions":
+                _print_json(orchestrator.get_decisions(args.business_id))
+                return 0
+            if args.businessos_command == "simulations":
+                _print_json(orchestrator.get_simulations(args.business_id))
+                return 0
+            if args.businessos_command == "health":
+                _print_json(orchestrator.get_business_health(args.business_id))
+                return 0
+            if args.businessos_command == "recommendations":
+                _print_json(orchestrator.get_recommendations(args.business_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

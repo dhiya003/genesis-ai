@@ -28,6 +28,25 @@ Recommended optional credentials:
 | Currency and tax assumptions | Exchange-rate provider, GST/tax source if used | `EXCHANGE_RATE_API_KEY`, `GST_DATA_API_KEY` |
 | Storage/docs | Google Drive, Google Sheets | `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_DRIVE_FOLDER_ID`, `GOOGLE_SHEETS_ID` |
 
+## Implemented live search backend
+
+SerpAPI is supported for Sprint 2 live web and marketplace research.
+
+```bash
+export GENESIS_RESEARCH_PROVIDER=live_web
+export GENESIS_SEARCH_PROVIDER=serpapi
+export SERPAPI_API_KEY=<your-key>
+```
+
+For marketplace/source-targeted search:
+
+```bash
+export GENESIS_RESEARCH_PROVIDER=marketplace
+export SERPAPI_API_KEY=<your-key>
+```
+
+Do not commit API keys into source control, fixtures, docs, or screenshots. Configure them only through runtime environment variables or GitHub repository secrets.
+
 ## Later sprint credentials
 
 Sprint 4 Creative Studio:

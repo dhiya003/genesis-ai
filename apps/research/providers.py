@@ -46,6 +46,41 @@ class WebSearchClient(Protocol):
 
 
 @dataclass(frozen=True)
+class SerpApiSearchClient:
+    """Google search client backed by SerpAPI.
+
+    The API key must be supplied at runtime through SERPAPI_API_KEY. It is never
+    stored in fixtures, logs, or generated reports.
+    """
+
+    api_key: str
+    timeout_seconds: int = 20
+    engine: str = "google"
+    google_domain: str = "google.co.in"
+    country: str = "in"
+    language: str = "en"
+
+    def search(self, query: str, limit: int = 5) -> list[WebSearchResult]:
+        params = {
+            "engine": self.engine,
+            "q": query,
+            "api_key": self.api_key,
+            "num": str(limit),
+            "google_domain": self.google_domain,
+            "gl": self.country,
+            "hl": self.language,
+        }
+        req = request.Request(
+            f"https://serpapi.com/search.json?{parse.urlencode(params)}",
+            headers={"User-Agent": "GenesisAI/0.2 (+https://github.com/dhiya003/genesis-ai)"},
+            method="GET",
+        )
+        with request.urlopen(req, timeout=self.timeout_seconds) as response:  # nosec B310 - fixed trusted API endpoint
+            payload = json.loads(response.read().decode("utf-8"))
+        return _parse_serpapi_results(payload, limit=limit)
+
+
+@dataclass(frozen=True)
 class DuckDuckGoLiteSearchClient:
     """No-key public web search client.
 
@@ -251,11 +286,26 @@ def get_research_provider() -> ResearchProvider:
     if provider_name in {"marketplace", "marketplaces", "marketplace_web", "social_marketplace"}:
         from apps.research.marketplaces import MarketplaceResearchProvider, SearchBackedMarketplaceClient
 
-        client = SearchBackedMarketplaceClient(search_client=DuckDuckGoLiteSearchClient())
+        client = SearchBackedMarketplaceClient(search_client=get_web_search_client())
         return MarketplaceResearchProvider(client=client)
     if provider_name in {"live", "live_web", "web"}:
-        return LiveWebResearchProvider(search_client=DuckDuckGoLiteSearchClient())
+        return LiveWebResearchProvider(search_client=get_web_search_client())
     return DeterministicResearchProvider()
+
+
+def get_web_search_client() -> WebSearchClient:
+    search_provider = os.environ.get("GENESIS_SEARCH_PROVIDER", "").lower()
+    serpapi_key = os.environ.get("SERPAPI_API_KEY")
+    if search_provider == "serpapi" or (serpapi_key and search_provider in {"", "auto"}):
+        if not serpapi_key:
+            raise RuntimeError("SERPAPI_API_KEY is required when GENESIS_SEARCH_PROVIDER=serpapi")
+        return SerpApiSearchClient(
+            api_key=serpapi_key,
+            google_domain=os.environ.get("SERPAPI_GOOGLE_DOMAIN", "google.co.in"),
+            country=os.environ.get("SERPAPI_GL", "in"),
+            language=os.environ.get("SERPAPI_HL", "en"),
+        )
+    return DuckDuckGoLiteSearchClient()
 
 
 def _query_for_employee(employee_id: str, idea: str) -> str:
@@ -304,6 +354,21 @@ def _product_ideas_from_evidence(idea: str, evidence: list[dict[str, str]]) -> l
     ]
     titles = _evidence_titles(evidence)
     return [f"{idea}: {item}" for item in base] + titles[:2]
+
+
+def _parse_serpapi_results(payload: dict[str, Any], limit: int) -> list[WebSearchResult]:
+    results: list[WebSearchResult] = []
+    for item in payload.get("organic_results", []):
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("title", "")).strip()
+        url = str(item.get("link", "")).strip()
+        snippet = str(item.get("snippet", "") or item.get("rich_snippet", "") or "").strip()
+        if title and url:
+            results.append(WebSearchResult(title=title, url=url, snippet=snippet))
+        if len(results) >= limit:
+            break
+    return results
 
 
 def _parse_duckduckgo_results(html: str, limit: int) -> list[WebSearchResult]:

@@ -15,14 +15,25 @@ It executes EMP-001 to EMP-004 locally without secrets or paid APIs.
 
 ## Live web mode
 
-This mode enables public web-backed market research without paid credentials.
+This mode enables web-backed market research. By default it uses a lightweight
+public search client. If `SERPAPI_API_KEY` is present, Genesis uses SerpAPI as
+the governed Google Search backend.
 
 ```bash
 export GENESIS_RESEARCH_PROVIDER=live_web
 python -m apps.cli.main submit "Create a coffee lovers product brand for India."
 ```
 
-Live web mode uses a lightweight public web search client and attaches evidence to every employee output:
+To force SerpAPI:
+
+```bash
+export GENESIS_RESEARCH_PROVIDER=live_web
+export GENESIS_SEARCH_PROVIDER=serpapi
+export SERPAPI_API_KEY=<your-key>
+python -m apps.cli.main submit "Create a coffee lovers product brand for India."
+```
+
+Live web mode attaches evidence to every employee output:
 
 - EMP-001: trend evidence
 - EMP-002: competitor evidence
@@ -30,6 +41,16 @@ Live web mode uses a lightweight public web search client and attaches evidence 
 - EMP-004: product opportunity evidence
 
 Live web mode is not the default CI provider because public search can be unavailable, rate-limited, or blocked by network policy. CI remains deterministic so the build is stable.
+
+## Marketplace mode
+
+Marketplace mode runs source-targeted searches for marketplace and social evidence. It also uses SerpAPI automatically when `SERPAPI_API_KEY` is configured.
+
+```bash
+export GENESIS_RESEARCH_PROVIDER=marketplace
+export SERPAPI_API_KEY=<your-key>
+python -m apps.cli.main submit "Create a coffee lovers product brand for India."
+```
 
 ## OpenAI mode
 

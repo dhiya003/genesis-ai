@@ -24,14 +24,18 @@ REQUIRED_PATHS = [
     "scripts/validate_launch_pack.py",
     "scripts/validate_research_report.py",
     "scripts/validate_product_definition.py",
+    "scripts/validate_product_blueprint.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
     "tests/test_product_department.py",
+    "tests/test_product_blueprint.py",
     "api/schemas/research-report-v2.schema.json",
     "api/schemas/product-definition.schema.json",
+    "api/schemas/product-blueprint.schema.json",
     "testing/fixtures/sample-research-report-v2.json",
     "testing/fixtures/sample-product-definition.json",
+    "testing/fixtures/sample-product-blueprint.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -42,9 +46,11 @@ JSON_PATHS = [
     "api/schemas/launch-pack.schema.json",
     "api/schemas/research-report-v2.schema.json",
     "api/schemas/product-definition.schema.json",
+    "api/schemas/product-blueprint.schema.json",
     "testing/fixtures/sample-launch-pack.json",
     "testing/fixtures/sample-research-report-v2.json",
     "testing/fixtures/sample-product-definition.json",
+    "testing/fixtures/sample-product-blueprint.json",
 ]
 
 COMMANDS = [
@@ -52,6 +58,7 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_launch_pack.py"], "launch pack validation"),
     ([sys.executable, "scripts/validate_research_report.py"], "research report validation"),
     ([sys.executable, "scripts/validate_product_definition.py"], "product definition validation"),
+    ([sys.executable, "scripts/validate_product_blueprint.py"], "product blueprint validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

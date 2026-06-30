@@ -1,4 +1,4 @@
-"""Product Department tests for Sprint 3 Phase 1."""
+"""Product Department tests for Sprint 3."""
 
 from __future__ import annotations
 

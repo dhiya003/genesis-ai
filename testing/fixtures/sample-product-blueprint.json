@@ -1,24 +1,342 @@
 {
-  "reportType": "PRODUCT_BLUEPRINT",
-  "projectId": "00000000-0000-0000-0000-000000000001",
-  "version": "1.0",
-  "recommendedProducts": [
+  "assumptions": [
+    "All costs are deterministic planning estimates until supplier quotes are collected.",
+    "Supplier names are placeholders unless live supplier research credentials are configured.",
+    "Final product safety must be reviewed before manufacturing."
+  ],
+  "bom": {
+    "currency": "INR",
+    "items": [
+      {
+        "component": "Beech wood cube",
+        "estimatedUnitCost": 22,
+        "material": "Beech wood",
+        "partNumber": "LUMA-001",
+        "quantity": 6,
+        "supplierCategory": "Wooden component manufacturer"
+      },
+      {
+        "component": "Starter box",
+        "estimatedUnitCost": 45,
+        "material": "Rigid kraft board",
+        "partNumber": "LUMA-004",
+        "quantity": 1,
+        "supplierCategory": "Packaging supplier"
+      }
+    ],
+    "totalEstimatedCost": 177
+  },
+  "costAnalysis": {
+    "breakEvenQuantity": 115,
+    "grossMargin": 687,
+    "landedCost": 612,
+    "manufacturingCost": 90,
+    "marketplaceFees": 130,
+    "netMargin": 607,
+    "packagingCost": 55,
+    "pricingStrategy": {
+      "bundlePricing": 2499,
+      "currency": "INR",
+      "distributorPrice": 999,
+      "manufacturingPrice": 612,
+      "marketplaceSellingPrice": 1399,
+      "premiumPricingOption": 1799,
+      "retailPrice": 1299,
+      "wholesalePrice": 899
+    },
+    "rawMaterialCost": 177,
+    "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+    "shippingCost": 70,
+    "taxes": 80
+  },
+  "customerFit": {
+    "problemFit": "Clear",
+    "purchaseTrigger": "Educational value and premium gifting appeal",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    }
+  },
+  "department": "PRODUCT",
+  "employeeOutputs": [
+    {"employeeId": "EMP-101", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-102", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-103", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-104", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-105", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-106", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-107", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-108", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-109", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
+    {"employeeId": "EMP-110", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}}
+  ],
+  "engineeringSpecification": {
+    "assemblyMethod": "Rounded wooden cubes finished, painted, inspected, packed with activity cards.",
+    "dimensions": {
+      "package": "180 x 120 x 60",
+      "product": "30 x 30 x 30 cube",
+      "starterSet": "6 cubes",
+      "unit": "mm"
+    },
+    "estimatedProductionTime": "5-7 production days for pilot batch",
+    "manufacturingDifficulty": "Medium",
+    "manufacturingProcess": "CNC or semi-automatic cutting, sanding, painting, drying, inspection, packaging.",
+    "materials": [
+      "Beech wood",
+      "Non-toxic water-based paint",
+      "Recycled kraft board"
+    ],
+    "safetyConsiderations": [
+      "Rounded edges",
+      "Non-toxic paint",
+      "Choking hazard review",
+      "Age labeling"
+    ],
+    "toolingRequirements": [
+      "Cube cutting jig",
+      "Sanding station",
+      "Paint drying rack"
+    ]
+  },
+  "executiveSummary": "Genesis Product Department generated a manufacturable, costed Product Blueprint for Luma Logic Cubes.",
+  "knowledgeBaseEntries": [],
+  "launchReadyEngineeringPackage": {
+    "included": [
+      "Product definition",
+      "Engineering specification",
+      "Manufacturing plan",
+      "BOM",
+      "Packaging specification",
+      "Supplier shortlist",
+      "Cost and pricing analysis",
+      "Quality checklist"
+    ],
+    "readyForSupplierDiscussion": true,
+    "requiresHumanReviewBeforeProduction": [
+      "Supplier verification",
+      "Safety certification",
+      "Physical sample approval"
+    ]
+  },
+  "manufacturingPlan": {
+    "expectedYield": "92%",
+    "manufacturingRisks": [
+      "Paint curing delays",
+      "Dimensional inconsistency",
+      "Supplier MOQ variance"
+    ],
+    "manufacturingSequence": [
+      "Material inspection",
+      "Cutting",
+      "Finishing",
+      "Decoration",
+      "Quality inspection",
+      "Packaging"
+    ],
+    "manufacturingTechnology": "Small-batch woodworking with CNC-assisted cutting",
+    "processFlow": "Raw material -> component fabrication -> finish -> inspect -> pack -> dispatch",
+    "productionAssumptions": [
+      "Pilot MOQ 100 units",
+      "Manual quality inspection",
+      "Local supplier validation required"
+    ]
+  },
+  "materialRecommendation": {
+    "alternativeMaterials": [
+      "Rubber wood",
+      "Maple wood",
+      "Bamboo composite"
+    ],
+    "availabilityAssessment": "Available from Indian wooden toy and craft manufacturers; confirm lead time and certifications.",
+    "costComparison": {
+      "currency": "INR",
+      "lowestCostAlternative": 150,
+      "primarySetMaterialCost": 180
+    },
+    "durabilityComparison": {
+      "alternative": "Medium",
+      "primary": "High"
+    },
+    "materialComparison": [
+      {
+        "availability": "Medium",
+        "cost": "Medium",
+        "durability": "High",
+        "material": "Beech wood",
+        "recommendation": "Primary choice"
+      }
+    ],
+    "primaryMaterials": [
+      "Beech wood",
+      "Non-toxic water-based paint",
+      "Recycled kraft board"
+    ]
+  },
+  "nextActions": [
+    "Send the BOM and engineering specification to shortlisted suppliers.",
+    "Collect quotes for 100, 250, and 500 unit production runs.",
+    "Approve packaging dieline and pilot sample quality checklist."
+  ],
+  "overallScore": 82,
+  "packagingSpecification": {
+    "packagingDimensions": {
+      "height": 60,
+      "length": 180,
+      "unit": "mm",
+      "width": 120
+    },
+    "packagingMaterials": [
+      "Rigid kraft board",
+      "Paper pulp insert",
+      "Tamper label"
+    ],
+    "protectionStrategy": "Use fitted insert to prevent cube movement and edge damage.",
+    "shippingOptimization": "Under 500g target shipping slab",
+    "storageOptimization": "Stackable rectangular packs, 20 units per carton",
+    "sustainabilityAssessment": "Plastic-free packaging with recyclable board and paper insert"
+  },
+  "pricingStrategy": {
+    "bundlePricing": 2499,
+    "currency": "INR",
+    "distributorPrice": 999,
+    "manufacturingPrice": 612,
+    "marketplaceSellingPrice": 1399,
+    "premiumPricingOption": 1799,
+    "retailPrice": 1299,
+    "wholesalePrice": 899
+  },
+  "productConstraints": {
+    "country": "India",
+    "founderBudget": "Not specified",
+    "moq": "Prefer low MOQ or manual pilot batch",
+    "targetMargin": "Target 55-65 percent gross margin before paid ads"
+  },
+  "productDefinition": {
+    "ageGroup": "3-5",
+    "category": "Educational toy",
+    "productName": "Luma Logic Cubes",
+    "purpose": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
+    "targetCustomer": {
+      "primarySegment": "Parents of children aged 3-5 in India"
+    }
+  },
+  "productFeatures": [
+    "Core physical product",
+    "Gift-ready packaging",
+    "Simple instructions",
+    "Expandable product family"
+  ],
+  "productId": "sample-product",
+  "productName": "Luma Logic Cubes",
+  "productRoadmap": {
+    "version1": "Luma Logic Cubes Starter validation kit",
+    "version2": "Gift-ready standard kit with improved packaging",
+    "version3": "Premium bundle with stronger brand story and add-ons"
+  },
+  "productSuccessMetrics": {
+    "customerValueScore": 83,
+    "overallProductScore": 74
+  },
+  "productVariants": [
     {
-      "name": "Coffee Quote Oversized T-Shirt",
-      "category": "Apparel",
-      "priority": 1,
-      "estimatedPrice": 699,
-      "estimatedCost": 350,
-      "estimatedMargin": 349,
-      "rationale": "Simple MVP-compatible POD product with broad appeal."
+      "contents": [
+        "Core product",
+        "Simple packaging"
+      ],
+      "level": "Starter",
+      "name": "Luma Logic Cubes Starter",
+      "purpose": "Validate demand with minimum inventory risk"
+    },
+    {
+      "contents": [
+        "Core product",
+        "Bonus item",
+        "Gift-ready packaging"
+      ],
+      "level": "Standard",
+      "name": "Luma Logic Cubes Standard",
+      "purpose": "Increase perceived value"
+    },
+    {
+      "contents": [
+        "Expanded product set",
+        "Premium packaging"
+      ],
+      "level": "Premium",
+      "name": "Luma Logic Cubes Premium",
+      "purpose": "Serve gifting and higher-margin buyers"
     }
   ],
-  "pricingStrategy": {
-    "positioning": "affordable premium",
-    "currency": "INR"
+  "profitabilityReport": {
+    "cashFlowImpact": "Requires controlled pilot batch and staged reorders.",
+    "inventoryRisk": "MEDIUM",
+    "marginScore": 78,
+    "profitPerUnit": 687,
+    "profitPercentage": 52.89,
+    "profitabilityAssessment": "Commercially promising if supplier samples and safety review pass.",
+    "scalabilityScore": 74
   },
-  "collections": [],
-  "launchSequence": ["Launch one apparel product first", "Validate response", "Add mugs and posters later"],
-  "risks": ["Crowded niche", "Needs differentiated design angle"],
-  "confidence": 0.7
+  "projectId": "sample-project",
+  "qualityChecklist": [
+    {
+      "check": "Manufacturability",
+      "status": "PASS"
+    },
+    {
+      "check": "Safety assumptions",
+      "status": "REVIEW"
+    }
+  ],
+  "recommendations": [
+    "Request physical samples from two shortlisted suppliers before placing a production order.",
+    "Run a 100-unit pilot batch before scaling inventory.",
+    "Verify safety labeling, paint compliance, and age suitability before launch."
+  ],
+  "reportType": "PRODUCT_BLUEPRINT",
+  "risks": [
+    {
+      "mitigation": "Validate with pilot orders before production scale.",
+      "risk": "Demand may not convert into purchases.",
+      "severity": "HIGH"
+    }
+  ],
+  "shippingPlan": {
+    "damageRisk": "LOW-MEDIUM",
+    "domesticCarrier": "Shiprocket or Delhivery placeholder",
+    "targetWeightGrams": 480
+  },
+  "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+  "sourceReportId": "sample-project",
+  "sourceWorkflowId": "sample-research-workflow",
+  "supplierRecommendations": {
+    "alternativeSuppliers": [
+      "Alibaba verified wooden toy supplier",
+      "Local CNC woodworking vendor",
+      "Print-and-pack assembly vendor"
+    ],
+    "comparison": {
+      "bestPilotSupplier": "Educational kit assembler placeholder",
+      "lowestMOQ": 100,
+      "lowestRiskScore": 38
+    },
+    "shortlist": [
+      {
+        "category": "Wooden toys",
+        "country": "India",
+        "leadTimeDays": 21,
+        "moq": 100,
+        "name": "India wooden toy manufacturer placeholder",
+        "riskScore": 42
+      }
+    ]
+  },
+  "validationReport": {
+    "failed": 0,
+    "passed": 6,
+    "reviewRequired": 2
+  },
+  "version": "0.3.0",
+  "workflowId": "sample-product-workflow"
 }

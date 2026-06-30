@@ -1,13 +1,16 @@
-"""Product Department Phase 1 execution."""
+"""Product Department execution for Sprint 3."""
 
 from __future__ import annotations
 
 import logging
 from statistics import mean
+from time import perf_counter
 from typing import Any
 
 from apps.observability import MetricsRecorder
+from apps.product.employees import PRODUCT_EMPLOYEES, run_product_employee
 from apps.storage import JsonStore
+from scripts.validate_product_blueprint import validate_product_blueprint_payload
 from scripts.validate_product_definition import validate_product_definition_payload
 
 LOGGER = logging.getLogger("genesis.product")
@@ -39,7 +42,7 @@ PRODUCT_METRIC_KEYS = [
 
 
 class ProductDepartment:
-    """Converts validated research into Sprint 3 Phase 1 product intelligence."""
+    """Converts validated research into Product Definition and Product Blueprint."""
 
     def __init__(self, store: JsonStore) -> None:
         self.store = store
@@ -64,6 +67,65 @@ class ProductDepartment:
         )
         LOGGER.info("product definition stored", extra={"event": "product.definition_stored", "project_id": project["id"], "workflow_id": workflow["id"], "status": "COMPLETED"})
         return product_definition
+
+    def execute_blueprint(self, project: dict[str, Any], workflow: dict[str, Any], research_report: dict[str, Any]) -> dict[str, Any]:
+        LOGGER.info("product blueprint started", extra={"event": "product.blueprint_started", "project_id": project["id"], "workflow_id": workflow["id"], "status": "RUNNING"})
+        product_definition = self.build_product_definition(project, workflow, research_report)
+        validation_issues = validate_product_definition_payload(product_definition)
+        if validation_issues:
+            raise ValueError(f"Product definition validation failed: {validation_issues}")
+        self.store.save_product_definition(product_definition)
+
+        context: dict[str, Any] = {
+            "project": project,
+            "workflow": workflow,
+            "researchReport": research_report,
+            "productDefinition": product_definition,
+            "sections": {},
+        }
+        employee_outputs: list[dict[str, Any]] = []
+        for employee_id in PRODUCT_EMPLOYEES:
+            started = perf_counter()
+            output = run_product_employee(employee_id, context)
+            output["projectId"] = project["id"]
+            output["workflowId"] = workflow["id"]
+            self.store.save_employee_output(output)
+            context["sections"][output["section"]] = output
+            employee_outputs.append(output)
+            MetricsRecorder(self.store).record(
+                "product.employee_completed",
+                {"employeeId": employee_id, "runtimeSeconds": round(perf_counter() - started, 4), "score": output.get("score")},
+                project_id=project["id"],
+                workflow_id=workflow["id"],
+            )
+
+        blueprint = self.build_product_blueprint(project, workflow, research_report, product_definition, employee_outputs)
+        blueprint_issues = validate_product_blueprint_payload(blueprint)
+        if blueprint_issues:
+            raise ValueError(f"Product blueprint validation failed: {blueprint_issues}")
+
+        self.store.save_product_blueprint(blueprint)
+        self.store.save_bom_report(project["id"], blueprint["bom"])
+        self.store.save_cost_report(project["id"], blueprint["costAnalysis"])
+        self.store.save_supplier_report(project["id"], blueprint["supplierRecommendations"])
+        self.store.save_packaging_report(project["id"], blueprint["packagingSpecification"])
+        self.store.save_profitability_report(project["id"], blueprint["profitabilityReport"])
+        self.store.save_manufacturing_plan(project["id"], blueprint["manufacturingPlan"])
+        for entry in blueprint["knowledgeBaseEntries"]:
+            self.store.save_product_knowledge(entry)
+
+        MetricsRecorder(self.store).record(
+            "product.blueprint_stored",
+            {
+                "overallScore": blueprint["overallScore"],
+                "employeeCount": len(employee_outputs),
+                "landedCost": blueprint["costAnalysis"]["landedCost"],
+            },
+            project_id=project["id"],
+            workflow_id=workflow["id"],
+        )
+        LOGGER.info("product blueprint stored", extra={"event": "product.blueprint_stored", "project_id": project["id"], "workflow_id": workflow["id"], "status": "COMPLETED"})
+        return blueprint
 
     def build_product_definition(self, project: dict[str, Any], workflow: dict[str, Any], research_report: dict[str, Any]) -> dict[str, Any]:
         recommended_products = research_report.get("productResearch", {}).get("recommendedProducts", [])
@@ -131,6 +193,103 @@ class ProductDepartment:
             "knowledgeBaseEntries": _knowledge_entries(project, product_name, rejected_alternatives),
         }
 
+    def build_product_blueprint(
+        self,
+        project: dict[str, Any],
+        workflow: dict[str, Any],
+        research_report: dict[str, Any],
+        product_definition: dict[str, Any],
+        employee_outputs: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        sections = {output["section"]: output for output in employee_outputs}
+        cost_analysis = sections["costAnalysis"]
+        pricing_strategy = cost_analysis["pricingStrategy"]
+        profitability = sections["profitabilityReport"]
+        quality = sections["qualityChecklist"]
+        product_name = product_definition["productDefinitionDocument"]["productName"]
+        return {
+            "reportType": "PRODUCT_BLUEPRINT",
+            "version": "0.3.0",
+            "projectId": project["id"],
+            "productId": project["id"],
+            "workflowId": workflow["id"],
+            "sourceReportId": research_report["projectId"],
+            "sourceWorkflowId": research_report["workflowId"],
+            "sourceIdea": research_report["idea"],
+            "department": "PRODUCT",
+            "productName": product_name,
+            "executiveSummary": f"Genesis Product Department generated a manufacturable, costed Product Blueprint for {product_name}.",
+            "productDefinition": sections["productManagement"]["productDefinition"],
+            "productFeatures": sections["productManagement"]["productFeatures"],
+            "productVariants": sections["productManagement"]["productVariants"],
+            "productRoadmap": sections["productManagement"]["productRoadmap"],
+            "customerFit": sections["productManagement"]["customerFit"],
+            "productConstraints": product_definition["constraintsReport"],
+            "productSuccessMetrics": product_definition["successMetrics"],
+            "engineeringSpecification": {
+                "dimensions": sections["engineeringSpecification"]["dimensions"],
+                "materials": sections["engineeringSpecification"]["materials"],
+                "assemblyMethod": sections["engineeringSpecification"]["assemblyMethod"],
+                "manufacturingProcess": sections["engineeringSpecification"]["manufacturingProcess"],
+                "manufacturingDifficulty": sections["engineeringSpecification"]["manufacturingDifficulty"],
+                "toolingRequirements": sections["engineeringSpecification"]["toolingRequirements"],
+                "safetyConsiderations": sections["engineeringSpecification"]["safetyConsiderations"],
+                "estimatedProductionTime": sections["engineeringSpecification"]["estimatedProductionTime"],
+            },
+            "materialRecommendation": {
+                "primaryMaterials": sections["materialRecommendation"]["primaryMaterials"],
+                "alternativeMaterials": sections["materialRecommendation"]["alternativeMaterials"],
+                "materialComparison": sections["materialRecommendation"]["materialComparison"],
+                "costComparison": sections["materialRecommendation"]["costComparison"],
+                "durabilityComparison": sections["materialRecommendation"]["durabilityComparison"],
+                "availabilityAssessment": sections["materialRecommendation"]["availabilityAssessment"],
+            },
+            "manufacturingPlan": {
+                "manufacturingTechnology": sections["manufacturingPlan"]["manufacturingTechnology"],
+                "manufacturingSequence": sections["manufacturingPlan"]["manufacturingSequence"],
+                "processFlow": sections["manufacturingPlan"]["processFlow"],
+                "productionAssumptions": sections["manufacturingPlan"]["productionAssumptions"],
+                "expectedYield": sections["manufacturingPlan"]["expectedYield"],
+                "manufacturingRisks": sections["manufacturingPlan"]["manufacturingRisks"],
+            },
+            "bom": sections["bom"],
+            "costAnalysis": cost_analysis,
+            "pricingStrategy": pricing_strategy,
+            "packagingSpecification": {
+                "packagingDimensions": sections["packagingSpecification"]["packagingDimensions"],
+                "packagingMaterials": sections["packagingSpecification"]["packagingMaterials"],
+                "protectionStrategy": sections["packagingSpecification"]["protectionStrategy"],
+                "shippingOptimization": sections["packagingSpecification"]["shippingOptimization"],
+                "storageOptimization": sections["packagingSpecification"]["storageOptimization"],
+                "sustainabilityAssessment": sections["packagingSpecification"]["sustainabilityAssessment"],
+            },
+            "shippingPlan": sections["packagingSpecification"]["shippingPlan"],
+            "supplierRecommendations": sections["supplierRecommendations"],
+            "qualityChecklist": quality["checks"],
+            "validationReport": quality["validationReport"],
+            "profitabilityReport": profitability,
+            "risks": _blueprint_risks(research_report, sections),
+            "assumptions": _blueprint_assumptions(sections),
+            "recommendations": [
+                "Request physical samples from two shortlisted suppliers before placing a production order.",
+                "Run a 100-unit pilot batch before scaling inventory.",
+                "Verify safety labeling, paint compliance, and age suitability before launch.",
+            ],
+            "nextActions": [
+                "Send the BOM and engineering specification to shortlisted suppliers.",
+                "Collect quotes for 100, 250, and 500 unit production runs.",
+                "Approve packaging dieline and pilot sample quality checklist.",
+            ],
+            "launchReadyEngineeringPackage": {
+                "included": ["Product definition", "Engineering specification", "Manufacturing plan", "BOM", "Packaging specification", "Supplier shortlist", "Cost and pricing analysis", "Quality checklist"],
+                "readyForSupplierDiscussion": True,
+                "requiresHumanReviewBeforeProduction": ["Supplier verification", "Safety certification", "Physical sample approval"],
+            },
+            "employeeOutputs": employee_outputs,
+            "knowledgeBaseEntries": _knowledge_entries(project, product_name, product_definition["opportunityReport"]["rejectedAlternatives"]),
+            "overallScore": round(mean(output["score"] for output in employee_outputs)),
+        }
+
 
 def _first_text(values: list[Any], fallback: str) -> str:
     for value in values:
@@ -161,12 +320,27 @@ def _category(idea: str) -> str:
 
 
 def _purpose(idea: str, base_product: str) -> str:
+    if "toy" in idea.lower() or "children" in idea.lower() or "kids" in idea.lower():
+        return "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience."
     if "coffee" in idea.lower():
         return "Help coffee lovers express their identity through an affordable, giftable starter kit."
     return f"Convert the validated market opportunity into a simple, manufacturable {base_product}."
 
 
 def _target_customer(research_report: dict[str, Any]) -> dict[str, Any]:
+    idea = str(research_report.get("idea", "")).lower()
+    if "toy" in idea or "children" in idea or "kids" in idea:
+        return {
+            "primarySegment": "Parents of children aged 3-5 in India",
+            "buyer": "Parents and gift buyers",
+            "user": "Children aged 3-5",
+            "ageGroup": "3-5",
+            "needs": [
+                "Safe educational play",
+                "Premium durable materials",
+                "Simple learning activities",
+            ],
+        }
     segments = research_report.get("customerAnalysis", {}).get("segments", [])
     primary_segment = _first_text(segments, "Early adopter customer")
     return {
@@ -305,3 +479,26 @@ def _knowledge_entries(project: dict[str, Any], product_name: str, rejected_alte
             "futureImprovement": "Revisit alternatives if manufacturing or supplier constraints change.",
         },
     ]
+
+
+def _blueprint_risks(research_report: dict[str, Any], sections: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
+    source_risks = research_report.get("risks", [])
+    risks = [
+        {"risk": _first_text(source_risks[:1], "Demand may not convert into purchases."), "severity": "HIGH", "mitigation": "Validate with pilot orders before production scale."},
+        {"risk": "Supplier shortlist uses deterministic placeholders until live supplier credentials are connected.", "severity": "MEDIUM", "mitigation": "Verify suppliers, samples, certifications, and quotes manually."},
+        {"risk": "Safety compliance assumptions require expert review before manufacturing.", "severity": "HIGH", "mitigation": "Confirm toy safety, paint, labeling, and choking hazard requirements."},
+    ]
+    for risk in sections.get("qualityChecklist", {}).get("qualityRisks", []):
+        risks.append({"risk": risk, "severity": "MEDIUM", "mitigation": "Resolve during pilot sample review."})
+    return risks
+
+
+def _blueprint_assumptions(sections: dict[str, dict[str, Any]]) -> list[str]:
+    assumptions = [
+        "All costs are deterministic planning estimates until supplier quotes are collected.",
+        "Supplier names are placeholders unless live supplier research credentials are configured.",
+        "Final product safety must be reviewed before manufacturing.",
+    ]
+    assumptions.extend(sections.get("supplierRecommendations", {}).get("supplierAssumptions", []))
+    assumptions.extend(sections.get("manufacturingPlan", {}).get("productionAssumptions", []))
+    return assumptions

@@ -144,6 +144,77 @@ class GenesisOrchestrator:
     def get_product_definition(self, project_id: str) -> dict[str, Any]:
         return self.store.get_product_definition(project_id)
 
+    def generate_product_blueprint(self, project_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        project = self.store.get_project(project_id)
+        report = self.store.get_report(project_id)
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project_id, "PRODUCT_BLUEPRINT")
+        workflow = engine.plan(workflow, reason="orchestrator selected Product Factory")
+        task = self._create_task(project_id, workflow["id"], "PRODUCT_FACTORY", "Generate complete Sprint 3 Product Blueprint")
+        LOGGER.info("orchestrator routed project to product factory", extra={"event": "orchestrator.routed", "project_id": project_id, "workflow_id": workflow["id"], "status": "PRODUCT_BLUEPRINT"})
+
+        department = ProductDepartment(self.store)
+
+        def run_product_factory(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute_blueprint(project, current_workflow, report)
+
+        completed_workflow = engine.run(workflow, run_product_factory)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "PRODUCT_BLUEPRINT_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["productId"] = project_id
+            project["productBlueprintWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "PRODUCT_BLUEPRINT"})
+            deliverable = self._create_deliverable(project_id, completed_workflow["id"], "PRODUCT_BLUEPRINT", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project_id, completed_workflow["id"], "FOUNDER_PRODUCT_BLUEPRINT_APPROVAL", mode=approval_mode)
+            project["productBlueprintApprovalId"] = approval["id"]
+            project["productBlueprintApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_PRODUCT_BLUEPRINT_APPROVAL"
+        else:
+            project["status"] = "PRODUCT_BLUEPRINT_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.product_blueprint_finished", project_id=project_id, workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "product": {"id": project_id, "projectId": project_id},
+            "blueprint": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_product(self, product_id: str) -> dict[str, Any]:
+        blueprint = self.store.get_product_blueprint(product_id)
+        return {
+            "product": {"id": product_id, "projectId": blueprint["projectId"], "name": blueprint["productName"]},
+            "blueprint": blueprint,
+            "bom": self.store.get_bom_report(product_id),
+            "cost": self.store.get_cost_report(product_id),
+            "suppliers": self.store.get_supplier_report(product_id),
+            "profitability": self.store.get_profitability_report(product_id),
+        }
+
+    def get_product_blueprint(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_product_blueprint(product_id)
+
+    def get_product_bom(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_bom_report(product_id)
+
+    def get_product_cost(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_cost_report(product_id)
+
+    def get_product_suppliers(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_supplier_report(product_id)
+
+    def get_product_profitability(self, product_id: str) -> dict[str, Any]:
+        return self.store.get_profitability_report(product_id)
+
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)
         if workflow["type"] != "RESEARCH":

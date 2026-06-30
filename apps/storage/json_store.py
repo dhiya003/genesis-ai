@@ -23,7 +23,14 @@ class JsonStore:
         self.audit_logs_dir = self.root / "audit_logs"
         self.execution_history_dir = self.root / "execution_history"
         self.product_definitions_dir = self.root / "product_definitions"
+        self.product_blueprints_dir = self.root / "product_blueprints"
         self.product_knowledge_dir = self.root / "product_knowledge"
+        self.bom_reports_dir = self.root / "bom_reports"
+        self.cost_reports_dir = self.root / "cost_reports"
+        self.supplier_reports_dir = self.root / "supplier_reports"
+        self.packaging_reports_dir = self.root / "packaging_reports"
+        self.profitability_reports_dir = self.root / "profitability_reports"
+        self.manufacturing_plans_dir = self.root / "manufacturing_plans"
         for directory in [
             self.projects_dir,
             self.workflows_dir,
@@ -36,7 +43,14 @@ class JsonStore:
             self.audit_logs_dir,
             self.execution_history_dir,
             self.product_definitions_dir,
+            self.product_blueprints_dir,
             self.product_knowledge_dir,
+            self.bom_reports_dir,
+            self.cost_reports_dir,
+            self.supplier_reports_dir,
+            self.packaging_reports_dir,
+            self.profitability_reports_dir,
+            self.manufacturing_plans_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -148,6 +162,48 @@ class JsonStore:
 
     def get_product_definition(self, project_id: str) -> dict[str, Any]:
         return self._read(self.product_definitions_dir / f"{project_id}.json")
+
+    def save_product_blueprint(self, product_blueprint: dict[str, Any]) -> None:
+        self._write(self.product_blueprints_dir / f"{product_blueprint['productId']}.json", product_blueprint)
+
+    def get_product_blueprint(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.product_blueprints_dir / f"{product_id}.json")
+
+    def save_bom_report(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.bom_reports_dir / f"{product_id}.json", report)
+
+    def get_bom_report(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.bom_reports_dir / f"{product_id}.json")
+
+    def save_cost_report(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.cost_reports_dir / f"{product_id}.json", report)
+
+    def get_cost_report(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.cost_reports_dir / f"{product_id}.json")
+
+    def save_supplier_report(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.supplier_reports_dir / f"{product_id}.json", report)
+
+    def get_supplier_report(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.supplier_reports_dir / f"{product_id}.json")
+
+    def save_packaging_report(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.packaging_reports_dir / f"{product_id}.json", report)
+
+    def get_packaging_report(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.packaging_reports_dir / f"{product_id}.json")
+
+    def save_profitability_report(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.profitability_reports_dir / f"{product_id}.json", report)
+
+    def get_profitability_report(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.profitability_reports_dir / f"{product_id}.json")
+
+    def save_manufacturing_plan(self, product_id: str, report: dict[str, Any]) -> None:
+        self._write(self.manufacturing_plans_dir / f"{product_id}.json", report)
+
+    def get_manufacturing_plan(self, product_id: str) -> dict[str, Any]:
+        return self._read(self.manufacturing_plans_dir / f"{product_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

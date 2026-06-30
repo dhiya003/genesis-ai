@@ -9,6 +9,7 @@ from uuid import uuid4
 
 from apps.audit import now_iso, record_audit
 from apps.creative import CreativeDepartment
+from apps.marketing import MarketingDepartment
 from apps.product import ProductDepartment
 from apps.research import ResearchDepartment
 from apps.storage import JsonStore
@@ -298,6 +299,86 @@ class GenesisOrchestrator:
 
     def get_creative_copy(self, creative_id: str) -> dict[str, Any]:
         return self.store.get_copy_report(creative_id)
+
+    def generate_marketing_pack(self, creative_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        creative_pack = self.store.get_creative_pack(creative_id)
+        product_blueprint = self.store.get_product_blueprint(creative_pack["productId"])
+        project = self.store.get_project(creative_pack["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "MARKETING_PACK")
+        workflow = engine.plan(workflow, reason="orchestrator selected Marketing Engine")
+        task = self._create_task(project["id"], workflow["id"], "MARKETING_ENGINE", "Generate complete Sprint 5 Marketing Pack")
+        LOGGER.info("orchestrator routed project to marketing engine", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "MARKETING_PACK"})
+
+        department = MarketingDepartment(self.store)
+
+        def run_marketing(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute(project, current_workflow, product_blueprint, creative_pack)
+
+        completed_workflow = engine.run(workflow, run_marketing)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "MARKETING_PACK_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["marketingId"] = creative_id
+            project["marketingWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "MARKETING_PACK"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "MARKETING_PACK", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_MARKETING_PACK_APPROVAL", mode=approval_mode)
+            project["marketingApprovalId"] = approval["id"]
+            project["marketingApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_MARKETING_APPROVAL"
+        else:
+            project["status"] = "MARKETING_PACK_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.marketing_pack_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "marketing": {"id": creative_id, "projectId": project["id"]},
+            "marketingPack": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_marketing(self, marketing_id: str) -> dict[str, Any]:
+        marketing_pack = self.store.get_marketing_pack(marketing_id)
+        return {
+            "marketing": {"id": marketing_id, "projectId": marketing_pack["projectId"]},
+            "marketingPack": marketing_pack,
+            "strategy": self.store.get_marketing_strategy_report(marketing_id),
+            "seo": self.store.get_seo_report(marketing_id),
+            "social": self.store.get_social_marketing_report(marketing_id),
+            "ads": self.store.get_ads_report(marketing_id),
+            "listing": self.store.get_listing_report(marketing_id),
+            "launch": self.store.get_launch_report(marketing_id),
+        }
+
+    def get_marketing_pack(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_marketing_pack(marketing_id)
+
+    def get_marketing_strategy(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_marketing_strategy_report(marketing_id)
+
+    def get_marketing_seo(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_seo_report(marketing_id)
+
+    def get_marketing_social(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_social_marketing_report(marketing_id)
+
+    def get_marketing_ads(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_ads_report(marketing_id)
+
+    def get_marketing_listing(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_listing_report(marketing_id)
+
+    def get_marketing_launch(self, marketing_id: str) -> dict[str, Any]:
+        return self.store.get_launch_report(marketing_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

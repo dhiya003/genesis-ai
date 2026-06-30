@@ -65,6 +65,36 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
                 return
+            if parsed.path.startswith("/marketing/"):
+                marketing_path = parsed.path.removeprefix("/marketing/").strip("/")
+                parts = [part for part in marketing_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Marketing ID is required")
+                marketing_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_marketing(marketing_id))
+                    elif section == "pack":
+                        self._send_json(200, orchestrator.get_marketing_pack(marketing_id))
+                    elif section == "strategy":
+                        self._send_json(200, orchestrator.get_marketing_strategy(marketing_id))
+                    elif section == "seo":
+                        self._send_json(200, orchestrator.get_marketing_seo(marketing_id))
+                    elif section == "social":
+                        self._send_json(200, orchestrator.get_marketing_social(marketing_id))
+                    elif section == "ads":
+                        self._send_json(200, orchestrator.get_marketing_ads(marketing_id))
+                    elif section == "listing":
+                        self._send_json(200, orchestrator.get_marketing_listing(marketing_id))
+                    elif section == "launch":
+                        self._send_json(200, orchestrator.get_marketing_launch(marketing_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Marketing pack not found: {marketing_id}") from exc
             if parsed.path.startswith("/creative/"):
                 creative_path = parsed.path.removeprefix("/creative/").strip("/")
                 parts = [part for part in creative_path.split("/") if part]
@@ -166,6 +196,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         parsed = urlparse(self.path)
         try:
+            if parsed.path == "/marketing/generate":
+                payload = self._read_json()
+                creative_id = payload.get("creativeId")
+                if not isinstance(creative_id, str):
+                    raise bad_request("creativeId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_marketing_pack(creative_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
             if parsed.path == "/creative/generate":
                 payload = self._read_json()
                 product_id = payload.get("productId")

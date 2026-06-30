@@ -74,6 +74,17 @@ def build_parser() -> argparse.ArgumentParser:
         section_parser.add_argument("creative_id")
         section_parser.add_argument("--data-dir")
 
+    marketing_parser = subcommands.add_parser("marketing", help="Run and retrieve Sprint 5 Marketing Engine outputs")
+    marketing_subcommands = marketing_parser.add_subparsers(dest="marketing_command", required=True)
+    marketing_generate_parser = marketing_subcommands.add_parser("generate", help="Generate a Marketing Pack from a stored Creative Pack")
+    marketing_generate_parser.add_argument("creative_id")
+    marketing_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
+    marketing_generate_parser.add_argument("--data-dir")
+    for name in ["pack", "strategy", "seo", "social", "ads", "listing", "launch"]:
+        section_parser = marketing_subcommands.add_parser(name, help=f"Retrieve stored marketing {name}")
+        section_parser.add_argument("marketing_id")
+        section_parser.add_argument("--data-dir")
+
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
@@ -252,6 +263,35 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             if args.creative_command == "copy":
                 _print_json(orchestrator.get_creative_copy(args.creative_id))
+                return 0
+        if args.command == "marketing":
+            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            if args.marketing_command == "generate":
+                try:
+                    _print_json(orchestrator.generate_marketing_pack(args.creative_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Creative Pack not found for creative {args.creative_id}") from exc
+                return 0
+            if args.marketing_command == "pack":
+                _print_json(orchestrator.get_marketing_pack(args.marketing_id))
+                return 0
+            if args.marketing_command == "strategy":
+                _print_json(orchestrator.get_marketing_strategy(args.marketing_id))
+                return 0
+            if args.marketing_command == "seo":
+                _print_json(orchestrator.get_marketing_seo(args.marketing_id))
+                return 0
+            if args.marketing_command == "social":
+                _print_json(orchestrator.get_marketing_social(args.marketing_id))
+                return 0
+            if args.marketing_command == "ads":
+                _print_json(orchestrator.get_marketing_ads(args.marketing_id))
+                return 0
+            if args.marketing_command == "listing":
+                _print_json(orchestrator.get_marketing_listing(args.marketing_id))
+                return 0
+            if args.marketing_command == "launch":
+                _print_json(orchestrator.get_marketing_launch(args.marketing_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

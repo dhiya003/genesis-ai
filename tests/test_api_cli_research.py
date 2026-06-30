@@ -59,6 +59,22 @@ class ApiCliResearchTests(unittest.TestCase):
             self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
             self.assertEqual(product_definition["projectId"], project_id)
 
+            product_blueprint_output = StringIO()
+            with patch("sys.stdout", product_blueprint_output):
+                self.assertEqual(cli_main(["product", "generate", project_id, "--data-dir", directory]), 0)
+            product_blueprint_run = json.loads(product_blueprint_output.getvalue())
+            self.assertEqual(product_blueprint_run["blueprint"]["reportType"], "PRODUCT_BLUEPRINT")
+
+            product_bom_output = StringIO()
+            with patch("sys.stdout", product_bom_output):
+                self.assertEqual(cli_main(["product", "bom", project_id, "--data-dir", directory]), 0)
+            self.assertTrue(json.loads(product_bom_output.getvalue())["items"])
+
+            product_cost_output = StringIO()
+            with patch("sys.stdout", product_cost_output):
+                self.assertEqual(cli_main(["product", "cost", project_id, "--data-dir", directory]), 0)
+            self.assertGreater(json.loads(product_cost_output.getvalue())["landedCost"], 0)
+
     def test_api_handler_uses_same_store_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             store = JsonStore(directory)

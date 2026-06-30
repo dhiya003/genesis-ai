@@ -65,6 +65,32 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
                 return
+            if parsed.path.startswith("/products/"):
+                product_path = parsed.path.removeprefix("/products/").strip("/")
+                parts = [part for part in product_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Product ID is required")
+                product_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_product(product_id))
+                    elif section == "blueprint":
+                        self._send_json(200, orchestrator.get_product_blueprint(product_id))
+                    elif section == "bom":
+                        self._send_json(200, orchestrator.get_product_bom(product_id))
+                    elif section == "cost":
+                        self._send_json(200, orchestrator.get_product_cost(product_id))
+                    elif section == "suppliers":
+                        self._send_json(200, orchestrator.get_product_suppliers(product_id))
+                    elif section == "profitability":
+                        self._send_json(200, orchestrator.get_product_profitability(product_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Product not found: {product_id}") from exc
             if parsed.path.startswith("/projects/"):
                 project_id = parsed.path.removeprefix("/projects/").strip("/")
                 if not project_id:
@@ -108,6 +134,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         parsed = urlparse(self.path)
         try:
+            if parsed.path == "/products/generate":
+                payload = self._read_json()
+                project_id = payload.get("projectId")
+                if not isinstance(project_id, str):
+                    raise bad_request("projectId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_product_blueprint(project_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
             if parsed.path == "/projects":
                 payload = self._read_json()
                 idea = payload.get("idea")

@@ -19,3 +19,11 @@ jobs:
       - name: Validate Sprint 2 research report fixture
         run: |
           python scripts/validate_research_report.py
+
+      - name: Validate Sprint 3 product blueprint fixture
+        run: |
+          python scripts/validate_product_blueprint.py
+
+      - name: Build Genesis API Docker image
+        run: |
+          docker build -t genesis-ai:test .

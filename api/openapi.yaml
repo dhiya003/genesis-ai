@@ -42,9 +42,67 @@ paths:
           description: Product Definition
         '404':
           description: Not found
+  /products/generate:
+    post:
+      summary: Generate a complete Product Blueprint from a stored research report
+      responses:
+        '201':
+          description: Product Blueprint created
+        '404':
+          description: Project or research report not found
+  /products/{productId}:
+    get:
+      summary: Retrieve product record with blueprint and core reports
+      responses:
+        '200':
+          description: Product bundle
+        '404':
+          description: Not found
+  /products/{productId}/blueprint:
+    get:
+      summary: Retrieve Product Blueprint
+      responses:
+        '200':
+          description: Product Blueprint
+        '404':
+          description: Not found
+  /products/{productId}/bom:
+    get:
+      summary: Retrieve Product BOM
+      responses:
+        '200':
+          description: BOM report
+        '404':
+          description: Not found
+  /products/{productId}/cost:
+    get:
+      summary: Retrieve Product Cost Report
+      responses:
+        '200':
+          description: Cost report
+        '404':
+          description: Not found
+  /products/{productId}/suppliers:
+    get:
+      summary: Retrieve Product Supplier Report
+      responses:
+        '200':
+          description: Supplier report
+        '404':
+          description: Not found
+  /products/{productId}/profitability:
+    get:
+      summary: Retrieve Product Profitability Report
+      responses:
+        '200':
+          description: Profitability report
+        '404':
+          description: Not found
 components:
   schemas:
     ResearchReport:
       type: object
     ProductDefinition:
+      type: object
+    ProductBlueprint:
       type: object

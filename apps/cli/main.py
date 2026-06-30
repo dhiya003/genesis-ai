@@ -51,9 +51,17 @@ def build_parser() -> argparse.ArgumentParser:
     product_run_parser.add_argument("project_id")
     product_run_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
     product_run_parser.add_argument("--data-dir")
+    product_generate_parser = product_subcommands.add_parser("generate", help="Generate a complete Product Blueprint from a stored research report")
+    product_generate_parser.add_argument("project_id")
+    product_generate_parser.add_argument("--approval-mode", choices=["auto", "manual", "human"], default="auto")
+    product_generate_parser.add_argument("--data-dir")
     product_definition_parser = product_subcommands.add_parser("definition", help="Retrieve a stored product definition")
     product_definition_parser.add_argument("project_id")
     product_definition_parser.add_argument("--data-dir")
+    for name in ["blueprint", "bom", "cost", "suppliers", "profitability"]:
+        section_parser = product_subcommands.add_parser(name, help=f"Retrieve stored product {name}")
+        section_parser.add_argument("product_id")
+        section_parser.add_argument("--data-dir")
 
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
@@ -175,11 +183,32 @@ def main(argv: list[str] | None = None) -> int:
                 except FileNotFoundError as exc:
                     raise not_found(f"Project or research report not found for project {args.project_id}") from exc
                 return 0
+            if args.product_command == "generate":
+                try:
+                    _print_json(orchestrator.generate_product_blueprint(args.project_id, approval_mode=args.approval_mode))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Project or research report not found for project {args.project_id}") from exc
+                return 0
             if args.product_command == "definition":
                 try:
                     _print_json(orchestrator.get_product_definition(args.project_id))
                 except FileNotFoundError as exc:
                     raise not_found(f"Product definition not found for project {args.project_id}") from exc
+                return 0
+            if args.product_command == "blueprint":
+                _print_json(orchestrator.get_product_blueprint(args.product_id))
+                return 0
+            if args.product_command == "bom":
+                _print_json(orchestrator.get_product_bom(args.product_id))
+                return 0
+            if args.product_command == "cost":
+                _print_json(orchestrator.get_product_cost(args.product_id))
+                return 0
+            if args.product_command == "suppliers":
+                _print_json(orchestrator.get_product_suppliers(args.product_id))
+                return 0
+            if args.product_command == "profitability":
+                _print_json(orchestrator.get_product_profitability(args.product_id))
                 return 0
         if args.command == "approval":
             orchestrator = GenesisOrchestrator(_store(args.data_dir))

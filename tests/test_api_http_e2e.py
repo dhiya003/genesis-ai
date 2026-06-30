@@ -59,6 +59,35 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     product_definition = json.loads(response.read().decode("utf-8"))
 
+                blueprint_request = request.Request(
+                    f"http://{host}:{port}/products/generate",
+                    data=json.dumps({"projectId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(blueprint_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    blueprint_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/blueprint", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_blueprint = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_bundle = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/bom", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_bom = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/cost", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_cost = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/suppliers", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_suppliers = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/products/{project_id}/profitability", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    product_profitability = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -73,6 +102,13 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertEqual(product_definition["reportType"], "PRODUCT_DEFINITION")
                 self.assertEqual(product_definition["projectId"], project_id)
                 self.assertIn("variantMatrix", product_definition)
+                self.assertEqual(blueprint_run["blueprint"]["reportType"], "PRODUCT_BLUEPRINT")
+                self.assertEqual(product_blueprint["reportType"], "PRODUCT_BLUEPRINT")
+                self.assertEqual(product_bundle["blueprint"]["reportType"], "PRODUCT_BLUEPRINT")
+                self.assertTrue(product_bom["items"])
+                self.assertGreater(product_cost["landedCost"], 0)
+                self.assertTrue(product_suppliers["shortlist"])
+                self.assertGreater(product_profitability["profitPerUnit"], 0)
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

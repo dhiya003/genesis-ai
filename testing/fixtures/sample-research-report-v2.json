@@ -1,109 +1,900 @@
 {
+  "citations": [
+    {
+      "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-001/trendAnalysis"
+    },
+    {
+      "snippet": "Competitors for 'Create a coffee lovers product brand for India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-002 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-002/competitorAnalysis"
+    },
+    {
+      "snippet": "Likely customers for 'Create a coffee lovers product brand for India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-003 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-003/customerAnalysis"
+    },
+    {
+      "snippet": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-004 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-004/productResearch"
+    }
+  ],
   "competitorAnalysis": {
+    "competitiveRisks": [
+      "Fast copycats",
+      "Paid ad inflation",
+      "Marketplace commoditization"
+    ],
     "competitorTypes": [
       "Generic print-on-demand merchandise pages",
       "Coffee roasters selling lifestyle accessories",
       "Instagram gifting stores"
     ],
+    "confidence": {
+      "evidenceCount": 1,
+      "level": "LOW",
+      "reasons": [
+        "1 evidence items collected.",
+        "1 unique source groups found.",
+        "1 items include snippets."
+      ],
+      "score": 0.39,
+      "sourceCount": 1
+    },
     "differentiation": [
       "Focus on India-specific coffee lover identity.",
       "Bundle products into launch kits instead of selling single commodity items.",
       "Use founder-led validation content before ads."
     ],
     "employeeId": "EMP-002",
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "snippet": "Competitors for 'Create a coffee lovers product brand for India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-002 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-002/competitorAnalysis"
+      }
+    ],
+    "evidenceLevel": "model_assumption",
+    "majorCompetitors": [
+      "Generic print-on-demand merchandise pages",
+      "Coffee roasters selling lifestyle accessories",
+      "Instagram gifting stores"
+    ],
+    "marketGaps": [
+      "Focus on India-specific coffee lover identity.",
+      "Bundle products into launch kits instead of selling single commodity items.",
+      "Use founder-led validation content before ads."
+    ],
+    "metrics": {
+      "evidenceCount": 1,
+      "runtimeSeconds": 0.01,
+      "score": 70
+    },
+    "outputPersisted": true,
+    "pricingAnalysis": "Benchmark live prices before procurement; deterministic range assumes affordable premium positioning.",
     "projectId": "sample-project",
+    "retryPolicy": {
+      "maxAttempts": 2,
+      "strategy": "retry employee output before failing workflow"
+    },
     "score": 70,
     "section": "competitorAnalysis",
     "status": "COMPLETED",
-    "summary": "Competitors are likely split between generic merchandise sellers and premium coffee accessory brands.",
+    "strengths": [
+      "Existing competitors prove category demand",
+      "Social channels can validate quickly"
+    ],
+    "summary": "Competitors for 'Create a coffee lovers product brand for India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+    "timeoutSeconds": 30,
+    "validation": {
+      "confidence": "PASS",
+      "evidence": "PASS",
+      "schema": "PASS",
+      "status": "PASS"
+    },
+    "weaknesses": [
+      "Generic positioning",
+      "Limited bundle differentiation"
+    ],
     "workflowId": "sample-workflow"
   },
-  "citations": [],
+  "completionChecklist": [
+    {
+      "item": "Trend Research completed",
+      "status": "PASS"
+    },
+    {
+      "item": "Competitor Research completed",
+      "status": "PASS"
+    },
+    {
+      "item": "Customer Research completed",
+      "status": "PASS"
+    },
+    {
+      "item": "Product Research completed",
+      "status": "PASS"
+    },
+    {
+      "item": "Evidence collected",
+      "status": "PASS"
+    },
+    {
+      "item": "Confidence calculated",
+      "status": "PASS"
+    },
+    {
+      "item": "Opportunity score generated",
+      "status": "PASS"
+    },
+    {
+      "item": "Risk assessment generated",
+      "status": "PASS"
+    },
+    {
+      "item": "Executive recommendation generated",
+      "status": "PASS"
+    },
+    {
+      "item": "Research Report finalized",
+      "status": "PASS"
+    },
+    {
+      "item": "Knowledge stored",
+      "status": "PASS"
+    },
+    {
+      "item": "Audit recorded",
+      "status": "PASS"
+    },
+    {
+      "item": "Workflow status updated",
+      "status": "PASS"
+    }
+  ],
   "confidence": {
-    "evidenceCount": 0,
+    "evidenceCount": 4,
     "level": "LOW",
     "reasons": [
-      "Sample fixture uses deterministic evidence."
+      "4 evidence items collected.",
+      "1 unique source groups found.",
+      "4 items include snippets."
     ],
-    "score": 0.2,
-    "sourceCount": 0
+    "score": 0.49,
+    "sourceCount": 1
+  },
+  "costSummary": {
+    "events": [
+      {
+        "estimatedCostInr": 0.0,
+        "label": "research_department",
+        "usage": {
+          "employees": 4,
+          "evidenceItems": 4
+        }
+      }
+    ],
+    "totalEstimatedCostInr": 0.0
   },
   "customerAnalysis": {
+    "buyingJourney": [
+      "Discovery through social/search",
+      "Comparison against alternatives",
+      "Trust check",
+      "Purchase or inquiry"
+    ],
+    "confidence": {
+      "evidenceCount": 1,
+      "level": "LOW",
+      "reasons": [
+        "1 evidence items collected.",
+        "1 unique source groups found.",
+        "1 items include snippets."
+      ],
+      "score": 0.39,
+      "sourceCount": 1
+    },
+    "customerRisks": [
+      "Assumed demand may not convert",
+      "Objections need live interviews"
+    ],
     "employeeId": "EMP-003",
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "snippet": "Likely customers for 'Create a coffee lovers product brand for India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-003 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-003/customerAnalysis"
+      }
+    ],
+    "evidenceLevel": "model_assumption",
+    "metrics": {
+      "evidenceCount": 1,
+      "runtimeSeconds": 0.01,
+      "score": 82
+    },
+    "motivations": [
+      "Identity",
+      "Giftability",
+      "Problem fit",
+      "Aesthetic appeal"
+    ],
     "objections": [
       "Price must feel gift-worthy but not luxury-only.",
       "Products must not look like generic marketplace merchandise.",
       "Shipping and packaging quality affect trust."
     ],
+    "outputPersisted": true,
+    "painPoints": [
+      "Price must feel gift-worthy but not luxury-only.",
+      "Products must not look like generic marketplace merchandise.",
+      "Shipping and packaging quality affect trust."
+    ],
+    "personas": [
+      "Young professionals who identify as coffee lovers",
+      "Gift buyers looking for affordable premium hampers",
+      "Home caf\u00e9 creators and content-friendly buyers"
+    ],
+    "preferredChannels": [
+      "Instagram",
+      "WhatsApp",
+      "Marketplace search",
+      "Google search"
+    ],
     "projectId": "sample-project",
+    "retryPolicy": {
+      "maxAttempts": 2,
+      "strategy": "retry employee output before failing workflow"
+    },
+    "reviewSentiment": "Requires live review ingestion for quantified sentiment.",
     "score": 82,
     "section": "customerAnalysis",
     "segments": [
       "Young professionals who identify as coffee lovers",
       "Gift buyers looking for affordable premium hampers",
-      "Home café creators and content-friendly buyers"
+      "Home caf\u00e9 creators and content-friendly buyers"
     ],
     "status": "COMPLETED",
-    "summary": "Likely customers are urban coffee drinkers, gifting buyers, and office/home café enthusiasts.",
+    "summary": "Likely customers for 'Create a coffee lovers product brand for India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+    "timeoutSeconds": 30,
+    "validation": {
+      "confidence": "PASS",
+      "evidence": "PASS",
+      "schema": "PASS",
+      "status": "PASS"
+    },
     "workflowId": "sample-workflow"
   },
-  "evidence": [],
-  "executiveSummary": "Genesis Research Department evaluated the coffee lovers India idea and recommends a lean manual validation launch.",
+  "downstreamReadiness": {
+    "productFactoryInputReady": true,
+    "requiredInputFor": "Sprint 3 Product Factory"
+  },
+  "evidence": [
+    {
+      "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+      "publishedDate": null,
+      "reliability": "MEDIUM",
+      "retrievedDate": "runtime",
+      "section": "trendAnalysis",
+      "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-001/trendAnalysis"
+    },
+    {
+      "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+      "publishedDate": null,
+      "reliability": "MEDIUM",
+      "retrievedDate": "runtime",
+      "section": "competitorAnalysis",
+      "snippet": "Competitors for 'Create a coffee lovers product brand for India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-002 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-002/competitorAnalysis"
+    },
+    {
+      "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+      "publishedDate": null,
+      "reliability": "MEDIUM",
+      "retrievedDate": "runtime",
+      "section": "customerAnalysis",
+      "snippet": "Likely customers for 'Create a coffee lovers product brand for India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-003 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-003/customerAnalysis"
+    },
+    {
+      "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+      "publishedDate": null,
+      "reliability": "MEDIUM",
+      "retrievedDate": "runtime",
+      "section": "productResearch",
+      "snippet": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+      "source": "genesis_deterministic_provider",
+      "title": "EMP-004 deterministic research assumption for Create a coffee lovers product brand for India.",
+      "url": "genesis://research/EMP-004/productResearch"
+    }
+  ],
+  "executiveRecommendation": {
+    "confidence": {
+      "evidenceCount": 4,
+      "level": "LOW",
+      "reasons": [
+        "4 evidence items collected.",
+        "1 unique source groups found.",
+        "4 items include snippets."
+      ],
+      "score": 0.49,
+      "sourceCount": 1
+    },
+    "justification": "Recommendation combines opportunity score, evidence confidence, risks, and MVP execution complexity.",
+    "nextActions": [
+      "Check 10 India coffee/gifting competitors and record prices.",
+      "Create one starter kit mockup and publish an interest post.",
+      "Collect 5 serious customer conversations before buying inventory."
+    ],
+    "recommendation": "Promising, but proceed only after improving evidence confidence with live customer and competitor checks.",
+    "risksSummary": [
+      "Competitor saturation must be verified with live marketplace and Instagram checks.",
+      "The first offer may fail if it looks like generic merchandise.",
+      "Unit economics must include packaging, shipping, and damaged-return risk."
+    ],
+    "supportingEvidence": [
+      {
+        "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-001/trendAnalysis"
+      },
+      {
+        "snippet": "Competitors for 'Create a coffee lovers product brand for India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-002 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-002/competitorAnalysis"
+      },
+      {
+        "snippet": "Likely customers for 'Create a coffee lovers product brand for India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-003 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-003/customerAnalysis"
+      },
+      {
+        "snippet": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-004 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-004/productResearch"
+      }
+    ],
+    "type": "Validate Further"
+  },
+  "executiveSummary": "Genesis Research Department evaluated 'Create a coffee lovers product brand for India.' using EMP-001 to EMP-004 and recommends: Promising, but proceed only after improving evidence confidence with live customer and competitor checks.",
   "idea": "Create a coffee lovers product brand for India.",
+  "knowledgeBaseEntries": [
+    {
+      "futureImprovement": "Refresh with live market, supplier, customer, and competitor data as credentials become available.",
+      "lesson": "Research should produce an evidence-backed opportunity score before Product Factory execution.",
+      "opportunityScore": 76,
+      "projectId": "sample-project",
+      "recommendation": "Promising, but proceed only after improving evidence confidence with live customer and competitor checks.",
+      "sourceWorkflowId": "sample-workflow",
+      "type": "RESEARCH_INTELLIGENCE"
+    }
+  ],
+  "mergeSummary": {
+    "contradictions": [],
+    "departmentSummary": "EMP-001 to EMP-004 outputs were merged into one evidence-backed Research Report.",
+    "duplicateFindingsMerged": 51,
+    "mergedFindings": [
+      "Niche communities respond well to identity-led products.",
+      "Coffee culture supports repeatable content themes and bundles.",
+      "India launch can begin with Instagram and WhatsApp without paid infrastructure.",
+      "Focus on India-specific coffee lover identity.",
+      "Bundle products into launch kits instead of selling single commodity items.",
+      "Use founder-led validation content before ads.",
+      "U",
+      "s",
+      "e",
+      "b"
+    ],
+    "sectionOwnership": {
+      "competitorAnalysis": "EMP-002",
+      "customerAnalysis": "EMP-003",
+      "productResearch": "EMP-004",
+      "trendAnalysis": "EMP-001"
+    }
+  },
   "nextActions": [
     "Check 10 India coffee/gifting competitors and record prices.",
     "Create one starter kit mockup and publish an interest post.",
     "Collect 5 serious customer conversations before buying inventory."
   ],
-  "opportunityScore": 77,
-  "overallScore": 77,
+  "opportunityRating": "Average",
+  "opportunityScore": 76,
+  "opportunityScoring": {
+    "confidenceAdjustment": -8,
+    "explanation": "Score uses weighted trend, competitor, customer, and product research, adjusted by evidence confidence.",
+    "rating": "Average",
+    "score": 69,
+    "sectionScores": {
+      "competitorAnalysis": 70,
+      "customerAnalysis": 82,
+      "productResearch": 76,
+      "trendAnalysis": 78
+    },
+    "weights": {
+      "competitorAnalysis": 0.2,
+      "customerAnalysis": 0.3,
+      "productResearch": 0.25,
+      "trendAnalysis": 0.25
+    }
+  },
+  "overallScore": 76,
   "productAnalysis": {
+    "confidence": {
+      "evidenceCount": 1,
+      "level": "LOW",
+      "reasons": [
+        "1 evidence items collected.",
+        "1 unique source groups found.",
+        "1 items include snippets."
+      ],
+      "score": 0.39,
+      "sourceCount": 1
+    },
+    "differentiation": "Use bundle/story/variant strategy to avoid generic product positioning.",
     "employeeId": "EMP-004",
+    "entryBarriers": [
+      "Differentiation",
+      "Supplier verification",
+      "Trust-building"
+    ],
+    "estimatedDemand": "Directional demand only until live marketplace/search volume is connected.",
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "snippet": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-004 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-004/productResearch"
+      }
+    ],
+    "evidenceLevel": "model_assumption",
+    "manufacturingFeasibility": "Favor low-tooling, lightweight, easy-to-ship MVP products.",
+    "marginPotential": "Requires Sprint 3 costing; target affordable premium margin.",
+    "metrics": {
+      "evidenceCount": 1,
+      "runtimeSeconds": 0.01,
+      "score": 76
+    },
     "mvpRecommendation": "Launch one compact coffee-lover starter kit and test demand before expanding into mugs, apparel, or heavier products.",
+    "outputPersisted": true,
     "projectId": "sample-project",
+    "rankedOpportunities": [
+      {
+        "product": "Coffee quote sticker pack",
+        "rank": 1,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Desk mini print or magnet",
+        "rank": 2,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Coffee lover gift card",
+        "rank": 3,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Starter hamper with one hero accessory",
+        "rank": 4,
+        "rationale": "Low-complexity MVP candidate"
+      }
+    ],
     "recommendedProducts": [
       "Coffee quote sticker pack",
       "Desk mini print or magnet",
       "Coffee lover gift card",
       "Starter hamper with one hero accessory"
     ],
+    "retryPolicy": {
+      "maxAttempts": 2,
+      "strategy": "retry employee output before failing workflow"
+    },
+    "scalability": "Start with a compact MVP, then expand into variants and bundles.",
     "score": 76,
     "section": "productResearch",
     "status": "COMPLETED",
-    "summary": "The first product set should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "summary": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "timeoutSeconds": 30,
+    "validation": {
+      "confidence": "PASS",
+      "evidence": "PASS",
+      "schema": "PASS",
+      "status": "PASS"
+    },
     "workflowId": "sample-workflow"
   },
   "productResearch": {
+    "confidence": {
+      "evidenceCount": 1,
+      "level": "LOW",
+      "reasons": [
+        "1 evidence items collected.",
+        "1 unique source groups found.",
+        "1 items include snippets."
+      ],
+      "score": 0.39,
+      "sourceCount": 1
+    },
+    "differentiation": "Use bundle/story/variant strategy to avoid generic product positioning.",
     "employeeId": "EMP-004",
+    "entryBarriers": [
+      "Differentiation",
+      "Supplier verification",
+      "Trust-building"
+    ],
+    "estimatedDemand": "Directional demand only until live marketplace/search volume is connected.",
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "snippet": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-004 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-004/productResearch"
+      }
+    ],
+    "evidenceLevel": "model_assumption",
+    "manufacturingFeasibility": "Favor low-tooling, lightweight, easy-to-ship MVP products.",
+    "marginPotential": "Requires Sprint 3 costing; target affordable premium margin.",
+    "metrics": {
+      "evidenceCount": 1,
+      "runtimeSeconds": 0.01,
+      "score": 76
+    },
     "mvpRecommendation": "Launch one compact coffee-lover starter kit and test demand before expanding into mugs, apparel, or heavier products.",
+    "outputPersisted": true,
     "projectId": "sample-project",
+    "rankedOpportunities": [
+      {
+        "product": "Coffee quote sticker pack",
+        "rank": 1,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Desk mini print or magnet",
+        "rank": 2,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Coffee lover gift card",
+        "rank": 3,
+        "rationale": "Low-complexity MVP candidate"
+      },
+      {
+        "product": "Starter hamper with one hero accessory",
+        "rank": 4,
+        "rationale": "Low-complexity MVP candidate"
+      }
+    ],
     "recommendedProducts": [
       "Coffee quote sticker pack",
       "Desk mini print or magnet",
       "Coffee lover gift card",
       "Starter hamper with one hero accessory"
     ],
+    "retryPolicy": {
+      "maxAttempts": 2,
+      "strategy": "retry employee output before failing workflow"
+    },
+    "scalability": "Start with a compact MVP, then expand into variants and bundles.",
     "score": 76,
     "section": "productResearch",
     "status": "COMPLETED",
-    "summary": "The first product set should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "summary": "The first product set for 'Create a coffee lovers product brand for India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+    "timeoutSeconds": 30,
+    "validation": {
+      "confidence": "PASS",
+      "evidence": "PASS",
+      "schema": "PASS",
+      "status": "PASS"
+    },
     "workflowId": "sample-workflow"
   },
   "projectId": "sample-project",
-  "recommendation": "Proceed with a lean manual validation launch before investing in inventory or ads.",
+  "recommendation": "Promising, but proceed only after improving evidence confidence with live customer and competitor checks.",
   "recommendations": [
-    "Proceed with a lean manual validation launch before investing in inventory or ads."
+    "Promising, but proceed only after improving evidence confidence with live customer and competitor checks."
   ],
   "reportType": "RESEARCH_REPORT",
+  "researchExecution": {
+    "employeeProgress": [
+      {
+        "employeeId": "EMP-001",
+        "progressPercent": 100,
+        "runtimeSeconds": 0.01,
+        "section": "trendAnalysis",
+        "status": "COMPLETED"
+      },
+      {
+        "employeeId": "EMP-002",
+        "progressPercent": 100,
+        "runtimeSeconds": 0.01,
+        "section": "competitorAnalysis",
+        "status": "COMPLETED"
+      },
+      {
+        "employeeId": "EMP-003",
+        "progressPercent": 100,
+        "runtimeSeconds": 0.01,
+        "section": "customerAnalysis",
+        "status": "COMPLETED"
+      },
+      {
+        "employeeId": "EMP-004",
+        "progressPercent": 100,
+        "runtimeSeconds": 0.01,
+        "section": "productResearch",
+        "status": "COMPLETED"
+      }
+    ],
+    "independentFailuresIsolated": true,
+    "mode": "parallel",
+    "parallelExecutionSupported": true,
+    "sequentialFallbackSupported": true,
+    "sharedSearchResultsReused": true
+  },
+  "riskAssessment": [
+    {
+      "category": "Market Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Run live market and customer validation before inventory.",
+      "risk": "Demand signal may be weaker than inferred.",
+      "severity": "MEDIUM"
+    },
+    {
+      "category": "Product Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Use differentiated bundle, story, and variant strategy.",
+      "risk": "The first product may feel generic.",
+      "severity": "HIGH"
+    },
+    {
+      "category": "Manufacturing Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Move to Sprint 3 BOM, supplier, and costing validation.",
+      "risk": "Manufacturing assumptions are not yet supplier-verified.",
+      "severity": "MEDIUM"
+    },
+    {
+      "category": "Financial Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Calculate landed cost and break-even before procurement.",
+      "risk": "Margins may compress after packaging, shipping, returns, and fees.",
+      "severity": "HIGH"
+    },
+    {
+      "category": "Competitive Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "HIGH",
+      "mitigation": "Build brand, packaging, content, and community moats.",
+      "risk": "Existing sellers can copy positioning quickly.",
+      "severity": "MEDIUM"
+    },
+    {
+      "category": "Supply Chain Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Collect quotes and sample lead times before launch.",
+      "risk": "Supplier availability and MOQ are not live-verified.",
+      "severity": "MEDIUM"
+    },
+    {
+      "category": "Regulatory Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "LOW",
+      "mitigation": "Route compliance-sensitive claims through founder/legal approval.",
+      "risk": "Claims, labeling, and category compliance need human review.",
+      "severity": "MEDIUM"
+    },
+    {
+      "category": "Operational Risk",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "section": "trendAnalysis",
+          "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+          "url": "genesis://research/EMP-001/trendAnalysis"
+        }
+      ],
+      "likelihood": "MEDIUM",
+      "mitigation": "Start with a narrow MVP and manual operations checklist.",
+      "risk": "Founder execution capacity may limit speed.",
+      "severity": "MEDIUM"
+    }
+  ],
   "risks": [
     "Competitor saturation must be verified with live marketplace and Instagram checks.",
     "The first offer may fail if it looks like generic merchandise.",
     "Unit economics must include packaging, shipping, and damaged-return risk."
   ],
   "trendAnalysis": {
+    "cagr": "Unavailable until live market source is connected.",
+    "confidence": {
+      "evidenceCount": 1,
+      "level": "LOW",
+      "reasons": [
+        "1 evidence items collected.",
+        "1 unique source groups found.",
+        "1 items include snippets."
+      ],
+      "score": 0.39,
+      "sourceCount": 1
+    },
+    "emergingTrends": [
+      "Niche communities respond well to identity-led products.",
+      "Coffee culture supports repeatable content themes and bundles.",
+      "India launch can begin with Instagram and WhatsApp without paid infrastructure."
+    ],
     "employeeId": "EMP-001",
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "snippet": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-001 deterministic research assumption for Create a coffee lovers product brand for India.",
+        "url": "genesis://research/EMP-001/trendAnalysis"
+      }
+    ],
+    "evidenceLevel": "model_assumption",
+    "growthDrivers": [
+      "Niche communities respond well to identity-led products.",
+      "Coffee culture supports repeatable content themes and bundles.",
+      "India launch can begin with Instagram and WhatsApp without paid infrastructure."
+    ],
+    "marketChallenges": [
+      "Differentiation",
+      "Distribution trust",
+      "Unit economics"
+    ],
+    "marketSize": "TAM/SAM/SOM requires live market data; MVP validates directional demand first.",
+    "metrics": {
+      "evidenceCount": 1,
+      "runtimeSeconds": 0.01,
+      "score": 78
+    },
+    "opportunities": [
+      "Validate with content before inventory",
+      "Bundle products for higher perceived value"
+    ],
+    "outputPersisted": true,
     "projectId": "sample-project",
+    "regulatoryChanges": [
+      "No specific regulatory change detected in deterministic MVP mode."
+    ],
+    "retryPolicy": {
+      "maxAttempts": 2,
+      "strategy": "retry employee output before failing workflow"
+    },
     "score": 78,
+    "seasonality": "Gifting peaks around festivals, birthdays, and workplace occasions.",
     "section": "trendAnalysis",
     "signals": [
       "Niche communities respond well to identity-led products.",
@@ -111,8 +902,20 @@
       "India launch can begin with Instagram and WhatsApp without paid infrastructure."
     ],
     "status": "COMPLETED",
-    "summary": "The idea fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+    "summary": "The idea 'Create a coffee lovers product brand for India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+    "threats": [
+      "Generic competitors",
+      "Weak evidence without live market checks"
+    ],
+    "timeoutSeconds": 30,
+    "validation": {
+      "confidence": "PASS",
+      "evidence": "PASS",
+      "schema": "PASS",
+      "status": "PASS"
+    },
     "workflowId": "sample-workflow"
   },
+  "version": 1,
   "workflowId": "sample-workflow"
 }

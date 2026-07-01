@@ -3,19 +3,88 @@
   "$id": "https://genesis-ai.local/schemas/research-report-v2.schema.json",
   "title": "Genesis Sprint 2 Research Report",
   "type": "object",
-  "required": ["reportType", "projectId", "workflowId", "idea", "trendAnalysis", "competitorAnalysis", "customerAnalysis", "productResearch", "overallScore", "recommendation", "risks", "nextActions"],
+  "required": ["reportType", "projectId", "workflowId", "idea", "trendAnalysis", "competitorAnalysis", "customerAnalysis", "productResearch", "overallScore", "opportunityScore", "opportunityRating", "opportunityScoring", "confidence", "evidence", "recommendation", "executiveRecommendation", "risks", "riskAssessment", "nextActions", "mergeSummary", "researchExecution", "completionChecklist", "downstreamReadiness"],
   "properties": {
     "reportType": { "const": "RESEARCH_REPORT" },
     "projectId": { "type": "string" },
     "workflowId": { "type": "string" },
     "idea": { "type": "string" },
-    "trendAnalysis": { "type": "object" },
-    "competitorAnalysis": { "type": "object" },
-    "customerAnalysis": { "type": "object" },
-    "productResearch": { "type": "object" },
+    "trendAnalysis": { "$ref": "#/$defs/employeeOutput" },
+    "competitorAnalysis": { "$ref": "#/$defs/employeeOutput" },
+    "customerAnalysis": { "$ref": "#/$defs/employeeOutput" },
+    "productResearch": { "$ref": "#/$defs/employeeOutput" },
     "overallScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "opportunityScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "opportunityRating": { "enum": ["Very Poor", "Poor", "Average", "Good", "Excellent"] },
+    "opportunityScoring": {
+      "type": "object",
+      "required": ["score", "rating", "weights", "explanation"],
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "rating": { "enum": ["Very Poor", "Poor", "Average", "Good", "Excellent"] },
+        "weights": { "type": "object" },
+        "explanation": { "type": "string" }
+      }
+    },
+    "confidence": { "type": "object" },
+    "evidence": { "type": "array" },
     "recommendation": { "type": "string" },
+    "executiveRecommendation": {
+      "type": "object",
+      "required": ["type", "recommendation", "confidence", "nextActions"],
+      "properties": {
+        "type": { "enum": ["Proceed", "Proceed with Caution", "Validate Further", "Pivot", "Do Not Proceed"] },
+        "recommendation": { "type": "string" },
+        "confidence": { "type": "object" },
+        "nextActions": { "type": "array" }
+      }
+    },
     "risks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
-    "nextActions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+    "riskAssessment": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/risk" },
+      "minItems": 4
+    },
+    "nextActions": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "mergeSummary": { "type": "object" },
+    "researchExecution": { "type": "object" },
+    "completionChecklist": { "type": "array", "minItems": 1 },
+    "downstreamReadiness": {
+      "type": "object",
+      "required": ["productFactoryInputReady"],
+      "properties": {
+        "productFactoryInputReady": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "employeeOutput": {
+      "type": "object",
+      "required": ["employeeId", "projectId", "workflowId", "section", "status", "score", "summary", "evidence", "confidence", "validation"],
+      "properties": {
+        "employeeId": { "type": "string" },
+        "projectId": { "type": "string" },
+        "workflowId": { "type": "string" },
+        "section": { "type": "string" },
+        "status": { "const": "COMPLETED" },
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "summary": { "type": "string" },
+        "evidence": { "type": "array", "minItems": 1 },
+        "confidence": { "type": "object" },
+        "validation": { "type": "object" }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["category", "risk", "severity", "likelihood", "mitigation", "evidence"],
+      "properties": {
+        "category": { "type": "string" },
+        "risk": { "type": "string" },
+        "severity": { "type": "string" },
+        "likelihood": { "type": "string" },
+        "mitigation": { "type": "string" },
+        "evidence": { "type": "array" }
+      }
+    }
   }
 }

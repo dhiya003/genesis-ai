@@ -21,13 +21,21 @@ REQUIRED_TOP_LEVEL = [
     "productResearch",
     "overallScore",
     "opportunityScore",
+    "opportunityRating",
+    "opportunityScoring",
     "confidence",
     "evidence",
     "recommendation",
     "recommendations",
+    "executiveRecommendation",
     "risks",
+    "riskAssessment",
     "nextActions",
     "citations",
+    "mergeSummary",
+    "researchExecution",
+    "completionChecklist",
+    "downstreamReadiness",
 ]
 
 EMPLOYEE_SECTIONS = {
@@ -51,6 +59,11 @@ def validate_research_report_payload(data: dict[str, Any]) -> list[str]:
     opportunity_score = data.get("opportunityScore")
     if not isinstance(opportunity_score, (int, float)) or not 0 <= opportunity_score <= 100:
         issues.append("opportunityScore must be a number from 0 to 100")
+    if data.get("opportunityRating") not in {"Very Poor", "Poor", "Average", "Good", "Excellent"}:
+        issues.append("opportunityRating must be one of Very Poor, Poor, Average, Good, or Excellent")
+    opportunity_scoring = data.get("opportunityScoring")
+    if not isinstance(opportunity_scoring, dict) or not isinstance(opportunity_scoring.get("weights"), dict) or not opportunity_scoring.get("explanation"):
+        issues.append("opportunityScoring must include weights and explanation")
     confidence = data.get("confidence")
     if not isinstance(confidence, dict) or confidence.get("level") not in {"LOW", "MEDIUM", "HIGH"}:
         issues.append("confidence.level must be LOW, MEDIUM, or HIGH")
@@ -60,6 +73,29 @@ def validate_research_report_payload(data: dict[str, Any]) -> list[str]:
     for key in ["risks", "nextActions"]:
         if not isinstance(data.get(key), list) or not data.get(key):
             issues.append(f"{key} must be a non-empty list")
+    risk_assessment = data.get("riskAssessment")
+    if not isinstance(risk_assessment, list) or len(risk_assessment) < 4:
+        issues.append("riskAssessment must include categorized risks")
+    else:
+        for index, risk in enumerate(risk_assessment):
+            if not isinstance(risk, dict):
+                issues.append(f"riskAssessment[{index}] must be an object")
+                continue
+            for key in ["category", "severity", "likelihood", "mitigation", "evidence"]:
+                if key not in risk:
+                    issues.append(f"riskAssessment[{index}].{key} is required")
+    executive = data.get("executiveRecommendation")
+    if not isinstance(executive, dict) or executive.get("type") not in {"Proceed", "Proceed with Caution", "Validate Further", "Pivot", "Do Not Proceed"}:
+        issues.append("executiveRecommendation.type must be a supported recommendation type")
+    execution = data.get("researchExecution")
+    if not isinstance(execution, dict) or not execution.get("parallelExecutionSupported") or not execution.get("sequentialFallbackSupported"):
+        issues.append("researchExecution must document parallel support and sequential fallback")
+    checklist = data.get("completionChecklist")
+    if not isinstance(checklist, list) or not checklist or any(item.get("status") != "PASS" for item in checklist if isinstance(item, dict)):
+        issues.append("completionChecklist must contain passing checklist items")
+    downstream = data.get("downstreamReadiness")
+    if not isinstance(downstream, dict) or downstream.get("productFactoryInputReady") is not True:
+        issues.append("downstreamReadiness.productFactoryInputReady must be true")
     for section, expected_employee in EMPLOYEE_SECTIONS.items():
         value = data.get(section)
         if not isinstance(value, dict):
@@ -74,6 +110,13 @@ def validate_research_report_payload(data: dict[str, Any]) -> list[str]:
             issues.append(f"{section}.score must be a number from 0 to 100")
         if not value.get("summary"):
             issues.append(f"{section}.summary is required")
+        if not value.get("evidence"):
+            issues.append(f"{section}.evidence is required")
+        if not isinstance(value.get("confidence"), dict):
+            issues.append(f"{section}.confidence is required")
+        validation = value.get("validation")
+        if not isinstance(validation, dict) or any(validation.get(key) != "PASS" for key in ["schema", "evidence", "confidence", "status"]):
+            issues.append(f"{section}.validation must pass schema, evidence, confidence, and status")
     return issues
 
 

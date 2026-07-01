@@ -11,6 +11,7 @@ This folder stores the PostgreSQL data model for Genesis AI.
 
 ```text
 database/migrations/0001_initial_schema.sql
+database/migrations/0002_epic_01_founder_business_management.sql
 database/seeds/0001_seed_ai_workforce.sql
 ```
 
@@ -31,6 +32,7 @@ Indexes are added for:
 - workflow project lookup
 - workflow state lookup
 - report lookup by project
+- business idempotency lookup by founder and idempotency key
 
 ## Constraints
 
@@ -38,3 +40,4 @@ Indexes are added for:
 - Priority values are constrained between 1 and 5.
 - Employees have explicit authority levels.
 - Child records cascade when projects are deleted.
+- Epic 01 business context stores founder profile, business vision, goals, constraints, budget, success metrics, and approval policies.

@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 from apps.dashboard import render_business_dashboard
 from apps.errors import GenesisError, bad_request, not_found
+from apps.founder import FounderBusinessRuntime
 from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
@@ -68,6 +69,9 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
         self.server.current_principal = principal  # type: ignore[attr-defined]
         return principal
 
+    def _founder_id(self) -> str:
+        return self.headers.get("X-Genesis-Founder-ID", "founder").strip() or "founder"
+
     def do_GET(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
         config: RuntimeConfig = self.server.runtime_config  # type: ignore[attr-defined]
         parsed = urlparse(self.path)
@@ -82,6 +86,43 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
             if parsed.path == "/integrations/status":
                 self._send_json(200, integration_status())
                 return
+            if parsed.path == "/founder/profile":
+                try:
+                    self._send_json(200, FounderBusinessRuntime(self.store).get_founder_profile(founder_id=self._founder_id()))
+                except FileNotFoundError as exc:
+                    raise not_found("Founder profile not found") from exc
+                return
+            if parsed.path == "/businesses":
+                self._send_json(200, FounderBusinessRuntime(self.store).list_businesses(founder_id=self._founder_id()))
+                return
+            if parsed.path.startswith("/businesses/"):
+                business_path = parsed.path.removeprefix("/businesses/").strip("/")
+                parts = [part for part in business_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Business ID is required")
+                business_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                runtime = FounderBusinessRuntime(self.store)
+                try:
+                    if section is None or section == "dashboard":
+                        self._send_json(200, runtime.business_dashboard(business_id))
+                    elif section == "vision":
+                        self._send_json(200, {"businessId": business_id, "activeVision": self.store.get_active_business_vision(business_id), "versions": self.store.list_business_vision_versions(business_id)})
+                    elif section == "goals":
+                        self._send_json(200, {"businessId": business_id, "goals": self.store.list_business_goals(business_id, include_archived=True)})
+                    elif section == "constraints":
+                        self._send_json(200, {"businessId": business_id, "constraints": self.store.list_business_constraints(business_id, include_archived=True)})
+                    elif section == "budget":
+                        self._send_json(200, self.store.get_business_budget(business_id))
+                    elif section == "success-metrics":
+                        self._send_json(200, {"businessId": business_id, "metrics": self.store.list_business_success_metrics(business_id)})
+                    elif section == "approval-policy":
+                        self._send_json(200, self.store.get_business_approval_policy(business_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Business resource not found: {business_id}") from exc
             if parsed.path == "/metrics":
                 metrics = self.store.list_metrics()
                 self._send_json(200, {"summary": summarize_metrics(metrics), "metrics": metrics})
@@ -339,6 +380,62 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 self._authorize({"founder"})
             else:
                 self._authorize({"founder", "operator"})
+            if parsed.path == "/founder/profile":
+                result = FounderBusinessRuntime(self.store).upsert_founder_profile(self._read_json(), founder_id=self._founder_id())
+                self._send_json(200, result)
+                return
+            if parsed.path == "/businesses":
+                payload = self._read_json()
+                result = FounderBusinessRuntime(self.store).create_business(payload, founder_id=self._founder_id(), idempotency_key=self.headers.get("Idempotency-Key"), draft=payload.get("draft") is True)
+                self._send_json(201, result)
+                return
+            if parsed.path.startswith("/businesses/"):
+                business_path = parsed.path.removeprefix("/businesses/").strip("/")
+                parts = [part for part in business_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Business ID is required")
+                business_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                runtime = FounderBusinessRuntime(self.store)
+                if len(parts) == 4 and parts[1] == "projects" and parts[3] == "start-planning":
+                    self._send_json(201, runtime.start_project_planning(business_id, parts[2], founder_id=self._founder_id()))
+                    return
+                payload = self._read_json()
+                if section == "vision":
+                    content = payload.get("content")
+                    if not isinstance(content, str):
+                        raise bad_request("content must be a string")
+                    content_format = payload.get("contentFormat", "markdown")
+                    if not isinstance(content_format, str):
+                        raise bad_request("contentFormat must be a string")
+                    self._send_json(201, runtime.set_business_vision(business_id, content, founder_id=self._founder_id(), content_format=content_format))
+                    return
+                if len(parts) == 3 and parts[1] == "goals":
+                    self._send_json(200, runtime.update_business_goal(business_id, parts[2], payload, founder_id=self._founder_id()))
+                    return
+                if section == "goals":
+                    self._send_json(201, runtime.add_business_goal(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if len(parts) == 3 and parts[1] == "constraints":
+                    self._send_json(200, runtime.update_business_constraint(business_id, parts[2], payload, founder_id=self._founder_id()))
+                    return
+                if section == "constraints":
+                    self._send_json(201, runtime.add_business_constraint(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if section == "budget":
+                    self._send_json(200, runtime.set_business_budget(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if section == "success-metrics":
+                    self._send_json(201, runtime.add_success_metric(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if section == "approval-policy":
+                    self._send_json(200, runtime.set_approval_policy(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if section == "projects":
+                    self._send_json(201, runtime.create_project(business_id, payload, founder_id=self._founder_id()))
+                    return
+                if len(parts) == 3 and parts[1] == "projects":
+                    raise bad_request("Project action is required")
             if parsed.path == "/marketing/generate":
                 payload = self._read_json()
                 creative_id = payload.get("creativeId")

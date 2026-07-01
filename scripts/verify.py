@@ -24,6 +24,7 @@ REQUIRED_PATHS = [
     "apps/analytics/runtime.py",
     "apps/dashboard.py",
     "apps/security.py",
+    "apps/founder/management.py",
     "apps/integrations/registry.py",
     "apps/employees/research.py",
     "apps/workflow/engine.py",
@@ -48,6 +49,7 @@ REQUIRED_PATHS = [
     "tests/test_businessos_runtime.py",
     "tests/test_analytics_runtime.py",
     "tests/test_production_guardrails.py",
+    "tests/test_founder_management.py",
     "api/schemas/research-report-v2.schema.json",
     "api/schemas/product-definition.schema.json",
     "api/schemas/product-blueprint.schema.json",
@@ -67,6 +69,8 @@ REQUIRED_PATHS = [
     "docs/sprint-6-definition-of-done.md",
     "docs/sprint-7-kickoff.md",
     "docs/sprint-8-definition-of-done.md",
+    "docs/epic-01-business-founder-management.md",
+    "database/migrations/0002_epic_01_founder_business_management.sql",
 ]
 
 JSON_PATHS = [

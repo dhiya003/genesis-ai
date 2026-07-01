@@ -12,6 +12,15 @@ class JsonStore:
 
     def __init__(self, root: str | Path = ".genesis-data") -> None:
         self.root = Path(root)
+        self.businesses_dir = self.root / "businesses"
+        self.founder_profiles_dir = self.root / "founder_profiles"
+        self.founder_profile_versions_dir = self.root / "founder_profile_versions"
+        self.business_visions_dir = self.root / "business_visions"
+        self.business_goals_dir = self.root / "business_goals"
+        self.business_constraints_dir = self.root / "business_constraints"
+        self.business_budgets_dir = self.root / "business_budgets"
+        self.business_success_metrics_dir = self.root / "business_success_metrics"
+        self.business_approval_policies_dir = self.root / "business_approval_policies"
         self.projects_dir = self.root / "projects"
         self.workflows_dir = self.root / "workflows"
         self.employee_outputs_dir = self.root / "employee_outputs"
@@ -64,6 +73,15 @@ class JsonStore:
         self.business_alerts_dir = self.root / "business_alerts"
         self.business_knowledge_dir = self.root / "business_knowledge"
         for directory in [
+            self.businesses_dir,
+            self.founder_profiles_dir,
+            self.founder_profile_versions_dir,
+            self.business_visions_dir,
+            self.business_goals_dir,
+            self.business_constraints_dir,
+            self.business_budgets_dir,
+            self.business_success_metrics_dir,
+            self.business_approval_policies_dir,
             self.projects_dir,
             self.workflows_dir,
             self.employee_outputs_dir,
@@ -118,11 +136,120 @@ class JsonStore:
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
+    def save_business(self, business: dict[str, Any]) -> None:
+        self._write(self.businesses_dir / f"{business['id']}.json", business)
+
+    def get_business(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.businesses_dir / f"{business_id}.json")
+
+    def list_businesses(self, founder_id: str | None = None) -> list[dict[str, Any]]:
+        businesses = [self._read(path) for path in sorted(self.businesses_dir.glob("*.json"))]
+        if founder_id is not None:
+            businesses = [business for business in businesses if business.get("creator") == founder_id or business.get("founderId") == founder_id]
+        businesses.sort(key=lambda item: str(item.get("createdAt", "")))
+        return businesses
+
+    def find_business_by_idempotency_key(self, founder_id: str, idempotency_key: str) -> dict[str, Any] | None:
+        for business in self.list_businesses(founder_id=founder_id):
+            if business.get("idempotencyKey") == idempotency_key:
+                return business
+        return None
+
+    def save_founder_profile(self, profile: dict[str, Any]) -> None:
+        self._write(self.founder_profiles_dir / f"{profile['founderId']}.json", profile)
+
+    def get_founder_profile(self, founder_id: str) -> dict[str, Any]:
+        return self._read(self.founder_profiles_dir / f"{founder_id}.json")
+
+    def save_founder_profile_version(self, version: dict[str, Any]) -> None:
+        self._write(self.founder_profile_versions_dir / f"{version['founderId']}__{int(version['version']):04d}.json", version)
+
+    def list_founder_profile_versions(self, founder_id: str) -> list[dict[str, Any]]:
+        versions = [self._read(path) for path in sorted(self.founder_profile_versions_dir.glob(f"{founder_id}__*.json"))]
+        versions.sort(key=lambda item: int(item.get("version", 0)))
+        return versions
+
+    def save_business_vision_version(self, version: dict[str, Any]) -> None:
+        self._write(self.business_visions_dir / f"{version['businessId']}__{int(version['version']):04d}.json", version)
+
+    def list_business_vision_versions(self, business_id: str) -> list[dict[str, Any]]:
+        versions = [self._read(path) for path in sorted(self.business_visions_dir.glob(f"{business_id}__*.json"))]
+        versions.sort(key=lambda item: int(item.get("version", 0)))
+        return versions
+
+    def get_active_business_vision(self, business_id: str) -> dict[str, Any] | None:
+        versions = self.list_business_vision_versions(business_id)
+        active_versions = [version for version in versions if version.get("status") == "ACTIVE"]
+        return active_versions[-1] if active_versions else versions[-1] if versions else None
+
+    def save_business_goal(self, goal: dict[str, Any]) -> None:
+        self._write(self.business_goals_dir / f"{goal['businessId']}__{goal['id']}.json", goal)
+
+    def list_business_goals(self, business_id: str, include_archived: bool = False) -> list[dict[str, Any]]:
+        goals = [self._read(path) for path in sorted(self.business_goals_dir.glob(f"{business_id}__*.json"))]
+        if not include_archived:
+            goals = [goal for goal in goals if goal.get("status") != "ARCHIVED"]
+        goals.sort(key=lambda item: str(item.get("createdAt", "")))
+        return goals
+
+    def get_business_goal(self, business_id: str, goal_id: str) -> dict[str, Any]:
+        return self._read(self.business_goals_dir / f"{business_id}__{goal_id}.json")
+
+    def save_business_constraint_version(self, constraint: dict[str, Any]) -> None:
+        self._write(self.business_constraints_dir / f"{constraint['businessId']}__{constraint['id']}__{int(constraint['version']):04d}.json", constraint)
+
+    def list_business_constraints(self, business_id: str, include_archived: bool = False) -> list[dict[str, Any]]:
+        versions = [self._read(path) for path in sorted(self.business_constraints_dir.glob(f"{business_id}__*.json"))]
+        latest_by_id: dict[str, dict[str, Any]] = {}
+        for version in versions:
+            constraint_id = str(version.get("id", ""))
+            if not constraint_id:
+                continue
+            if int(version.get("version", 0)) >= int(latest_by_id.get(constraint_id, {}).get("version", 0)):
+                latest_by_id[constraint_id] = version
+        constraints = list(latest_by_id.values())
+        if not include_archived:
+            constraints = [constraint for constraint in constraints if constraint.get("status") != "ARCHIVED"]
+        constraints.sort(key=lambda item: str(item.get("createdAt", "")))
+        return constraints
+
+    def list_business_constraint_versions(self, business_id: str, constraint_id: str) -> list[dict[str, Any]]:
+        versions = [self._read(path) for path in sorted(self.business_constraints_dir.glob(f"{business_id}__{constraint_id}__*.json"))]
+        versions.sort(key=lambda item: int(item.get("version", 0)))
+        return versions
+
+    def save_business_budget(self, budget: dict[str, Any]) -> None:
+        self._write(self.business_budgets_dir / f"{budget['businessId']}.json", budget)
+
+    def get_business_budget(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_budgets_dir / f"{business_id}.json")
+
+    def save_business_success_metric(self, metric: dict[str, Any]) -> None:
+        self._write(self.business_success_metrics_dir / f"{metric['businessId']}__{metric['id']}.json", metric)
+
+    def list_business_success_metrics(self, business_id: str) -> list[dict[str, Any]]:
+        metrics = [self._read(path) for path in sorted(self.business_success_metrics_dir.glob(f"{business_id}__*.json"))]
+        metrics.sort(key=lambda item: str(item.get("createdAt", "")))
+        return metrics
+
+    def save_business_approval_policy(self, policy: dict[str, Any]) -> None:
+        self._write(self.business_approval_policies_dir / f"{policy['businessId']}.json", policy)
+
+    def get_business_approval_policy(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_approval_policies_dir / f"{business_id}.json")
+
     def save_project(self, project: dict[str, Any]) -> None:
         self._write(self.projects_dir / f"{project['id']}.json", project)
 
     def get_project(self, project_id: str) -> dict[str, Any]:
         return self._read(self.projects_dir / f"{project_id}.json")
+
+    def list_projects(self, business_id: str | None = None) -> list[dict[str, Any]]:
+        projects = [self._read(path) for path in sorted(self.projects_dir.glob("*.json"))]
+        if business_id is not None:
+            projects = [project for project in projects if project.get("businessId") == business_id]
+        projects.sort(key=lambda item: str(item.get("createdAt", "")))
+        return projects
 
     def save_workflow(self, workflow: dict[str, Any]) -> None:
         self._write(self.workflows_dir / f"{workflow['id']}.json", workflow)

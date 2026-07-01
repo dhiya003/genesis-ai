@@ -12,6 +12,150 @@ paths:
       responses:
         '200':
           description: Health status
+  /founder/profile:
+    get:
+      summary: Retrieve founder profile with version history
+      responses:
+        '200':
+          description: Founder profile
+        '404':
+          description: Not found
+    post:
+      summary: Create or update founder profile
+      responses:
+        '200':
+          description: Founder profile saved
+        '400':
+          description: Validation error
+  /businesses:
+    get:
+      summary: List founder businesses
+      responses:
+        '200':
+          description: Founder business list
+    post:
+      summary: Create a new business
+      responses:
+        '201':
+          description: Business created
+        '400':
+          description: Validation error
+  /businesses/{businessId}:
+    get:
+      summary: Retrieve business dashboard
+      responses:
+        '200':
+          description: Business dashboard
+        '404':
+          description: Not found
+  /businesses/{businessId}/dashboard:
+    get:
+      summary: Retrieve business dashboard
+      responses:
+        '200':
+          description: Business dashboard
+        '404':
+          description: Not found
+  /businesses/{businessId}/vision:
+    get:
+      summary: Retrieve active business vision and history
+      responses:
+        '200':
+          description: Business vision history
+        '404':
+          description: Not found
+    post:
+      summary: Set active business vision
+      responses:
+        '201':
+          description: Business vision version created
+        '400':
+          description: Validation error
+  /businesses/{businessId}/goals:
+    get:
+      summary: Retrieve business goals
+      responses:
+        '200':
+          description: Business goals
+    post:
+      summary: Create business goal
+      responses:
+        '201':
+          description: Business goal created
+  /businesses/{businessId}/goals/{goalId}:
+    post:
+      summary: Update or archive business goal
+      responses:
+        '200':
+          description: Business goal updated
+        '404':
+          description: Not found
+  /businesses/{businessId}/constraints:
+    get:
+      summary: Retrieve business constraints
+      responses:
+        '200':
+          description: Business constraints
+    post:
+      summary: Create versioned business constraint
+      responses:
+        '201':
+          description: Business constraint created
+  /businesses/{businessId}/constraints/{constraintId}:
+    post:
+      summary: Update or archive business constraint
+      responses:
+        '200':
+          description: Business constraint version created
+        '404':
+          description: Not found
+  /businesses/{businessId}/budget:
+    get:
+      summary: Retrieve business budget
+      responses:
+        '200':
+          description: Business budget
+    post:
+      summary: Set business budget
+      responses:
+        '200':
+          description: Business budget updated
+  /businesses/{businessId}/success-metrics:
+    get:
+      summary: Retrieve business success metrics
+      responses:
+        '200':
+          description: Success metrics
+    post:
+      summary: Create success metric
+      responses:
+        '201':
+          description: Success metric created
+  /businesses/{businessId}/approval-policy:
+    get:
+      summary: Retrieve business approval policy
+      responses:
+        '200':
+          description: Approval policy
+    post:
+      summary: Set business approval policy
+      responses:
+        '200':
+          description: Approval policy updated
+  /businesses/{businessId}/projects:
+    post:
+      summary: Create a project inside a business
+      responses:
+        '201':
+          description: Business project created
+  /businesses/{businessId}/projects/{projectId}/start-planning:
+    post:
+      summary: Start planning workflow for a business project
+      responses:
+        '201':
+          description: Planning workflow created
+        '400':
+          description: Missing vision, goals, constraints, or invalid ownership
   /projects:
     post:
       summary: Submit an idea and run the research workflow
@@ -503,4 +647,18 @@ components:
     BusinessDashboard:
       type: object
     IntegrationReadiness:
+      type: object
+    Business:
+      type: object
+    FounderProfile:
+      type: object
+    BusinessVision:
+      type: object
+    BusinessGoal:
+      type: object
+    BusinessConstraint:
+      type: object
+    BusinessBudget:
+      type: object
+    BusinessApprovalPolicy:
       type: object

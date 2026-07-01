@@ -8,6 +8,7 @@ from pathlib import Path
 
 from apps.errors import GenesisError, not_found
 from apps.factory.runner import build_launch_pack
+from apps.founder import FounderBusinessRuntime
 from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
@@ -126,6 +127,35 @@ def build_parser() -> argparse.ArgumentParser:
     integrations_subcommands = integrations_parser.add_subparsers(dest="integrations_command", required=True)
     integrations_subcommands.add_parser("status", help="Print sanitized integration readiness")
 
+    founder_parser = subcommands.add_parser("founder", help="Manage Genesis v1 founder and business context")
+    founder_parser.add_argument("--founder-id", default="founder")
+    founder_parser.add_argument("--data-dir")
+    founder_subcommands = founder_parser.add_subparsers(dest="founder_command", required=True)
+    profile_parser = founder_subcommands.add_parser("profile", help="Create, edit, or retrieve founder profile")
+    profile_parser.add_argument("payload", nargs="?", help="JSON profile payload or path when --from-file is used")
+    profile_parser.add_argument("--from-file", action="store_true")
+    business_create_parser = founder_subcommands.add_parser("create-business", help="Create a business")
+    business_create_parser.add_argument("payload", help="JSON business payload or path when --from-file is used")
+    business_create_parser.add_argument("--from-file", action="store_true")
+    business_create_parser.add_argument("--idempotency-key")
+    business_create_parser.add_argument("--draft", action="store_true")
+    business_list_parser = founder_subcommands.add_parser("businesses", help="List founder businesses")
+    business_dashboard_parser = founder_subcommands.add_parser("dashboard", help="Retrieve business dashboard")
+    business_dashboard_parser.add_argument("business_id")
+    business_vision_parser = founder_subcommands.add_parser("vision", help="Set business vision")
+    business_vision_parser.add_argument("business_id")
+    business_vision_parser.add_argument("content", help="Vision text or path when --from-file is used")
+    business_vision_parser.add_argument("--from-file", action="store_true")
+    business_vision_parser.add_argument("--content-format", default="markdown")
+    for name in ["goal", "constraint", "budget", "success-metric", "approval-policy", "project"]:
+        payload_parser = founder_subcommands.add_parser(name, help=f"Create or set business {name}")
+        payload_parser.add_argument("business_id")
+        payload_parser.add_argument("payload", help="JSON payload or path when --from-file is used")
+        payload_parser.add_argument("--from-file", action="store_true")
+    start_parser = founder_subcommands.add_parser("start-planning", help="Start planning for a business project")
+    start_parser.add_argument("business_id")
+    start_parser.add_argument("project_id")
+
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
@@ -176,6 +206,13 @@ def _read_text_arg(value: str, from_file: bool) -> str:
     return Path(value).read_text(encoding="utf-8")
 
 
+def _read_json_arg(value: str, from_file: bool) -> dict[str, object]:
+    payload = json.loads(_read_text_arg(value, from_file))
+    if not isinstance(payload, dict):
+        raise ValueError("payload must be a JSON object")
+    return payload
+
+
 def _store(data_dir: str | None = None) -> JsonStore:
     config = load_runtime_config()
     return JsonStore(data_dir or config.data_dir)
@@ -203,6 +240,48 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "integrations":
             if args.integrations_command == "status":
                 _print_json(integration_status())
+                return 0
+        if args.command == "founder":
+            runtime = FounderBusinessRuntime(_store(args.data_dir))
+            founder_id = args.founder_id
+            if args.founder_command == "profile":
+                if args.payload:
+                    _print_json(runtime.upsert_founder_profile(_read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                else:
+                    _print_json(runtime.get_founder_profile(founder_id=founder_id))
+                return 0
+            if args.founder_command == "create-business":
+                _print_json(runtime.create_business(_read_json_arg(args.payload, args.from_file), founder_id=founder_id, idempotency_key=args.idempotency_key, draft=args.draft))
+                return 0
+            if args.founder_command == "businesses":
+                _print_json(runtime.list_businesses(founder_id=founder_id))
+                return 0
+            if args.founder_command == "dashboard":
+                _print_json(runtime.business_dashboard(args.business_id))
+                return 0
+            if args.founder_command == "vision":
+                _print_json(runtime.set_business_vision(args.business_id, _read_text_arg(args.content, args.from_file), founder_id=founder_id, content_format=args.content_format))
+                return 0
+            if args.founder_command == "goal":
+                _print_json(runtime.add_business_goal(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "constraint":
+                _print_json(runtime.add_business_constraint(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "budget":
+                _print_json(runtime.set_business_budget(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "success-metric":
+                _print_json(runtime.add_success_metric(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "approval-policy":
+                _print_json(runtime.set_approval_policy(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "project":
+                _print_json(runtime.create_project(args.business_id, _read_json_arg(args.payload, args.from_file), founder_id=founder_id))
+                return 0
+            if args.founder_command == "start-planning":
+                _print_json(runtime.start_project_planning(args.business_id, args.project_id, founder_id=founder_id))
                 return 0
         if args.command == "submit":
             idea = _read_text_arg(args.idea, args.from_file)

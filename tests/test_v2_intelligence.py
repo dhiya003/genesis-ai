@@ -7,6 +7,7 @@ import unittest
 
 from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
+from scripts.validate_enterprise_integration_platform import validate_enterprise_integration_platform_payload
 from scripts.validate_enterprise_organization import validate_enterprise_organization_payload
 from scripts.validate_execution_optimization_report import validate_execution_optimization_report_payload
 from scripts.validate_executive_planning_report import validate_executive_planning_report_payload
@@ -43,6 +44,7 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             discovery = orchestrator.generate_opportunity_discovery_report(business_id)["opportunityDiscoveryReport"]
             optimization = orchestrator.generate_execution_optimization_report(business_id)["executionOptimizationReport"]
             enterprise = orchestrator.create_enterprise_organization("Genesis Enterprise")["enterpriseOrganization"]
+            integration_platform = orchestrator.initialize_enterprise_integration_platform("Genesis Enterprise Integration Platform", organization_id=enterprise["organizationId"])["enterpriseIntegrationPlatform"]
 
             self.assertFalse(validate_organizational_intelligence_report_payload(organizational))
             self.assertFalse(validate_simulation_report_payload(simulation))
@@ -50,6 +52,7 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             self.assertFalse(validate_opportunity_discovery_report_payload(discovery))
             self.assertFalse(validate_execution_optimization_report_payload(optimization))
             self.assertFalse(validate_enterprise_organization_payload(enterprise))
+            self.assertFalse(validate_enterprise_integration_platform_payload(integration_platform))
             self.assertTrue(organizational["organizationalMemory"]["initialized"])
             self.assertTrue(organizational["knowledgeReuse"]["founderOverrideSupported"])
             self.assertTrue(simulation["pricingSimulation"]["multipleScenariosSupported"])
@@ -64,12 +67,16 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             self.assertTrue(optimization["adaptiveGovernanceBoundary"]["governanceRulesProtected"])
             self.assertTrue(enterprise["organization"]["multipleBusinessUnitsSupported"])
             self.assertTrue(enterprise["securityAccessControl"]["leastPrivilegeEnforcement"])
+            self.assertTrue(integration_platform["integrationPlatform"]["connectorRegistryLoaded"])
+            self.assertTrue(integration_platform["eventStreaming"]["eventBusOperational"])
+            self.assertTrue(integration_platform["secretsManagement"]["secretsEncrypted"])
             self.assertEqual(store.get_organizational_intelligence_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_v2_simulation_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_executive_planning_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_opportunity_discovery_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_execution_optimization_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_enterprise_organization(enterprise["organizationId"])["organizationId"], enterprise["organizationId"])
+            self.assertEqual(store.get_enterprise_integration_platform(integration_platform["platformId"])["platformId"], integration_platform["platformId"])
             self.assertTrue(store.get_v2_decision_register(business_id)["decisions"])
 
 

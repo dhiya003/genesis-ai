@@ -869,6 +869,31 @@ class GenesisOrchestrator:
         record_audit(self.store, "enterprise.organization_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
         return {"project": project, "workflow": completed_workflow, "enterpriseOrganization": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
 
+    def initialize_enterprise_integration_platform(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        engine = WorkflowEngine(self.store)
+        platform_project_id = str(uuid4())
+        project = {"id": platform_project_id, "idea": f"Initialize enterprise integration platform: {name}", "status": "CREATED", "createdAt": now_iso(), "updatedAt": now_iso(), "organizationId": organization_id}
+        self.store.save_project(project)
+        workflow = engine.plan(engine.create(project["id"], "ENTERPRISE_INTEGRATION_PLATFORM"), reason="orchestrator selected Genesis v3 Enterprise Integration Platform")
+        task = self._create_task(project["id"], workflow["id"], "ENTERPRISE_INTEGRATION_PLATFORM", "Initialize Genesis v3 Enterprise Integration Platform")
+        runtime = EnterpriseRuntime(self.store)
+        completed_workflow = engine.run(workflow, lambda current: runtime.initialize_integration_platform(name, current, organization_id=organization_id, admin=admin))
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "ENTERPRISE_INTEGRATION_PLATFORM_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": "ENTERPRISE_INTEGRATION_PLATFORM"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "ENTERPRISE_INTEGRATION_PLATFORM", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "ENTERPRISE_INTEGRATION_GOVERNANCE_APPROVAL", mode=approval_mode)
+        else:
+            project["status"] = "ENTERPRISE_INTEGRATION_PLATFORM_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "enterprise.integration_platform_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {"project": project, "workflow": completed_workflow, "enterpriseIntegrationPlatform": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
+
     def get_opportunity_discovery_report(self, business_id: str) -> dict[str, Any]:
         return self.store.get_opportunity_discovery_report(business_id)
 
@@ -877,6 +902,9 @@ class GenesisOrchestrator:
 
     def get_enterprise_organization(self, organization_id: str) -> dict[str, Any]:
         return self.store.get_enterprise_organization(organization_id)
+
+    def get_enterprise_integration_platform(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_enterprise_integration_platform(platform_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

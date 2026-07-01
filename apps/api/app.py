@@ -345,6 +345,15 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"V2 report not found: {business_id}") from exc
+            if parsed.path.startswith("/enterprise/integration-platforms/"):
+                platform_id = parsed.path.removeprefix("/enterprise/integration-platforms/").strip("/")
+                if not platform_id:
+                    raise bad_request("Platform ID is required")
+                try:
+                    self._send_json(200, GenesisOrchestrator(self.store).get_enterprise_integration_platform(platform_id))
+                except FileNotFoundError as exc:
+                    raise not_found(f"Enterprise integration platform not found: {platform_id}") from exc
+                return
             if parsed.path.startswith("/enterprise/"):
                 organization_id = parsed.path.removeprefix("/enterprise/").strip("/")
                 if not organization_id:
@@ -698,6 +707,23 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(admin, str):
                     raise bad_request("admin must be a string")
                 result = GenesisOrchestrator(self.store).create_enterprise_organization(name, approval_mode=approval_mode, admin=admin)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/enterprise/integration-platforms":
+                payload = self._read_json()
+                name = payload.get("name", "Genesis Enterprise Integration Platform")
+                if not isinstance(name, str):
+                    raise bad_request("name must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                organization_id = payload.get("organizationId")
+                if organization_id is not None and not isinstance(organization_id, str):
+                    raise bad_request("organizationId must be a string")
+                admin = payload.get("admin", "platform-admin")
+                if not isinstance(admin, str):
+                    raise bad_request("admin must be a string")
+                result = GenesisOrchestrator(self.store).initialize_enterprise_integration_platform(name, approval_mode=approval_mode, organization_id=organization_id, admin=admin)
                 self._send_json(201, result)
                 return
             if parsed.path == "/creative/generate":

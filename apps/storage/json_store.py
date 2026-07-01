@@ -91,6 +91,7 @@ class JsonStore:
         self.opportunity_discovery_reports_dir = self.root / "opportunity_discovery_reports"
         self.execution_optimization_reports_dir = self.root / "execution_optimization_reports"
         self.enterprise_organizations_dir = self.root / "enterprise_organizations"
+        self.enterprise_integration_platforms_dir = self.root / "enterprise_integration_platforms"
         for directory in [
             self.businesses_dir,
             self.founder_profiles_dir,
@@ -171,6 +172,7 @@ class JsonStore:
             self.opportunity_discovery_reports_dir,
             self.execution_optimization_reports_dir,
             self.enterprise_organizations_dir,
+            self.enterprise_integration_platforms_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -764,6 +766,12 @@ class JsonStore:
 
     def get_enterprise_organization(self, organization_id: str) -> dict[str, Any]:
         return self._read(self.enterprise_organizations_dir / f"{organization_id}.json")
+
+    def save_enterprise_integration_platform(self, platform: dict[str, Any]) -> None:
+        self._write(self.enterprise_integration_platforms_dir / f"{platform['platformId']}.json", platform)
+
+    def get_enterprise_integration_platform(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.enterprise_integration_platforms_dir / f"{platform_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

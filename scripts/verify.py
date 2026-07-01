@@ -50,6 +50,7 @@ REQUIRED_PATHS = [
     "scripts/validate_opportunity_discovery_report.py",
     "scripts/validate_execution_optimization_report.py",
     "scripts/validate_enterprise_organization.py",
+    "scripts/validate_enterprise_integration_platform.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
@@ -86,6 +87,7 @@ REQUIRED_PATHS = [
     "testing/fixtures/sample-opportunity-discovery-report.json",
     "testing/fixtures/sample-execution-optimization-report.json",
     "testing/fixtures/sample-enterprise-organization.json",
+    "testing/fixtures/sample-enterprise-integration-platform.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -103,6 +105,7 @@ REQUIRED_PATHS = [
     "docs/epic-11-13-commerce-bi-executive-validation.md",
     "docs/epic-14-16-v2-intelligence-validation.md",
     "docs/epic-17-19-v2-v3-validation.md",
+    "docs/epic-20-enterprise-integration-platform.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]
@@ -131,6 +134,7 @@ JSON_PATHS = [
     "testing/fixtures/sample-opportunity-discovery-report.json",
     "testing/fixtures/sample-execution-optimization-report.json",
     "testing/fixtures/sample-enterprise-organization.json",
+    "testing/fixtures/sample-enterprise-integration-platform.json",
 ]
 
 COMMANDS = [
@@ -151,6 +155,7 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_opportunity_discovery_report.py"], "opportunity discovery report validation"),
     ([sys.executable, "scripts/validate_execution_optimization_report.py"], "execution optimization report validation"),
     ([sys.executable, "scripts/validate_enterprise_organization.py"], "enterprise organization validation"),
+    ([sys.executable, "scripts/validate_enterprise_integration_platform.py"], "enterprise integration platform validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

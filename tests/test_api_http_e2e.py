@@ -341,6 +341,20 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     enterprise_organization = json.loads(response.read().decode("utf-8"))
 
+                integration_platform_request = request.Request(
+                    f"http://{host}:{port}/enterprise/integration-platforms",
+                    data=json.dumps({"name": "Genesis Enterprise Integration Platform", "organizationId": organization_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(integration_platform_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    integration_platform_run = json.loads(response.read().decode("utf-8"))
+                platform_id = integration_platform_run["enterpriseIntegrationPlatform"]["platformId"]
+                with request.urlopen(f"http://{host}:{port}/enterprise/integration-platforms/{platform_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    integration_platform = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -415,6 +429,9 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(optimization_report["adaptiveGovernanceBoundary"]["governanceRulesProtected"])
                 self.assertEqual(enterprise_run["enterpriseOrganization"]["reportType"], "ENTERPRISE_ORGANIZATION")
                 self.assertTrue(enterprise_organization["completionStatus"]["enterprisePlatformOperational"])
+                self.assertEqual(integration_platform_run["enterpriseIntegrationPlatform"]["reportType"], "ENTERPRISE_INTEGRATION_PLATFORM")
+                self.assertTrue(integration_platform["completionStatus"]["genesisReadyForEnterpriseScaleIntegrations"])
+                self.assertTrue(integration_platform["apiGateway"]["apiDocumentationGenerated"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

@@ -894,6 +894,55 @@ class GenesisOrchestrator:
         record_audit(self.store, "enterprise.integration_platform_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
         return {"project": project, "workflow": completed_workflow, "enterpriseIntegrationPlatform": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
 
+    def initialize_ai_agent_platform(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        return self._run_enterprise_platform(
+            name,
+            "AI_AGENT_PLATFORM",
+            "AI_AGENT_PLATFORM",
+            "Initialize Genesis v3 AI Agent Platform and Low-Code Workflow Studio",
+            "FOUNDER_AI_AGENT_PLATFORM_APPROVAL",
+            "aiAgentPlatform",
+            lambda runtime, workflow: runtime.initialize_ai_agent_platform(name, workflow, organization_id=organization_id, admin=admin),
+            approval_mode,
+            organization_id,
+        )
+
+    def initialize_digital_enterprise(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        return self._run_enterprise_platform(name, "DIGITAL_ENTERPRISE", "DIGITAL_ENTERPRISE", "Initialize Genesis v4 Digital Twin Enterprise", "FOUNDER_DIGITAL_ENTERPRISE_APPROVAL", "digitalEnterprise", lambda runtime, workflow: runtime.initialize_digital_enterprise(name, workflow, organization_id=organization_id, admin=admin), approval_mode, organization_id)
+
+    def initialize_autonomous_enterprise(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        return self._run_enterprise_platform(name, "AUTONOMOUS_ENTERPRISE", "AUTONOMOUS_ENTERPRISE", "Initialize Genesis v5 Autonomous Enterprise", "FOUNDER_AUTONOMOUS_ENTERPRISE_APPROVAL", "autonomousEnterprise", lambda runtime, workflow: runtime.initialize_autonomous_enterprise(name, workflow, organization_id=organization_id, admin=admin), approval_mode, organization_id)
+
+    def initialize_platform_ecosystem(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        return self._run_enterprise_platform(name, "PLATFORM_ECOSYSTEM", "PLATFORM_ECOSYSTEM", "Initialize Genesis v6 Platform Ecosystem", "FOUNDER_PLATFORM_ECOSYSTEM_APPROVAL", "platformEcosystem", lambda runtime, workflow: runtime.initialize_platform_ecosystem(name, workflow, organization_id=organization_id, admin=admin), approval_mode, organization_id)
+
+    def initialize_collective_intelligence_platform(self, name: str, approval_mode: str = "auto", *, organization_id: str | None = None, admin: str = "platform-admin") -> dict[str, Any]:
+        return self._run_enterprise_platform(name, "COLLECTIVE_ENTERPRISE_INTELLIGENCE", "COLLECTIVE_ENTERPRISE_INTELLIGENCE", "Initialize Genesis v7 Collective Enterprise Intelligence", "FOUNDER_COLLECTIVE_INTELLIGENCE_APPROVAL", "collectiveIntelligencePlatform", lambda runtime, workflow: runtime.initialize_collective_intelligence_platform(name, workflow, organization_id=organization_id, admin=admin), approval_mode, organization_id)
+
+    def _run_enterprise_platform(self, name: str, workflow_type: str, task_type: str, task_description: str, approval_type: str, result_key: str, executor: Any, approval_mode: str, organization_id: str | None) -> dict[str, Any]:
+        engine = WorkflowEngine(self.store)
+        project = {"id": str(uuid4()), "idea": f"Initialize {workflow_type}: {name}", "status": "CREATED", "createdAt": now_iso(), "updatedAt": now_iso(), "organizationId": organization_id}
+        self.store.save_project(project)
+        workflow = engine.plan(engine.create(project["id"], workflow_type), reason=f"orchestrator selected {workflow_type}")
+        task = self._create_task(project["id"], workflow["id"], task_type, task_description)
+        runtime = EnterpriseRuntime(self.store)
+        completed_workflow = engine.run(workflow, lambda current: executor(runtime, current))
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = f"{workflow_type}_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": workflow_type})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], workflow_type, completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], approval_type, mode=approval_mode)
+        else:
+            project["status"] = f"{workflow_type}_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "enterprise.platform_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"], "type": workflow_type})
+        return {"project": project, "workflow": completed_workflow, result_key: completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
+
     def get_opportunity_discovery_report(self, business_id: str) -> dict[str, Any]:
         return self.store.get_opportunity_discovery_report(business_id)
 
@@ -905,6 +954,21 @@ class GenesisOrchestrator:
 
     def get_enterprise_integration_platform(self, platform_id: str) -> dict[str, Any]:
         return self.store.get_enterprise_integration_platform(platform_id)
+
+    def get_ai_agent_platform(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_ai_agent_platform(platform_id)
+
+    def get_digital_enterprise(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_digital_enterprise(platform_id)
+
+    def get_autonomous_enterprise(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_autonomous_enterprise(platform_id)
+
+    def get_platform_ecosystem(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_platform_ecosystem(platform_id)
+
+    def get_collective_intelligence_platform(self, platform_id: str) -> dict[str, Any]:
+        return self.store.get_collective_intelligence_platform(platform_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

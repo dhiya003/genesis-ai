@@ -354,6 +354,23 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 except FileNotFoundError as exc:
                     raise not_found(f"Enterprise integration platform not found: {platform_id}") from exc
                 return
+            platform_getters = {
+                "/platform/ai-agent-platforms/": GenesisOrchestrator(self.store).get_ai_agent_platform,
+                "/platform/digital-enterprises/": GenesisOrchestrator(self.store).get_digital_enterprise,
+                "/platform/autonomous-enterprises/": GenesisOrchestrator(self.store).get_autonomous_enterprise,
+                "/platform/ecosystems/": GenesisOrchestrator(self.store).get_platform_ecosystem,
+                "/platform/collective-intelligence/": GenesisOrchestrator(self.store).get_collective_intelligence_platform,
+            }
+            for prefix, getter in platform_getters.items():
+                if parsed.path.startswith(prefix):
+                    platform_id = parsed.path.removeprefix(prefix).strip("/")
+                    if not platform_id:
+                        raise bad_request("Platform ID is required")
+                    try:
+                        self._send_json(200, getter(platform_id))
+                    except FileNotFoundError as exc:
+                        raise not_found(f"Platform package not found: {platform_id}") from exc
+                    return
             if parsed.path.startswith("/enterprise/"):
                 organization_id = parsed.path.removeprefix("/enterprise/").strip("/")
                 if not organization_id:
@@ -725,6 +742,30 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     raise bad_request("admin must be a string")
                 result = GenesisOrchestrator(self.store).initialize_enterprise_integration_platform(name, approval_mode=approval_mode, organization_id=organization_id, admin=admin)
                 self._send_json(201, result)
+                return
+            platform_creators = {
+                "/platform/ai-agent-platforms": ("name", "Genesis AI Agent Platform", "aiAgentPlatform", GenesisOrchestrator(self.store).initialize_ai_agent_platform),
+                "/platform/digital-enterprises": ("name", "Genesis Digital Enterprise", "digitalEnterprise", GenesisOrchestrator(self.store).initialize_digital_enterprise),
+                "/platform/autonomous-enterprises": ("name", "Genesis Autonomous Enterprise", "autonomousEnterprise", GenesisOrchestrator(self.store).initialize_autonomous_enterprise),
+                "/platform/ecosystems": ("name", "Genesis Platform Ecosystem", "platformEcosystem", GenesisOrchestrator(self.store).initialize_platform_ecosystem),
+                "/platform/collective-intelligence": ("name", "Genesis Collective Enterprise Intelligence", "collectiveIntelligencePlatform", GenesisOrchestrator(self.store).initialize_collective_intelligence_platform),
+            }
+            if parsed.path in platform_creators:
+                _, default_name, _, creator = platform_creators[parsed.path]
+                payload = self._read_json()
+                name = payload.get("name", default_name)
+                if not isinstance(name, str):
+                    raise bad_request("name must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                organization_id = payload.get("organizationId")
+                if organization_id is not None and not isinstance(organization_id, str):
+                    raise bad_request("organizationId must be a string")
+                admin = payload.get("admin", "platform-admin")
+                if not isinstance(admin, str):
+                    raise bad_request("admin must be a string")
+                self._send_json(201, creator(name, approval_mode=approval_mode, organization_id=organization_id, admin=admin))
                 return
             if parsed.path == "/creative/generate":
                 payload = self._read_json()

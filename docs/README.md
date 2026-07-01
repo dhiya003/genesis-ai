@@ -17,6 +17,7 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 - [Epic 14-16 Genesis v2 Intelligence Validation](epic-14-16-v2-intelligence-validation.md)
 - [Epic 17-19 Genesis v2/v3 Validation](epic-17-19-v2-v3-validation.md)
 - [Epic 20 - Enterprise Integration Platform](epic-20-enterprise-integration-platform.md)
+- [Epic 21-25 Platform Evolution Validation](epic-21-25-platform-evolution.md)
 
 ## Sprint 1 Documentation Sets
 

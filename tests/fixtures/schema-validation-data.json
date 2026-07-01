@@ -14,7 +14,12 @@
     "testing/fixtures/sample-opportunity-discovery-report.json",
     "testing/fixtures/sample-execution-optimization-report.json",
     "testing/fixtures/sample-enterprise-organization.json",
-    "testing/fixtures/sample-enterprise-integration-platform.json"
+    "testing/fixtures/sample-enterprise-integration-platform.json",
+    "testing/fixtures/sample-ai-agent-platform.json",
+    "testing/fixtures/sample-digital-enterprise.json",
+    "testing/fixtures/sample-autonomous-enterprise.json",
+    "testing/fixtures/sample-platform-ecosystem.json",
+    "testing/fixtures/sample-collective-enterprise-intelligence.json"
   ],
   "schemas": [
     "schemas/research-report.schema.json",

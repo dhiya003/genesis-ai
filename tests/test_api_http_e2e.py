@@ -355,6 +355,29 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     integration_platform = json.loads(response.read().decode("utf-8"))
 
+                platform_runs = {}
+                for endpoint, result_key, default_name in [
+                    ("ai-agent-platforms", "aiAgentPlatform", "Genesis AI Agent Platform"),
+                    ("digital-enterprises", "digitalEnterprise", "Genesis Digital Enterprise"),
+                    ("autonomous-enterprises", "autonomousEnterprise", "Genesis Autonomous Enterprise"),
+                    ("ecosystems", "platformEcosystem", "Genesis Platform Ecosystem"),
+                    ("collective-intelligence", "collectiveIntelligencePlatform", "Genesis Collective Enterprise Intelligence"),
+                ]:
+                    platform_request = request.Request(
+                        f"http://{host}:{port}/platform/{endpoint}",
+                        data=json.dumps({"name": default_name, "organizationId": organization_id}).encode("utf-8"),
+                        headers={"Content-Type": "application/json"},
+                        method="POST",
+                    )
+                    with request.urlopen(platform_request, timeout=10) as response:
+                        self.assertEqual(response.status, 201)
+                        platform_run = json.loads(response.read().decode("utf-8"))
+                    created_platform = platform_run[result_key]
+                    with request.urlopen(f"http://{host}:{port}/platform/{endpoint}/{created_platform['platformId']}", timeout=10) as response:
+                        self.assertEqual(response.status, 200)
+                        fetched_platform = json.loads(response.read().decode("utf-8"))
+                    platform_runs[result_key] = fetched_platform
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -432,6 +455,11 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertEqual(integration_platform_run["enterpriseIntegrationPlatform"]["reportType"], "ENTERPRISE_INTEGRATION_PLATFORM")
                 self.assertTrue(integration_platform["completionStatus"]["genesisReadyForEnterpriseScaleIntegrations"])
                 self.assertTrue(integration_platform["apiGateway"]["apiDocumentationGenerated"])
+                self.assertTrue(platform_runs["aiAgentPlatform"]["completionStatus"]["platformExtensibilityValidated"])
+                self.assertTrue(platform_runs["digitalEnterprise"]["completionStatus"]["digitalTwinOperational"])
+                self.assertTrue(platform_runs["autonomousEnterprise"]["completionStatus"]["executiveAdvisoryOperational"])
+                self.assertTrue(platform_runs["platformEcosystem"]["completionStatus"]["thirdPartyEcosystemOperational"])
+                self.assertTrue(platform_runs["collectiveIntelligencePlatform"]["completionStatus"]["globalIntelligenceOperational"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

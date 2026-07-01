@@ -13,6 +13,7 @@ from scripts.validate_execution_optimization_report import validate_execution_op
 from scripts.validate_executive_planning_report import validate_executive_planning_report_payload
 from scripts.validate_organizational_intelligence_report import validate_organizational_intelligence_report_payload
 from scripts.validate_opportunity_discovery_report import validate_opportunity_discovery_report_payload
+from scripts.validate_platform_evolution_reports import validate_platform_evolution_payload
 from scripts.validate_simulation_report import validate_simulation_report_payload
 
 
@@ -45,6 +46,11 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             optimization = orchestrator.generate_execution_optimization_report(business_id)["executionOptimizationReport"]
             enterprise = orchestrator.create_enterprise_organization("Genesis Enterprise")["enterpriseOrganization"]
             integration_platform = orchestrator.initialize_enterprise_integration_platform("Genesis Enterprise Integration Platform", organization_id=enterprise["organizationId"])["enterpriseIntegrationPlatform"]
+            agent_platform = orchestrator.initialize_ai_agent_platform("Genesis AI Agent Platform", organization_id=enterprise["organizationId"])["aiAgentPlatform"]
+            digital_enterprise = orchestrator.initialize_digital_enterprise("Genesis Digital Enterprise", organization_id=enterprise["organizationId"])["digitalEnterprise"]
+            autonomous_enterprise = orchestrator.initialize_autonomous_enterprise("Genesis Autonomous Enterprise", organization_id=enterprise["organizationId"])["autonomousEnterprise"]
+            ecosystem = orchestrator.initialize_platform_ecosystem("Genesis Platform Ecosystem", organization_id=enterprise["organizationId"])["platformEcosystem"]
+            collective = orchestrator.initialize_collective_intelligence_platform("Genesis Collective Enterprise Intelligence", organization_id=enterprise["organizationId"])["collectiveIntelligencePlatform"]
 
             self.assertFalse(validate_organizational_intelligence_report_payload(organizational))
             self.assertFalse(validate_simulation_report_payload(simulation))
@@ -53,6 +59,8 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             self.assertFalse(validate_execution_optimization_report_payload(optimization))
             self.assertFalse(validate_enterprise_organization_payload(enterprise))
             self.assertFalse(validate_enterprise_integration_platform_payload(integration_platform))
+            for platform in [agent_platform, digital_enterprise, autonomous_enterprise, ecosystem, collective]:
+                self.assertFalse(validate_platform_evolution_payload(platform))
             self.assertTrue(organizational["organizationalMemory"]["initialized"])
             self.assertTrue(organizational["knowledgeReuse"]["founderOverrideSupported"])
             self.assertTrue(simulation["pricingSimulation"]["multipleScenariosSupported"])
@@ -70,6 +78,11 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             self.assertTrue(integration_platform["integrationPlatform"]["connectorRegistryLoaded"])
             self.assertTrue(integration_platform["eventStreaming"]["eventBusOperational"])
             self.assertTrue(integration_platform["secretsManagement"]["secretsEncrypted"])
+            self.assertTrue(agent_platform["agentBuilder"]["publishWorkflow"])
+            self.assertTrue(digital_enterprise["digitalTwinEngine"]["historicalSnapshots"])
+            self.assertTrue(autonomous_enterprise["goalManagement"]["goalMonitoring"])
+            self.assertTrue(ecosystem["developerPortal"]["apiExplorer"])
+            self.assertTrue(collective["anonymousBusinessLearning"]["privacyPreserving"])
             self.assertEqual(store.get_organizational_intelligence_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_v2_simulation_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_executive_planning_report(business_id)["businessId"], business_id)
@@ -77,6 +90,11 @@ class GenesisV2V3IntelligenceTests(unittest.TestCase):
             self.assertEqual(store.get_execution_optimization_report(business_id)["businessId"], business_id)
             self.assertEqual(store.get_enterprise_organization(enterprise["organizationId"])["organizationId"], enterprise["organizationId"])
             self.assertEqual(store.get_enterprise_integration_platform(integration_platform["platformId"])["platformId"], integration_platform["platformId"])
+            self.assertEqual(store.get_ai_agent_platform(agent_platform["platformId"])["platformId"], agent_platform["platformId"])
+            self.assertEqual(store.get_digital_enterprise(digital_enterprise["platformId"])["platformId"], digital_enterprise["platformId"])
+            self.assertEqual(store.get_autonomous_enterprise(autonomous_enterprise["platformId"])["platformId"], autonomous_enterprise["platformId"])
+            self.assertEqual(store.get_platform_ecosystem(ecosystem["platformId"])["platformId"], ecosystem["platformId"])
+            self.assertEqual(store.get_collective_intelligence_platform(collective["platformId"])["platformId"], collective["platformId"])
             self.assertTrue(store.get_v2_decision_register(business_id)["decisions"])
 
 

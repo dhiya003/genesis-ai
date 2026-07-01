@@ -92,6 +92,11 @@ class JsonStore:
         self.execution_optimization_reports_dir = self.root / "execution_optimization_reports"
         self.enterprise_organizations_dir = self.root / "enterprise_organizations"
         self.enterprise_integration_platforms_dir = self.root / "enterprise_integration_platforms"
+        self.ai_agent_platforms_dir = self.root / "ai_agent_platforms"
+        self.digital_enterprises_dir = self.root / "digital_enterprises"
+        self.autonomous_enterprises_dir = self.root / "autonomous_enterprises"
+        self.platform_ecosystems_dir = self.root / "platform_ecosystems"
+        self.collective_intelligence_platforms_dir = self.root / "collective_intelligence_platforms"
         for directory in [
             self.businesses_dir,
             self.founder_profiles_dir,
@@ -173,6 +178,11 @@ class JsonStore:
             self.execution_optimization_reports_dir,
             self.enterprise_organizations_dir,
             self.enterprise_integration_platforms_dir,
+            self.ai_agent_platforms_dir,
+            self.digital_enterprises_dir,
+            self.autonomous_enterprises_dir,
+            self.platform_ecosystems_dir,
+            self.collective_intelligence_platforms_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -772,6 +782,36 @@ class JsonStore:
 
     def get_enterprise_integration_platform(self, platform_id: str) -> dict[str, Any]:
         return self._read(self.enterprise_integration_platforms_dir / f"{platform_id}.json")
+
+    def save_ai_agent_platform(self, platform: dict[str, Any]) -> None:
+        self._write(self.ai_agent_platforms_dir / f"{platform['platformId']}.json", platform)
+
+    def get_ai_agent_platform(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.ai_agent_platforms_dir / f"{platform_id}.json")
+
+    def save_digital_enterprise(self, platform: dict[str, Any]) -> None:
+        self._write(self.digital_enterprises_dir / f"{platform['platformId']}.json", platform)
+
+    def get_digital_enterprise(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.digital_enterprises_dir / f"{platform_id}.json")
+
+    def save_autonomous_enterprise(self, platform: dict[str, Any]) -> None:
+        self._write(self.autonomous_enterprises_dir / f"{platform['platformId']}.json", platform)
+
+    def get_autonomous_enterprise(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.autonomous_enterprises_dir / f"{platform_id}.json")
+
+    def save_platform_ecosystem(self, platform: dict[str, Any]) -> None:
+        self._write(self.platform_ecosystems_dir / f"{platform['platformId']}.json", platform)
+
+    def get_platform_ecosystem(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.platform_ecosystems_dir / f"{platform_id}.json")
+
+    def save_collective_intelligence_platform(self, platform: dict[str, Any]) -> None:
+        self._write(self.collective_intelligence_platforms_dir / f"{platform['platformId']}.json", platform)
+
+    def get_collective_intelligence_platform(self, platform_id: str) -> dict[str, Any]:
+        return self._read(self.collective_intelligence_platforms_dir / f"{platform_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

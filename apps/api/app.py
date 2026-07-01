@@ -13,8 +13,10 @@ from apps.founder import FounderBusinessRuntime
 from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
+from apps.project import ProjectLifecycleRuntime
 from apps.security import ApiPrincipal, authenticate_request
 from apps.storage import JsonStore
+from apps.workflow import WorkflowEngine
 from config import RuntimeConfig, configure_logging, load_runtime_config
 
 API_VERSION = "1.0.0-foundation"
@@ -333,12 +335,52 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"Product not found: {product_id}") from exc
-            if parsed.path.startswith("/projects/"):
-                project_id = parsed.path.removeprefix("/projects/").strip("/")
-                if not project_id:
-                    raise bad_request("Project ID is required")
+            if parsed.path.startswith("/workflows/"):
+                workflow_path = parsed.path.removeprefix("/workflows/").strip("/")
+                parts = [part for part in workflow_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Workflow ID is required")
+                workflow_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                engine = WorkflowEngine(self.store)
                 try:
-                    self._send_json(200, GenesisOrchestrator(self.store).get_project(project_id))
+                    if section is None:
+                        self._send_json(200, {"workflow": self.store.get_workflow(workflow_id)})
+                    elif section == "progress":
+                        self._send_json(200, engine.progress(workflow_id))
+                    elif section == "history":
+                        self._send_json(200, engine.history(workflow_id))
+                    elif section == "notifications":
+                        self._send_json(200, engine.notifications(workflow_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Workflow not found: {workflow_id}") from exc
+            if parsed.path.startswith("/projects/"):
+                project_path = parsed.path.removeprefix("/projects/").strip("/")
+                parts = [part for part in project_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Project ID is required")
+                project_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                try:
+                    runtime = ProjectLifecycleRuntime(self.store)
+                    if section is None:
+                        self._send_json(200, GenesisOrchestrator(self.store).get_project(project_id))
+                    elif section == "dashboard":
+                        self._send_json(200, runtime.dashboard(project_id))
+                    elif section == "timeline":
+                        self._send_json(200, runtime.timeline(project_id))
+                    elif section == "health":
+                        self._send_json(200, runtime.health(project_id))
+                    elif section == "readiness":
+                        reports = self.store.list_project_readiness(project_id)
+                        self._send_json(200, {"projectId": project_id, "reports": reports, "latest": reports[-1] if reports else None})
+                    elif section == "audit":
+                        self._send_json(200, {"projectId": project_id, "auditLogs": self.store.list_audit_logs(project_id=project_id), "export": {"format": "json"}})
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
                 except FileNotFoundError as exc:
                     raise not_found(f"Project not found: {project_id}") from exc
                 return
@@ -508,6 +550,24 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 result = GenesisOrchestrator(self.store).generate_product_blueprint(project_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
+            if parsed.path == "/workflows":
+                payload = self._read_json()
+                project_id = payload.get("projectId")
+                workflow_type = payload.get("type")
+                if not isinstance(project_id, str):
+                    raise bad_request("projectId must be a string")
+                if not isinstance(workflow_type, str):
+                    raise bad_request("type must be a string")
+                result = WorkflowEngine(self.store).create(
+                    project_id,
+                    workflow_type,
+                    created_by=self._founder_id(),
+                    name=payload.get("name") if isinstance(payload.get("name"), str) else None,
+                    priority=payload.get("priority", "MEDIUM") if isinstance(payload.get("priority", "MEDIUM"), str) else "MEDIUM",
+                    idempotency_key=self.headers.get("Idempotency-Key") or (payload.get("idempotencyKey") if isinstance(payload.get("idempotencyKey"), str) else None),
+                )
+                self._send_json(201, {"workflow": result})
+                return
             if parsed.path == "/projects":
                 payload = self._read_json()
                 idea = payload.get("idea")
@@ -533,6 +593,37 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 )
                 self._send_json(201, result)
                 return
+            if parsed.path.startswith("/projects/") and not parsed.path.endswith("/product-definition"):
+                project_path = parsed.path.removeprefix("/projects/").strip("/")
+                parts = [part for part in project_path.split("/") if part]
+                if len(parts) < 2:
+                    raise bad_request("Project action is required")
+                project_id = parts[0]
+                action = parts[1]
+                runtime = ProjectLifecycleRuntime(self.store)
+                payload = self._read_optional_json()
+                actor = self._founder_id()
+                if action == "update":
+                    self._send_json(200, runtime.update(project_id, payload, actor=actor))
+                    return
+                if action == "archive":
+                    reason = payload.get("reason", "archived by founder")
+                    if not isinstance(reason, str):
+                        raise bad_request("reason must be a string")
+                    self._send_json(200, runtime.archive(project_id, actor=actor, reason=reason))
+                    return
+                if action == "restore":
+                    self._send_json(200, runtime.restore(project_id, actor=actor))
+                    return
+                if action == "duplicate":
+                    title = payload.get("title")
+                    if title is not None and not isinstance(title, str):
+                        raise bad_request("title must be a string")
+                    self._send_json(201, runtime.duplicate(project_id, actor=actor, title=title))
+                    return
+                if action == "validate-readiness":
+                    self._send_json(200, runtime.validate_readiness(project_id, actor=actor))
+                    return
             if parsed.path.startswith("/projects/") and parsed.path.endswith("/product-definition"):
                 project_id = parsed.path.removeprefix("/projects/").removesuffix("/product-definition").strip("/")
                 if not project_id:
@@ -543,6 +634,12 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).run_product_definition(project_id, approval_mode=approval_mode)
                 self._send_json(201, result)
+                return
+            if parsed.path.startswith("/workflows/") and parsed.path.endswith("/retry"):
+                workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/retry").strip("/")
+                if not workflow_id:
+                    raise bad_request("Workflow ID is required")
+                self._send_json(200, {"workflow": WorkflowEngine(self.store).retry(workflow_id)})
                 return
             if parsed.path.startswith("/workflows/") and parsed.path.endswith("/pause"):
                 workflow_id = parsed.path.removeprefix("/workflows/").removesuffix("/pause").strip("/")

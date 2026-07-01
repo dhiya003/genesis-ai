@@ -162,6 +162,136 @@ paths:
       responses:
         '201':
           description: Project, workflow, and research report created
+  /projects/{projectId}:
+    get:
+      summary: Retrieve project bundle with tasks, deliverables, workflows, audit, and execution history
+      responses:
+        '200':
+          description: Project bundle
+        '404':
+          description: Not found
+  /projects/{projectId}/dashboard:
+    get:
+      summary: Retrieve project lifecycle dashboard
+      responses:
+        '200':
+          description: Project dashboard
+        '404':
+          description: Not found
+  /projects/{projectId}/update:
+    post:
+      summary: Update project details with versioning and audit
+      responses:
+        '200':
+          description: Project updated
+        '400':
+          description: Validation error
+  /projects/{projectId}/archive:
+    post:
+      summary: Archive project while preserving historical outputs
+      responses:
+        '200':
+          description: Project archived
+  /projects/{projectId}/restore:
+    post:
+      summary: Restore archived project to active work
+      responses:
+        '200':
+          description: Project restored
+  /projects/{projectId}/duplicate:
+    post:
+      summary: Duplicate project configuration without execution history
+      responses:
+        '201':
+          description: Project duplicated
+  /projects/{projectId}/timeline:
+    get:
+      summary: Retrieve immutable project timeline
+      responses:
+        '200':
+          description: Project timeline
+  /projects/{projectId}/health:
+    get:
+      summary: Calculate and retrieve project health score
+      responses:
+        '200':
+          description: Project health report
+  /projects/{projectId}/readiness:
+    get:
+      summary: Retrieve stored project readiness reports
+      responses:
+        '200':
+          description: Project readiness history
+  /projects/{projectId}/validate-readiness:
+    post:
+      summary: Validate project readiness before execution
+      responses:
+        '200':
+          description: Readiness report
+  /projects/{projectId}/audit:
+    get:
+      summary: Retrieve project audit trail
+      responses:
+        '200':
+          description: Project audit trail
+  /workflows:
+    post:
+      summary: Create a workflow for a project
+      responses:
+        '201':
+          description: Workflow created
+        '400':
+          description: Validation error
+  /workflows/{workflowId}:
+    get:
+      summary: Retrieve workflow
+      responses:
+        '200':
+          description: Workflow
+        '404':
+          description: Not found
+  /workflows/{workflowId}/progress:
+    get:
+      summary: Retrieve workflow progress
+      responses:
+        '200':
+          description: Workflow progress
+  /workflows/{workflowId}/history:
+    get:
+      summary: Retrieve workflow execution history
+      responses:
+        '200':
+          description: Workflow history
+  /workflows/{workflowId}/notifications:
+    get:
+      summary: Retrieve workflow notification history
+      responses:
+        '200':
+          description: Workflow notifications
+  /workflows/{workflowId}/pause:
+    post:
+      summary: Pause active workflow
+      responses:
+        '200':
+          description: Workflow paused
+  /workflows/{workflowId}/resume:
+    post:
+      summary: Resume stored research workflow
+      responses:
+        '200':
+          description: Workflow resumed
+  /workflows/{workflowId}/retry:
+    post:
+      summary: Retry failed workflow
+      responses:
+        '200':
+          description: Workflow retry started
+  /workflows/{workflowId}/cancel:
+    post:
+      summary: Cancel incomplete workflow
+      responses:
+        '200':
+          description: Workflow cancelled
   /reports/{projectId}:
     get:
       summary: Retrieve a research report

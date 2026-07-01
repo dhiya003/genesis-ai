@@ -162,6 +162,15 @@ create table if not exists projects (
   brand_id uuid references brands(id),
   title text not null,
   description text,
+  target_market text,
+  timeline text,
+  budget_allocation jsonb not null default '{}'::jsonb,
+  preferences jsonb not null default '{}'::jsonb,
+  constraints jsonb not null default '[]'::jsonb,
+  owner text,
+  source_project_id uuid references projects(id),
+  archived_at timestamptz,
+  restored_at timestamptz,
   niche text,
   country text default 'India',
   language text default 'en',
@@ -171,16 +180,75 @@ create table if not exists projects (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists project_versions (
+  project_id uuid not null references projects(id),
+  version integer not null,
+  snapshot jsonb not null default '{}'::jsonb,
+  snapshot_reason text,
+  snapshot_by text,
+  snapshot_at timestamptz not null default now(),
+  primary key (project_id, version)
+);
+
+create table if not exists project_readiness_reports (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects(id),
+  outcome text not null,
+  checks jsonb not null default '[]'::jsonb,
+  blocking_errors jsonb not null default '[]'::jsonb,
+  warnings jsonb not null default '[]'::jsonb,
+  created_by text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists project_health_reports (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects(id),
+  health jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists workflows (
   id uuid primary key default gen_random_uuid(),
   project_id uuid not null references projects(id),
+  business_id uuid references businesses(id),
+  workflow_name text,
   workflow_type text not null,
-  current_state text not null default 'CREATED',
+  current_state text not null default 'NEW',
+  current_stage text not null default 'NEW',
+  current_department text,
+  current_employee text,
+  priority text not null default 'MEDIUM',
+  version integer not null default 1,
+  progress_percent integer not null default 0,
+  estimated_duration_seconds numeric(12,2),
+  actual_duration_seconds numeric(12,2),
+  idempotency_key text,
+  created_by text,
+  state_history jsonb not null default '[]'::jsonb,
+  events_published jsonb not null default '[]'::jsonb,
   retry_count integer not null default 0,
   started_at timestamptz,
   completed_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
+);
+
+create unique index if not exists idx_workflows_project_idempotency
+  on workflows(project_id, idempotency_key)
+  where idempotency_key is not null;
+
+create table if not exists workflow_notifications (
+  id uuid primary key default gen_random_uuid(),
+  workflow_id uuid not null references workflows(id),
+  project_id uuid not null references projects(id),
+  business_id uuid references businesses(id),
+  notification_type text not null,
+  message text not null,
+  status text,
+  dedupe_key text not null,
+  created_at timestamptz not null default now(),
+  unique (workflow_id, dedupe_key)
 );
 
 create table if not exists reports (

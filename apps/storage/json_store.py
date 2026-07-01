@@ -22,7 +22,11 @@ class JsonStore:
         self.business_success_metrics_dir = self.root / "business_success_metrics"
         self.business_approval_policies_dir = self.root / "business_approval_policies"
         self.projects_dir = self.root / "projects"
+        self.project_versions_dir = self.root / "project_versions"
+        self.project_readiness_reports_dir = self.root / "project_readiness_reports"
+        self.project_health_reports_dir = self.root / "project_health_reports"
         self.workflows_dir = self.root / "workflows"
+        self.workflow_notifications_dir = self.root / "workflow_notifications"
         self.employee_outputs_dir = self.root / "employee_outputs"
         self.reports_dir = self.root / "reports"
         self.approvals_dir = self.root / "approvals"
@@ -83,7 +87,11 @@ class JsonStore:
             self.business_success_metrics_dir,
             self.business_approval_policies_dir,
             self.projects_dir,
+            self.project_versions_dir,
+            self.project_readiness_reports_dir,
+            self.project_health_reports_dir,
             self.workflows_dir,
+            self.workflow_notifications_dir,
             self.employee_outputs_dir,
             self.reports_dir,
             self.approvals_dir,
@@ -251,6 +259,38 @@ class JsonStore:
         projects.sort(key=lambda item: str(item.get("createdAt", "")))
         return projects
 
+    def save_project_version(self, version: dict[str, Any]) -> None:
+        self._write(self.project_versions_dir / f"{version['id']}__{int(version['version']):04d}.json", version)
+
+    def list_project_versions(self, project_id: str) -> list[dict[str, Any]]:
+        versions = [self._read(path) for path in sorted(self.project_versions_dir.glob(f"{project_id}__*.json"))]
+        versions.sort(key=lambda item: int(item.get("version", 0)))
+        return versions
+
+    def save_project_readiness(self, report: dict[str, Any]) -> None:
+        existing = self.list_project_readiness(report["projectId"])
+        self._write(self.project_readiness_reports_dir / f"{report['projectId']}__{len(existing) + 1:04d}.json", report)
+
+    def list_project_readiness(self, project_id: str) -> list[dict[str, Any]]:
+        reports = [self._read(path) for path in sorted(self.project_readiness_reports_dir.glob(f"{project_id}__*.json"))]
+        reports.sort(key=lambda item: str(item.get("createdAt", "")))
+        return reports
+
+    def get_latest_project_readiness(self, project_id: str) -> dict[str, Any]:
+        reports = self.list_project_readiness(project_id)
+        if not reports:
+            raise FileNotFoundError(f"Project readiness report not found: {project_id}")
+        return reports[-1]
+
+    def save_project_health(self, report: dict[str, Any]) -> None:
+        existing = self.list_project_health(report["projectId"])
+        self._write(self.project_health_reports_dir / f"{report['projectId']}__{len(existing) + 1:04d}.json", report)
+
+    def list_project_health(self, project_id: str) -> list[dict[str, Any]]:
+        reports = [self._read(path) for path in sorted(self.project_health_reports_dir.glob(f"{project_id}__*.json"))]
+        reports.sort(key=lambda item: str(item.get("createdAt", "")))
+        return reports
+
     def save_workflow(self, workflow: dict[str, Any]) -> None:
         self._write(self.workflows_dir / f"{workflow['id']}.json", workflow)
 
@@ -262,6 +302,18 @@ class JsonStore:
         if status is None:
             return workflows
         return [workflow for workflow in workflows if workflow.get("status") == status]
+
+    def save_workflow_notification(self, notification: dict[str, Any]) -> None:
+        self._write(self.workflow_notifications_dir / f"{notification['workflowId']}__{notification['dedupeKey']}.json", notification)
+
+    def list_workflow_notifications(self, workflow_id: str | None = None, project_id: str | None = None) -> list[dict[str, Any]]:
+        notifications = [self._read(path) for path in sorted(self.workflow_notifications_dir.glob("*.json"))]
+        if workflow_id is not None:
+            notifications = [notification for notification in notifications if notification.get("workflowId") == workflow_id]
+        if project_id is not None:
+            notifications = [notification for notification in notifications if notification.get("projectId") == project_id]
+        notifications.sort(key=lambda item: str(item.get("createdAt", "")))
+        return notifications
 
     def save_employee_output(self, output: dict[str, Any]) -> None:
         filename = f"{output['workflowId']}__{output['employeeId']}.json"

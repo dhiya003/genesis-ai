@@ -12,7 +12,9 @@ from apps.founder import FounderBusinessRuntime
 from apps.integrations.registry import integration_status
 from apps.observability import summarize_metrics
 from apps.orchestrator import GenesisOrchestrator
+from apps.project import ProjectLifecycleRuntime
 from apps.storage import JsonStore
+from apps.workflow import WorkflowEngine
 from apps.worker.main import worker_health
 from config import RuntimeConfig, load_runtime_config
 
@@ -39,8 +41,14 @@ def build_parser() -> argparse.ArgumentParser:
     submit_parser.add_argument("--timeline")
     submit_parser.add_argument("--constraint", action="append", default=[])
 
-    project_parser = subcommands.add_parser("project", help="Retrieve a stored project with tasks, deliverables, and audit history")
+    project_parser = subcommands.add_parser("project", help="Retrieve or manage a stored project lifecycle")
     project_parser.add_argument("project_id")
+    project_parser.add_argument("project_action", nargs="?", choices=["dashboard", "update", "archive", "restore", "duplicate", "timeline", "health", "readiness", "audit"])
+    project_parser.add_argument("payload", nargs="?", help="JSON payload or path when --from-file is used")
+    project_parser.add_argument("--from-file", action="store_true")
+    project_parser.add_argument("--actor", default="founder")
+    project_parser.add_argument("--reason", default="archived by founder")
+    project_parser.add_argument("--title")
     project_parser.add_argument("--data-dir", help="Override Genesis data directory")
 
     report_parser = subcommands.add_parser("report", help="Retrieve a stored research report")
@@ -158,6 +166,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     workflow_parser = subcommands.add_parser("workflow", help="Manage stored workflows")
     workflow_subcommands = workflow_parser.add_subparsers(dest="workflow_command", required=True)
+    workflow_create_parser = workflow_subcommands.add_parser("create", help="Create a workflow for a project")
+    workflow_create_parser.add_argument("project_id")
+    workflow_create_parser.add_argument("workflow_type")
+    workflow_create_parser.add_argument("--name")
+    workflow_create_parser.add_argument("--priority", default="MEDIUM")
+    workflow_create_parser.add_argument("--idempotency-key")
+    workflow_create_parser.add_argument("--data-dir")
     pause_parser = workflow_subcommands.add_parser("pause", help="Pause an active workflow")
     pause_parser.add_argument("workflow_id")
     pause_parser.add_argument("--reason", default="manual pause")
@@ -166,6 +181,13 @@ def build_parser() -> argparse.ArgumentParser:
     cancel_parser.add_argument("workflow_id")
     cancel_parser.add_argument("--reason", default="manual cancel")
     cancel_parser.add_argument("--data-dir")
+    retry_parser = workflow_subcommands.add_parser("retry", help="Retry a failed workflow")
+    retry_parser.add_argument("workflow_id")
+    retry_parser.add_argument("--data-dir")
+    for name in ["progress", "history", "notifications"]:
+        section_parser = workflow_subcommands.add_parser(name, help=f"Retrieve workflow {name}")
+        section_parser.add_argument("workflow_id")
+        section_parser.add_argument("--data-dir")
 
     resume_parser = subcommands.add_parser("resume", help="Resume a stored research workflow")
     resume_parser.add_argument("workflow_id", help="Workflow ID returned by submit")
@@ -297,17 +319,68 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "project":
             try:
-                _print_json(GenesisOrchestrator(_store(args.data_dir)).get_project(args.project_id))
+                store = _store(args.data_dir)
+                lifecycle = ProjectLifecycleRuntime(store)
+                if args.project_action is None:
+                    _print_json(GenesisOrchestrator(store).get_project(args.project_id))
+                elif args.project_action == "dashboard":
+                    _print_json(lifecycle.dashboard(args.project_id))
+                elif args.project_action == "update":
+                    if not args.payload:
+                        raise ValueError("payload is required for project update")
+                    _print_json(lifecycle.update(args.project_id, _read_json_arg(args.payload, args.from_file), actor=args.actor))
+                elif args.project_action == "archive":
+                    _print_json(lifecycle.archive(args.project_id, actor=args.actor, reason=args.reason))
+                elif args.project_action == "restore":
+                    _print_json(lifecycle.restore(args.project_id, actor=args.actor))
+                elif args.project_action == "duplicate":
+                    _print_json(lifecycle.duplicate(args.project_id, actor=args.actor, title=args.title))
+                elif args.project_action == "timeline":
+                    _print_json(lifecycle.timeline(args.project_id))
+                elif args.project_action == "health":
+                    _print_json(lifecycle.health(args.project_id))
+                elif args.project_action == "readiness":
+                    _print_json(lifecycle.validate_readiness(args.project_id, actor=args.actor))
+                elif args.project_action == "audit":
+                    _print_json({"projectId": args.project_id, "auditLogs": store.list_audit_logs(project_id=args.project_id), "export": {"format": "json"}})
             except FileNotFoundError as exc:
                 raise not_found(f"Project not found: {args.project_id}") from exc
             return 0
         if args.command == "workflow":
-            orchestrator = GenesisOrchestrator(_store(args.data_dir))
+            store = _store(args.data_dir)
+            orchestrator = GenesisOrchestrator(store)
+            engine = WorkflowEngine(store)
+            if args.workflow_command == "create":
+                _print_json(
+                    {
+                        "workflow": engine.create(
+                            args.project_id,
+                            args.workflow_type,
+                            created_by="founder",
+                            name=args.name,
+                            priority=args.priority,
+                            idempotency_key=args.idempotency_key,
+                        )
+                    }
+                )
+                return 0
             if args.workflow_command == "pause":
                 _print_json(orchestrator.pause_workflow(args.workflow_id, reason=args.reason))
                 return 0
             if args.workflow_command == "cancel":
                 _print_json(orchestrator.cancel_workflow(args.workflow_id, reason=args.reason))
+                return 0
+            if args.workflow_command == "retry":
+                _print_json({"workflow": engine.retry(args.workflow_id)})
+                return 0
+            if args.workflow_command == "progress":
+                _print_json(engine.progress(args.workflow_id))
+                return 0
+            if args.workflow_command == "history":
+                _print_json(engine.history(args.workflow_id))
+                return 0
+            if args.workflow_command == "notifications":
+                _print_json(engine.notifications(args.workflow_id))
                 return 0
         if args.command == "resume":
             result = GenesisOrchestrator(_store(args.data_dir)).resume_research_workflow(args.workflow_id, approval_mode=args.approval_mode)

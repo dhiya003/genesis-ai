@@ -7,6 +7,7 @@ from typing import Any
 from uuid import uuid4
 
 from apps.audit import now_iso, record_audit
+from apps.project import ProjectLifecycleRuntime
 from apps.storage import JsonStore
 from apps.workflow import WorkflowEngine
 
@@ -297,9 +298,10 @@ class FounderBusinessRuntime:
         project = self.store.get_project(project_id)
         if project.get("businessId") != business_id:
             raise ValueError("Project does not belong to business")
-        readiness = self._planning_readiness(business_id)
-        if not readiness["ready"]:
-            raise ValueError(f"Planning cannot start: {', '.join(readiness['missing'])}")
+        readiness_report = ProjectLifecycleRuntime(self.store).validate_readiness(project_id, actor=founder_id)["readiness"]
+        if readiness_report["outcome"] == "BLOCKED":
+            failed = [_readiness_label(check["name"]) for check in readiness_report["blockingErrors"]]
+            raise ValueError(f"Planning cannot start: {', '.join(failed)}")
         workflow = WorkflowEngine(self.store).create(project_id, "PROJECT_PLANNING")
         workflow = WorkflowEngine(self.store).plan(workflow, reason="founder started business project planning")
         workflow["scheduledDepartment"] = "RESEARCH_DEPARTMENT"
@@ -392,3 +394,16 @@ def business_goal_score(goals: list[dict[str, Any]]) -> int:
         return 0
     priority_weights = {"LOW": 40, "MEDIUM": 60, "HIGH": 80, "CRITICAL": 100}
     return round(mean(priority_weights.get(goal.get("priority", "MEDIUM"), 60) for goal in goals))
+
+
+def _readiness_label(name: str) -> str:
+    labels = {
+        "vision_defined": "vision",
+        "goals_defined": "goals",
+        "constraints_defined": "constraints",
+        "business_exists": "business",
+        "business_active": "active business",
+        "project_status_valid": "project status",
+        "required_project_fields_completed": "project fields",
+    }
+    return labels.get(name, name)

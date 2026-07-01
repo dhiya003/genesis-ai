@@ -9,6 +9,7 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 - [Genesis Release Roadmap](genesis-release-roadmap.md)
 - [Live Data Credentials and Placeholders](live-data-credentials.md)
 - [Epic 01 - Business & Founder Management](epic-01-business-founder-management.md)
+- [Epic 02-04 Lifecycle Validation](epic-02-04-lifecycle-validation.md)
 
 ## Sprint 1 Documentation Sets
 

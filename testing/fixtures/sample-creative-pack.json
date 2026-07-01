@@ -1,192 +1,2953 @@
 {
-  "reportType": "CREATIVE_PACK",
-  "version": "0.4.0",
-  "projectId": "00000000-0000-0000-0000-000000000001",
-  "creativeId": "00000000-0000-0000-0000-000000000001",
-  "productId": "00000000-0000-0000-0000-000000000001",
-  "workflowId": "workflow-creative-fixture",
-  "sourceProductBlueprintId": "00000000-0000-0000-0000-000000000001",
-  "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
-  "department": "CREATIVE",
-  "executiveSummary": "Genesis Creative Studio generated a launch-ready Creative Pack for Luma Logic Cubes.",
-  "brandStrategy": {
-    "positioning": "Premium screen-free learning toys for early childhood development in India",
-    "targetAudience": { "primarySegment": "Parents of children aged 3-5 in India" },
-    "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
-    "personality": ["warm", "intelligent", "safe", "premium", "playful"],
-    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
-    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation."
+  "aiDeliverables": {
+    "brandConsistencyRules": [
+      "Use real product visibility",
+      "Keep claims parent-clear",
+      "Avoid cluttered educational jargon",
+      "Show hands, scale, and activity cards"
+    ],
+    "creativeAssetManifestRules": [
+      "Every asset must include purpose, format, source section, and approval status."
+    ],
+    "masterImagePrompts": [
+      "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+      "Three benefit tiles: logic, motor skills, pattern recognition.",
+      "Close-up of wood grain, rounded edges, paint safety placeholder.",
+      "Starter vs Standard vs Premium contents grid.",
+      "Luma Logic Cubes Starter box, six cubes, activity cards, warm tabletop light.",
+      "Luma Logic Cubes Standard kit with expanded cubes and parent guide.",
+      "Luma Logic Cubes Premium gift-ready box with complete family set.",
+      "Founding batch now open",
+      "Built for ages 3-5",
+      "Starter, Standard, Premium kits"
+    ],
+    "styleGuidePrompts": [
+      "Use warm ivory background, forest green typography, marigold accent, real product visibility."
+    ]
   },
-  "brandNameRecommendation": {
-    "recommendedName": "LumaLearn",
-    "nameOptions": ["LumaLearn", "TinkerLuma", "Little Logic Co"],
-    "rationale": "Short, memorable, warm, and extendable across future learning products."
+  "assetGenerationPrompts": [
+    "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+    "Three benefit tiles: logic, motor skills, pattern recognition.",
+    "Close-up of wood grain, rounded edges, paint safety placeholder.",
+    "Starter vs Standard vs Premium contents grid.",
+    "Luma Logic Cubes Starter box, six cubes, activity cards, warm tabletop light.",
+    "Luma Logic Cubes Standard kit with expanded cubes and parent guide.",
+    "Luma Logic Cubes Premium gift-ready box with complete family set.",
+    "Founding batch now open",
+    "Built for ages 3-5",
+    "Starter, Standard, Premium kits"
+  ],
+  "assumptions": [
+    "Sprint 4 MVP produces creative specifications and deterministic binary asset files.",
+    "Canva, Figma, and image-generation integrations are optional later enhancements.",
+    "Founder approves the brand direction before production artwork begins."
+  ],
+  "auditSummary": {
+    "createdBy": "CreativeDepartment",
+    "sourceProductBlueprintId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "brandContext": {
+    "productId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "productName": "Luma Logic Cubes",
+    "productStory": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "variants": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ]
+  },
+  "brandGuidelinesDocument": {
+    "accessibility": {
+      "contrast": "Use Ink Charcoal on Warm Ivory for body text",
+      "mobileText": "Avoid tiny text in marketplace and social assets"
+    },
+    "claimRules": [
+      "Mark certification claims as pending until verified",
+      "Avoid medical or guaranteed learning claims"
+    ],
+    "colors": [
+      {
+        "hex": "#1F5A46",
+        "name": "Forest Green",
+        "usage": "Primary brand color"
+      },
+      {
+        "hex": "#F4B740",
+        "name": "Marigold",
+        "usage": "Learning accent"
+      },
+      {
+        "hex": "#FFF7E6",
+        "name": "Warm Ivory",
+        "usage": "Packaging base"
+      },
+      {
+        "hex": "#E87561",
+        "name": "Soft Coral",
+        "usage": "Variant accent"
+      },
+      {
+        "hex": "#242424",
+        "name": "Ink Charcoal",
+        "usage": "Text"
+      }
+    ],
+    "copy": {
+      "claimRule": "Avoid unsupported safety or learning guarantees",
+      "headlineRule": "Lead with parent benefit"
+    },
+    "do": [
+      "Show real product scale",
+      "Keep one primary message per asset",
+      "Use parent-friendly language"
+    ],
+    "dont": [
+      "Use unsupported certification claims",
+      "Overcrowd packaging",
+      "Hide the product behind abstract graphics"
+    ],
+    "iconography": "Rounded, simple symbols for learning domains and safety cues.",
+    "illustration": "Soft geometric line illustrations inspired by cubes, paths, and learning prompts.",
+    "imagery": "Bright natural product photography with visible scale and parent-child interaction.",
+    "layoutRules": [
+      "Show product first",
+      "Keep one primary message per asset",
+      "Use generous spacing"
+    ],
+    "logo": {
+      "usage": {
+        "darkBackground": "Use warm ivory mark.",
+        "lightBackground": "Use forest green wordmark.",
+        "minimumSize": "24 mm wide on packaging."
+      },
+      "variants": [
+        "Primary horizontal",
+        "Stacked",
+        "Icon mark",
+        "Monochrome"
+      ]
+    },
+    "spacing": {
+      "large": 24,
+      "medium": 16,
+      "small": 8
+    },
+    "tone": "Calm, parent-friendly, clear, and lightly playful",
+    "typography": {
+      "body": "Readable humanist sans",
+      "heading": "Rounded geometric sans",
+      "packaging": "Large friendly headings with concise parent-facing proof points"
+    },
+    "voiceRules": [
+      "Lead with parent benefit",
+      "Use simple developmental language",
+      "Avoid unsupported safety claims"
+    ]
   },
   "brandIdentity": {
+    "brandGuidelines": {
+      "accessibility": {
+        "contrast": "Use Ink Charcoal on Warm Ivory for body text",
+        "mobileText": "Avoid tiny text in marketplace and social assets"
+      },
+      "claimRules": [
+        "Mark certification claims as pending until verified",
+        "Avoid medical or guaranteed learning claims"
+      ],
+      "colors": [
+        {
+          "hex": "#1F5A46",
+          "name": "Forest Green",
+          "usage": "Primary brand color"
+        },
+        {
+          "hex": "#F4B740",
+          "name": "Marigold",
+          "usage": "Learning accent"
+        },
+        {
+          "hex": "#FFF7E6",
+          "name": "Warm Ivory",
+          "usage": "Packaging base"
+        },
+        {
+          "hex": "#E87561",
+          "name": "Soft Coral",
+          "usage": "Variant accent"
+        },
+        {
+          "hex": "#242424",
+          "name": "Ink Charcoal",
+          "usage": "Text"
+        }
+      ],
+      "copy": {
+        "claimRule": "Avoid unsupported safety or learning guarantees",
+        "headlineRule": "Lead with parent benefit"
+      },
+      "do": [
+        "Show real product scale",
+        "Keep one primary message per asset",
+        "Use parent-friendly language"
+      ],
+      "dont": [
+        "Use unsupported certification claims",
+        "Overcrowd packaging",
+        "Hide the product behind abstract graphics"
+      ],
+      "iconography": "Rounded, simple symbols for learning domains and safety cues.",
+      "illustration": "Soft geometric line illustrations inspired by cubes, paths, and learning prompts.",
+      "imagery": "Bright natural product photography with visible scale and parent-child interaction.",
+      "layoutRules": [
+        "Show product first",
+        "Keep one primary message per asset",
+        "Use generous spacing"
+      ],
+      "logo": {
+        "usage": {
+          "darkBackground": "Use warm ivory mark.",
+          "lightBackground": "Use forest green wordmark.",
+          "minimumSize": "24 mm wide on packaging."
+        },
+        "variants": [
+          "Primary horizontal",
+          "Stacked",
+          "Icon mark",
+          "Monochrome"
+        ]
+      },
+      "spacing": {
+        "large": 24,
+        "medium": 16,
+        "small": 8
+      },
+      "tone": "Calm, parent-friendly, clear, and lightly playful",
+      "typography": {
+        "body": "Readable humanist sans",
+        "heading": "Rounded geometric sans",
+        "packaging": "Large friendly headings with concise parent-facing proof points"
+      },
+      "voiceRules": [
+        "Lead with parent benefit",
+        "Use simple developmental language",
+        "Avoid unsupported safety claims"
+      ]
+    },
     "brandName": "LumaLearn",
-    "brandStory": "LumaLearn exists to make early learning feel calm, beautiful, and useful at home.",
-    "mission": "Help families turn everyday play into safe, screen-free learning moments.",
-    "vision": "Become India's most trusted premium early-learning play brand.",
-    "positioning": "Premium screen-free learning toys for early childhood development in India",
-    "targetAudience": { "primarySegment": "Parents of children aged 3-5 in India" },
-    "targetPersona": { "name": "Learning-focused urban parent", "priority": "Safe, premium play" },
     "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
-    "personality": ["warm", "intelligent", "safe", "premium", "playful"],
+    "brandStory": "LumaLearn exists to make early learning feel calm, beautiful, and useful at home.",
     "brandVoice": "Warm expert, clear parent guide, quietly playful",
-    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
-    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
     "colorPalette": [
-      { "name": "Forest Green", "hex": "#1F5A46", "usage": "Primary brand color" },
-      { "name": "Marigold", "hex": "#F4B740", "usage": "Learning accent" },
-      { "name": "Warm Ivory", "hex": "#FFF7E6", "usage": "Packaging base" }
+      {
+        "hex": "#1F5A46",
+        "name": "Forest Green",
+        "usage": "Primary brand color"
+      },
+      {
+        "hex": "#F4B740",
+        "name": "Marigold",
+        "usage": "Learning accent"
+      },
+      {
+        "hex": "#FFF7E6",
+        "name": "Warm Ivory",
+        "usage": "Packaging base"
+      },
+      {
+        "hex": "#E87561",
+        "name": "Soft Coral",
+        "usage": "Variant accent"
+      },
+      {
+        "hex": "#242424",
+        "name": "Ink Charcoal",
+        "usage": "Text"
+      }
     ],
-    "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
-    "visualRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"],
-    "brandGuidelines": { "voiceRules": ["Lead with parent benefit"], "layoutRules": ["Show product first"], "claimRules": ["Avoid unsupported claims"] }
+    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
+    "mission": "Help families turn everyday play into safe, screen-free learning moments.",
+    "personality": [
+      "warm",
+      "intelligent",
+      "safe",
+      "premium",
+      "playful"
+    ],
+    "positioning": "Premium screen-free learning toys for early childhood development in India",
+    "targetAudience": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "targetPersona": {
+      "buyingTrigger": "Birthday gifting, preschool readiness, and screen-free routines",
+      "name": "Learning-focused urban parent",
+      "priority": "Safe, premium, purposeful play for children aged 3-5"
+    },
+    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
+    "typography": {
+      "body": "Readable humanist sans",
+      "heading": "Rounded geometric sans",
+      "packaging": "Large friendly headings with concise parent-facing proof points"
+    },
+    "vision": "Become India's most trusted premium early-learning play brand.",
+    "visualRules": [
+      "Use real product visibility",
+      "Keep claims parent-clear",
+      "Avoid cluttered educational jargon",
+      "Show hands, scale, and activity cards"
+    ]
   },
-  "logoSystem": {
-    "primaryConcept": "LumaLearn wordmark with a cube/sun learning mark.",
-    "secondaryConcept": "Stacked lockup for square packaging.",
-    "iconMark": "Rounded cube with three path lines.",
-    "usage": { "lightBackground": "Use forest green wordmark." }
+  "brandNameRecommendation": {
+    "nameOptions": [
+      "LumaLearn",
+      "TinkerLuma",
+      "Little Logic Co"
+    ],
+    "rationale": "Short, memorable, warm, and extendable across future learning products.",
+    "recommendedName": "LumaLearn"
   },
-  "logoVariants": [{ "name": "Primary horizontal", "usage": "Website and box front", "fileName": "logo-primary-horizontal.svg" }],
-  "logoUsageRules": {
-    "clearSpaceRules": "Keep clear space equal to the icon height.",
-    "minimumSizeRules": "24 mm wide on packaging",
-    "backgroundRules": { "lightBackground": "Use forest green wordmark." }
+  "brandStrategy": {
+    "brandArchetype": "Caregiver Sage",
+    "brandMission": "Help families choose purposeful, screen-free play with confidence.",
+    "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
+    "brandPurpose": "Make early learning feel beautiful, safe, and useful at home.",
+    "brandVision": "Become India's most trusted premium early-learning play brand.",
+    "competitivePositioning": "More premium and intentional than generic marketplace toys; more accessible than imported educational systems.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint"
+        ]
+      },
+      "name": "Brand Strategist",
+      "outputSchema": {
+        "required": [
+          "positioning",
+          "targetAudience",
+          "brandPromise",
+          "personality",
+          "differentiation"
+        ]
+      },
+      "promptContract": "Turn the Product Blueprint into a clear brand strategy.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define positioning, audience, promise, personality, and differentiation.",
+      "section": "brandStrategy",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
+    "emotionalPositioning": "Calm confidence for parents and joyful discovery for children.",
+    "employeeId": "EMP-201",
+    "employeeName": "Brand Strategist",
+    "personality": [
+      "warm",
+      "intelligent",
+      "safe",
+      "premium",
+      "playful"
+    ],
+    "positioning": "Premium screen-free learning toys for early childhood development in India",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 88,
+    "section": "brandStrategy",
+    "status": "COMPLETED",
+    "targetAudience": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "valueProposition": "Premium wooden learning products that combine parent trust, child engagement, and gift-ready presentation.",
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "brandStrategyDocument": {
+    "brandArchetype": "Caregiver Sage",
+    "competitivePositioning": "More premium and intentional than generic marketplace toys; more accessible than imported educational systems.",
+    "emotionalPositioning": "Calm confidence for parents and joyful discovery for children.",
+    "mission": "Help families choose purposeful, screen-free play with confidence.",
+    "positioning": "Premium screen-free learning toys for early childhood development in India",
+    "purpose": "Make early learning feel beautiful, safe, and useful at home.",
+    "targetAudience": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "valueProposition": "Premium wooden learning products that combine parent trust, child engagement, and gift-ready presentation.",
+    "vision": "Become India's most trusted premium early-learning play brand."
   },
   "colorPalette": [
-    { "name": "Forest Green", "hex": "#1F5A46", "usage": "Primary brand color" },
-    { "name": "Marigold", "hex": "#F4B740", "usage": "Learning accent" },
-    { "name": "Warm Ivory", "hex": "#FFF7E6", "usage": "Packaging base" }
+    {
+      "hex": "#1F5A46",
+      "name": "Forest Green",
+      "usage": "Primary brand color"
+    },
+    {
+      "hex": "#F4B740",
+      "name": "Marigold",
+      "usage": "Learning accent"
+    },
+    {
+      "hex": "#FFF7E6",
+      "name": "Warm Ivory",
+      "usage": "Packaging base"
+    },
+    {
+      "hex": "#E87561",
+      "name": "Soft Coral",
+      "usage": "Variant accent"
+    },
+    {
+      "hex": "#242424",
+      "name": "Ink Charcoal",
+      "usage": "Text"
+    }
   ],
-  "typography": { "heading": "Rounded geometric sans", "body": "Readable humanist sans" },
-  "visualIdentityRules": ["Use real product visibility", "Keep claims parent-clear", "Avoid cluttered educational jargon"],
-  "visualSystem": {
-    "iconLibrary": [{ "name": "Logic", "concept": "Path through rounded cube" }],
-    "illustrationStyle": "Soft geometric line illustrations.",
-    "photographyStyle": "Bright Indian home setting with natural light.",
-    "graphicElements": ["Cube path pattern"],
-    "designTokens": { "colors": { "Forest Green": "#1F5A46" }, "spacing": { "sm": 8 } }
+  "creativeAssetManifest": [
+    {
+      "assetId": "brand-guidelines",
+      "format": "pdf",
+      "name": "LumaLearn Brand Guidelines",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "productMockups",
+      "format": "mixed",
+      "name": "Productmockups",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "heroImages",
+      "format": "mixed",
+      "name": "Heroimages",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "lifestyleImages",
+      "format": "mixed",
+      "name": "Lifestyleimages",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "explodedViews",
+      "format": "mixed",
+      "name": "Explodedviews",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "featureCallouts",
+      "format": "mixed",
+      "name": "Featurecallouts",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "sizeCharts",
+      "format": "mixed",
+      "name": "Sizecharts",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "infographics",
+      "format": "mixed",
+      "name": "Infographics",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "productManuals",
+      "format": "mixed",
+      "name": "Productmanuals",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "instructionCards",
+      "format": "mixed",
+      "name": "Instructioncards",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "boxDesign",
+      "format": "mixed",
+      "name": "Boxdesign",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "labels",
+      "format": "mixed",
+      "name": "Labels",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "stickers",
+      "format": "mixed",
+      "name": "Stickers",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "hangTags",
+      "format": "mixed",
+      "name": "Hangtags",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "thankYouCards",
+      "format": "mixed",
+      "name": "Thankyoucards",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "warrantyCards",
+      "format": "mixed",
+      "name": "Warrantycards",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "qrIntegration",
+      "format": "mixed",
+      "name": "Qrintegration",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "barcodePlacement",
+      "format": "mixed",
+      "name": "Barcodeplacement",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "printReadyDielines",
+      "format": "mixed",
+      "name": "Printreadydielines",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "packagingSpecifications",
+      "format": "mixed",
+      "name": "Packagingspecifications",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "websiteBanners",
+      "format": "mixed",
+      "name": "Websitebanners",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "appAssets",
+      "format": "mixed",
+      "name": "Appassets",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "amazonImageSet",
+      "format": "mixed",
+      "name": "Amazonimageset",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "shopifyImageSet",
+      "format": "mixed",
+      "name": "Shopifyimageset",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "socialMediaTemplates",
+      "format": "mixed",
+      "name": "Socialmediatemplates",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "storyTemplates",
+      "format": "mixed",
+      "name": "Storytemplates",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "highlightCovers",
+      "format": "mixed",
+      "name": "Highlightcovers",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "emailGraphics",
+      "format": "mixed",
+      "name": "Emailgraphics",
+      "status": "SPEC_READY"
+    },
+    {
+      "assetId": "primary-horizontal-logo",
+      "format": "svg",
+      "name": "Primary Horizontal Logo",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-primary-horizontal.svg",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "stacked-logo",
+      "format": "svg",
+      "name": "Stacked Logo",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-stacked.svg",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "icon-mark",
+      "format": "svg",
+      "name": "Icon Mark",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-icon-mark.svg",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "monochrome-logo",
+      "format": "svg",
+      "name": "Monochrome Logo",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-monochrome.svg",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "product-hero-image",
+      "format": "png",
+      "name": "Product Hero Image",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/product-hero.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "starter-variant-mockup",
+      "format": "png",
+      "name": "Starter Variant Mockup",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/product-mockup-starter.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "amazon-main-image",
+      "format": "png",
+      "name": "Amazon Main Image",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/amazon-main-image.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "shopify-product-card",
+      "format": "png",
+      "name": "Shopify Product Card",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/shopify-product-card.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "instagram-launch-post",
+      "format": "png",
+      "name": "Instagram Launch Post",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instagram-launch-post.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "instagram-story",
+      "format": "png",
+      "name": "Instagram Story",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instagram-story.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "email-launch-header",
+      "format": "png",
+      "name": "Email Launch Header",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/email-launch-header.png",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "starter-box-dieline",
+      "format": "svg",
+      "name": "Starter Box Dieline",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/starter-box-dieline.svg",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "packaging-specification-pdf",
+      "format": "pdf",
+      "name": "Packaging Specification PDF",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/packaging-spec.pdf",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "parent-guide-pdf",
+      "format": "pdf",
+      "name": "Parent Guide PDF",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/parent-guide.pdf",
+      "status": "GENERATED"
+    },
+    {
+      "assetId": "instruction-cards-pdf",
+      "format": "pdf",
+      "name": "Instruction Cards PDF",
+      "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instruction-cards.pdf",
+      "status": "GENERATED"
+    }
+  ],
+  "creativeDirector": {
+    "assignmentStatus": "ASSIGNED",
+    "employeeId": "EMP-210",
+    "name": "Creative Director / QA",
+    "responsibilities": [
+      "Orchestrate creative standards",
+      "Validate consistency",
+      "Prepare founder approval checklist"
+    ]
   },
-  "packagingDesignBrief": {
-    "concept": "Premium learning kit box with natural board texture.",
-    "panelContent": { "front": ["Brand name", "Age 3-5"], "back": ["How children play"], "side": ["SKU placeholder"] },
-    "materials": ["Rigid kraft board", "Paper pulp insert"],
-    "compliancePlaceholders": ["Age grade", "Choking hazard review"]
-  },
-  "packagingProductionAssets": {
-    "boxDesign": { "concept": "Premium learning kit box" },
-    "labels": [{ "fileName": "label-age-safety.svg" }],
-    "stickers": [{ "fileName": "sticker-founder-batch.svg" }],
-    "hangTags": [{ "fileName": "hang-tag-learning-benefits.pdf" }],
-    "thankYouCards": [{ "fileName": "thank-you-card.pdf" }],
-    "warrantyCards": [{ "fileName": "care-and-warranty-card.pdf" }],
-    "qrIntegration": { "placement": "Back panel" },
-    "barcodePlacement": { "placement": "Bottom side panel" },
-    "printReadyDielines": [{ "fileName": "starter-box-dieline.ai", "status": "SPEC_READY" }],
-    "packagingSpecifications": { "materials": ["Rigid kraft board"] }
-  },
-  "productMockupBrief": {
-    "variantMockups": [
-      { "variant": "Starter", "brief": "Starter box, six cubes, activity cards." },
-      { "variant": "Standard", "brief": "Standard kit with expanded cubes." },
-      { "variant": "Premium", "brief": "Premium gift-ready box." }
+  "creativeExecutionPlan": {
+    "automation": "FULLY_AUTOMATED",
+    "employees": [
+      "EMP-201",
+      "EMP-202",
+      "EMP-203",
+      "EMP-204",
+      "EMP-205",
+      "EMP-206",
+      "EMP-207",
+      "EMP-208",
+      "EMP-209",
+      "EMP-210"
     ],
-    "lifestyleScenes": ["Parent and child solving a pattern"],
-    "renderingGuidance": "Use bright natural light."
+    "steps": [
+      "Brand strategy",
+      "Naming",
+      "Logo system",
+      "Visual identity",
+      "Packaging",
+      "Mockups",
+      "Marketplace assets",
+      "Social assets",
+      "Copy",
+      "QA"
+    ]
   },
-  "productCreativeDeliverables": {
-    "productMockups": [{ "variant": "Starter", "brief": "Starter box, six cubes, activity cards." }],
-    "heroImages": [{ "name": "Main hero", "brief": "Box, cubes, and cards on white." }],
-    "lifestyleImages": [{ "name": "Parent-child activity", "brief": "Child arranging cubes." }],
-    "explodedViews": [{ "name": "What is inside", "components": ["Box", "Cubes", "Cards"] }],
-    "featureCallouts": ["Logic", "Motor skills"],
-    "sizeCharts": [{ "variant": "Starter", "packageSize": "180 x 120 x 60 mm" }],
-    "infographics": ["How to play in 3 steps"],
-    "productManuals": [{ "fileName": "manual-parent-guide.pdf" }],
-    "instructionCards": [{ "fileName": "instruction-cards-starter.pdf", "count": 12 }]
+  "creativeId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "creativeQaReport": {
+    "approvalChecklist": [
+      {
+        "item": "Approve brand name",
+        "status": "READY"
+      },
+      {
+        "item": "Approve logo direction",
+        "status": "READY"
+      },
+      {
+        "item": "Approve packaging concept",
+        "status": "READY"
+      },
+      {
+        "item": "Approve image-generation briefs",
+        "status": "READY"
+      },
+      {
+        "item": "Confirm compliance wording before print",
+        "status": "REVIEW"
+      }
+    ],
+    "checks": [
+      {
+        "check": "Brand-product fit",
+        "status": "PASS"
+      },
+      {
+        "check": "Variant coverage",
+        "status": "PASS"
+      },
+      {
+        "check": "Packaging clarity",
+        "status": "PASS"
+      },
+      {
+        "check": "Marketplace readiness",
+        "status": "PASS"
+      },
+      {
+        "check": "Unsupported claims",
+        "status": "PASS"
+      }
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "creativeSections"
+        ]
+      },
+      "name": "Creative Director / QA",
+      "outputSchema": {
+        "required": [
+          "checks",
+          "approvalChecklist",
+          "risks"
+        ]
+      },
+      "promptContract": "Run creative quality gates and summarize founder approval needs.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Validate creative consistency, launch readiness, and founder approval needs.",
+      "section": "creativeQaReport",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-210",
+    "employeeName": "Creative Director / QA",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [
+      "Certification claims must remain placeholders until verified.",
+      "Final logo files require design tool production."
+    ],
+    "score": 82,
+    "section": "creativeQaReport",
+    "status": "COMPLETED",
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "creativeStudio": {
+    "entryCriteria": [
+      "Approved Product Blueprint",
+      "Product variants",
+      "Packaging specification",
+      "Creative handoff readiness"
+    ],
+    "mission": "Transform Product Blueprint into export-ready brand, packaging, marketplace, and social creative assets.",
+    "output": "Creative Pack",
+    "status": "INITIALIZED"
+  },
+  "creativeValidationReport": {
+    "errors": [],
+    "failedAssetsBlocked": true,
+    "status": "PASS",
+    "validationAreas": [
+      {
+        "area": "Brand strategy",
+        "status": "PASS"
+      },
+      {
+        "area": "Brand identity",
+        "status": "PASS"
+      },
+      {
+        "area": "Packaging design",
+        "status": "PASS"
+      },
+      {
+        "area": "Marketplace creative",
+        "status": "PASS"
+      },
+      {
+        "area": "Social creative",
+        "status": "PASS"
+      },
+      {
+        "area": "Copy consistency",
+        "status": "PASS"
+      }
+    ],
+    "validationHistory": [
+      {
+        "evidence": "APPROVED_WITH_REVIEW_ITEMS",
+        "stage": "Product Blueprint precondition",
+        "status": "PASS"
+      },
+      {
+        "stage": "Creative employee outputs",
+        "status": "PASS",
+        "validator": "validate_creative_employee_output"
+      },
+      {
+        "stage": "Creative Pack",
+        "status": "PASS",
+        "validator": "validate_creative_pack.py"
+      }
+    ],
+    "warnings": [
+      "Certification claims must remain placeholders until verified.",
+      "Final logo files require design tool production."
+    ]
+  },
+  "department": "CREATIVE",
+  "departmentMetrics": {
+    "employeeCount": 10,
+    "overallScore": 85
+  },
+  "departmentStatus": "COMPLETED",
+  "digitalAssets": {
+    "amazonImageSet": [
+      {
+        "brief": "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+        "slot": 1,
+        "title": "Hero product image"
+      },
+      {
+        "brief": "Three benefit tiles: logic, motor skills, pattern recognition.",
+        "slot": 2,
+        "title": "Learning benefits"
+      },
+      {
+        "brief": "Close-up of wood grain, rounded edges, paint safety placeholder.",
+        "slot": 3,
+        "title": "Material trust"
+      },
+      {
+        "brief": "Starter vs Standard vs Premium contents grid.",
+        "slot": 4,
+        "title": "Variant comparison"
+      }
+    ],
+    "appAssets": [
+      {
+        "brief": "Square product card for mobile catalog",
+        "fileName": "app-product-card.png"
+      }
+    ],
+    "emailGraphics": [
+      {
+        "brief": "Brand header with product hero",
+        "fileName": "email-launch-header.png"
+      }
+    ],
+    "highlightCovers": [
+      {
+        "icon": "Logic cube",
+        "name": "Play"
+      },
+      {
+        "icon": "Leaf badge",
+        "name": "Safety"
+      }
+    ],
+    "shopifyImageSet": [
+      {
+        "brief": "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+        "slot": 1,
+        "title": "Hero product image"
+      },
+      {
+        "brief": "Three benefit tiles: logic, motor skills, pattern recognition.",
+        "slot": 2,
+        "title": "Learning benefits"
+      },
+      {
+        "brief": "Close-up of wood grain, rounded edges, paint safety placeholder.",
+        "slot": 3,
+        "title": "Material trust"
+      },
+      {
+        "brief": "Starter vs Standard vs Premium contents grid.",
+        "slot": 4,
+        "title": "Variant comparison"
+      }
+    ],
+    "socialMediaTemplates": [
+      {
+        "format": "carousel",
+        "hook": "A toy that teaches before it explains.",
+        "slides": [
+          "Problem",
+          "How it works",
+          "Skills built",
+          "Inside the box",
+          "Founder waitlist CTA"
+        ]
+      },
+      {
+        "format": "static",
+        "hook": "Premium wooden play for curious little minds.",
+        "visual": "Child hand arranging cubes with parent nearby"
+      }
+    ],
+    "storyTemplates": [
+      "Poll: Which skill should playtime build?",
+      "Behind the product: why rounded wooden cubes",
+      "Waitlist sticker"
+    ],
+    "websiteBanners": [
+      {
+        "brief": "Hero product render with founding batch CTA",
+        "fileName": "website-hero-banner.png"
+      }
+    ]
+  },
+  "employeeOutputs": [
+    {
+      "brandArchetype": "Caregiver Sage",
+      "brandMission": "Help families choose purposeful, screen-free play with confidence.",
+      "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence.",
+      "brandPurpose": "Make early learning feel beautiful, safe, and useful at home.",
+      "brandVision": "Become India's most trusted premium early-learning play brand.",
+      "competitivePositioning": "More premium and intentional than generic marketplace toys; more accessible than imported educational systems.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint"
+          ]
+        },
+        "name": "Brand Strategist",
+        "outputSchema": {
+          "required": [
+            "positioning",
+            "targetAudience",
+            "brandPromise",
+            "personality",
+            "differentiation"
+          ]
+        },
+        "promptContract": "Turn the Product Blueprint into a clear brand strategy.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define positioning, audience, promise, personality, and differentiation.",
+        "section": "brandStrategy",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "differentiation": "Combines premium natural materials, parent-friendly education value, and gift-ready presentation.",
+      "emotionalPositioning": "Calm confidence for parents and joyful discovery for children.",
+      "employeeId": "EMP-201",
+      "employeeName": "Brand Strategist",
+      "personality": [
+        "warm",
+        "intelligent",
+        "safe",
+        "premium",
+        "playful"
+      ],
+      "positioning": "Premium screen-free learning toys for early childhood development in India",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 88,
+      "section": "brandStrategy",
+      "status": "COMPLETED",
+      "targetAudience": {
+        "ageGroup": "3-5",
+        "buyer": "Parents and gift buyers",
+        "needs": [
+          "Safe educational play",
+          "Premium durable materials",
+          "Simple learning activities"
+        ],
+        "primarySegment": "Parents of children aged 3-5 in India",
+        "user": "Children aged 3-5"
+      },
+      "toneOfVoice": "Calm, parent-friendly, clear, and lightly playful",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "valueProposition": "Premium wooden learning products that combine parent trust, child engagement, and gift-ready presentation.",
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "brandStrategy",
+            "productBlueprint"
+          ]
+        },
+        "name": "Naming Specialist",
+        "outputSchema": {
+          "required": [
+            "nameOptions",
+            "recommendedName",
+            "rationale"
+          ]
+        },
+        "promptContract": "Create distinct, memorable names that fit the founder opportunity.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Generate and recommend brand names aligned to product strategy.",
+        "section": "brandNaming",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-202",
+      "employeeName": "Naming Specialist",
+      "nameOptions": [
+        "LumaLearn",
+        "TinkerLuma",
+        "Little Logic Co"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "rationale": "Short, memorable, warm, and extendable across future learning products.",
+      "recommendedName": "LumaLearn",
+      "rejectedNames": [
+        {
+          "name": "TinkerLuma",
+          "reason": "Good backup, but less direct than the recommended name."
+        },
+        {
+          "name": "Little Logic Co",
+          "reason": "Good backup, but less direct than the recommended name."
+        }
+      ],
+      "risks": [],
+      "score": 86,
+      "section": "brandNaming",
+      "status": "COMPLETED",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "brandNaming",
+            "brandStrategy"
+          ]
+        },
+        "name": "Logo Designer",
+        "outputSchema": {
+          "required": [
+            "primaryConcept",
+            "secondaryConcept",
+            "iconMark",
+            "usage"
+          ]
+        },
+        "promptContract": "Create a production-ready logo system brief.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define logo direction, mark concept, lockups, and usage rules.",
+        "section": "logoSystem",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-203",
+      "employeeName": "Logo Designer",
+      "iconMark": "Rounded cube with three simple path lines suggesting logic and play.",
+      "monochromeVersion": "Single-color mark for box stamping and instruction cards.",
+      "primaryConcept": "LumaLearn wordmark with a small cube/sun learning mark.",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 84,
+      "secondaryConcept": "Stacked lockup for square packaging and marketplace thumbnails.",
+      "section": "logoSystem",
+      "status": "COMPLETED",
+      "usage": {
+        "darkBackground": "Use warm ivory mark.",
+        "lightBackground": "Use forest green wordmark.",
+        "minimumSize": "24 mm wide on packaging."
+      },
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "colorPalette": [
+        {
+          "hex": "#1F5A46",
+          "name": "Forest Green",
+          "usage": "Primary brand color"
+        },
+        {
+          "hex": "#F4B740",
+          "name": "Marigold",
+          "usage": "Learning accent"
+        },
+        {
+          "hex": "#FFF7E6",
+          "name": "Warm Ivory",
+          "usage": "Packaging base"
+        },
+        {
+          "hex": "#E87561",
+          "name": "Soft Coral",
+          "usage": "Variant accent"
+        },
+        {
+          "hex": "#242424",
+          "name": "Ink Charcoal",
+          "usage": "Text"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "logoSystem",
+            "brandStrategy"
+          ]
+        },
+        "name": "Visual Identity Designer",
+        "outputSchema": {
+          "required": [
+            "colorPalette",
+            "typography",
+            "visualRules"
+          ]
+        },
+        "promptContract": "Create a cohesive visual identity for packaging and launch assets.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define colors, typography, visual language, and brand rules.",
+        "section": "visualIdentity",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-204",
+      "employeeName": "Visual Identity Designer",
+      "graphicStyle": "Soft geometric patterns inspired by cubes, paths, and early learning shapes",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 85,
+      "section": "visualIdentity",
+      "status": "COMPLETED",
+      "typography": {
+        "body": "Readable humanist sans",
+        "heading": "Rounded geometric sans",
+        "packaging": "Large friendly headings with concise parent-facing proof points"
+      },
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "visualRules": [
+        "Use real product visibility",
+        "Keep claims parent-clear",
+        "Avoid cluttered educational jargon",
+        "Show hands, scale, and activity cards"
+      ],
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "compliancePlaceholders": [
+        "Age grade",
+        "Choking hazard review",
+        "Non-toxic paint claim pending certification",
+        "Manufacturer details"
+      ],
+      "concept": "LumaLearn premium learning kit box with natural board texture and bold color-coded variant band.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "visualIdentity"
+          ]
+        },
+        "name": "Packaging Designer",
+        "outputSchema": {
+          "required": [
+            "concept",
+            "panelContent",
+            "materials",
+            "compliancePlaceholders"
+          ]
+        },
+        "promptContract": "Create a supplier-ready packaging design brief.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Translate packaging engineering into creative packaging direction.",
+        "section": "packagingDesignBrief",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-205",
+      "employeeName": "Packaging Designer",
+      "finishRecommendations": [
+        "Matte lamination alternative",
+        "Single spot-color accent",
+        "Stamped monochrome logo option"
+      ],
+      "materials": [
+        "Rigid kraft board",
+        "Paper pulp insert",
+        "Matte water-based finish"
+      ],
+      "panelContent": {
+        "back": [
+          "How children play",
+          "What is inside",
+          "Parent benefit proof",
+          "Safety placeholders"
+        ],
+        "front": [
+          "Brand name",
+          "Product name",
+          "Age 3-5",
+          "Logic + motor skills benefit",
+          "Product window or product render"
+        ],
+        "side": [
+          "Variant name",
+          "SKU placeholder",
+          "QR placeholder",
+          "Barcode placeholder"
+        ]
+      },
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 86,
+      "section": "packagingDesignBrief",
+      "status": "COMPLETED",
+      "sustainabilityNotes": "Plastic-free, recyclable paper components, compact shipping footprint.",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "visualIdentity"
+          ]
+        },
+        "name": "Product Mockup Designer",
+        "outputSchema": {
+          "required": [
+            "variantMockups",
+            "lifestyleScenes",
+            "renderingGuidance"
+          ]
+        },
+        "promptContract": "Create image-generation-ready mockup briefs for each product variant.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define product, variant, and lifestyle mockup scenes.",
+        "section": "productMockupBrief",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-206",
+      "employeeName": "Product Mockup Designer",
+      "lifestyleScenes": [
+        "Parent and child solving a simple pattern",
+        "Gift box opened on a clean Indian home table",
+        "Close-up of safe rounded wooden edges"
+      ],
+      "marketplaceImageRequirements": [
+        "White-background hero",
+        "Scale image",
+        "What's in the box",
+        "Skill benefits",
+        "Safety and material proof"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "renderingGuidance": "Use bright natural light, visible product scale, no exaggerated claims, no unsafe small loose parts near younger children.",
+      "risks": [],
+      "score": 84,
+      "section": "productMockupBrief",
+      "status": "COMPLETED",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "variantMockups": [
+        {
+          "brief": "Luma Logic Cubes Starter box, six cubes, activity cards, warm tabletop light.",
+          "variant": "Starter"
+        },
+        {
+          "brief": "Luma Logic Cubes Standard kit with expanded cubes and parent guide.",
+          "variant": "Standard"
+        },
+        {
+          "brief": "Luma Logic Cubes Premium gift-ready box with complete family set.",
+          "variant": "Premium"
+        }
+      ],
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "copyAssets"
+          ]
+        },
+        "name": "Marketplace Creative Designer",
+        "outputSchema": {
+          "required": [
+            "imageConcepts",
+            "requirements",
+            "qualityRules"
+          ]
+        },
+        "promptContract": "Create marketplace-ready creative concepts for conversion.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define marketplace hero, feature, comparison, and trust images.",
+        "section": "marketplaceCreativePack",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-207",
+      "employeeName": "Marketplace Creative Designer",
+      "imageConcepts": [
+        {
+          "brief": "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+          "slot": 1,
+          "title": "Hero product image"
+        },
+        {
+          "brief": "Three benefit tiles: logic, motor skills, pattern recognition.",
+          "slot": 2,
+          "title": "Learning benefits"
+        },
+        {
+          "brief": "Close-up of wood grain, rounded edges, paint safety placeholder.",
+          "slot": 3,
+          "title": "Material trust"
+        },
+        {
+          "brief": "Starter vs Standard vs Premium contents grid.",
+          "slot": 4,
+          "title": "Variant comparison"
+        }
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "qualityRules": [
+        "Avoid tiny text",
+        "Avoid clutter",
+        "Keep parent benefit above feature detail"
+      ],
+      "requirements": [
+        "Readable on mobile",
+        "Product visible in every image",
+        "No unsupported certification claims"
+      ],
+      "risks": [],
+      "score": 83,
+      "section": "marketplaceCreativePack",
+      "status": "COMPLETED",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "brandStrategy",
+            "visualIdentity"
+          ]
+        },
+        "name": "Social Media Designer",
+        "outputSchema": {
+          "required": [
+            "instagramPosts",
+            "stories",
+            "reels",
+            "launchBanners"
+          ]
+        },
+        "promptContract": "Create platform-ready social creative concepts.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define Instagram posts, stories, reels, and launch banners.",
+        "section": "socialMediaCreativePack",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-208",
+      "employeeName": "Social Media Designer",
+      "instagramPosts": [
+        {
+          "format": "carousel",
+          "hook": "A toy that teaches before it explains.",
+          "slides": [
+            "Problem",
+            "How it works",
+            "Skills built",
+            "Inside the box",
+            "Founder waitlist CTA"
+          ]
+        },
+        {
+          "format": "static",
+          "hook": "Premium wooden play for curious little minds.",
+          "visual": "Child hand arranging cubes with parent nearby"
+        }
+      ],
+      "launchBanners": [
+        "Founding batch now open",
+        "Built for ages 3-5",
+        "Starter, Standard, Premium kits"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "reels": [
+        "15-second pattern challenge",
+        "Unbox the Starter kit",
+        "Parent explains screen-free play"
+      ],
+      "risks": [],
+      "score": 84,
+      "section": "socialMediaCreativePack",
+      "status": "COMPLETED",
+      "stories": [
+        "Poll: Which skill should playtime build?",
+        "Behind the product: why rounded wooden cubes",
+        "Waitlist sticker"
+      ],
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "brandStrategy",
+            "productBlueprint"
+          ]
+        },
+        "name": "Copywriter",
+        "outputSchema": {
+          "required": [
+            "taglines",
+            "packagingCopy",
+            "productHeadline",
+            "featureBullets",
+            "socialCaptions"
+          ]
+        },
+        "promptContract": "Write clear, conversion-aware launch copy in the brand voice.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Write taglines, packaging copy, product copy, captions, and listing copy.",
+        "section": "copyAssets",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-209",
+      "employeeName": "Copywriter",
+      "featureBullets": [
+        "Supports logic and pattern recognition",
+        "Rounded wooden pieces for comfortable play",
+        "Gift-ready packaging",
+        "Expandable activity system"
+      ],
+      "marketplaceListingDraft": "Premium wooden educational toy kit for ages 3-5 with activity cards, safe rounded pieces, and gift-ready packaging.",
+      "packagingCopy": {
+        "back": "A premium wooden activity kit designed to help children explore patterns, logic, and motor skills through screen-free play.",
+        "front": "LumaLearn Logic Cubes"
+      },
+      "productDescription": "A gift-ready educational wooden toy kit for parents who want safe, beautiful, screen-free learning at home.",
+      "productHeadline": "Premium wooden logic cubes for children aged 3-5",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 85,
+      "section": "copyAssets",
+      "socialCaptions": [
+        "Screen-free play, made a little smarter.",
+        "A calmer way to build early logic skills.",
+        "The first founding batch is almost ready."
+      ],
+      "status": "COMPLETED",
+      "taglines": [
+        "Play that builds little logic.",
+        "Quiet learning. Beautiful play.",
+        "Premium wooden play for curious minds."
+      ],
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    {
+      "approvalChecklist": [
+        {
+          "item": "Approve brand name",
+          "status": "READY"
+        },
+        {
+          "item": "Approve logo direction",
+          "status": "READY"
+        },
+        {
+          "item": "Approve packaging concept",
+          "status": "READY"
+        },
+        {
+          "item": "Approve image-generation briefs",
+          "status": "READY"
+        },
+        {
+          "item": "Confirm compliance wording before print",
+          "status": "REVIEW"
+        }
+      ],
+      "checks": [
+        {
+          "check": "Brand-product fit",
+          "status": "PASS"
+        },
+        {
+          "check": "Variant coverage",
+          "status": "PASS"
+        },
+        {
+          "check": "Packaging clarity",
+          "status": "PASS"
+        },
+        {
+          "check": "Marketplace readiness",
+          "status": "PASS"
+        },
+        {
+          "check": "Unsupported claims",
+          "status": "PASS"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "creativeSections"
+          ]
+        },
+        "name": "Creative Director / QA",
+        "outputSchema": {
+          "required": [
+            "checks",
+            "approvalChecklist",
+            "risks"
+          ]
+        },
+        "promptContract": "Run creative quality gates and summarize founder approval needs.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Validate creative consistency, launch readiness, and founder approval needs.",
+        "section": "creativeQaReport",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-210",
+      "employeeName": "Creative Director / QA",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [
+        "Certification claims must remain placeholders until verified.",
+        "Final logo files require design tool production."
+      ],
+      "score": 82,
+      "section": "creativeQaReport",
+      "status": "COMPLETED",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    }
+  ],
+  "executiveSummary": "Genesis Creative Studio generated a launch-ready Creative Pack for Luma Logic Cubes.",
+  "founderApprovalChecklist": [
+    {
+      "item": "Approve brand name",
+      "status": "READY"
+    },
+    {
+      "item": "Approve logo direction",
+      "status": "READY"
+    },
+    {
+      "item": "Approve packaging concept",
+      "status": "READY"
+    },
+    {
+      "item": "Approve image-generation briefs",
+      "status": "READY"
+    },
+    {
+      "item": "Confirm compliance wording before print",
+      "status": "REVIEW"
+    }
+  ],
+  "founderNotification": {
+    "message": "Creative Pack is complete with deterministic assets and ready for founder approval before Marketing Engine.",
+    "status": "READY_FOR_REVIEW"
+  },
+  "generatedAssets": {
+    "assetRoot": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "assets": [
+      {
+        "assetId": "primary-horizontal-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-primary-horizontal.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Primary Horizontal Logo",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-primary-horizontal.svg",
+        "sizeBytes": 658,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "stacked-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-stacked.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Stacked Logo",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-stacked.svg",
+        "sizeBytes": 567,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "icon-mark",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-icon-mark.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Icon Mark",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-icon-mark.svg",
+        "sizeBytes": 452,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "monochrome-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-monochrome.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Monochrome Logo",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/logo-monochrome.svg",
+        "sizeBytes": 650,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "product-hero-image",
+        "contentType": "image/png",
+        "fileName": "product-hero.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Product Hero Image",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/product-hero.png",
+        "sizeBytes": 2501,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-variant-mockup",
+        "contentType": "image/png",
+        "fileName": "product-mockup-starter.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Starter Variant Mockup",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/product-mockup-starter.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "amazon-main-image",
+        "contentType": "image/png",
+        "fileName": "amazon-main-image.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Amazon Main Image",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/amazon-main-image.png",
+        "sizeBytes": 6235,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "shopify-product-card",
+        "contentType": "image/png",
+        "fileName": "shopify-product-card.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Shopify Product Card",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/shopify-product-card.png",
+        "sizeBytes": 4398,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-launch-post",
+        "contentType": "image/png",
+        "fileName": "instagram-launch-post.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Launch Post",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instagram-launch-post.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-story",
+        "contentType": "image/png",
+        "fileName": "instagram-story.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Story",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instagram-story.png",
+        "sizeBytes": 5326,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "email-launch-header",
+        "contentType": "image/png",
+        "fileName": "email-launch-header.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Email Launch Header",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/email-launch-header.png",
+        "sizeBytes": 1853,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-box-dieline",
+        "contentType": "image/svg+xml",
+        "fileName": "starter-box-dieline.svg",
+        "format": "svg",
+        "kind": "document",
+        "name": "Starter Box Dieline",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/starter-box-dieline.svg",
+        "sizeBytes": 967,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "packaging-specification-pdf",
+        "contentType": "application/pdf",
+        "fileName": "packaging-spec.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Packaging Specification PDF",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/packaging-spec.pdf",
+        "sizeBytes": 753,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "parent-guide-pdf",
+        "contentType": "application/pdf",
+        "fileName": "parent-guide.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Parent Guide PDF",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/parent-guide.pdf",
+        "sizeBytes": 697,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instruction-cards-pdf",
+        "contentType": "application/pdf",
+        "fileName": "instruction-cards.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Instruction Cards PDF",
+        "path": ".genesis-data/creative_assets/68b4684d-a698-4694-9ed7-06bd3d9eb964/instruction-cards.pdf",
+        "sizeBytes": 701,
+        "status": "GENERATED"
+      }
+    ],
+    "mode": "NO_CREDENTIALS",
+    "notes": [
+      "Deterministic assets keep CI stable and credential-free.",
+      "OpenAI image generation is opt-in through GENESIS_CREATIVE_IMAGE_PROVIDER=openai.",
+      "Source product context: Build a premium educational wooden toy business for children aged 3-5 in India."
+    ],
+    "openaiImagesGenerated": 0,
+    "provider": "deterministic-local",
+    "summary": {
+      "pdf": 3,
+      "png": 7,
+      "svg": 5,
+      "totalAssets": 15
+    }
+  },
+  "knowledgeBaseEntries": [
+    {
+      "brandName": "LumaLearn",
+      "lesson": "Brand strategy, packaging, marketplace, and social assets should share one visual system.",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "type": "CREATIVE_SYSTEM"
+    },
+    {
+      "brandName": "LumaLearn",
+      "lesson": "Deterministic assets prove workflow completeness; provider assets can upgrade quality later.",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "type": "ASSET_GENERATION"
+    }
+  ],
+  "launchCopyPack": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "brandStrategy",
+          "productBlueprint"
+        ]
+      },
+      "name": "Copywriter",
+      "outputSchema": {
+        "required": [
+          "taglines",
+          "packagingCopy",
+          "productHeadline",
+          "featureBullets",
+          "socialCaptions"
+        ]
+      },
+      "promptContract": "Write clear, conversion-aware launch copy in the brand voice.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Write taglines, packaging copy, product copy, captions, and listing copy.",
+      "section": "copyAssets",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-209",
+    "employeeName": "Copywriter",
+    "featureBullets": [
+      "Supports logic and pattern recognition",
+      "Rounded wooden pieces for comfortable play",
+      "Gift-ready packaging",
+      "Expandable activity system"
+    ],
+    "marketplaceListingDraft": "Premium wooden educational toy kit for ages 3-5 with activity cards, safe rounded pieces, and gift-ready packaging.",
+    "packagingCopy": {
+      "back": "A premium wooden activity kit designed to help children explore patterns, logic, and motor skills through screen-free play.",
+      "front": "LumaLearn Logic Cubes"
+    },
+    "productDescription": "A gift-ready educational wooden toy kit for parents who want safe, beautiful, screen-free learning at home.",
+    "productHeadline": "Premium wooden logic cubes for children aged 3-5",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 85,
+    "section": "copyAssets",
+    "socialCaptions": [
+      "Screen-free play, made a little smarter.",
+      "A calmer way to build early logic skills.",
+      "The first founding batch is almost ready."
+    ],
+    "status": "COMPLETED",
+    "taglines": [
+      "Play that builds little logic.",
+      "Quiet learning. Beautiful play.",
+      "Premium wooden play for curious minds."
+    ],
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "logoSystem": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "brandNaming",
+          "brandStrategy"
+        ]
+      },
+      "name": "Logo Designer",
+      "outputSchema": {
+        "required": [
+          "primaryConcept",
+          "secondaryConcept",
+          "iconMark",
+          "usage"
+        ]
+      },
+      "promptContract": "Create a production-ready logo system brief.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define logo direction, mark concept, lockups, and usage rules.",
+      "section": "logoSystem",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-203",
+    "employeeName": "Logo Designer",
+    "iconMark": "Rounded cube with three simple path lines suggesting logic and play.",
+    "monochromeVersion": "Single-color mark for box stamping and instruction cards.",
+    "primaryConcept": "LumaLearn wordmark with a small cube/sun learning mark.",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 84,
+    "secondaryConcept": "Stacked lockup for square packaging and marketplace thumbnails.",
+    "section": "logoSystem",
+    "status": "COMPLETED",
+    "usage": {
+      "darkBackground": "Use warm ivory mark.",
+      "lightBackground": "Use forest green wordmark.",
+      "minimumSize": "24 mm wide on packaging."
+    },
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "logoUsageRules": {
+    "backgroundRules": {
+      "darkBackground": "Use warm ivory mark.",
+      "lightBackground": "Use forest green wordmark.",
+      "minimumSize": "24 mm wide on packaging."
+    },
+    "clearSpaceRules": "Keep clear space equal to the height of the icon mark around all sides.",
+    "minimumSizeRules": "24 mm wide on packaging."
+  },
+  "logoVariants": [
+    {
+      "fileName": "logo-primary-horizontal.svg",
+      "name": "Primary horizontal",
+      "usage": "Website, marketplace hero, box front"
+    },
+    {
+      "fileName": "logo-stacked.svg",
+      "name": "Stacked",
+      "usage": "Square labels, social profile, box side"
+    },
+    {
+      "fileName": "logo-icon-mark.svg",
+      "name": "Icon mark",
+      "usage": "Stickers, favicon, pattern"
+    },
+    {
+      "fileName": "logo-monochrome.svg",
+      "name": "Monochrome",
+      "usage": "Stamping and one-color print"
+    }
+  ],
+  "marketingTransition": {
+    "handoffArtifacts": [
+      "Brand strategy",
+      "Brand identity",
+      "Creative asset manifest",
+      "Launch copy",
+      "Marketplace concepts",
+      "Social concepts"
+    ],
+    "nextDepartment": "MARKETING",
+    "status": "READY"
   },
   "marketplaceCreativePack": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "copyAssets"
+        ]
+      },
+      "name": "Marketplace Creative Designer",
+      "outputSchema": {
+        "required": [
+          "imageConcepts",
+          "requirements",
+          "qualityRules"
+        ]
+      },
+      "promptContract": "Create marketplace-ready creative concepts for conversion.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define marketplace hero, feature, comparison, and trust images.",
+      "section": "marketplaceCreativePack",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-207",
+    "employeeName": "Marketplace Creative Designer",
     "imageConcepts": [
-      { "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }
+      {
+        "brief": "Luma Logic Cubes box, cubes, and activity cards arranged clearly on white.",
+        "slot": 1,
+        "title": "Hero product image"
+      },
+      {
+        "brief": "Three benefit tiles: logic, motor skills, pattern recognition.",
+        "slot": 2,
+        "title": "Learning benefits"
+      },
+      {
+        "brief": "Close-up of wood grain, rounded edges, paint safety placeholder.",
+        "slot": 3,
+        "title": "Material trust"
+      },
+      {
+        "brief": "Starter vs Standard vs Premium contents grid.",
+        "slot": 4,
+        "title": "Variant comparison"
+      }
     ],
-    "requirements": ["Readable on mobile"],
-    "qualityRules": ["Avoid tiny text"]
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "qualityRules": [
+      "Avoid tiny text",
+      "Avoid clutter",
+      "Keep parent benefit above feature detail"
+    ],
+    "requirements": [
+      "Readable on mobile",
+      "Product visible in every image",
+      "No unsupported certification claims"
+    ],
+    "risks": [],
+    "score": 83,
+    "section": "marketplaceCreativePack",
+    "status": "COMPLETED",
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
   },
+  "nextActions": [
+    "Founder approves brand name and positioning.",
+    "Review generated deterministic logo, packaging, mockup, and social files.",
+    "Hand Creative Pack to Sprint 5 Marketing Engine."
+  ],
+  "overallScore": 85,
+  "packagingDesignBrief": {
+    "compliancePlaceholders": [
+      "Age grade",
+      "Choking hazard review",
+      "Non-toxic paint claim pending certification",
+      "Manufacturer details"
+    ],
+    "concept": "LumaLearn premium learning kit box with natural board texture and bold color-coded variant band.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "visualIdentity"
+        ]
+      },
+      "name": "Packaging Designer",
+      "outputSchema": {
+        "required": [
+          "concept",
+          "panelContent",
+          "materials",
+          "compliancePlaceholders"
+        ]
+      },
+      "promptContract": "Create a supplier-ready packaging design brief.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Translate packaging engineering into creative packaging direction.",
+      "section": "packagingDesignBrief",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-205",
+    "employeeName": "Packaging Designer",
+    "finishRecommendations": [
+      "Matte lamination alternative",
+      "Single spot-color accent",
+      "Stamped monochrome logo option"
+    ],
+    "materials": [
+      "Rigid kraft board",
+      "Paper pulp insert",
+      "Matte water-based finish"
+    ],
+    "panelContent": {
+      "back": [
+        "How children play",
+        "What is inside",
+        "Parent benefit proof",
+        "Safety placeholders"
+      ],
+      "front": [
+        "Brand name",
+        "Product name",
+        "Age 3-5",
+        "Logic + motor skills benefit",
+        "Product window or product render"
+      ],
+      "side": [
+        "Variant name",
+        "SKU placeholder",
+        "QR placeholder",
+        "Barcode placeholder"
+      ]
+    },
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 86,
+    "section": "packagingDesignBrief",
+    "status": "COMPLETED",
+    "sustainabilityNotes": "Plastic-free, recyclable paper components, compact shipping footprint.",
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "packagingProductionAssets": {
+    "barcodePlacement": {
+      "format": "EAN/UPC placeholder",
+      "placement": "Bottom side panel"
+    },
+    "boxDesign": {
+      "compliancePlaceholders": [
+        "Age grade",
+        "Choking hazard review",
+        "Non-toxic paint claim pending certification",
+        "Manufacturer details"
+      ],
+      "concept": "LumaLearn premium learning kit box with natural board texture and bold color-coded variant band.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "visualIdentity"
+          ]
+        },
+        "name": "Packaging Designer",
+        "outputSchema": {
+          "required": [
+            "concept",
+            "panelContent",
+            "materials",
+            "compliancePlaceholders"
+          ]
+        },
+        "promptContract": "Create a supplier-ready packaging design brief.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Translate packaging engineering into creative packaging direction.",
+        "section": "packagingDesignBrief",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-205",
+      "employeeName": "Packaging Designer",
+      "finishRecommendations": [
+        "Matte lamination alternative",
+        "Single spot-color accent",
+        "Stamped monochrome logo option"
+      ],
+      "materials": [
+        "Rigid kraft board",
+        "Paper pulp insert",
+        "Matte water-based finish"
+      ],
+      "panelContent": {
+        "back": [
+          "How children play",
+          "What is inside",
+          "Parent benefit proof",
+          "Safety placeholders"
+        ],
+        "front": [
+          "Brand name",
+          "Product name",
+          "Age 3-5",
+          "Logic + motor skills benefit",
+          "Product window or product render"
+        ],
+        "side": [
+          "Variant name",
+          "SKU placeholder",
+          "QR placeholder",
+          "Barcode placeholder"
+        ]
+      },
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 86,
+      "section": "packagingDesignBrief",
+      "status": "COMPLETED",
+      "sustainabilityNotes": "Plastic-free, recyclable paper components, compact shipping footprint.",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    "hangTags": [
+      {
+        "content": "Learning benefits and QR placeholder",
+        "fileName": "hang-tag-learning-benefits.pdf"
+      }
+    ],
+    "labels": [
+      {
+        "content": "Age 3-5 and safety placeholders",
+        "fileName": "label-age-safety.svg"
+      }
+    ],
+    "packagingSpecifications": {
+      "compliancePlaceholders": [
+        "Age grade",
+        "Choking hazard review",
+        "Non-toxic paint claim pending certification",
+        "Manufacturer details"
+      ],
+      "concept": "LumaLearn premium learning kit box with natural board texture and bold color-coded variant band.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "visualIdentity"
+          ]
+        },
+        "name": "Packaging Designer",
+        "outputSchema": {
+          "required": [
+            "concept",
+            "panelContent",
+            "materials",
+            "compliancePlaceholders"
+          ]
+        },
+        "promptContract": "Create a supplier-ready packaging design brief.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Translate packaging engineering into creative packaging direction.",
+        "section": "packagingDesignBrief",
+        "timeoutSeconds": 30
+      },
+      "department": "CREATIVE",
+      "employeeId": "EMP-205",
+      "employeeName": "Packaging Designer",
+      "finishRecommendations": [
+        "Matte lamination alternative",
+        "Single spot-color accent",
+        "Stamped monochrome logo option"
+      ],
+      "materials": [
+        "Rigid kraft board",
+        "Paper pulp insert",
+        "Matte water-based finish"
+      ],
+      "panelContent": {
+        "back": [
+          "How children play",
+          "What is inside",
+          "Parent benefit proof",
+          "Safety placeholders"
+        ],
+        "front": [
+          "Brand name",
+          "Product name",
+          "Age 3-5",
+          "Logic + motor skills benefit",
+          "Product window or product render"
+        ],
+        "side": [
+          "Variant name",
+          "SKU placeholder",
+          "QR placeholder",
+          "Barcode placeholder"
+        ]
+      },
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 86,
+      "section": "packagingDesignBrief",
+      "status": "COMPLETED",
+      "sustainabilityNotes": "Plastic-free, recyclable paper components, compact shipping footprint.",
+      "validation": {
+        "brand": "PASS",
+        "confidence": "PASS",
+        "creative": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+    },
+    "printReadyDielines": [
+      {
+        "fileName": "starter-box-dieline.ai",
+        "notes": "Final dieline requires printer template.",
+        "status": "SPEC_READY"
+      }
+    ],
+    "qrIntegration": {
+      "destination": "Founder landing page placeholder",
+      "placement": "Back panel"
+    },
+    "stickers": [
+      {
+        "content": "Founding batch seal",
+        "fileName": "sticker-founder-batch.svg"
+      }
+    ],
+    "thankYouCards": [
+      {
+        "fileName": "thank-you-card.pdf",
+        "message": "Thank you for joining the founding batch."
+      }
+    ],
+    "warrantyCards": [
+      {
+        "content": "Care instructions and support placeholder",
+        "fileName": "care-and-warranty-card.pdf"
+      }
+    ]
+  },
+  "productBlueprintApproval": {
+    "approvedForCreativeStudio": true,
+    "status": "APPROVED_WITH_REVIEW_ITEMS"
+  },
+  "productCreativeDeliverables": {
+    "explodedViews": [
+      {
+        "components": [
+          "Box",
+          "Insert",
+          "Cubes",
+          "Activity cards",
+          "Parent guide"
+        ],
+        "name": "What is inside"
+      }
+    ],
+    "featureCallouts": [
+      "Logic",
+      "Motor skills",
+      "Pattern recognition",
+      "Gift-ready"
+    ],
+    "heroImages": [
+      {
+        "brief": "Luma Logic Cubes box, cubes, cards, and parent-facing benefit badge on clean white.",
+        "name": "Main hero"
+      }
+    ],
+    "infographics": [
+      "How to play in 3 steps",
+      "Skills developed",
+      "Starter vs Standard vs Premium"
+    ],
+    "instructionCards": [
+      {
+        "count": 12,
+        "fileName": "instruction-cards-starter.pdf",
+        "themes": [
+          "Pattern",
+          "Sort",
+          "Sequence"
+        ]
+      }
+    ],
+    "lifestyleImages": [
+      {
+        "brief": "Child arranging cubes with parent guiding nearby in natural light.",
+        "name": "Parent-child activity"
+      }
+    ],
+    "productManuals": [
+      {
+        "fileName": "manual-parent-guide.pdf",
+        "sections": [
+          "Safety",
+          "How to play",
+          "Activity examples",
+          "Care instructions"
+        ]
+      }
+    ],
+    "productMockups": [
+      {
+        "brief": "Luma Logic Cubes Starter box, six cubes, activity cards, warm tabletop light.",
+        "variant": "Starter"
+      },
+      {
+        "brief": "Luma Logic Cubes Standard kit with expanded cubes and parent guide.",
+        "variant": "Standard"
+      },
+      {
+        "brief": "Luma Logic Cubes Premium gift-ready box with complete family set.",
+        "variant": "Premium"
+      }
+    ],
+    "sizeCharts": [
+      {
+        "packageSize": "180 x 120 x 60 mm",
+        "targetWeight": "Under 500 g",
+        "variant": "Starter"
+      }
+    ]
+  },
+  "productId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "productMockupBrief": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "visualIdentity"
+        ]
+      },
+      "name": "Product Mockup Designer",
+      "outputSchema": {
+        "required": [
+          "variantMockups",
+          "lifestyleScenes",
+          "renderingGuidance"
+        ]
+      },
+      "promptContract": "Create image-generation-ready mockup briefs for each product variant.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define product, variant, and lifestyle mockup scenes.",
+      "section": "productMockupBrief",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-206",
+    "employeeName": "Product Mockup Designer",
+    "lifestyleScenes": [
+      "Parent and child solving a simple pattern",
+      "Gift box opened on a clean Indian home table",
+      "Close-up of safe rounded wooden edges"
+    ],
+    "marketplaceImageRequirements": [
+      "White-background hero",
+      "Scale image",
+      "What's in the box",
+      "Skill benefits",
+      "Safety and material proof"
+    ],
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "renderingGuidance": "Use bright natural light, visible product scale, no exaggerated claims, no unsafe small loose parts near younger children.",
+    "risks": [],
+    "score": 84,
+    "section": "productMockupBrief",
+    "status": "COMPLETED",
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "variantMockups": [
+      {
+        "brief": "Luma Logic Cubes Starter box, six cubes, activity cards, warm tabletop light.",
+        "variant": "Starter"
+      },
+      {
+        "brief": "Luma Logic Cubes Standard kit with expanded cubes and parent guide.",
+        "variant": "Standard"
+      },
+      {
+        "brief": "Luma Logic Cubes Premium gift-ready box with complete family set.",
+        "variant": "Premium"
+      }
+    ],
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
+  },
+  "productionReadiness": {
+    "assetFilesGenerated": true,
+    "designerHandoff": "READY",
+    "ecommerceHandoff": "READY",
+    "manufacturerHandoff": "SPEC_READY",
+    "printerHandoff": "SPEC_READY",
+    "requiresBinaryAssetGeneration": false
+  },
+  "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "reportType": "CREATIVE_PACK",
+  "risks": [
+    {
+      "mitigation": "Use the generated files for layout validation and upgrade lifestyle imagery with an approved provider.",
+      "risk": "Deterministic image files are placeholder-grade until a premium image provider is connected.",
+      "severity": "MEDIUM"
+    },
+    {
+      "mitigation": "Keep claims as placeholders until verified.",
+      "risk": "Compliance claims require legal and certification review.",
+      "severity": "HIGH"
+    }
+  ],
   "socialMediaCreativePack": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.76
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "brandStrategy",
+          "visualIdentity"
+        ]
+      },
+      "name": "Social Media Designer",
+      "outputSchema": {
+        "required": [
+          "instagramPosts",
+          "stories",
+          "reels",
+          "launchBanners"
+        ]
+      },
+      "promptContract": "Create platform-ready social creative concepts.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define Instagram posts, stories, reels, and launch banners.",
+      "section": "socialMediaCreativePack",
+      "timeoutSeconds": 30
+    },
+    "department": "CREATIVE",
+    "employeeId": "EMP-208",
+    "employeeName": "Social Media Designer",
     "instagramPosts": [
-      { "format": "carousel", "hook": "A toy that teaches before it explains." }
+      {
+        "format": "carousel",
+        "hook": "A toy that teaches before it explains.",
+        "slides": [
+          "Problem",
+          "How it works",
+          "Skills built",
+          "Inside the box",
+          "Founder waitlist CTA"
+        ]
+      },
+      {
+        "format": "static",
+        "hook": "Premium wooden play for curious little minds.",
+        "visual": "Child hand arranging cubes with parent nearby"
+      }
     ],
-    "stories": ["Poll: Which skill should playtime build?"],
-    "reels": ["15-second pattern challenge"],
-    "launchBanners": ["Founding batch now open"]
-  },
-  "digitalAssets": {
-    "websiteBanners": [{ "fileName": "website-hero-banner.png" }],
-    "appAssets": [{ "fileName": "app-product-card.png" }],
-    "amazonImageSet": [{ "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }],
-    "shopifyImageSet": [{ "slot": 1, "title": "Hero product image", "brief": "Box, cubes, and cards on white." }],
-    "socialMediaTemplates": [{ "format": "carousel", "hook": "A toy that teaches before it explains." }],
-    "storyTemplates": ["Poll: Which skill should playtime build?"],
-    "highlightCovers": [{ "name": "Play", "icon": "Logic cube" }],
-    "emailGraphics": [{ "fileName": "email-launch-header.png" }]
-  },
-  "launchCopyPack": {
-    "taglines": ["Play that builds little logic."],
-    "packagingCopy": { "front": "LumaLearn Logic Cubes" },
-    "productHeadline": "Premium wooden logic cubes for children aged 3-5",
-    "featureBullets": ["Supports logic and pattern recognition"],
-    "socialCaptions": ["Screen-free play, made a little smarter."]
-  },
-  "aiDeliverables": {
-    "masterImagePrompts": ["Box, cubes, and cards on white."],
-    "styleGuidePrompts": ["Use warm ivory background and forest green typography."],
-    "brandConsistencyRules": ["Use real product visibility"],
-    "creativeAssetManifestRules": ["Every asset needs purpose and approval status."]
-  },
-  "creativeAssetManifest": [
-    { "assetId": "brand-guidelines", "name": "LumaLearn Brand Guidelines", "format": "pdf", "status": "SPEC_READY" },
-    { "assetId": "primary-logo", "name": "Primary Logo", "format": "svg", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/logo-primary-horizontal.svg" },
-    { "assetId": "product-hero", "name": "Product Hero", "format": "png", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/product-hero.png" },
-    { "assetId": "packaging-spec", "name": "Packaging Specification", "format": "pdf", "status": "GENERATED", "path": ".genesis-data/creative_assets/sample/packaging-spec.pdf" }
-  ],
-  "generatedAssets": {
-    "assetRoot": ".genesis-data/creative_assets/sample",
-    "provider": "deterministic-local",
-    "mode": "NO_CREDENTIALS",
-    "summary": { "totalAssets": 3, "svg": 1, "png": 1, "pdf": 1 },
-    "assets": [
-      { "assetId": "primary-logo", "kind": "logo", "name": "Primary Logo", "fileName": "logo-primary-horizontal.svg", "format": "svg", "contentType": "image/svg+xml", "path": ".genesis-data/creative_assets/sample/logo-primary-horizontal.svg", "sizeBytes": 1200, "status": "GENERATED" },
-      { "assetId": "product-hero", "kind": "raster", "name": "Product Hero", "fileName": "product-hero.png", "format": "png", "contentType": "image/png", "path": ".genesis-data/creative_assets/sample/product-hero.png", "sizeBytes": 2400, "status": "GENERATED" },
-      { "assetId": "packaging-spec", "kind": "document", "name": "Packaging Specification", "fileName": "packaging-spec.pdf", "format": "pdf", "contentType": "application/pdf", "path": ".genesis-data/creative_assets/sample/packaging-spec.pdf", "sizeBytes": 1800, "status": "GENERATED" }
+    "launchBanners": [
+      "Founding batch now open",
+      "Built for ages 3-5",
+      "Starter, Standard, Premium kits"
     ],
-    "notes": ["Sample fixture paths are illustrative; runtime generation writes real files."]
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "reels": [
+      "15-second pattern challenge",
+      "Unbox the Starter kit",
+      "Parent explains screen-free play"
+    ],
+    "risks": [],
+    "score": 84,
+    "section": "socialMediaCreativePack",
+    "status": "COMPLETED",
+    "stories": [
+      "Poll: Which skill should playtime build?",
+      "Behind the product: why rounded wooden cubes",
+      "Waitlist sticker"
+    ],
+    "validation": {
+      "brand": "PASS",
+      "confidence": "PASS",
+      "creative": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d"
   },
-  "productionReadiness": { "designerHandoff": "READY", "printerHandoff": "SPEC_READY", "requiresBinaryAssetGeneration": false, "assetFilesGenerated": true },
-  "creativeQaReport": {
-    "checks": [{ "check": "Brand-product fit", "status": "PASS" }],
-    "approvalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
-    "risks": ["Certification claims must remain placeholders until verified."]
+  "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+  "sourceProductBlueprintId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "typography": {
+    "body": "Readable humanist sans",
+    "heading": "Rounded geometric sans",
+    "packaging": "Large friendly headings with concise parent-facing proof points"
   },
-  "validationReport": { "brandConsistency": "PASS", "printSafety": "SPEC_READY", "accessibility": "PASS", "resolutionChecks": "PASS_DETERMINISTIC_ASSETS", "manufacturingReadiness": "SPEC_READY" },
-  "founderApprovalChecklist": [{ "item": "Approve brand name", "status": "READY" }],
-  "risks": [{ "risk": "Deterministic image files are placeholder-grade until a premium image provider is connected.", "severity": "MEDIUM", "mitigation": "Use approved provider for premium lifestyle imagery." }],
-  "assumptions": ["Sprint 4 MVP produces creative specifications and deterministic binary asset files."],
-  "nextActions": ["Founder approves brand name and reviews generated deterministic assets."],
-  "assetGenerationPrompts": ["Box, cubes, and cards on white."],
-  "employeeOutputs": [
-    { "employeeId": "EMP-201" },
-    { "employeeId": "EMP-202" },
-    { "employeeId": "EMP-203" },
-    { "employeeId": "EMP-204" },
-    { "employeeId": "EMP-205" },
-    { "employeeId": "EMP-206" },
-    { "employeeId": "EMP-207" },
-    { "employeeId": "EMP-208" },
-    { "employeeId": "EMP-209" },
-    { "employeeId": "EMP-210" }
+  "validationHistory": [
+    {
+      "evidence": "APPROVED_WITH_REVIEW_ITEMS",
+      "stage": "Product Blueprint precondition",
+      "status": "PASS"
+    },
+    {
+      "stage": "Creative employee outputs",
+      "status": "PASS",
+      "validator": "validate_creative_employee_output"
+    },
+    {
+      "stage": "Creative Pack",
+      "status": "PASS",
+      "validator": "validate_creative_pack.py"
+    }
   ],
-  "overallScore": 85
+  "validationReport": {
+    "accessibility": "PASS",
+    "brandConsistency": "PASS",
+    "manufacturingReadiness": "SPEC_READY",
+    "printSafety": "SPEC_READY",
+    "resolutionChecks": "PASS_DETERMINISTIC_ASSETS"
+  },
+  "version": "0.4.0",
+  "visualIdentityRules": [
+    "Use real product visibility",
+    "Keep claims parent-clear",
+    "Avoid cluttered educational jargon",
+    "Show hands, scale, and activity cards"
+  ],
+  "visualSystem": {
+    "designTokens": {
+      "colors": {
+        "Forest Green": "#1F5A46",
+        "Ink Charcoal": "#242424",
+        "Marigold": "#F4B740",
+        "Soft Coral": "#E87561",
+        "Warm Ivory": "#FFF7E6"
+      },
+      "radius": {
+        "medium": 8,
+        "small": 4
+      },
+      "spacing": {
+        "lg": 24,
+        "md": 16,
+        "sm": 8,
+        "xs": 4
+      }
+    },
+    "graphicElements": [
+      "Cube path pattern",
+      "Rounded learning badges",
+      "Variant color bands"
+    ],
+    "iconLibrary": [
+      {
+        "concept": "Path through rounded cube",
+        "name": "Logic"
+      },
+      {
+        "concept": "Hand and cube outline",
+        "name": "Motor Skills"
+      },
+      {
+        "concept": "Leaf plus rounded edge",
+        "name": "Safe Material"
+      }
+    ],
+    "illustrationStyle": "Soft geometric line illustrations with rounded corners and limited accent colors.",
+    "photographyStyle": "Bright Indian home setting, natural light, product scale visible, parent-child interaction."
+  },
+  "workflowId": "5a20843d-b4aa-4612-8de2-3b7fae77ba1d",
+  "workflowUpdate": {
+    "nextDepartment": "MARKETING",
+    "status": "CREATIVE_PACK_COMPLETED"
+  }
 }

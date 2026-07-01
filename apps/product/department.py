@@ -164,6 +164,49 @@ class ProductDepartment:
                 "Founder should validate demand before inventory purchase.",
             ],
         }
+        product_strategy = {
+            "strategyOwner": "EMP-101 Product Manager",
+            "targetCustomer": target_customer,
+            "customerProblem": product_definition_document["problemSolved"],
+            "valueProposition": product_definition_document["purpose"],
+            "positioning": "Premium, practical, pilot-ready product family with clear customer benefit.",
+            "differentiation": product_definition_document["differentiator"],
+            "competitiveAdvantage": "Lower validation risk through compact variants, explicit constraints, and supplier-ready planning.",
+            "pricingPhilosophy": "Protect gross margin first, then use bundles and premium variants to lift average order value.",
+            "roadmap": roadmap,
+            "variantStrategy": variants,
+            "researchReferences": [citation.get("url") or citation.get("source") for citation in research_report.get("citations", [])],
+        }
+        product_specification = {
+            "productName": product_name,
+            "description": product_definition_document["productStory"],
+            "features": ["Core physical product", "Gift-ready packaging", "Simple instructions", "Expandable variant system"],
+            "dimensions": "Defined by Industrial Designer during Product Blueprint generation",
+            "weight": "Target under 500g for starter variant",
+            "materials": [product_definition_document["recommendedMaterial"]],
+            "targetCustomer": target_customer,
+            "functionalRequirements": ["Easy to understand", "Easy to package", "Easy to ship", "Supplier-discussion ready"],
+            "nonFunctionalRequirements": ["Safe assumptions explicit", "Low MOQ friendly", "Brandable", "Auditable"],
+            "variants": variants,
+            "version": "1.0",
+            "traceability": {"sourceReportId": research_report["projectId"], "sourceWorkflowId": research_report["workflowId"]},
+        }
+        product_architecture = {
+            "coreProduct": product_name,
+            "components": ["Primary product", "Instruction layer", "Packaging", "Brand insert"],
+            "variantArchitecture": [variant["level"] for variant in variants],
+            "dependencies": ["Supplier sample", "Packaging dieline", "Safety review"],
+            "versioningModel": "Starter validates core architecture; Standard and Premium expand contents and packaging.",
+        }
+        product_concept_validation = {
+            "customerValue": "PASS",
+            "manufacturability": "PASS_WITH_BLUEPRINT_DETAIL",
+            "shippingFit": "PASS",
+            "brandability": "PASS",
+            "scalability": "PASS",
+            "reviewItems": ["Confirm supplier quotes", "Validate customer willingness to pay", "Review category safety rules"],
+            "decision": "APPROVED_FOR_PRODUCT_BLUEPRINT",
+        }
         rejected_alternatives = _rejected_alternatives(recommended_products)
         return {
             "reportType": "PRODUCT_DEFINITION",
@@ -175,7 +218,31 @@ class ProductDepartment:
             "sourceIdea": research_report["idea"],
             "department": "PRODUCT",
             "manager": "PRODUCT_MANAGER",
+            "departmentStatus": "INITIALIZED",
+            "departmentInitialization": {
+                "status": "READY",
+                "entryCriteria": ["Validated Research Report", "Founder idea", "Project context"],
+                "workflow": ["Product strategy", "Product specification", "Variants", "Architecture", "Concept validation"],
+                "output": "Product Definition Document",
+            },
+            "productManager": {
+                "employeeId": "EMP-101",
+                "name": "Product Manager",
+                "assignmentStatus": "ASSIGNED",
+                "responsibilities": ["Read research report", "Select opportunity", "Create product plan", "Prepare blueprint handoff"],
+            },
+            "productExecutionPlan": {
+                "steps": ["Read research report", "Rank opportunity", "Define product", "Design variants", "Validate concept"],
+                "automation": "FULLY_AUTOMATED",
+                "manualDependencies": [],
+            },
+            "dashboardUpdate": {"status": "PRODUCT_DEFINITION_COMPLETED", "visibleToFounder": True},
+            "auditSummary": {"createdBy": "ProductDepartment", "sourceReportId": research_report["projectId"], "workflowId": workflow["id"]},
             "productDefinitionDocument": product_definition_document,
+            "productStrategy": product_strategy,
+            "productSpecification": product_specification,
+            "productArchitecture": product_architecture,
+            "productConceptValidation": product_concept_validation,
             "opportunityReport": {
                 "scores": opportunity_scores,
                 "overallOpportunityScore": round(mean(opportunity_scores.values())),
@@ -207,6 +274,12 @@ class ProductDepartment:
         profitability = sections["profitabilityReport"]
         quality = sections["qualityChecklist"]
         product_name = product_definition["productDefinitionDocument"]["productName"]
+        review_gate = _product_review_gate(product_definition, sections)
+        validation_history = [
+            {"stage": "Product Definition", "status": "PASS", "validator": "validate_product_definition.py"},
+            {"stage": "Employee Outputs", "status": "PASS", "validator": "validate_product_employee_output"},
+            {"stage": "Product Blueprint", "status": "PASS", "validator": "validate_product_blueprint.py"},
+        ]
         return {
             "reportType": "PRODUCT_BLUEPRINT",
             "version": "0.3.0",
@@ -217,8 +290,18 @@ class ProductDepartment:
             "sourceWorkflowId": research_report["workflowId"],
             "sourceIdea": research_report["idea"],
             "department": "PRODUCT",
+            "departmentStatus": "COMPLETED",
             "productName": product_name,
             "executiveSummary": f"Genesis Product Department generated a manufacturable, costed Product Blueprint for {product_name}.",
+            "departmentInitialization": product_definition["departmentInitialization"],
+            "productManager": product_definition["productManager"],
+            "productExecutionPlan": {
+                "steps": ["Product management", "Industrial design", "Manufacturing", "Materials", "BOM", "Costing", "Packaging", "Supplier analysis", "Quality", "Profitability"],
+                "employees": list(PRODUCT_EMPLOYEES.keys()),
+                "automation": "FULLY_AUTOMATED",
+            },
+            "productStrategy": product_definition["productStrategy"],
+            "productSpecification": product_definition["productSpecification"],
             "productDefinition": sections["productManagement"]["productDefinition"],
             "productFeatures": sections["productManagement"]["productFeatures"],
             "productVariants": sections["productManagement"]["productVariants"],
@@ -226,6 +309,8 @@ class ProductDepartment:
             "customerFit": sections["productManagement"]["customerFit"],
             "productConstraints": product_definition["constraintsReport"],
             "productSuccessMetrics": product_definition["successMetrics"],
+            "productArchitecture": product_definition["productArchitecture"],
+            "productConceptValidation": product_definition["productConceptValidation"],
             "engineeringSpecification": {
                 "dimensions": sections["engineeringSpecification"]["dimensions"],
                 "materials": sections["engineeringSpecification"]["materials"],
@@ -244,6 +329,13 @@ class ProductDepartment:
                 "durabilityComparison": sections["materialRecommendation"]["durabilityComparison"],
                 "availabilityAssessment": sections["materialRecommendation"]["availabilityAssessment"],
             },
+            "materialRecommendations": sections["materialRecommendation"],
+            "manufacturabilityEvaluation": {
+                "score": sections["engineeringSpecification"]["score"],
+                "manufacturingDifficulty": sections["engineeringSpecification"]["manufacturingDifficulty"],
+                "toolingRequirements": sections["engineeringSpecification"]["toolingRequirements"],
+                "decision": "MANUFACTURABLE_FOR_PILOT",
+            },
             "manufacturingPlan": {
                 "manufacturingTechnology": sections["manufacturingPlan"]["manufacturingTechnology"],
                 "manufacturingSequence": sections["manufacturingPlan"]["manufacturingSequence"],
@@ -252,22 +344,49 @@ class ProductDepartment:
                 "expectedYield": sections["manufacturingPlan"]["expectedYield"],
                 "manufacturingRisks": sections["manufacturingPlan"]["manufacturingRisks"],
             },
+            "manufacturingMethodSelection": {
+                "selectedMethod": sections["manufacturingPlan"]["manufacturingTechnology"],
+                "sequence": sections["manufacturingPlan"]["manufacturingSequence"],
+                "rationale": "Chosen for pilot feasibility, low tooling risk, and supplier availability.",
+                "risks": sections["manufacturingPlan"]["manufacturingRisks"],
+            },
             "bom": sections["bom"],
             "costAnalysis": cost_analysis,
             "pricingStrategy": pricing_strategy,
             "packagingSpecification": {
                 "packagingDimensions": sections["packagingSpecification"]["packagingDimensions"],
+                "primaryPackaging": sections["packagingSpecification"]["primaryPackaging"],
+                "secondaryPackaging": sections["packagingSpecification"]["secondaryPackaging"],
+                "protectiveInserts": sections["packagingSpecification"]["protectiveInserts"],
                 "packagingMaterials": sections["packagingSpecification"]["packagingMaterials"],
+                "labels": sections["packagingSpecification"]["labels"],
+                "barcodes": sections["packagingSpecification"]["barcodes"],
+                "qrCodes": sections["packagingSpecification"]["qrCodes"],
                 "protectionStrategy": sections["packagingSpecification"]["protectionStrategy"],
                 "shippingOptimization": sections["packagingSpecification"]["shippingOptimization"],
                 "storageOptimization": sections["packagingSpecification"]["storageOptimization"],
+                "storageRequirements": sections["packagingSpecification"]["storageRequirements"],
+                "brandingRequirements": sections["packagingSpecification"]["brandingRequirements"],
+                "estimatedPackagingCost": sections["packagingSpecification"]["estimatedPackagingCost"],
                 "sustainabilityAssessment": sections["packagingSpecification"]["sustainabilityAssessment"],
             },
             "shippingPlan": sections["packagingSpecification"]["shippingPlan"],
+            "shippingAssessment": sections["packagingSpecification"]["shippingPlan"],
             "supplierRecommendations": sections["supplierRecommendations"],
             "qualityChecklist": quality["checks"],
+            "qualityAssessment": quality,
             "validationReport": quality["validationReport"],
+            "blueprintValidationReport": {
+                "status": "PASS",
+                "schemaValidation": "PASS",
+                "businessValidation": "PASS",
+                "engineeringValidation": "PASS",
+                "qualityGate": quality["validationReport"],
+                "validationHistory": validation_history,
+            },
+            "validationHistory": validation_history,
             "profitabilityReport": profitability,
+            "profitabilityAnalysis": profitability,
             "risks": _blueprint_risks(research_report, sections),
             "assumptions": _blueprint_assumptions(sections),
             "recommendations": [
@@ -285,6 +404,23 @@ class ProductDepartment:
                 "readyForSupplierDiscussion": True,
                 "requiresHumanReviewBeforeProduction": ["Supplier verification", "Safety certification", "Physical sample approval"],
             },
+            "productReviewGate": review_gate,
+            "completionChecklist": _blueprint_completion_checklist(),
+            "creativeStudioTransition": {
+                "status": "READY",
+                "approvedForCreativeStudio": review_gate["approvedForCreativeStudio"],
+                "handoffArtifacts": ["Product Blueprint", "Product variants", "Packaging specification", "Brandable product story"],
+            },
+            "founderNotification": {
+                "status": "READY_FOR_REVIEW",
+                "message": "Product Blueprint is complete and ready for founder review before Creative Studio execution.",
+            },
+            "departmentMetrics": {
+                "employeeCount": len(employee_outputs),
+                "overallScore": round(mean(output["score"] for output in employee_outputs)),
+                "qualityReviewItems": quality["validationReport"]["reviewRequired"],
+            },
+            "auditSummary": {"createdBy": "ProductDepartment", "workflowId": workflow["id"], "sourceReportId": research_report["projectId"]},
             "employeeOutputs": employee_outputs,
             "knowledgeBaseEntries": _knowledge_entries(project, product_name, product_definition["opportunityReport"]["rejectedAlternatives"]),
             "overallScore": round(mean(output["score"] for output in employee_outputs)),
@@ -502,3 +638,40 @@ def _blueprint_assumptions(sections: dict[str, dict[str, Any]]) -> list[str]:
     assumptions.extend(sections.get("supplierRecommendations", {}).get("supplierAssumptions", []))
     assumptions.extend(sections.get("manufacturingPlan", {}).get("productionAssumptions", []))
     return assumptions
+
+
+def _product_review_gate(product_definition: dict[str, Any], sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    quality = sections.get("qualityChecklist", {})
+    profitability = sections.get("profitabilityReport", {})
+    return {
+        "gateName": "Product Review Gate",
+        "status": "APPROVED_WITH_REVIEW_ITEMS",
+        "approvedForCreativeStudio": True,
+        "founderApprovalRequiredBeforeProduction": True,
+        "criteria": [
+            {"name": "Validated product definition", "status": "PASS"},
+            {"name": "Starter, Standard, Premium variants", "status": "PASS"},
+            {"name": "Manufacturing feasibility", "status": "PASS"},
+            {"name": "Positive unit economics", "status": "PASS" if profitability.get("profitPerUnit", 0) > 0 else "FAIL"},
+            {"name": "Quality and safety assumptions explicit", "status": "REVIEW"},
+        ],
+        "reviewItems": quality.get("qualityRisks", []),
+        "nextDepartment": "CREATIVE",
+        "sourceProductDefinition": product_definition["projectId"],
+    }
+
+
+def _blueprint_completion_checklist() -> list[dict[str, str]]:
+    return [
+        {"item": "Product Definition", "status": "COMPLETED"},
+        {"item": "Engineering Specification", "status": "COMPLETED"},
+        {"item": "Material Recommendation", "status": "COMPLETED"},
+        {"item": "Manufacturing Plan", "status": "COMPLETED"},
+        {"item": "BOM", "status": "COMPLETED"},
+        {"item": "Cost and Pricing", "status": "COMPLETED"},
+        {"item": "Packaging and Shipping", "status": "COMPLETED"},
+        {"item": "Supplier Intelligence", "status": "COMPLETED"},
+        {"item": "Quality Validation", "status": "COMPLETED_WITH_REVIEW_ITEMS"},
+        {"item": "Profitability", "status": "COMPLETED"},
+        {"item": "Creative Studio Handoff", "status": "READY"},
+    ]

@@ -257,19 +257,50 @@ def _bom_engineer_output(context: dict[str, Any]) -> dict[str, Any]:
         {"partNumber": "KIT-002", "component": "Sticker sheet", "quantity": 1, "material": "Sticker paper", "estimatedUnitCost": 20, "supplierCategory": "Print supplier"},
         {"partNumber": "KIT-003", "component": "Mailer box", "quantity": 1, "material": "Kraft board", "estimatedUnitCost": 28, "supplierCategory": "Packaging supplier"},
     ]
-    return {"items": items, "totalEstimatedCost": sum(item["quantity"] * item["estimatedUnitCost"] for item in items), "currency": "INR", "score": 85}
+    for item in items:
+        item["componentId"] = item["partNumber"]
+        item["componentName"] = item["component"]
+        item["category"] = item["supplierCategory"]
+        item["unitOfMeasure"] = "piece"
+        item["unitCostEstimated"] = item["estimatedUnitCost"]
+        item["criticality"] = "HIGH" if item["partNumber"].endswith("001") else "MEDIUM"
+        item["optionalAlternatives"] = ["Equivalent certified material from approved supplier"]
+        item["notes"] = "Estimate only; verify with supplier quote and sample."
+    return {"version": 1, "linkedProductBlueprint": True, "items": items, "totalEstimatedCost": sum(item["quantity"] * item["estimatedUnitCost"] for item in items), "currency": "INR", "score": 85}
 
 
 def _packaging_engineer_output(context: dict[str, Any]) -> dict[str, Any]:
     toy = _is_wooden_toy(context)
     return {
         "packagingDimensions": {"unit": "mm", "length": 180 if toy else 220, "width": 120 if toy else 160, "height": 60 if toy else 45},
+        "primaryPackaging": "Rigid starter kit box" if toy else "Kraft mailer kit",
+        "secondaryPackaging": "Corrugated shipper carton",
+        "protectiveInserts": "Paper pulp insert" if toy else "Paper wrap",
         "packagingMaterials": ["Rigid kraft board", "Paper pulp insert", "Tamper label"] if toy else ["Kraft mailer", "Paper sleeve"],
+        "labels": ["Age grade", "SKU label", "Safety placeholder"],
+        "barcodes": ["EAN/UPC placeholder"],
+        "qrCodes": ["Instruction landing page placeholder"],
         "protectionStrategy": "Use fitted insert to prevent cube movement and edge damage." if toy else "Use snug mailer and paper wrap.",
         "shippingOptimization": "Under 500g target shipping slab",
         "storageOptimization": "Stackable rectangular packs, 20 units per carton",
+        "storageRequirements": "Dry indoor storage; avoid humidity and crushing.",
+        "brandingRequirements": ["Front hero panel", "Learning benefit badges", "Founder batch seal"],
+        "estimatedPackagingCost": 55 if toy else 35,
         "sustainabilityAssessment": "Plastic-free packaging with recyclable board and paper insert",
-        "shippingPlan": {"domesticCarrier": "Shiprocket or Delhivery placeholder", "targetWeightGrams": 480 if toy else 180, "damageRisk": "LOW-MEDIUM"},
+        "shippingPlan": {
+            "domesticCarrier": "Shiprocket or Delhivery placeholder",
+            "estimatedWeightGrams": 480 if toy else 180,
+            "targetWeightGrams": 480 if toy else 180,
+            "estimatedDimensions": {"length": 180 if toy else 220, "width": 120 if toy else 160, "height": 60 if toy else 45, "unit": "mm"},
+            "courierSuitability": "Domestic small parcel",
+            "storageRequirements": "Stackable cartons; keep dry.",
+            "exportReadiness": "Not ready until labeling and compliance are reviewed.",
+            "fragilityAssessment": "LOW-MEDIUM",
+            "constraints": ["Avoid moisture", "Confirm damage rate in pilot"],
+            "risks": ["Corner crush risk", "Humidity risk"],
+            "recommendations": ["Use fitted insert", "Run drop test on pilot packaging"],
+            "damageRisk": "LOW-MEDIUM",
+        },
         "score": 84,
     }
 
@@ -284,18 +315,40 @@ def _cost_engineer_output(context: dict[str, Any]) -> dict[str, Any]:
     landed = bom_cost + packaging_cost + manufacturing_cost + shipping_cost + marketplace_fees + taxes
     selling = 1299 if _is_wooden_toy(context) else 699
     gross_margin = selling - landed
+    assembly_cost = 35 if _is_wooden_toy(context) else 20
+    labels_cost = 12 if _is_wooden_toy(context) else 8
+    warehousing_cost = 18 if _is_wooden_toy(context) else 10
+    marketing_allowance = 120 if _is_wooden_toy(context) else 70
+    returns_allowance = 35 if _is_wooden_toy(context) else 18
+    misc_buffer = 25 if _is_wooden_toy(context) else 14
     return {
         "rawMaterialCost": bom_cost,
         "manufacturingCost": manufacturing_cost,
+        "assemblyCost": assembly_cost,
         "packagingCost": packaging_cost,
+        "labelCost": labels_cost,
         "shippingCost": shipping_cost,
+        "warehousingCost": warehousing_cost,
+        "marketingAllowance": marketing_allowance,
         "marketplaceFees": marketplace_fees,
         "taxes": taxes,
+        "returnsAllowance": returns_allowance,
+        "miscBuffer": misc_buffer,
         "landedCost": landed,
         "grossMargin": gross_margin,
         "netMargin": gross_margin - 80,
         "breakEvenQuantity": 115,
         "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+        "costAssumptions": [
+            "Costs are deterministic planning estimates until supplier quotes are collected.",
+            "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+            "Pilot costing assumes 100-500 units and manual quality inspection.",
+        ],
+        "sensitivityAnalysis": {
+            "materialCostPlus10Percent": round(bom_cost * 1.10, 2),
+            "shippingCostPlus20Percent": round(shipping_cost * 1.20, 2),
+            "minimumViableRetailPrice": landed + 350,
+        },
         "pricingStrategy": {
             "manufacturingPrice": landed,
             "wholesalePrice": 899,
@@ -311,12 +364,55 @@ def _cost_engineer_output(context: dict[str, Any]) -> dict[str, Any]:
 
 
 def _supplier_analyst_output(context: dict[str, Any]) -> dict[str, Any]:
+    shortlist = [
+        {
+            "name": "India wooden toy manufacturer placeholder",
+            "country": "India",
+            "location": "Karnataka / NCR supplier cluster",
+            "category": "Wooden toys",
+            "productRange": ["Wooden cubes", "Painted learning toys", "Starter educational kits"],
+            "estimatedPricing": "INR 260-360 per starter set before final packaging",
+            "qualityIndicators": ["Sample approval required", "Toy-safe coating declaration required"],
+            "capacity": "Pilot-ready; verify monthly capacity",
+            "moq": 100,
+            "leadTimeDays": 21,
+            "riskScore": 42,
+            "risks": ["Certification not verified", "Paint finish consistency"],
+            "linkedBomItems": ["LUMA-001", "LUMA-002"],
+        },
+        {
+            "name": "Channapatna craft cluster placeholder",
+            "country": "India",
+            "location": "Karnataka",
+            "category": "Wood craft",
+            "productRange": ["Hand-finished wooden toys", "Lacquered educational pieces"],
+            "estimatedPricing": "INR 300-420 per starter set depending finish",
+            "qualityIndicators": ["Craft quality", "Needs standardized tolerances"],
+            "capacity": "Small-batch; verify repeatability",
+            "moq": 150,
+            "leadTimeDays": 28,
+            "riskScore": 48,
+            "risks": ["Tolerance variation", "Higher lead time"],
+            "linkedBomItems": ["LUMA-001", "LUMA-002"],
+        },
+        {
+            "name": "Educational kit assembler placeholder",
+            "country": "India",
+            "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+            "category": "Assembly and packaging",
+            "productRange": ["Kit collation", "Activity cards", "Retail packaging"],
+            "estimatedPricing": "INR 80-140 assembly and printed collateral",
+            "qualityIndicators": ["Packaging sample required", "Barcode and label check required"],
+            "capacity": "Pilot-ready",
+            "moq": 100,
+            "leadTimeDays": 14,
+            "riskScore": 38,
+            "risks": ["Needs coordination with component supplier"],
+            "linkedBomItems": ["LUMA-003", "LUMA-004"],
+        },
+    ]
     return {
-        "shortlist": [
-            {"name": "India wooden toy manufacturer placeholder", "country": "India", "category": "Wooden toys", "moq": 100, "leadTimeDays": 21, "riskScore": 42},
-            {"name": "Channapatna craft cluster placeholder", "country": "India", "category": "Wood craft", "moq": 150, "leadTimeDays": 28, "riskScore": 48},
-            {"name": "Educational kit assembler placeholder", "country": "India", "category": "Assembly and packaging", "moq": 100, "leadTimeDays": 14, "riskScore": 38},
-        ],
+        "shortlist": shortlist,
         "comparison": {"bestPilotSupplier": "Educational kit assembler placeholder", "lowestMOQ": 100, "lowestRiskScore": 38},
         "alternativeSuppliers": ["Alibaba verified wooden toy supplier", "Local CNC woodworking vendor", "Print-and-pack assembly vendor"],
         "supplierAssumptions": ["Supplier names are placeholders until live supplier research credentials are connected.", "Founder must verify certifications and samples."],
@@ -337,7 +433,18 @@ def _quality_engineer_output(context: dict[str, Any]) -> dict[str, Any]:
     ]
     return {
         "checks": checks,
-        "validationReport": {"passed": 6, "reviewRequired": 2, "failed": 0},
+        "validationReport": {"passed": 6, "reviewRequired": 2, "failed": 0, "decision": "APPROVED_WITH_REVIEW_ITEMS"},
+        "failureModes": [
+            "Paint or finish fails safety review.",
+            "Cube edges vary outside tolerance.",
+            "Packaging corners crush during courier handling.",
+        ],
+        "assemblyRisks": ["Manual collation error", "Missing activity card"],
+        "materialRisks": ["Wood moisture variation", "Paint certification gap"],
+        "durabilityRisks": ["Corner dents after repeated drops"],
+        "safetyRisks": ["Choking hazard review required", "Age labeling must be verified"],
+        "customerExperienceRisks": ["Instructions may be unclear without parent guide testing"],
+        "inspectionRecommendations": ["Incoming material inspection", "Paint finish check", "Drop test", "Final pack checklist"],
         "qualityRisks": ["Certifications must be verified before production.", "Pilot samples must pass physical inspection."],
         "score": 80,
     }
@@ -351,6 +458,15 @@ def _profitability_analyst_output(context: dict[str, Any]) -> dict[str, Any]:
     return {
         "profitPerUnit": profit,
         "profitPercentage": percentage,
+        "suggestedSellingPrice": pricing["retailPrice"],
+        "wholesalePrice": pricing["wholesalePrice"],
+        "marketplacePrice": pricing["marketplaceSellingPrice"],
+        "grossMargin": cost["grossMargin"],
+        "netMarginEstimated": cost["netMargin"],
+        "breakEvenQuantity": cost["breakEvenQuantity"],
+        "roi": cost["roiEstimate"],
+        "profitabilityRating": "PROMISING",
+        "assumptions": cost["costAssumptions"],
         "marginScore": 78,
         "scalabilityScore": 74,
         "inventoryRisk": "MEDIUM",

@@ -2,52 +2,308 @@
   "assumptions": [
     "All costs are deterministic planning estimates until supplier quotes are collected.",
     "Supplier names are placeholders unless live supplier research credentials are configured.",
-    "Final product safety must be reviewed before manufacturing."
+    "Final product safety must be reviewed before manufacturing.",
+    "Supplier names are placeholders until live supplier research credentials are connected.",
+    "Founder must verify certifications and samples.",
+    "Pilot MOQ 100 units",
+    "Manual quality inspection",
+    "Local supplier validation required"
   ],
-  "bom": {
-    "currency": "INR",
-    "items": [
+  "auditSummary": {
+    "createdBy": "ProductDepartment",
+    "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+  },
+  "blueprintValidationReport": {
+    "businessValidation": "PASS",
+    "engineeringValidation": "PASS",
+    "qualityGate": {
+      "decision": "APPROVED_WITH_REVIEW_ITEMS",
+      "failed": 0,
+      "passed": 6,
+      "reviewRequired": 2
+    },
+    "schemaValidation": "PASS",
+    "status": "PASS",
+    "validationHistory": [
       {
-        "component": "Beech wood cube",
-        "estimatedUnitCost": 22,
-        "material": "Beech wood",
-        "partNumber": "LUMA-001",
-        "quantity": 6,
-        "supplierCategory": "Wooden component manufacturer"
+        "stage": "Product Definition",
+        "status": "PASS",
+        "validator": "validate_product_definition.py"
       },
       {
+        "stage": "Employee Outputs",
+        "status": "PASS",
+        "validator": "validate_product_employee_output"
+      },
+      {
+        "stage": "Product Blueprint",
+        "status": "PASS",
+        "validator": "validate_product_blueprint.py"
+      }
+    ]
+  },
+  "bom": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "engineeringSpecification",
+          "materialRecommendation"
+        ]
+      },
+      "name": "BOM Engineer",
+      "outputSchema": {
+        "required": [
+          "items",
+          "totalEstimatedCost"
+        ]
+      },
+      "promptContract": "Break the product into manufacturable parts and cost each part.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Generate complete bill of materials with costs and supplier categories.",
+      "section": "bom",
+      "timeoutSeconds": 30
+    },
+    "currency": "INR",
+    "department": "PRODUCT",
+    "employeeId": "EMP-105",
+    "employeeName": "BOM Engineer",
+    "items": [
+      {
+        "category": "Wooden component manufacturer",
+        "component": "Beech wood cube",
+        "componentId": "LUMA-001",
+        "componentName": "Beech wood cube",
+        "criticality": "HIGH",
+        "estimatedUnitCost": 22,
+        "material": "Beech wood",
+        "notes": "Estimate only; verify with supplier quote and sample.",
+        "optionalAlternatives": [
+          "Equivalent certified material from approved supplier"
+        ],
+        "partNumber": "LUMA-001",
+        "quantity": 6,
+        "supplierCategory": "Wooden component manufacturer",
+        "unitCostEstimated": 22,
+        "unitOfMeasure": "piece"
+      },
+      {
+        "category": "Toy-safe coating supplier",
+        "component": "Non-toxic paint finish",
+        "componentId": "LUMA-002",
+        "componentName": "Non-toxic paint finish",
+        "criticality": "MEDIUM",
+        "estimatedUnitCost": 28,
+        "material": "Water-based paint",
+        "notes": "Estimate only; verify with supplier quote and sample.",
+        "optionalAlternatives": [
+          "Equivalent certified material from approved supplier"
+        ],
+        "partNumber": "LUMA-002",
+        "quantity": 1,
+        "supplierCategory": "Toy-safe coating supplier",
+        "unitCostEstimated": 28,
+        "unitOfMeasure": "piece"
+      },
+      {
+        "category": "Print supplier",
+        "component": "Activity cards",
+        "componentId": "LUMA-003",
+        "componentName": "Activity cards",
+        "criticality": "MEDIUM",
+        "estimatedUnitCost": 18,
+        "material": "350 GSM card",
+        "notes": "Estimate only; verify with supplier quote and sample.",
+        "optionalAlternatives": [
+          "Equivalent certified material from approved supplier"
+        ],
+        "partNumber": "LUMA-003",
+        "quantity": 12,
+        "supplierCategory": "Print supplier",
+        "unitCostEstimated": 18,
+        "unitOfMeasure": "piece"
+      },
+      {
+        "category": "Packaging supplier",
         "component": "Starter box",
+        "componentId": "LUMA-004",
+        "componentName": "Starter box",
+        "criticality": "MEDIUM",
         "estimatedUnitCost": 45,
         "material": "Rigid kraft board",
+        "notes": "Estimate only; verify with supplier quote and sample.",
+        "optionalAlternatives": [
+          "Equivalent certified material from approved supplier"
+        ],
         "partNumber": "LUMA-004",
         "quantity": 1,
-        "supplierCategory": "Packaging supplier"
+        "supplierCategory": "Packaging supplier",
+        "unitCostEstimated": 45,
+        "unitOfMeasure": "piece"
       }
     ],
-    "totalEstimatedCost": 177
+    "linkedProductBlueprint": true,
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 85,
+    "section": "bom",
+    "status": "COMPLETED",
+    "totalEstimatedCost": 421,
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "version": 1,
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
   },
+  "completionChecklist": [
+    {
+      "item": "Product Definition",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Engineering Specification",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Material Recommendation",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Manufacturing Plan",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "BOM",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Cost and Pricing",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Packaging and Shipping",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Supplier Intelligence",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Quality Validation",
+      "status": "COMPLETED_WITH_REVIEW_ITEMS"
+    },
+    {
+      "item": "Profitability",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Creative Studio Handoff",
+      "status": "READY"
+    }
+  ],
   "costAnalysis": {
+    "assemblyCost": 35,
     "breakEvenQuantity": 115,
-    "grossMargin": 687,
-    "landedCost": 612,
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "bom",
+          "packagingSpecification",
+          "constraints"
+        ]
+      },
+      "name": "Cost Engineer",
+      "outputSchema": {
+        "required": [
+          "rawMaterialCost",
+          "landedCost",
+          "grossMargin",
+          "pricingStrategy"
+        ]
+      },
+      "promptContract": "Calculate realistic unit economics and recommended selling prices.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Calculate landed cost, margin, break-even quantity, ROI, and pricing.",
+      "section": "costAnalysis",
+      "timeoutSeconds": 30
+    },
+    "costAssumptions": [
+      "Costs are deterministic planning estimates until supplier quotes are collected.",
+      "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+      "Pilot costing assumes 100-500 units and manual quality inspection."
+    ],
+    "department": "PRODUCT",
+    "employeeId": "EMP-106",
+    "employeeName": "Cost Engineer",
+    "grossMargin": 453,
+    "labelCost": 12,
+    "landedCost": 846,
     "manufacturingCost": 90,
+    "marketingAllowance": 120,
     "marketplaceFees": 130,
-    "netMargin": 607,
+    "miscBuffer": 25,
+    "netMargin": 373,
     "packagingCost": 55,
     "pricingStrategy": {
       "bundlePricing": 2499,
       "currency": "INR",
       "distributorPrice": 999,
-      "manufacturingPrice": 612,
+      "manufacturingPrice": 846,
       "marketplaceSellingPrice": 1399,
       "premiumPricingOption": 1799,
       "retailPrice": 1299,
       "wholesalePrice": 899
     },
-    "rawMaterialCost": 177,
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "rawMaterialCost": 421,
+    "returnsAllowance": 35,
+    "risks": [],
     "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+    "score": 81,
+    "section": "costAnalysis",
+    "sensitivityAnalysis": {
+      "materialCostPlus10Percent": 463.1,
+      "minimumViableRetailPrice": 1196,
+      "shippingCostPlus20Percent": 84.0
+    },
     "shippingCost": 70,
-    "taxes": 80
+    "status": "COMPLETED",
+    "taxes": 80,
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "warehousingCost": 18,
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+  },
+  "creativeStudioTransition": {
+    "approvedForCreativeStudio": true,
+    "handoffArtifacts": [
+      "Product Blueprint",
+      "Product variants",
+      "Packaging specification",
+      "Brandable product story"
+    ],
+    "status": "READY"
   },
   "customerFit": {
     "problemFit": "Clear",
@@ -55,22 +311,1223 @@
     "targetCustomer": {
       "ageGroup": "3-5",
       "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
       "primarySegment": "Parents of children aged 3-5 in India",
       "user": "Children aged 3-5"
     }
   },
   "department": "PRODUCT",
+  "departmentInitialization": {
+    "entryCriteria": [
+      "Validated Research Report",
+      "Founder idea",
+      "Project context"
+    ],
+    "output": "Product Definition Document",
+    "status": "READY",
+    "workflow": [
+      "Product strategy",
+      "Product specification",
+      "Variants",
+      "Architecture",
+      "Concept validation"
+    ]
+  },
+  "departmentMetrics": {
+    "employeeCount": 10,
+    "overallScore": 82,
+    "qualityReviewItems": 2
+  },
+  "departmentStatus": "COMPLETED",
   "employeeOutputs": [
-    {"employeeId": "EMP-101", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-102", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-103", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-104", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-105", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-106", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-107", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-108", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-109", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}},
-    {"employeeId": "EMP-110", "validation": {"business": "PASS", "confidence": "PASS", "engineering": "PASS", "risk": "PASS", "schema": "PASS"}}
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "project",
+            "researchReport",
+            "productDefinition"
+          ]
+        },
+        "name": "Product Manager",
+        "outputSchema": {
+          "required": [
+            "productDefinition",
+            "productFeatures",
+            "productVariants",
+            "productRoadmap",
+            "customerFit"
+          ]
+        },
+        "promptContract": "Select the best product opportunity and define the product family.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Convert research into product definition, variants, roadmap, and customer fit.",
+        "section": "productManagement",
+        "timeoutSeconds": 30
+      },
+      "customerFit": {
+        "problemFit": "Clear",
+        "purchaseTrigger": "Educational value and premium gifting appeal",
+        "targetCustomer": {
+          "ageGroup": "3-5",
+          "buyer": "Parents and gift buyers",
+          "needs": [
+            "Safe educational play",
+            "Premium durable materials",
+            "Simple learning activities"
+          ],
+          "primarySegment": "Parents of children aged 3-5 in India",
+          "user": "Children aged 3-5"
+        }
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-101",
+      "employeeName": "Product Manager",
+      "productDefinition": {
+        "ageGroup": "3-5",
+        "assumptions": [
+          "Sprint 3 Phase 1 uses deterministic product intelligence until live supplier data is connected.",
+          "Manufacturing, BOM, and supplier validation happen in later Sprint 3 phases.",
+          "Founder should validate demand before inventory purchase."
+        ],
+        "category": "Educational toy",
+        "differentiator": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
+        "difficulty": "Easy",
+        "educationalDomain": [
+          "Customer learning",
+          "Market validation",
+          "Product-family testing"
+        ],
+        "evidence": [
+          {
+            "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+            "publishedDate": null,
+            "reliability": "MEDIUM",
+            "retrievedDate": "runtime",
+            "section": "trendAnalysis",
+            "snippet": "The idea 'Build a premium educational wooden toy business for children aged 3-5 in India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+            "source": "genesis_deterministic_provider",
+            "title": "EMP-001 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+            "url": "genesis://research/EMP-001/trendAnalysis"
+          },
+          {
+            "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+            "publishedDate": null,
+            "reliability": "MEDIUM",
+            "retrievedDate": "runtime",
+            "section": "competitorAnalysis",
+            "snippet": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+            "source": "genesis_deterministic_provider",
+            "title": "EMP-002 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+            "url": "genesis://research/EMP-002/competitorAnalysis"
+          },
+          {
+            "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+            "publishedDate": null,
+            "reliability": "MEDIUM",
+            "retrievedDate": "runtime",
+            "section": "customerAnalysis",
+            "snippet": "Likely customers for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+            "source": "genesis_deterministic_provider",
+            "title": "EMP-003 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+            "url": "genesis://research/EMP-003/customerAnalysis"
+          },
+          {
+            "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+            "publishedDate": null,
+            "reliability": "MEDIUM",
+            "retrievedDate": "runtime",
+            "section": "productResearch",
+            "snippet": "The first product set for 'Build a premium educational wooden toy business for children aged 3-5 in India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+            "source": "genesis_deterministic_provider",
+            "title": "EMP-004 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+            "url": "genesis://research/EMP-004/productResearch"
+          }
+        ],
+        "futureRoadmap": {
+          "accessories": [
+            "Replacement parts",
+            "Add-on cards",
+            "Gift wrap"
+          ],
+          "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+          "expansionOpportunities": [
+            "Bundles",
+            "Corporate gifting",
+            "Retail-ready packaging"
+          ],
+          "futureFeatures": [
+            "Seasonal themes",
+            "Personalization",
+            "Limited editions"
+          ],
+          "subscription": "Monthly themed drop if repeat demand is validated",
+          "version1": "Luma Logic Cubes Starter validation kit",
+          "version2": "Gift-ready standard kit with improved packaging",
+          "version3": "Premium bundle with stronger brand story and add-ons"
+        },
+        "packagingType": "Starter kit",
+        "problemSolved": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
+        "productName": "Luma Logic Cubes",
+        "productStory": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+        "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+        "purpose": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
+        "recommendedMaterial": "Lightweight printable or packable materials selected for low-risk MVP validation.",
+        "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+        "targetCustomer": {
+          "ageGroup": "3-5",
+          "buyer": "Parents and gift buyers",
+          "needs": [
+            "Safe educational play",
+            "Premium durable materials",
+            "Simple learning activities"
+          ],
+          "primarySegment": "Parents of children aged 3-5 in India",
+          "user": "Children aged 3-5"
+        },
+        "useCase": "Starter purchase, gifting, validation launch, and later product-family expansion.",
+        "variants": [
+          {
+            "contents": [
+              "Core product",
+              "Simple packaging"
+            ],
+            "level": "Starter",
+            "name": "Luma Logic Cubes Starter",
+            "purpose": "Validate demand with minimum inventory risk"
+          },
+          {
+            "contents": [
+              "Core product",
+              "Bonus item",
+              "Gift-ready packaging"
+            ],
+            "level": "Standard",
+            "name": "Luma Logic Cubes Standard",
+            "purpose": "Increase perceived value"
+          },
+          {
+            "contents": [
+              "Expanded product set",
+              "Premium packaging"
+            ],
+            "level": "Premium",
+            "name": "Luma Logic Cubes Premium",
+            "purpose": "Serve gifting and higher-margin buyers"
+          },
+          {
+            "contents": [
+              "Multiple units",
+              "Occasion-based bundle"
+            ],
+            "level": "Bundle",
+            "name": "Luma Logic Cubes Bundle",
+            "purpose": "Raise average order value"
+          },
+          {
+            "contents": [
+              "Recurring monthly variation"
+            ],
+            "level": "Subscription",
+            "name": "Luma Logic Cubes Club",
+            "purpose": "Test repeat purchase potential"
+          },
+          {
+            "contents": [
+              "Replacement or add-on parts"
+            ],
+            "level": "Accessories",
+            "name": "Luma Logic Cubes Accessories",
+            "purpose": "Create low-cost upsells"
+          },
+          {
+            "contents": [
+              "New themes",
+              "Advanced variants"
+            ],
+            "level": "Expansion Packs",
+            "name": "Luma Logic Cubes Expansion Pack",
+            "purpose": "Build a product family"
+          }
+        ]
+      },
+      "productFeatures": [
+        "Core physical product",
+        "Gift-ready packaging",
+        "Simple instructions",
+        "Expandable product family"
+      ],
+      "productRoadmap": {
+        "accessories": [
+          "Replacement parts",
+          "Add-on cards",
+          "Gift wrap"
+        ],
+        "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+        "expansionOpportunities": [
+          "Bundles",
+          "Corporate gifting",
+          "Retail-ready packaging"
+        ],
+        "futureFeatures": [
+          "Seasonal themes",
+          "Personalization",
+          "Limited editions"
+        ],
+        "subscription": "Monthly themed drop if repeat demand is validated",
+        "version1": "Luma Logic Cubes Starter validation kit",
+        "version2": "Gift-ready standard kit with improved packaging",
+        "version3": "Premium bundle with stronger brand story and add-ons"
+      },
+      "productVariants": [
+        {
+          "contents": [
+            "Core product",
+            "Simple packaging"
+          ],
+          "level": "Starter",
+          "name": "Luma Logic Cubes Starter",
+          "purpose": "Validate demand with minimum inventory risk"
+        },
+        {
+          "contents": [
+            "Core product",
+            "Bonus item",
+            "Gift-ready packaging"
+          ],
+          "level": "Standard",
+          "name": "Luma Logic Cubes Standard",
+          "purpose": "Increase perceived value"
+        },
+        {
+          "contents": [
+            "Expanded product set",
+            "Premium packaging"
+          ],
+          "level": "Premium",
+          "name": "Luma Logic Cubes Premium",
+          "purpose": "Serve gifting and higher-margin buyers"
+        },
+        {
+          "contents": [
+            "Multiple units",
+            "Occasion-based bundle"
+          ],
+          "level": "Bundle",
+          "name": "Luma Logic Cubes Bundle",
+          "purpose": "Raise average order value"
+        },
+        {
+          "contents": [
+            "Recurring monthly variation"
+          ],
+          "level": "Subscription",
+          "name": "Luma Logic Cubes Club",
+          "purpose": "Test repeat purchase potential"
+        },
+        {
+          "contents": [
+            "Replacement or add-on parts"
+          ],
+          "level": "Accessories",
+          "name": "Luma Logic Cubes Accessories",
+          "purpose": "Create low-cost upsells"
+        },
+        {
+          "contents": [
+            "New themes",
+            "Advanced variants"
+          ],
+          "level": "Expansion Packs",
+          "name": "Luma Logic Cubes Expansion Pack",
+          "purpose": "Build a product family"
+        }
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 86,
+      "section": "productManagement",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "assemblyMethod": "Rounded wooden cubes finished, painted, inspected, packed with activity cards.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productDefinition"
+          ]
+        },
+        "name": "Industrial Designer",
+        "outputSchema": {
+          "required": [
+            "dimensions",
+            "assemblyMethod",
+            "manufacturingProcess",
+            "toolingRequirements"
+          ]
+        },
+        "promptContract": "Create a practical industrial design specification for manufacturing discussion.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define dimensions, assembly, tooling, safety, and production readiness.",
+        "section": "engineeringSpecification",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "dimensions": {
+        "package": "180 x 120 x 60",
+        "product": "30 x 30 x 30 cube",
+        "starterSet": "6 cubes",
+        "unit": "mm"
+      },
+      "employeeId": "EMP-102",
+      "employeeName": "Industrial Designer",
+      "estimatedProductionTime": "5-7 production days for pilot batch",
+      "manufacturingDifficulty": "Medium",
+      "manufacturingProcess": "CNC or semi-automatic cutting, sanding, painting, drying, inspection, packaging.",
+      "materials": [
+        "Beech wood",
+        "Non-toxic water-based paint",
+        "Recycled kraft board"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "safetyConsiderations": [
+        "Rounded edges",
+        "Non-toxic paint",
+        "Choking hazard review",
+        "Age labeling"
+      ],
+      "score": 84,
+      "section": "engineeringSpecification",
+      "status": "COMPLETED",
+      "toolingRequirements": [
+        "Cube cutting jig",
+        "Sanding station",
+        "Paint drying rack"
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "engineeringSpecification",
+            "materialRecommendation"
+          ]
+        },
+        "name": "Manufacturing Engineer",
+        "outputSchema": {
+          "required": [
+            "manufacturingTechnology",
+            "manufacturingSequence",
+            "processFlow",
+            "expectedYield"
+          ]
+        },
+        "promptContract": "Convert product design into a feasible manufacturing plan.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define manufacturing technology, process flow, yield, and risks.",
+        "section": "manufacturingPlan",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-103",
+      "employeeName": "Manufacturing Engineer",
+      "expectedYield": "92%",
+      "manufacturingRisks": [
+        "Paint curing delays",
+        "Dimensional inconsistency",
+        "Supplier MOQ variance"
+      ],
+      "manufacturingSequence": [
+        "Material inspection",
+        "Cutting",
+        "Finishing",
+        "Decoration",
+        "Quality inspection",
+        "Packaging"
+      ],
+      "manufacturingTechnology": "Small-batch woodworking with CNC-assisted cutting",
+      "processFlow": "Raw material -> component fabrication -> finish -> inspect -> pack -> dispatch",
+      "productionAssumptions": [
+        "Pilot MOQ 100 units",
+        "Manual quality inspection",
+        "Local supplier validation required"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 82,
+      "section": "manufacturingPlan",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "alternativeMaterials": [
+        "Rubber wood",
+        "Maple wood",
+        "Bamboo composite"
+      ],
+      "availabilityAssessment": "Available from Indian wooden toy and craft manufacturers; confirm lead time and certifications.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productDefinition",
+            "constraints"
+          ]
+        },
+        "name": "Material Engineer",
+        "outputSchema": {
+          "required": [
+            "primaryMaterials",
+            "alternativeMaterials",
+            "materialComparison"
+          ]
+        },
+        "promptContract": "Choose practical materials that balance safety, cost, availability, and brand positioning.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Recommend materials and compare cost, durability, and availability.",
+        "section": "materialRecommendation",
+        "timeoutSeconds": 30
+      },
+      "costComparison": {
+        "currency": "INR",
+        "lowestCostAlternative": 150,
+        "primarySetMaterialCost": 180
+      },
+      "department": "PRODUCT",
+      "durabilityComparison": {
+        "alternative": "Medium",
+        "primary": "High"
+      },
+      "employeeId": "EMP-104",
+      "employeeName": "Material Engineer",
+      "materialComparison": [
+        {
+          "availability": "Medium",
+          "cost": "Medium",
+          "durability": "High",
+          "material": "Beech wood",
+          "recommendation": "Primary choice"
+        },
+        {
+          "availability": "High",
+          "cost": "Low",
+          "durability": "Medium",
+          "material": "Rubber wood",
+          "recommendation": "Backup option"
+        }
+      ],
+      "primaryMaterials": [
+        "Beech wood",
+        "Non-toxic water-based paint",
+        "Recycled kraft board"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 83,
+      "section": "materialRecommendation",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "engineeringSpecification",
+            "materialRecommendation"
+          ]
+        },
+        "name": "BOM Engineer",
+        "outputSchema": {
+          "required": [
+            "items",
+            "totalEstimatedCost"
+          ]
+        },
+        "promptContract": "Break the product into manufacturable parts and cost each part.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Generate complete bill of materials with costs and supplier categories.",
+        "section": "bom",
+        "timeoutSeconds": 30
+      },
+      "currency": "INR",
+      "department": "PRODUCT",
+      "employeeId": "EMP-105",
+      "employeeName": "BOM Engineer",
+      "items": [
+        {
+          "category": "Wooden component manufacturer",
+          "component": "Beech wood cube",
+          "componentId": "LUMA-001",
+          "componentName": "Beech wood cube",
+          "criticality": "HIGH",
+          "estimatedUnitCost": 22,
+          "material": "Beech wood",
+          "notes": "Estimate only; verify with supplier quote and sample.",
+          "optionalAlternatives": [
+            "Equivalent certified material from approved supplier"
+          ],
+          "partNumber": "LUMA-001",
+          "quantity": 6,
+          "supplierCategory": "Wooden component manufacturer",
+          "unitCostEstimated": 22,
+          "unitOfMeasure": "piece"
+        },
+        {
+          "category": "Toy-safe coating supplier",
+          "component": "Non-toxic paint finish",
+          "componentId": "LUMA-002",
+          "componentName": "Non-toxic paint finish",
+          "criticality": "MEDIUM",
+          "estimatedUnitCost": 28,
+          "material": "Water-based paint",
+          "notes": "Estimate only; verify with supplier quote and sample.",
+          "optionalAlternatives": [
+            "Equivalent certified material from approved supplier"
+          ],
+          "partNumber": "LUMA-002",
+          "quantity": 1,
+          "supplierCategory": "Toy-safe coating supplier",
+          "unitCostEstimated": 28,
+          "unitOfMeasure": "piece"
+        },
+        {
+          "category": "Print supplier",
+          "component": "Activity cards",
+          "componentId": "LUMA-003",
+          "componentName": "Activity cards",
+          "criticality": "MEDIUM",
+          "estimatedUnitCost": 18,
+          "material": "350 GSM card",
+          "notes": "Estimate only; verify with supplier quote and sample.",
+          "optionalAlternatives": [
+            "Equivalent certified material from approved supplier"
+          ],
+          "partNumber": "LUMA-003",
+          "quantity": 12,
+          "supplierCategory": "Print supplier",
+          "unitCostEstimated": 18,
+          "unitOfMeasure": "piece"
+        },
+        {
+          "category": "Packaging supplier",
+          "component": "Starter box",
+          "componentId": "LUMA-004",
+          "componentName": "Starter box",
+          "criticality": "MEDIUM",
+          "estimatedUnitCost": 45,
+          "material": "Rigid kraft board",
+          "notes": "Estimate only; verify with supplier quote and sample.",
+          "optionalAlternatives": [
+            "Equivalent certified material from approved supplier"
+          ],
+          "partNumber": "LUMA-004",
+          "quantity": 1,
+          "supplierCategory": "Packaging supplier",
+          "unitCostEstimated": 45,
+          "unitOfMeasure": "piece"
+        }
+      ],
+      "linkedProductBlueprint": true,
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 85,
+      "section": "bom",
+      "status": "COMPLETED",
+      "totalEstimatedCost": 421,
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "version": 1,
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "assemblyCost": 35,
+      "breakEvenQuantity": 115,
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "packagingSpecification",
+            "constraints"
+          ]
+        },
+        "name": "Cost Engineer",
+        "outputSchema": {
+          "required": [
+            "rawMaterialCost",
+            "landedCost",
+            "grossMargin",
+            "pricingStrategy"
+          ]
+        },
+        "promptContract": "Calculate realistic unit economics and recommended selling prices.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Calculate landed cost, margin, break-even quantity, ROI, and pricing.",
+        "section": "costAnalysis",
+        "timeoutSeconds": 30
+      },
+      "costAssumptions": [
+        "Costs are deterministic planning estimates until supplier quotes are collected.",
+        "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+        "Pilot costing assumes 100-500 units and manual quality inspection."
+      ],
+      "department": "PRODUCT",
+      "employeeId": "EMP-106",
+      "employeeName": "Cost Engineer",
+      "grossMargin": 453,
+      "labelCost": 12,
+      "landedCost": 846,
+      "manufacturingCost": 90,
+      "marketingAllowance": 120,
+      "marketplaceFees": 130,
+      "miscBuffer": 25,
+      "netMargin": 373,
+      "packagingCost": 55,
+      "pricingStrategy": {
+        "bundlePricing": 2499,
+        "currency": "INR",
+        "distributorPrice": 999,
+        "manufacturingPrice": 846,
+        "marketplaceSellingPrice": 1399,
+        "premiumPricingOption": 1799,
+        "retailPrice": 1299,
+        "wholesalePrice": 899
+      },
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "rawMaterialCost": 421,
+      "returnsAllowance": 35,
+      "risks": [],
+      "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+      "score": 81,
+      "section": "costAnalysis",
+      "sensitivityAnalysis": {
+        "materialCostPlus10Percent": 463.1,
+        "minimumViableRetailPrice": 1196,
+        "shippingCostPlus20Percent": 84.0
+      },
+      "shippingCost": 70,
+      "status": "COMPLETED",
+      "taxes": 80,
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "warehousingCost": 18,
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "barcodes": [
+        "EAN/UPC placeholder"
+      ],
+      "brandingRequirements": [
+        "Front hero panel",
+        "Learning benefit badges",
+        "Founder batch seal"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "engineeringSpecification",
+            "constraints"
+          ]
+        },
+        "name": "Packaging Engineer",
+        "outputSchema": {
+          "required": [
+            "packagingDimensions",
+            "packagingMaterials",
+            "protectionStrategy",
+            "shippingPlan"
+          ]
+        },
+        "promptContract": "Design compact, protective, supplier-ready packaging.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define packaging, protection, storage, sustainability, and shipping plan.",
+        "section": "packagingSpecification",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-107",
+      "employeeName": "Packaging Engineer",
+      "estimatedPackagingCost": 55,
+      "labels": [
+        "Age grade",
+        "SKU label",
+        "Safety placeholder"
+      ],
+      "packagingDimensions": {
+        "height": 60,
+        "length": 180,
+        "unit": "mm",
+        "width": 120
+      },
+      "packagingMaterials": [
+        "Rigid kraft board",
+        "Paper pulp insert",
+        "Tamper label"
+      ],
+      "primaryPackaging": "Rigid starter kit box",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "protectionStrategy": "Use fitted insert to prevent cube movement and edge damage.",
+      "protectiveInserts": "Paper pulp insert",
+      "qrCodes": [
+        "Instruction landing page placeholder"
+      ],
+      "risks": [],
+      "score": 84,
+      "secondaryPackaging": "Corrugated shipper carton",
+      "section": "packagingSpecification",
+      "shippingOptimization": "Under 500g target shipping slab",
+      "shippingPlan": {
+        "constraints": [
+          "Avoid moisture",
+          "Confirm damage rate in pilot"
+        ],
+        "courierSuitability": "Domestic small parcel",
+        "damageRisk": "LOW-MEDIUM",
+        "domesticCarrier": "Shiprocket or Delhivery placeholder",
+        "estimatedDimensions": {
+          "height": 60,
+          "length": 180,
+          "unit": "mm",
+          "width": 120
+        },
+        "estimatedWeightGrams": 480,
+        "exportReadiness": "Not ready until labeling and compliance are reviewed.",
+        "fragilityAssessment": "LOW-MEDIUM",
+        "recommendations": [
+          "Use fitted insert",
+          "Run drop test on pilot packaging"
+        ],
+        "risks": [
+          "Corner crush risk",
+          "Humidity risk"
+        ],
+        "storageRequirements": "Stackable cartons; keep dry.",
+        "targetWeightGrams": 480
+      },
+      "status": "COMPLETED",
+      "storageOptimization": "Stackable rectangular packs, 20 units per carton",
+      "storageRequirements": "Dry indoor storage; avoid humidity and crushing.",
+      "sustainabilityAssessment": "Plastic-free packaging with recyclable board and paper insert",
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "alternativeSuppliers": [
+        "Alibaba verified wooden toy supplier",
+        "Local CNC woodworking vendor",
+        "Print-and-pack assembly vendor"
+      ],
+      "comparison": {
+        "bestPilotSupplier": "Educational kit assembler placeholder",
+        "lowestMOQ": 100,
+        "lowestRiskScore": 38
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "materialRecommendation",
+            "country"
+          ]
+        },
+        "name": "Supplier Analyst",
+        "outputSchema": {
+          "required": [
+            "shortlist",
+            "comparison",
+            "alternativeSuppliers"
+          ]
+        },
+        "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+        "section": "supplierRecommendations",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-108",
+      "employeeName": "Supplier Analyst",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "score": 78,
+      "section": "supplierRecommendations",
+      "shortlist": [
+        {
+          "capacity": "Pilot-ready; verify monthly capacity",
+          "category": "Wooden toys",
+          "country": "India",
+          "estimatedPricing": "INR 260-360 per starter set before final packaging",
+          "leadTimeDays": 21,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka / NCR supplier cluster",
+          "moq": 100,
+          "name": "India wooden toy manufacturer placeholder",
+          "productRange": [
+            "Wooden cubes",
+            "Painted learning toys",
+            "Starter educational kits"
+          ],
+          "qualityIndicators": [
+            "Sample approval required",
+            "Toy-safe coating declaration required"
+          ],
+          "riskScore": 42,
+          "risks": [
+            "Certification not verified",
+            "Paint finish consistency"
+          ]
+        },
+        {
+          "capacity": "Small-batch; verify repeatability",
+          "category": "Wood craft",
+          "country": "India",
+          "estimatedPricing": "INR 300-420 per starter set depending finish",
+          "leadTimeDays": 28,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka",
+          "moq": 150,
+          "name": "Channapatna craft cluster placeholder",
+          "productRange": [
+            "Hand-finished wooden toys",
+            "Lacquered educational pieces"
+          ],
+          "qualityIndicators": [
+            "Craft quality",
+            "Needs standardized tolerances"
+          ],
+          "riskScore": 48,
+          "risks": [
+            "Tolerance variation",
+            "Higher lead time"
+          ]
+        },
+        {
+          "capacity": "Pilot-ready",
+          "category": "Assembly and packaging",
+          "country": "India",
+          "estimatedPricing": "INR 80-140 assembly and printed collateral",
+          "leadTimeDays": 14,
+          "linkedBomItems": [
+            "LUMA-003",
+            "LUMA-004"
+          ],
+          "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+          "moq": 100,
+          "name": "Educational kit assembler placeholder",
+          "productRange": [
+            "Kit collation",
+            "Activity cards",
+            "Retail packaging"
+          ],
+          "qualityIndicators": [
+            "Packaging sample required",
+            "Barcode and label check required"
+          ],
+          "riskScore": 38,
+          "risks": [
+            "Needs coordination with component supplier"
+          ]
+        }
+      ],
+      "status": "COMPLETED",
+      "supplierAssumptions": [
+        "Supplier names are placeholders until live supplier research credentials are connected.",
+        "Founder must verify certifications and samples."
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "assemblyRisks": [
+        "Manual collation error",
+        "Missing activity card"
+      ],
+      "checks": [
+        {
+          "check": "Manufacturability",
+          "status": "PASS"
+        },
+        {
+          "check": "Profitability",
+          "status": "PASS"
+        },
+        {
+          "check": "Shipping feasibility",
+          "status": "PASS"
+        },
+        {
+          "check": "Packaging feasibility",
+          "status": "PASS"
+        },
+        {
+          "check": "Customer fit",
+          "status": "PASS"
+        },
+        {
+          "check": "Market differentiation",
+          "status": "PASS"
+        },
+        {
+          "check": "Safety assumptions",
+          "status": "REVIEW"
+        },
+        {
+          "check": "Supplier availability",
+          "status": "REVIEW"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "blueprintSections"
+          ]
+        },
+        "name": "Quality Engineer",
+        "outputSchema": {
+          "required": [
+            "checks",
+            "validationReport"
+          ]
+        },
+        "promptContract": "Run quality gates and make risks explicit before founder approval.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Validate manufacturability, safety, packaging, customer fit, and supplier assumptions.",
+        "section": "qualityChecklist",
+        "timeoutSeconds": 30
+      },
+      "customerExperienceRisks": [
+        "Instructions may be unclear without parent guide testing"
+      ],
+      "department": "PRODUCT",
+      "durabilityRisks": [
+        "Corner dents after repeated drops"
+      ],
+      "employeeId": "EMP-109",
+      "employeeName": "Quality Engineer",
+      "failureModes": [
+        "Paint or finish fails safety review.",
+        "Cube edges vary outside tolerance.",
+        "Packaging corners crush during courier handling."
+      ],
+      "inspectionRecommendations": [
+        "Incoming material inspection",
+        "Paint finish check",
+        "Drop test",
+        "Final pack checklist"
+      ],
+      "materialRisks": [
+        "Wood moisture variation",
+        "Paint certification gap"
+      ],
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "qualityRisks": [
+        "Certifications must be verified before production.",
+        "Pilot samples must pass physical inspection."
+      ],
+      "risks": [],
+      "safetyRisks": [
+        "Choking hazard review required",
+        "Age labeling must be verified"
+      ],
+      "score": 80,
+      "section": "qualityChecklist",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "validationReport": {
+        "decision": "APPROVED_WITH_REVIEW_ITEMS",
+        "failed": 0,
+        "passed": 6,
+        "reviewRequired": 2
+      },
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    },
+    {
+      "assumptions": [
+        "Costs are deterministic planning estimates until supplier quotes are collected.",
+        "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+        "Pilot costing assumes 100-500 units and manual quality inspection."
+      ],
+      "breakEvenQuantity": 115,
+      "cashFlowImpact": "Requires controlled pilot batch and staged reorders.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "costAnalysis",
+            "pricingStrategy"
+          ]
+        },
+        "name": "Profitability Analyst",
+        "outputSchema": {
+          "required": [
+            "profitPerUnit",
+            "profitPercentage",
+            "marginScore",
+            "scalabilityScore"
+          ]
+        },
+        "promptContract": "Decide whether the product can become profitable before inventory spend.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Calculate profit per unit, margin, scalability, inventory risk, and cash-flow impact.",
+        "section": "profitabilityReport",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-110",
+      "employeeName": "Profitability Analyst",
+      "grossMargin": 453,
+      "inventoryRisk": "MEDIUM",
+      "marginScore": 78,
+      "marketplacePrice": 1399,
+      "netMarginEstimated": 373,
+      "profitPerUnit": 453,
+      "profitPercentage": 34.87,
+      "profitabilityAssessment": "Commercially promising if supplier samples and safety review pass.",
+      "profitabilityRating": "PROMISING",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "risks": [],
+      "roi": "1.8x on first 500 units if sell-through exceeds 70%",
+      "scalabilityScore": 74,
+      "score": 79,
+      "section": "profitabilityReport",
+      "status": "COMPLETED",
+      "suggestedSellingPrice": 1299,
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "wholesalePrice": 899,
+      "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+    }
   ],
   "engineeringSpecification": {
     "assemblyMethod": "Rounded wooden cubes finished, painted, inspected, packed with activity cards.",
@@ -101,7 +1558,40 @@
     ]
   },
   "executiveSummary": "Genesis Product Department generated a manufacturable, costed Product Blueprint for Luma Logic Cubes.",
-  "knowledgeBaseEntries": [],
+  "founderNotification": {
+    "message": "Product Blueprint is complete and ready for founder review before Creative Studio execution.",
+    "status": "READY_FOR_REVIEW"
+  },
+  "knowledgeBaseEntries": [
+    {
+      "futureImprovement": "Re-score after supplier, BOM, and packaging data are available.",
+      "lesson": "Start with a compact product family seed instead of a single-product dead end.",
+      "productName": "Luma Logic Cubes",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "type": "GENERATED_PRODUCT"
+    },
+    {
+      "futureImprovement": "Revisit alternatives if manufacturing or supplier constraints change.",
+      "lesson": "Weak alternatives should be retained with reasons so future product decisions improve.",
+      "productName": "Rejected alternatives",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "rejectedProducts": [
+        {
+          "name": "Desk mini print or magnet",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        },
+        {
+          "name": "Coffee lover gift card",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        },
+        {
+          "name": "Starter hamper with one hero accessory",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        }
+      ],
+      "type": "REJECTED_PRODUCTS"
+    }
+  ],
   "launchReadyEngineeringPackage": {
     "included": [
       "Product definition",
@@ -118,6 +1608,33 @@
       "Supplier verification",
       "Safety certification",
       "Physical sample approval"
+    ]
+  },
+  "manufacturabilityEvaluation": {
+    "decision": "MANUFACTURABLE_FOR_PILOT",
+    "manufacturingDifficulty": "Medium",
+    "score": 84,
+    "toolingRequirements": [
+      "Cube cutting jig",
+      "Sanding station",
+      "Paint drying rack"
+    ]
+  },
+  "manufacturingMethodSelection": {
+    "rationale": "Chosen for pilot feasibility, low tooling risk, and supplier availability.",
+    "risks": [
+      "Paint curing delays",
+      "Dimensional inconsistency",
+      "Supplier MOQ variance"
+    ],
+    "selectedMethod": "Small-batch woodworking with CNC-assisted cutting",
+    "sequence": [
+      "Material inspection",
+      "Cutting",
+      "Finishing",
+      "Decoration",
+      "Quality inspection",
+      "Packaging"
     ]
   },
   "manufacturingPlan": {
@@ -166,6 +1683,13 @@
         "durability": "High",
         "material": "Beech wood",
         "recommendation": "Primary choice"
+      },
+      {
+        "availability": "High",
+        "cost": "Low",
+        "durability": "Medium",
+        "material": "Rubber wood",
+        "recommendation": "Backup option"
       }
     ],
     "primaryMaterials": [
@@ -174,6 +1698,87 @@
       "Recycled kraft board"
     ]
   },
+  "materialRecommendations": {
+    "alternativeMaterials": [
+      "Rubber wood",
+      "Maple wood",
+      "Bamboo composite"
+    ],
+    "availabilityAssessment": "Available from Indian wooden toy and craft manufacturers; confirm lead time and certifications.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productDefinition",
+          "constraints"
+        ]
+      },
+      "name": "Material Engineer",
+      "outputSchema": {
+        "required": [
+          "primaryMaterials",
+          "alternativeMaterials",
+          "materialComparison"
+        ]
+      },
+      "promptContract": "Choose practical materials that balance safety, cost, availability, and brand positioning.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Recommend materials and compare cost, durability, and availability.",
+      "section": "materialRecommendation",
+      "timeoutSeconds": 30
+    },
+    "costComparison": {
+      "currency": "INR",
+      "lowestCostAlternative": 150,
+      "primarySetMaterialCost": 180
+    },
+    "department": "PRODUCT",
+    "durabilityComparison": {
+      "alternative": "Medium",
+      "primary": "High"
+    },
+    "employeeId": "EMP-104",
+    "employeeName": "Material Engineer",
+    "materialComparison": [
+      {
+        "availability": "Medium",
+        "cost": "Medium",
+        "durability": "High",
+        "material": "Beech wood",
+        "recommendation": "Primary choice"
+      },
+      {
+        "availability": "High",
+        "cost": "Low",
+        "durability": "Medium",
+        "material": "Rubber wood",
+        "recommendation": "Backup option"
+      }
+    ],
+    "primaryMaterials": [
+      "Beech wood",
+      "Non-toxic water-based paint",
+      "Recycled kraft board"
+    ],
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 83,
+    "section": "materialRecommendation",
+    "status": "COMPLETED",
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+  },
   "nextActions": [
     "Send the BOM and engineering specification to shortlisted suppliers.",
     "Collect quotes for 100, 250, and 500 unit production runs.",
@@ -181,6 +1786,20 @@
   ],
   "overallScore": 82,
   "packagingSpecification": {
+    "barcodes": [
+      "EAN/UPC placeholder"
+    ],
+    "brandingRequirements": [
+      "Front hero panel",
+      "Learning benefit badges",
+      "Founder batch seal"
+    ],
+    "estimatedPackagingCost": 55,
+    "labels": [
+      "Age grade",
+      "SKU label",
+      "Safety placeholder"
+    ],
     "packagingDimensions": {
       "height": 60,
       "length": 180,
@@ -192,35 +1811,275 @@
       "Paper pulp insert",
       "Tamper label"
     ],
+    "primaryPackaging": "Rigid starter kit box",
     "protectionStrategy": "Use fitted insert to prevent cube movement and edge damage.",
+    "protectiveInserts": "Paper pulp insert",
+    "qrCodes": [
+      "Instruction landing page placeholder"
+    ],
+    "secondaryPackaging": "Corrugated shipper carton",
     "shippingOptimization": "Under 500g target shipping slab",
     "storageOptimization": "Stackable rectangular packs, 20 units per carton",
+    "storageRequirements": "Dry indoor storage; avoid humidity and crushing.",
     "sustainabilityAssessment": "Plastic-free packaging with recyclable board and paper insert"
   },
   "pricingStrategy": {
     "bundlePricing": 2499,
     "currency": "INR",
     "distributorPrice": 999,
-    "manufacturingPrice": 612,
+    "manufacturingPrice": 846,
     "marketplaceSellingPrice": 1399,
     "premiumPricingOption": 1799,
     "retailPrice": 1299,
     "wholesalePrice": 899
   },
+  "productArchitecture": {
+    "components": [
+      "Primary product",
+      "Instruction layer",
+      "Packaging",
+      "Brand insert"
+    ],
+    "coreProduct": "Luma Logic Cubes",
+    "dependencies": [
+      "Supplier sample",
+      "Packaging dieline",
+      "Safety review"
+    ],
+    "variantArchitecture": [
+      "Starter",
+      "Standard",
+      "Premium",
+      "Bundle",
+      "Subscription",
+      "Accessories",
+      "Expansion Packs"
+    ],
+    "versioningModel": "Starter validates core architecture; Standard and Premium expand contents and packaging."
+  },
+  "productConceptValidation": {
+    "brandability": "PASS",
+    "customerValue": "PASS",
+    "decision": "APPROVED_FOR_PRODUCT_BLUEPRINT",
+    "manufacturability": "PASS_WITH_BLUEPRINT_DETAIL",
+    "reviewItems": [
+      "Confirm supplier quotes",
+      "Validate customer willingness to pay",
+      "Review category safety rules"
+    ],
+    "scalability": "PASS",
+    "shippingFit": "PASS"
+  },
   "productConstraints": {
+    "constraints": [
+      "premium wooden material",
+      "low MOQ pilot"
+    ],
     "country": "India",
-    "founderBudget": "Not specified",
-    "moq": "Prefer low MOQ or manual pilot batch",
-    "targetMargin": "Target 55-65 percent gross margin before paid ads"
+    "founderBudget": "300000 INR",
+    "machineAvailability": "Avoid machine-dependent design in Phase 1.",
+    "manufacturingCapability": "Start with simple, low-tooling production until demand is proven.",
+    "moq": "Prefer low MOQ or manual pilot batch.",
+    "safety": "Validate category-specific safety and labeling before production.",
+    "shipping": "Keep the starter variant lightweight and compact.",
+    "storage": "Avoid bulky or fragile inventory.",
+    "targetMargin": "Target 55-65 percent gross margin before paid ads.",
+    "timeToMarket": "45 days"
   },
   "productDefinition": {
     "ageGroup": "3-5",
+    "assumptions": [
+      "Sprint 3 Phase 1 uses deterministic product intelligence until live supplier data is connected.",
+      "Manufacturing, BOM, and supplier validation happen in later Sprint 3 phases.",
+      "Founder should validate demand before inventory purchase."
+    ],
     "category": "Educational toy",
+    "differentiator": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
+    "difficulty": "Easy",
+    "educationalDomain": [
+      "Customer learning",
+      "Market validation",
+      "Product-family testing"
+    ],
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "trendAnalysis",
+        "snippet": "The idea 'Build a premium educational wooden toy business for children aged 3-5 in India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-001 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-001/trendAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "competitorAnalysis",
+        "snippet": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-002 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-002/competitorAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "customerAnalysis",
+        "snippet": "Likely customers for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-003 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-003/customerAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "productResearch",
+        "snippet": "The first product set for 'Build a premium educational wooden toy business for children aged 3-5 in India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-004 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-004/productResearch"
+      }
+    ],
+    "futureRoadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "packagingType": "Starter kit",
+    "problemSolved": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
     "productName": "Luma Logic Cubes",
+    "productStory": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
     "purpose": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
+    "recommendedMaterial": "Lightweight printable or packable materials selected for low-risk MVP validation.",
+    "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
     "targetCustomer": {
-      "primarySegment": "Parents of children aged 3-5 in India"
-    }
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "useCase": "Starter purchase, gifting, validation launch, and later product-family expansion.",
+    "variants": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ]
+  },
+  "productExecutionPlan": {
+    "automation": "FULLY_AUTOMATED",
+    "employees": [
+      "EMP-101",
+      "EMP-102",
+      "EMP-103",
+      "EMP-104",
+      "EMP-105",
+      "EMP-106",
+      "EMP-107",
+      "EMP-108",
+      "EMP-109",
+      "EMP-110"
+    ],
+    "steps": [
+      "Product management",
+      "Industrial design",
+      "Manufacturing",
+      "Materials",
+      "BOM",
+      "Costing",
+      "Packaging",
+      "Supplier analysis",
+      "Quality",
+      "Profitability"
+    ]
   },
   "productFeatures": [
     "Core physical product",
@@ -228,16 +2087,304 @@
     "Simple instructions",
     "Expandable product family"
   ],
-  "productId": "sample-product",
+  "productId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "productManager": {
+    "assignmentStatus": "ASSIGNED",
+    "employeeId": "EMP-101",
+    "name": "Product Manager",
+    "responsibilities": [
+      "Read research report",
+      "Select opportunity",
+      "Create product plan",
+      "Prepare blueprint handoff"
+    ]
+  },
   "productName": "Luma Logic Cubes",
+  "productReviewGate": {
+    "approvedForCreativeStudio": true,
+    "criteria": [
+      {
+        "name": "Validated product definition",
+        "status": "PASS"
+      },
+      {
+        "name": "Starter, Standard, Premium variants",
+        "status": "PASS"
+      },
+      {
+        "name": "Manufacturing feasibility",
+        "status": "PASS"
+      },
+      {
+        "name": "Positive unit economics",
+        "status": "PASS"
+      },
+      {
+        "name": "Quality and safety assumptions explicit",
+        "status": "REVIEW"
+      }
+    ],
+    "founderApprovalRequiredBeforeProduction": true,
+    "gateName": "Product Review Gate",
+    "nextDepartment": "CREATIVE",
+    "reviewItems": [
+      "Certifications must be verified before production.",
+      "Pilot samples must pass physical inspection."
+    ],
+    "sourceProductDefinition": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "status": "APPROVED_WITH_REVIEW_ITEMS"
+  },
   "productRoadmap": {
+    "accessories": [
+      "Replacement parts",
+      "Add-on cards",
+      "Gift wrap"
+    ],
+    "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+    "expansionOpportunities": [
+      "Bundles",
+      "Corporate gifting",
+      "Retail-ready packaging"
+    ],
+    "futureFeatures": [
+      "Seasonal themes",
+      "Personalization",
+      "Limited editions"
+    ],
+    "subscription": "Monthly themed drop if repeat demand is validated",
     "version1": "Luma Logic Cubes Starter validation kit",
     "version2": "Gift-ready standard kit with improved packaging",
     "version3": "Premium bundle with stronger brand story and add-ons"
   },
+  "productSpecification": {
+    "description": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "dimensions": "Defined by Industrial Designer during Product Blueprint generation",
+    "features": [
+      "Core physical product",
+      "Gift-ready packaging",
+      "Simple instructions",
+      "Expandable variant system"
+    ],
+    "functionalRequirements": [
+      "Easy to understand",
+      "Easy to package",
+      "Easy to ship",
+      "Supplier-discussion ready"
+    ],
+    "materials": [
+      "Lightweight printable or packable materials selected for low-risk MVP validation."
+    ],
+    "nonFunctionalRequirements": [
+      "Safe assumptions explicit",
+      "Low MOQ friendly",
+      "Brandable",
+      "Auditable"
+    ],
+    "productName": "Luma Logic Cubes",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "traceability": {
+      "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "sourceWorkflowId": "39176c41-6aa5-4627-bf1d-39ec0451313b"
+    },
+    "variants": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ],
+    "version": "1.0",
+    "weight": "Target under 500g for starter variant"
+  },
+  "productStrategy": {
+    "competitiveAdvantage": "Lower validation risk through compact variants, explicit constraints, and supplier-ready planning.",
+    "customerProblem": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
+    "differentiation": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
+    "positioning": "Premium, practical, pilot-ready product family with clear customer benefit.",
+    "pricingPhilosophy": "Protect gross margin first, then use bundles and premium variants to lift average order value.",
+    "researchReferences": [
+      "genesis://research/EMP-001/trendAnalysis",
+      "genesis://research/EMP-002/competitorAnalysis",
+      "genesis://research/EMP-003/customerAnalysis",
+      "genesis://research/EMP-004/productResearch"
+    ],
+    "roadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "strategyOwner": "EMP-101 Product Manager",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "valueProposition": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
+    "variantStrategy": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ]
+  },
   "productSuccessMetrics": {
-    "customerValueScore": 83,
-    "overallProductScore": 74
+    "complexityScore": 32,
+    "customerValueScore": 82,
+    "expansionPotential": 79,
+    "innovationScore": 80,
+    "manufacturabilityScore": 78,
+    "overallProductScore": 74,
+    "packagingScore": 80,
+    "profitabilityScore": 77,
+    "shippingScore": 82
   },
   "productVariants": [
     {
@@ -267,25 +2414,322 @@
       "level": "Premium",
       "name": "Luma Logic Cubes Premium",
       "purpose": "Serve gifting and higher-margin buyers"
+    },
+    {
+      "contents": [
+        "Multiple units",
+        "Occasion-based bundle"
+      ],
+      "level": "Bundle",
+      "name": "Luma Logic Cubes Bundle",
+      "purpose": "Raise average order value"
+    },
+    {
+      "contents": [
+        "Recurring monthly variation"
+      ],
+      "level": "Subscription",
+      "name": "Luma Logic Cubes Club",
+      "purpose": "Test repeat purchase potential"
+    },
+    {
+      "contents": [
+        "Replacement or add-on parts"
+      ],
+      "level": "Accessories",
+      "name": "Luma Logic Cubes Accessories",
+      "purpose": "Create low-cost upsells"
+    },
+    {
+      "contents": [
+        "New themes",
+        "Advanced variants"
+      ],
+      "level": "Expansion Packs",
+      "name": "Luma Logic Cubes Expansion Pack",
+      "purpose": "Build a product family"
     }
   ],
-  "profitabilityReport": {
+  "profitabilityAnalysis": {
+    "assumptions": [
+      "Costs are deterministic planning estimates until supplier quotes are collected.",
+      "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+      "Pilot costing assumes 100-500 units and manual quality inspection."
+    ],
+    "breakEvenQuantity": 115,
     "cashFlowImpact": "Requires controlled pilot batch and staged reorders.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "costAnalysis",
+          "pricingStrategy"
+        ]
+      },
+      "name": "Profitability Analyst",
+      "outputSchema": {
+        "required": [
+          "profitPerUnit",
+          "profitPercentage",
+          "marginScore",
+          "scalabilityScore"
+        ]
+      },
+      "promptContract": "Decide whether the product can become profitable before inventory spend.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Calculate profit per unit, margin, scalability, inventory risk, and cash-flow impact.",
+      "section": "profitabilityReport",
+      "timeoutSeconds": 30
+    },
+    "department": "PRODUCT",
+    "employeeId": "EMP-110",
+    "employeeName": "Profitability Analyst",
+    "grossMargin": 453,
     "inventoryRisk": "MEDIUM",
     "marginScore": 78,
-    "profitPerUnit": 687,
-    "profitPercentage": 52.89,
+    "marketplacePrice": 1399,
+    "netMarginEstimated": 373,
+    "profitPerUnit": 453,
+    "profitPercentage": 34.87,
     "profitabilityAssessment": "Commercially promising if supplier samples and safety review pass.",
-    "scalabilityScore": 74
+    "profitabilityRating": "PROMISING",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "roi": "1.8x on first 500 units if sell-through exceeds 70%",
+    "scalabilityScore": 74,
+    "score": 79,
+    "section": "profitabilityReport",
+    "status": "COMPLETED",
+    "suggestedSellingPrice": 1299,
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "wholesalePrice": 899,
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
   },
-  "projectId": "sample-project",
+  "profitabilityReport": {
+    "assumptions": [
+      "Costs are deterministic planning estimates until supplier quotes are collected.",
+      "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+      "Pilot costing assumes 100-500 units and manual quality inspection."
+    ],
+    "breakEvenQuantity": 115,
+    "cashFlowImpact": "Requires controlled pilot batch and staged reorders.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "costAnalysis",
+          "pricingStrategy"
+        ]
+      },
+      "name": "Profitability Analyst",
+      "outputSchema": {
+        "required": [
+          "profitPerUnit",
+          "profitPercentage",
+          "marginScore",
+          "scalabilityScore"
+        ]
+      },
+      "promptContract": "Decide whether the product can become profitable before inventory spend.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Calculate profit per unit, margin, scalability, inventory risk, and cash-flow impact.",
+      "section": "profitabilityReport",
+      "timeoutSeconds": 30
+    },
+    "department": "PRODUCT",
+    "employeeId": "EMP-110",
+    "employeeName": "Profitability Analyst",
+    "grossMargin": 453,
+    "inventoryRisk": "MEDIUM",
+    "marginScore": 78,
+    "marketplacePrice": 1399,
+    "netMarginEstimated": 373,
+    "profitPerUnit": 453,
+    "profitPercentage": 34.87,
+    "profitabilityAssessment": "Commercially promising if supplier samples and safety review pass.",
+    "profitabilityRating": "PROMISING",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "roi": "1.8x on first 500 units if sell-through exceeds 70%",
+    "scalabilityScore": 74,
+    "score": 79,
+    "section": "profitabilityReport",
+    "status": "COMPLETED",
+    "suggestedSellingPrice": 1299,
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "wholesalePrice": 899,
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+  },
+  "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "qualityAssessment": {
+    "assemblyRisks": [
+      "Manual collation error",
+      "Missing activity card"
+    ],
+    "checks": [
+      {
+        "check": "Manufacturability",
+        "status": "PASS"
+      },
+      {
+        "check": "Profitability",
+        "status": "PASS"
+      },
+      {
+        "check": "Shipping feasibility",
+        "status": "PASS"
+      },
+      {
+        "check": "Packaging feasibility",
+        "status": "PASS"
+      },
+      {
+        "check": "Customer fit",
+        "status": "PASS"
+      },
+      {
+        "check": "Market differentiation",
+        "status": "PASS"
+      },
+      {
+        "check": "Safety assumptions",
+        "status": "REVIEW"
+      },
+      {
+        "check": "Supplier availability",
+        "status": "REVIEW"
+      }
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "blueprintSections"
+        ]
+      },
+      "name": "Quality Engineer",
+      "outputSchema": {
+        "required": [
+          "checks",
+          "validationReport"
+        ]
+      },
+      "promptContract": "Run quality gates and make risks explicit before founder approval.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Validate manufacturability, safety, packaging, customer fit, and supplier assumptions.",
+      "section": "qualityChecklist",
+      "timeoutSeconds": 30
+    },
+    "customerExperienceRisks": [
+      "Instructions may be unclear without parent guide testing"
+    ],
+    "department": "PRODUCT",
+    "durabilityRisks": [
+      "Corner dents after repeated drops"
+    ],
+    "employeeId": "EMP-109",
+    "employeeName": "Quality Engineer",
+    "failureModes": [
+      "Paint or finish fails safety review.",
+      "Cube edges vary outside tolerance.",
+      "Packaging corners crush during courier handling."
+    ],
+    "inspectionRecommendations": [
+      "Incoming material inspection",
+      "Paint finish check",
+      "Drop test",
+      "Final pack checklist"
+    ],
+    "materialRisks": [
+      "Wood moisture variation",
+      "Paint certification gap"
+    ],
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "qualityRisks": [
+      "Certifications must be verified before production.",
+      "Pilot samples must pass physical inspection."
+    ],
+    "risks": [],
+    "safetyRisks": [
+      "Choking hazard review required",
+      "Age labeling must be verified"
+    ],
+    "score": 80,
+    "section": "qualityChecklist",
+    "status": "COMPLETED",
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "validationReport": {
+      "decision": "APPROVED_WITH_REVIEW_ITEMS",
+      "failed": 0,
+      "passed": 6,
+      "reviewRequired": 2
+    },
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
+  },
   "qualityChecklist": [
     {
       "check": "Manufacturability",
       "status": "PASS"
     },
     {
+      "check": "Profitability",
+      "status": "PASS"
+    },
+    {
+      "check": "Shipping feasibility",
+      "status": "PASS"
+    },
+    {
+      "check": "Packaging feasibility",
+      "status": "PASS"
+    },
+    {
+      "check": "Customer fit",
+      "status": "PASS"
+    },
+    {
+      "check": "Market differentiation",
+      "status": "PASS"
+    },
+    {
       "check": "Safety assumptions",
+      "status": "REVIEW"
+    },
+    {
+      "check": "Supplier availability",
       "status": "REVIEW"
     }
   ],
@@ -298,18 +2742,89 @@
   "risks": [
     {
       "mitigation": "Validate with pilot orders before production scale.",
-      "risk": "Demand may not convert into purchases.",
+      "risk": "Competitor saturation must be verified with live marketplace and Instagram checks.",
       "severity": "HIGH"
+    },
+    {
+      "mitigation": "Verify suppliers, samples, certifications, and quotes manually.",
+      "risk": "Supplier shortlist uses deterministic placeholders until live supplier credentials are connected.",
+      "severity": "MEDIUM"
+    },
+    {
+      "mitigation": "Confirm toy safety, paint, labeling, and choking hazard requirements.",
+      "risk": "Safety compliance assumptions require expert review before manufacturing.",
+      "severity": "HIGH"
+    },
+    {
+      "mitigation": "Resolve during pilot sample review.",
+      "risk": "Certifications must be verified before production.",
+      "severity": "MEDIUM"
+    },
+    {
+      "mitigation": "Resolve during pilot sample review.",
+      "risk": "Pilot samples must pass physical inspection.",
+      "severity": "MEDIUM"
     }
   ],
-  "shippingPlan": {
+  "shippingAssessment": {
+    "constraints": [
+      "Avoid moisture",
+      "Confirm damage rate in pilot"
+    ],
+    "courierSuitability": "Domestic small parcel",
     "damageRisk": "LOW-MEDIUM",
     "domesticCarrier": "Shiprocket or Delhivery placeholder",
+    "estimatedDimensions": {
+      "height": 60,
+      "length": 180,
+      "unit": "mm",
+      "width": 120
+    },
+    "estimatedWeightGrams": 480,
+    "exportReadiness": "Not ready until labeling and compliance are reviewed.",
+    "fragilityAssessment": "LOW-MEDIUM",
+    "recommendations": [
+      "Use fitted insert",
+      "Run drop test on pilot packaging"
+    ],
+    "risks": [
+      "Corner crush risk",
+      "Humidity risk"
+    ],
+    "storageRequirements": "Stackable cartons; keep dry.",
+    "targetWeightGrams": 480
+  },
+  "shippingPlan": {
+    "constraints": [
+      "Avoid moisture",
+      "Confirm damage rate in pilot"
+    ],
+    "courierSuitability": "Domestic small parcel",
+    "damageRisk": "LOW-MEDIUM",
+    "domesticCarrier": "Shiprocket or Delhivery placeholder",
+    "estimatedDimensions": {
+      "height": 60,
+      "length": 180,
+      "unit": "mm",
+      "width": 120
+    },
+    "estimatedWeightGrams": 480,
+    "exportReadiness": "Not ready until labeling and compliance are reviewed.",
+    "fragilityAssessment": "LOW-MEDIUM",
+    "recommendations": [
+      "Use fitted insert",
+      "Run drop test on pilot packaging"
+    ],
+    "risks": [
+      "Corner crush risk",
+      "Humidity risk"
+    ],
+    "storageRequirements": "Stackable cartons; keep dry.",
     "targetWeightGrams": 480
   },
   "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
-  "sourceReportId": "sample-project",
-  "sourceWorkflowId": "sample-research-workflow",
+  "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "sourceWorkflowId": "39176c41-6aa5-4627-bf1d-39ec0451313b",
   "supplierRecommendations": {
     "alternativeSuppliers": [
       "Alibaba verified wooden toy supplier",
@@ -321,22 +2836,162 @@
       "lowestMOQ": 100,
       "lowestRiskScore": 38
     },
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.74
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "bom",
+          "materialRecommendation",
+          "country"
+        ]
+      },
+      "name": "Supplier Analyst",
+      "outputSchema": {
+        "required": [
+          "shortlist",
+          "comparison",
+          "alternativeSuppliers"
+        ]
+      },
+      "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+      "section": "supplierRecommendations",
+      "timeoutSeconds": 30
+    },
+    "department": "PRODUCT",
+    "employeeId": "EMP-108",
+    "employeeName": "Supplier Analyst",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "risks": [],
+    "score": 78,
+    "section": "supplierRecommendations",
     "shortlist": [
       {
+        "capacity": "Pilot-ready; verify monthly capacity",
         "category": "Wooden toys",
         "country": "India",
+        "estimatedPricing": "INR 260-360 per starter set before final packaging",
         "leadTimeDays": 21,
+        "linkedBomItems": [
+          "LUMA-001",
+          "LUMA-002"
+        ],
+        "location": "Karnataka / NCR supplier cluster",
         "moq": 100,
         "name": "India wooden toy manufacturer placeholder",
-        "riskScore": 42
+        "productRange": [
+          "Wooden cubes",
+          "Painted learning toys",
+          "Starter educational kits"
+        ],
+        "qualityIndicators": [
+          "Sample approval required",
+          "Toy-safe coating declaration required"
+        ],
+        "riskScore": 42,
+        "risks": [
+          "Certification not verified",
+          "Paint finish consistency"
+        ]
+      },
+      {
+        "capacity": "Small-batch; verify repeatability",
+        "category": "Wood craft",
+        "country": "India",
+        "estimatedPricing": "INR 300-420 per starter set depending finish",
+        "leadTimeDays": 28,
+        "linkedBomItems": [
+          "LUMA-001",
+          "LUMA-002"
+        ],
+        "location": "Karnataka",
+        "moq": 150,
+        "name": "Channapatna craft cluster placeholder",
+        "productRange": [
+          "Hand-finished wooden toys",
+          "Lacquered educational pieces"
+        ],
+        "qualityIndicators": [
+          "Craft quality",
+          "Needs standardized tolerances"
+        ],
+        "riskScore": 48,
+        "risks": [
+          "Tolerance variation",
+          "Higher lead time"
+        ]
+      },
+      {
+        "capacity": "Pilot-ready",
+        "category": "Assembly and packaging",
+        "country": "India",
+        "estimatedPricing": "INR 80-140 assembly and printed collateral",
+        "leadTimeDays": 14,
+        "linkedBomItems": [
+          "LUMA-003",
+          "LUMA-004"
+        ],
+        "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+        "moq": 100,
+        "name": "Educational kit assembler placeholder",
+        "productRange": [
+          "Kit collation",
+          "Activity cards",
+          "Retail packaging"
+        ],
+        "qualityIndicators": [
+          "Packaging sample required",
+          "Barcode and label check required"
+        ],
+        "riskScore": 38,
+        "risks": [
+          "Needs coordination with component supplier"
+        ]
       }
-    ]
+    ],
+    "status": "COMPLETED",
+    "supplierAssumptions": [
+      "Supplier names are placeholders until live supplier research credentials are connected.",
+      "Founder must verify certifications and samples."
+    ],
+    "validation": {
+      "business": "PASS",
+      "confidence": "PASS",
+      "engineering": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
   },
+  "validationHistory": [
+    {
+      "stage": "Product Definition",
+      "status": "PASS",
+      "validator": "validate_product_definition.py"
+    },
+    {
+      "stage": "Employee Outputs",
+      "status": "PASS",
+      "validator": "validate_product_employee_output"
+    },
+    {
+      "stage": "Product Blueprint",
+      "status": "PASS",
+      "validator": "validate_product_blueprint.py"
+    }
+  ],
   "validationReport": {
+    "decision": "APPROVED_WITH_REVIEW_ITEMS",
     "failed": 0,
     "passed": 6,
     "reviewRequired": 2
   },
   "version": "0.3.0",
-  "workflowId": "sample-product-workflow"
+  "workflowId": "70c48b4c-89c3-4990-ac0c-aa8599d7408f"
 }

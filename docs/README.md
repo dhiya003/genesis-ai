@@ -11,6 +11,7 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 - [Epic 01 - Business & Founder Management](epic-01-business-founder-management.md)
 - [Epic 02-04 Lifecycle Validation](epic-02-04-lifecycle-validation.md)
 - [Epic 05 - Research Intelligence Validation](epic-05-research-intelligence-validation.md)
+- [Epic 06-08 Product and Creative Validation](epic-06-08-product-creative-validation.md)
 
 ## Sprint 1 Documentation Sets
 

@@ -74,6 +74,7 @@ REQUIRED_PATHS = [
     "docs/epic-01-business-founder-management.md",
     "docs/epic-02-04-lifecycle-validation.md",
     "docs/epic-05-research-intelligence-validation.md",
+    "docs/epic-06-08-product-creative-validation.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]

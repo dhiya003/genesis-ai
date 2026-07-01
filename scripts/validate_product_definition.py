@@ -18,7 +18,17 @@ REQUIRED_TOP_LEVEL = [
     "sourceIdea",
     "department",
     "manager",
+    "departmentStatus",
+    "departmentInitialization",
+    "productManager",
+    "productExecutionPlan",
+    "dashboardUpdate",
+    "auditSummary",
     "productDefinitionDocument",
+    "productStrategy",
+    "productSpecification",
+    "productArchitecture",
+    "productConceptValidation",
     "opportunityReport",
     "variantMatrix",
     "productRoadmap",
@@ -120,6 +130,19 @@ def validate_product_definition_payload(data: dict[str, Any]) -> list[str]:
     for key in ["productRoadmap", "constraintsReport"]:
         if not isinstance(data.get(key), dict) or not data.get(key):
             issues.append(f"{key} must be a non-empty object")
+    for key in ["departmentInitialization", "productManager", "productExecutionPlan", "productStrategy", "productSpecification", "productArchitecture", "productConceptValidation"]:
+        if not isinstance(data.get(key), dict) or not data.get(key):
+            issues.append(f"{key} must be a non-empty object")
+    if data.get("productConceptValidation", {}).get("decision") != "APPROVED_FOR_PRODUCT_BLUEPRINT":
+        issues.append("productConceptValidation.decision must approve Product Blueprint")
+    strategy = data.get("productStrategy", {})
+    for key in ["targetCustomer", "valueProposition", "positioning", "differentiation", "competitiveAdvantage", "pricingPhilosophy", "roadmap", "variantStrategy"]:
+        if key not in strategy:
+            issues.append(f"productStrategy missing key: {key}")
+    specification = data.get("productSpecification", {})
+    for key in ["productName", "description", "features", "functionalRequirements", "nonFunctionalRequirements", "variants", "version", "traceability"]:
+        if key not in specification:
+            issues.append(f"productSpecification missing key: {key}")
     success_metrics = data.get("successMetrics")
     if not isinstance(success_metrics, dict):
         issues.append("successMetrics must be an object")

@@ -34,6 +34,12 @@ class ProductDepartmentTests(unittest.TestCase):
             self.assertFalse(validate_product_definition_payload(product_definition))
             self.assertEqual(store.get_product_definition(project_id)["projectId"], project_id)
             self.assertTrue(store.list_product_knowledge(project_id=project_id))
+            self.assertEqual(product_definition["departmentInitialization"]["status"], "READY")
+            self.assertEqual(product_definition["productManager"]["employeeId"], "EMP-101")
+            self.assertEqual(product_definition["productConceptValidation"]["decision"], "APPROVED_FOR_PRODUCT_BLUEPRINT")
+            self.assertTrue(product_definition["productStrategy"]["variantStrategy"])
+            self.assertTrue(product_definition["productSpecification"]["functionalRequirements"])
+            self.assertTrue(product_definition["productArchitecture"]["components"])
 
             levels = {variant["level"] for variant in product_definition["variantMatrix"]}
             self.assertEqual(

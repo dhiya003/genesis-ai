@@ -18,8 +18,14 @@ REQUIRED_TOP_LEVEL = [
     "sourceWorkflowId",
     "sourceIdea",
     "department",
+    "departmentStatus",
     "productName",
     "executiveSummary",
+    "departmentInitialization",
+    "productManager",
+    "productExecutionPlan",
+    "productStrategy",
+    "productSpecification",
     "productDefinition",
     "productFeatures",
     "productVariants",
@@ -27,22 +33,38 @@ REQUIRED_TOP_LEVEL = [
     "customerFit",
     "productConstraints",
     "productSuccessMetrics",
+    "productArchitecture",
+    "productConceptValidation",
     "engineeringSpecification",
     "materialRecommendation",
+    "materialRecommendations",
+    "manufacturabilityEvaluation",
     "manufacturingPlan",
+    "manufacturingMethodSelection",
     "bom",
     "costAnalysis",
     "pricingStrategy",
     "packagingSpecification",
     "shippingPlan",
+    "shippingAssessment",
     "supplierRecommendations",
     "qualityChecklist",
+    "qualityAssessment",
     "profitabilityReport",
+    "profitabilityAnalysis",
+    "blueprintValidationReport",
+    "validationHistory",
     "risks",
     "assumptions",
     "recommendations",
     "nextActions",
     "launchReadyEngineeringPackage",
+    "productReviewGate",
+    "completionChecklist",
+    "creativeStudioTransition",
+    "founderNotification",
+    "departmentMetrics",
+    "auditSummary",
     "employeeOutputs",
     "overallScore",
 ]
@@ -53,12 +75,12 @@ REQUIRED_BLUEPRINT_SECTIONS = {
     "engineeringSpecification": ["dimensions", "materials", "assemblyMethod", "manufacturingProcess", "manufacturingDifficulty", "toolingRequirements", "safetyConsiderations", "estimatedProductionTime"],
     "materialRecommendation": ["primaryMaterials", "alternativeMaterials", "materialComparison", "costComparison", "durabilityComparison", "availabilityAssessment"],
     "manufacturingPlan": ["manufacturingTechnology", "manufacturingSequence", "processFlow", "productionAssumptions", "expectedYield", "manufacturingRisks"],
-    "bom": ["items", "totalEstimatedCost"],
-    "costAnalysis": ["rawMaterialCost", "manufacturingCost", "packagingCost", "shippingCost", "marketplaceFees", "taxes", "landedCost", "grossMargin", "netMargin", "breakEvenQuantity", "roiEstimate"],
+    "bom": ["version", "linkedProductBlueprint", "items", "totalEstimatedCost"],
+    "costAnalysis": ["rawMaterialCost", "manufacturingCost", "assemblyCost", "packagingCost", "labelCost", "shippingCost", "warehousingCost", "marketingAllowance", "marketplaceFees", "taxes", "returnsAllowance", "miscBuffer", "landedCost", "grossMargin", "netMargin", "breakEvenQuantity", "roiEstimate", "costAssumptions", "sensitivityAnalysis"],
     "pricingStrategy": ["manufacturingPrice", "wholesalePrice", "distributorPrice", "retailPrice", "marketplaceSellingPrice", "premiumPricingOption", "bundlePricing"],
-    "packagingSpecification": ["packagingDimensions", "packagingMaterials", "protectionStrategy", "shippingOptimization", "storageOptimization", "sustainabilityAssessment"],
+    "packagingSpecification": ["packagingDimensions", "primaryPackaging", "secondaryPackaging", "protectiveInserts", "packagingMaterials", "labels", "barcodes", "qrCodes", "protectionStrategy", "shippingOptimization", "storageOptimization", "storageRequirements", "brandingRequirements", "estimatedPackagingCost", "sustainabilityAssessment"],
     "supplierRecommendations": ["shortlist", "comparison", "alternativeSuppliers"],
-    "profitabilityReport": ["profitPerUnit", "profitPercentage", "marginScore", "scalabilityScore", "inventoryRisk", "cashFlowImpact"],
+    "profitabilityReport": ["profitPerUnit", "profitPercentage", "suggestedSellingPrice", "wholesalePrice", "marketplacePrice", "grossMargin", "netMarginEstimated", "breakEvenQuantity", "roi", "profitabilityRating", "assumptions", "marginScore", "scalabilityScore", "inventoryRisk", "cashFlowImpact"],
 }
 
 
@@ -96,18 +118,42 @@ def validate_product_blueprint_payload(data: dict[str, Any]) -> list[str]:
             if not isinstance(item, dict):
                 issues.append(f"bom.items[{index}] must be an object")
                 continue
-            for key in ["partNumber", "component", "quantity", "material", "estimatedUnitCost", "supplierCategory"]:
+            for key in ["partNumber", "component", "quantity", "material", "estimatedUnitCost", "supplierCategory", "componentId", "componentName", "category", "unitOfMeasure", "unitCostEstimated", "criticality", "optionalAlternatives", "notes"]:
                 if key not in item:
                     issues.append(f"bom.items[{index}] missing key: {key}")
     supplier_shortlist = data.get("supplierRecommendations", {}).get("shortlist") if isinstance(data.get("supplierRecommendations"), dict) else None
     if not isinstance(supplier_shortlist, list) or not supplier_shortlist:
         issues.append("supplierRecommendations.shortlist must be a non-empty list")
+    else:
+        for index, supplier in enumerate(supplier_shortlist):
+            if not isinstance(supplier, dict):
+                issues.append(f"supplierRecommendations.shortlist[{index}] must be an object")
+                continue
+            for key in ["name", "country", "location", "productRange", "estimatedPricing", "qualityIndicators", "capacity", "moq", "leadTimeDays", "riskScore", "risks", "linkedBomItems"]:
+                if key not in supplier:
+                    issues.append(f"supplierRecommendations.shortlist[{index}] missing key: {key}")
+    shipping = data.get("shippingAssessment")
+    if not isinstance(shipping, dict) or not all(key in shipping for key in ["estimatedWeightGrams", "estimatedDimensions", "courierSuitability", "exportReadiness", "fragilityAssessment", "risks", "recommendations"]):
+        issues.append("shippingAssessment must include readiness, dimensions, risks, and recommendations")
+    quality = data.get("qualityAssessment")
+    if not isinstance(quality, dict) or not all(key in quality for key in ["failureModes", "assemblyRisks", "materialRisks", "durabilityRisks", "safetyRisks", "customerExperienceRisks", "inspectionRecommendations"]):
+        issues.append("qualityAssessment must include risk categories and inspection recommendations")
     for key in ["qualityChecklist", "risks", "assumptions", "recommendations", "nextActions"]:
         if not isinstance(data.get(key), list) or not data.get(key):
             issues.append(f"{key} must be a non-empty list")
     package = data.get("launchReadyEngineeringPackage")
     if not isinstance(package, dict) or package.get("readyForSupplierDiscussion") is not True:
         issues.append("launchReadyEngineeringPackage.readyForSupplierDiscussion must be true")
+    review_gate = data.get("productReviewGate")
+    if not isinstance(review_gate, dict) or review_gate.get("approvedForCreativeStudio") is not True:
+        issues.append("productReviewGate.approvedForCreativeStudio must be true")
+    if data.get("creativeStudioTransition", {}).get("status") != "READY":
+        issues.append("creativeStudioTransition.status must be READY")
+    if data.get("departmentStatus") != "COMPLETED":
+        issues.append("departmentStatus must be COMPLETED")
+    for key in ["blueprintValidationReport", "validationHistory", "completionChecklist", "departmentMetrics"]:
+        if not data.get(key):
+            issues.append(f"{key} is required")
     employee_outputs = data.get("employeeOutputs")
     if not isinstance(employee_outputs, list):
         issues.append("employeeOutputs must be a list")

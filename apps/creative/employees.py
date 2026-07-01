@@ -196,6 +196,13 @@ def _is_wooden_toy(context: dict[str, Any]) -> bool:
 def _brand_strategy_output(context: dict[str, Any]) -> dict[str, Any]:
     toy = _is_wooden_toy(context)
     return {
+        "brandPurpose": "Make early learning feel beautiful, safe, and useful at home." if toy else "Turn a validated product opportunity into a trustworthy launch brand.",
+        "brandMission": "Help families choose purposeful, screen-free play with confidence." if toy else "Help founders launch a clear first product with strong brand trust.",
+        "brandVision": "Become India's most trusted premium early-learning play brand." if toy else "Become a repeatable brand system for product-family launches.",
+        "valueProposition": "Premium wooden learning products that combine parent trust, child engagement, and gift-ready presentation." if toy else "A simple, polished product brand built for validation and scale.",
+        "emotionalPositioning": "Calm confidence for parents and joyful discovery for children." if toy else "Practical confidence for early buyers.",
+        "competitivePositioning": "More premium and intentional than generic marketplace toys; more accessible than imported educational systems." if toy else "More structured than generic marketplace listings.",
+        "brandArchetype": "Caregiver Sage" if toy else "Creator Guide",
         "positioning": "Premium screen-free learning toys for early childhood development in India" if toy else "A focused launch brand built around the validated product opportunity",
         "targetAudience": _blueprint(context).get("customerFit", {}).get("targetCustomer", {}),
         "brandPromise": "Beautiful play that quietly builds logic, motor skills, and confidence." if toy else "A clear first product with a trustworthy story and polished launch presence.",
@@ -339,4 +346,3 @@ def _qa_output(context: dict[str, Any]) -> dict[str, Any]:
         "risks": ["Certification claims must remain placeholders until verified.", "Final logo files require design tool production."],
         "score": 82,
     }
-

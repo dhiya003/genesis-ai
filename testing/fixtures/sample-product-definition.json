@@ -9,12 +9,45 @@
       "evidence": "Product definition uses a starter kit and clear purpose.",
       "item": "Buyer can understand quickly",
       "status": "PASS"
+    },
+    {
+      "evidence": "Phase 1 keeps the product simple and low-tooling.",
+      "item": "Can be manufactured",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Variant matrix prioritizes compact starter packaging.",
+      "item": "Can be shipped",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Roadmap includes standard, premium, bundle, and expansion paths.",
+      "item": "Can scale",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Product story and differentiator are explicit.",
+      "item": "Can be branded",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Variants include accessories, subscription, and expansion packs.",
+      "item": "Can become a product family",
+      "status": "PASS"
     }
   ],
+  "auditSummary": {
+    "createdBy": "ProductDepartment",
+    "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "workflowId": "c58fcf27-4eb3-4a85-ab50-a77ebb1f9414"
+  },
   "constraintsReport": {
-    "constraints": [],
+    "constraints": [
+      "premium wooden material",
+      "low MOQ pilot"
+    ],
     "country": "India",
-    "founderBudget": "Not specified",
+    "founderBudget": "300000 INR",
     "machineAvailability": "Avoid machine-dependent design in Phase 1.",
     "manufacturingCapability": "Start with simple, low-tooling production until demand is proven.",
     "moq": "Prefer low MOQ or manual pilot batch.",
@@ -22,25 +55,54 @@
     "shipping": "Keep the starter variant lightweight and compact.",
     "storage": "Avoid bulky or fragile inventory.",
     "targetMargin": "Target 55-65 percent gross margin before paid ads.",
-    "timeToMarket": "Pilot within 2-4 weeks"
+    "timeToMarket": "45 days"
+  },
+  "dashboardUpdate": {
+    "status": "PRODUCT_DEFINITION_COMPLETED",
+    "visibleToFounder": true
   },
   "department": "PRODUCT",
+  "departmentInitialization": {
+    "entryCriteria": [
+      "Validated Research Report",
+      "Founder idea",
+      "Project context"
+    ],
+    "output": "Product Definition Document",
+    "status": "READY",
+    "workflow": [
+      "Product strategy",
+      "Product specification",
+      "Variants",
+      "Architecture",
+      "Concept validation"
+    ]
+  },
+  "departmentStatus": "INITIALIZED",
   "knowledgeBaseEntries": [
     {
       "futureImprovement": "Re-score after supplier, BOM, and packaging data are available.",
       "lesson": "Start with a compact product family seed instead of a single-product dead end.",
-      "productName": "Brew Buddy Starter Kit",
-      "projectId": "sample-project",
+      "productName": "Luma Logic Cubes",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
       "type": "GENERATED_PRODUCT"
     },
     {
       "futureImprovement": "Revisit alternatives if manufacturing or supplier constraints change.",
       "lesson": "Weak alternatives should be retained with reasons so future product decisions improve.",
       "productName": "Rejected alternatives",
-      "projectId": "sample-project",
+      "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
       "rejectedProducts": [
         {
           "name": "Desk mini print or magnet",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        },
+        {
+          "name": "Coffee lover gift card",
+          "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+        },
+        {
+          "name": "Starter hamper with one hero accessory",
           "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
         }
       ],
@@ -49,38 +111,88 @@
   ],
   "manager": "PRODUCT_MANAGER",
   "opportunityReport": {
-    "evidenceReferences": [],
+    "evidenceReferences": [
+      "genesis://research/EMP-001/trendAnalysis",
+      "genesis://research/EMP-002/competitorAnalysis",
+      "genesis://research/EMP-003/customerAnalysis",
+      "genesis://research/EMP-004/productResearch"
+    ],
     "overallOpportunityScore": 77,
     "rankingRationale": "The selected product balances customer clarity, low manufacturing risk, shipping simplicity, and expansion potential.",
     "rejectedAlternatives": [
       {
         "name": "Desk mini print or magnet",
         "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+      },
+      {
+        "name": "Coffee lover gift card",
+        "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
+      },
+      {
+        "name": "Starter hamper with one hero accessory",
+        "reason": "Rejected for Phase 1 because it creates higher inventory, differentiation, or validation risk."
       }
     ],
     "scores": {
-      "competition": 69,
-      "customerValue": 83,
-      "differentiation": 81,
+      "competition": 68,
+      "customerValue": 82,
+      "differentiation": 80,
       "inventoryRisk": 68,
-      "learningValue": 84,
+      "learningValue": 83,
       "manufacturingDifficulty": 78,
-      "marketGap": 79,
-      "profit": 78,
-      "scalability": 80,
+      "marketGap": 78,
+      "profit": 77,
+      "scalability": 79,
       "shippingRisk": 82,
       "supplierAvailability": 72
     },
-    "selectedOpportunity": "Brew Buddy Starter Kit"
+    "selectedOpportunity": "Luma Logic Cubes"
+  },
+  "productArchitecture": {
+    "components": [
+      "Primary product",
+      "Instruction layer",
+      "Packaging",
+      "Brand insert"
+    ],
+    "coreProduct": "Luma Logic Cubes",
+    "dependencies": [
+      "Supplier sample",
+      "Packaging dieline",
+      "Safety review"
+    ],
+    "variantArchitecture": [
+      "Starter",
+      "Standard",
+      "Premium",
+      "Bundle",
+      "Subscription",
+      "Accessories",
+      "Expansion Packs"
+    ],
+    "versioningModel": "Starter validates core architecture; Standard and Premium expand contents and packaging."
+  },
+  "productConceptValidation": {
+    "brandability": "PASS",
+    "customerValue": "PASS",
+    "decision": "APPROVED_FOR_PRODUCT_BLUEPRINT",
+    "manufacturability": "PASS_WITH_BLUEPRINT_DETAIL",
+    "reviewItems": [
+      "Confirm supplier quotes",
+      "Validate customer willingness to pay",
+      "Review category safety rules"
+    ],
+    "scalability": "PASS",
+    "shippingFit": "PASS"
   },
   "productDefinitionDocument": {
-    "ageGroup": "18-35",
+    "ageGroup": "3-5",
     "assumptions": [
       "Sprint 3 Phase 1 uses deterministic product intelligence until live supplier data is connected.",
       "Manufacturing, BOM, and supplier validation happen in later Sprint 3 phases.",
       "Founder should validate demand before inventory purchase."
     ],
-    "category": "Lifestyle gifting",
+    "category": "Educational toy",
     "differentiator": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
     "difficulty": "Easy",
     "educationalDomain": [
@@ -88,7 +200,52 @@
       "Market validation",
       "Product-family testing"
     ],
-    "evidence": [],
+    "evidence": [
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "trendAnalysis",
+        "snippet": "The idea 'Build a premium educational wooden toy business for children aged 3-5 in India.' fits a giftable, passion-led niche where content can validate demand before inventory scale.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-001 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-001/trendAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "competitorAnalysis",
+        "snippet": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-002 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-002/competitorAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "customerAnalysis",
+        "snippet": "Likely customers for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are urban coffee drinkers, gifting buyers, and office/home caf\u00e9 enthusiasts.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-003 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-003/customerAnalysis"
+      },
+      {
+        "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+        "publishedDate": null,
+        "reliability": "MEDIUM",
+        "retrievedDate": "runtime",
+        "section": "productResearch",
+        "snippet": "The first product set for 'Build a premium educational wooden toy business for children aged 3-5 in India.' should be lightweight, visual, easy to ship, and bundle-friendly.",
+        "source": "genesis_deterministic_provider",
+        "title": "EMP-004 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "url": "genesis://research/EMP-004/productResearch"
+      }
+    ],
     "futureRoadmap": {
       "accessories": [
         "Replacement parts",
@@ -107,27 +264,28 @@
         "Limited editions"
       ],
       "subscription": "Monthly themed drop if repeat demand is validated",
-      "version1": "Brew Buddy Starter Kit Starter validation kit",
+      "version1": "Luma Logic Cubes Starter validation kit",
       "version2": "Gift-ready standard kit with improved packaging",
       "version3": "Premium bundle with stronger brand story and add-ons"
     },
     "packagingType": "Starter kit",
     "problemSolved": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
-    "productName": "Brew Buddy Starter Kit",
-    "productStory": "Brew Buddy Starter Kit turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
-    "projectId": "sample-project",
-    "purpose": "Help coffee lovers express their identity through an affordable, giftable starter kit.",
+    "productName": "Luma Logic Cubes",
+    "productStory": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+    "purpose": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
     "recommendedMaterial": "Lightweight printable or packable materials selected for low-risk MVP validation.",
-    "sourceReportId": "sample-project",
+    "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
     "targetCustomer": {
-      "ageGroup": "18-35",
-      "buyer": "Young professionals who identify as coffee lovers",
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
       "needs": [
-        "Clear product value",
-        "Affordable first purchase",
-        "Trustworthy packaging and delivery"
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
       ],
-      "primarySegment": "Young professionals who identify as coffee lovers"
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
     },
     "useCase": "Starter purchase, gifting, validation launch, and later product-family expansion.",
     "variants": [
@@ -137,7 +295,7 @@
           "Simple packaging"
         ],
         "level": "Starter",
-        "name": "Brew Buddy Starter Kit Starter",
+        "name": "Luma Logic Cubes Starter",
         "purpose": "Validate demand with minimum inventory risk"
       },
       {
@@ -147,7 +305,7 @@
           "Gift-ready packaging"
         ],
         "level": "Standard",
-        "name": "Brew Buddy Starter Kit Standard",
+        "name": "Luma Logic Cubes Standard",
         "purpose": "Increase perceived value"
       },
       {
@@ -156,7 +314,7 @@
           "Premium packaging"
         ],
         "level": "Premium",
-        "name": "Brew Buddy Starter Kit Premium",
+        "name": "Luma Logic Cubes Premium",
         "purpose": "Serve gifting and higher-margin buyers"
       },
       {
@@ -165,7 +323,7 @@
           "Occasion-based bundle"
         ],
         "level": "Bundle",
-        "name": "Brew Buddy Starter Kit Bundle",
+        "name": "Luma Logic Cubes Bundle",
         "purpose": "Raise average order value"
       },
       {
@@ -173,7 +331,7 @@
           "Recurring monthly variation"
         ],
         "level": "Subscription",
-        "name": "Brew Buddy Starter Kit Club",
+        "name": "Luma Logic Cubes Club",
         "purpose": "Test repeat purchase potential"
       },
       {
@@ -181,7 +339,7 @@
           "Replacement or add-on parts"
         ],
         "level": "Accessories",
-        "name": "Brew Buddy Starter Kit Accessories",
+        "name": "Luma Logic Cubes Accessories",
         "purpose": "Create low-cost upsells"
       },
       {
@@ -190,9 +348,31 @@
           "Advanced variants"
         ],
         "level": "Expansion Packs",
-        "name": "Brew Buddy Starter Kit Expansion Pack",
+        "name": "Luma Logic Cubes Expansion Pack",
         "purpose": "Build a product family"
       }
+    ]
+  },
+  "productExecutionPlan": {
+    "automation": "FULLY_AUTOMATED",
+    "manualDependencies": [],
+    "steps": [
+      "Read research report",
+      "Rank opportunity",
+      "Define product",
+      "Design variants",
+      "Validate concept"
+    ]
+  },
+  "productManager": {
+    "assignmentStatus": "ASSIGNED",
+    "employeeId": "EMP-101",
+    "name": "Product Manager",
+    "responsibilities": [
+      "Read research report",
+      "Select opportunity",
+      "Create product plan",
+      "Prepare blueprint handoff"
     ]
   },
   "productRoadmap": {
@@ -213,11 +393,230 @@
       "Limited editions"
     ],
     "subscription": "Monthly themed drop if repeat demand is validated",
-    "version1": "Brew Buddy Starter Kit Starter validation kit",
+    "version1": "Luma Logic Cubes Starter validation kit",
     "version2": "Gift-ready standard kit with improved packaging",
     "version3": "Premium bundle with stronger brand story and add-ons"
   },
-  "projectId": "sample-project",
+  "productSpecification": {
+    "description": "Luma Logic Cubes turns the validated research opportunity into a simple product family that can be tested before inventory scale.",
+    "dimensions": "Defined by Industrial Designer during Product Blueprint generation",
+    "features": [
+      "Core physical product",
+      "Gift-ready packaging",
+      "Simple instructions",
+      "Expandable variant system"
+    ],
+    "functionalRequirements": [
+      "Easy to understand",
+      "Easy to package",
+      "Easy to ship",
+      "Supplier-discussion ready"
+    ],
+    "materials": [
+      "Lightweight printable or packable materials selected for low-risk MVP validation."
+    ],
+    "nonFunctionalRequirements": [
+      "Safe assumptions explicit",
+      "Low MOQ friendly",
+      "Brandable",
+      "Auditable"
+    ],
+    "productName": "Luma Logic Cubes",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "traceability": {
+      "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+      "sourceWorkflowId": "39176c41-6aa5-4627-bf1d-39ec0451313b"
+    },
+    "variants": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ],
+    "version": "1.0",
+    "weight": "Target under 500g for starter variant"
+  },
+  "productStrategy": {
+    "competitiveAdvantage": "Lower validation risk through compact variants, explicit constraints, and supplier-ready planning.",
+    "customerProblem": "Gives the target customer a clear, giftable, identity-led product instead of generic marketplace merchandise.",
+    "differentiation": "A focused starter product with planned variants, lightweight shipping, and a brand story tied to the research insight.",
+    "positioning": "Premium, practical, pilot-ready product family with clear customer benefit.",
+    "pricingPhilosophy": "Protect gross margin first, then use bundles and premium variants to lift average order value.",
+    "researchReferences": [
+      "genesis://research/EMP-001/trendAnalysis",
+      "genesis://research/EMP-002/competitorAnalysis",
+      "genesis://research/EMP-003/customerAnalysis",
+      "genesis://research/EMP-004/productResearch"
+    ],
+    "roadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "strategyOwner": "EMP-101 Product Manager",
+    "targetCustomer": {
+      "ageGroup": "3-5",
+      "buyer": "Parents and gift buyers",
+      "needs": [
+        "Safe educational play",
+        "Premium durable materials",
+        "Simple learning activities"
+      ],
+      "primarySegment": "Parents of children aged 3-5 in India",
+      "user": "Children aged 3-5"
+    },
+    "valueProposition": "Help children aged 3-5 build logic, motor skills, and pattern recognition through a premium wooden play experience.",
+    "variantStrategy": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ]
+  },
+  "projectId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
   "reportType": "PRODUCT_DEFINITION",
   "riskRegister": [
     {
@@ -229,20 +628,25 @@
       "mitigation": "Use variant strategy, packaging, and story to sharpen differentiation.",
       "risk": "Product may look generic without a strong differentiator.",
       "severity": "MEDIUM"
+    },
+    {
+      "mitigation": "Complete Sprint 3 cost engineering before supplier commitment.",
+      "risk": "Unit economics may fail after packaging and shipping.",
+      "severity": "HIGH"
     }
   ],
-  "sourceIdea": "Create a coffee lovers product brand for India.",
-  "sourceReportId": "sample-project",
-  "sourceWorkflowId": "sample-workflow",
+  "sourceIdea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+  "sourceReportId": "68b4684d-a698-4694-9ed7-06bd3d9eb964",
+  "sourceWorkflowId": "39176c41-6aa5-4627-bf1d-39ec0451313b",
   "successMetrics": {
     "complexityScore": 32,
-    "customerValueScore": 83,
-    "expansionPotential": 80,
-    "innovationScore": 81,
+    "customerValueScore": 82,
+    "expansionPotential": 79,
+    "innovationScore": 80,
     "manufacturabilityScore": 78,
     "overallProductScore": 74,
     "packagingScore": 80,
-    "profitabilityScore": 78,
+    "profitabilityScore": 77,
     "shippingScore": 82
   },
   "variantMatrix": [
@@ -252,7 +656,7 @@
         "Simple packaging"
       ],
       "level": "Starter",
-      "name": "Brew Buddy Starter Kit Starter",
+      "name": "Luma Logic Cubes Starter",
       "purpose": "Validate demand with minimum inventory risk"
     },
     {
@@ -262,7 +666,7 @@
         "Gift-ready packaging"
       ],
       "level": "Standard",
-      "name": "Brew Buddy Starter Kit Standard",
+      "name": "Luma Logic Cubes Standard",
       "purpose": "Increase perceived value"
     },
     {
@@ -271,7 +675,7 @@
         "Premium packaging"
       ],
       "level": "Premium",
-      "name": "Brew Buddy Starter Kit Premium",
+      "name": "Luma Logic Cubes Premium",
       "purpose": "Serve gifting and higher-margin buyers"
     },
     {
@@ -280,7 +684,7 @@
         "Occasion-based bundle"
       ],
       "level": "Bundle",
-      "name": "Brew Buddy Starter Kit Bundle",
+      "name": "Luma Logic Cubes Bundle",
       "purpose": "Raise average order value"
     },
     {
@@ -288,7 +692,7 @@
         "Recurring monthly variation"
       ],
       "level": "Subscription",
-      "name": "Brew Buddy Starter Kit Club",
+      "name": "Luma Logic Cubes Club",
       "purpose": "Test repeat purchase potential"
     },
     {
@@ -296,7 +700,7 @@
         "Replacement or add-on parts"
       ],
       "level": "Accessories",
-      "name": "Brew Buddy Starter Kit Accessories",
+      "name": "Luma Logic Cubes Accessories",
       "purpose": "Create low-cost upsells"
     },
     {
@@ -305,10 +709,10 @@
         "Advanced variants"
       ],
       "level": "Expansion Packs",
-      "name": "Brew Buddy Starter Kit Expansion Pack",
+      "name": "Luma Logic Cubes Expansion Pack",
       "purpose": "Build a product family"
     }
   ],
   "version": "0.3.0",
-  "workflowId": "sample-product-workflow"
+  "workflowId": "c58fcf27-4eb3-4a85-ab50-a77ebb1f9414"
 }

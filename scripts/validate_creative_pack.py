@@ -16,9 +16,18 @@ REQUIRED_TOP_LEVEL = [
     "productId",
     "workflowId",
     "department",
+    "departmentStatus",
+    "creativeStudio",
+    "creativeDirector",
+    "creativeExecutionPlan",
+    "brandContext",
+    "workflowUpdate",
+    "productBlueprintApproval",
     "brandStrategy",
+    "brandStrategyDocument",
     "brandNameRecommendation",
     "brandIdentity",
+    "brandGuidelinesDocument",
     "logoSystem",
     "logoVariants",
     "logoUsageRules",
@@ -40,11 +49,18 @@ REQUIRED_TOP_LEVEL = [
     "productionReadiness",
     "creativeQaReport",
     "validationReport",
+    "creativeValidationReport",
+    "validationHistory",
     "founderApprovalChecklist",
     "risks",
     "assumptions",
     "nextActions",
     "assetGenerationPrompts",
+    "marketingTransition",
+    "founderNotification",
+    "departmentMetrics",
+    "auditSummary",
+    "knowledgeBaseEntries",
     "employeeOutputs",
     "overallScore",
 ]
@@ -61,6 +77,13 @@ def validate_creative_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("reportType must be CREATIVE_PACK")
     if data.get("department") != "CREATIVE":
         issues.append("department must be CREATIVE")
+    if data.get("departmentStatus") != "COMPLETED":
+        issues.append("departmentStatus must be COMPLETED")
+    for key in ["creativeStudio", "creativeDirector", "creativeExecutionPlan", "brandContext", "workflowUpdate", "productBlueprintApproval"]:
+        if not isinstance(data.get(key), dict) or not data.get(key):
+            issues.append(f"{key} must be a non-empty object")
+    if data.get("productBlueprintApproval", {}).get("approvedForCreativeStudio") is not True:
+        issues.append("productBlueprintApproval.approvedForCreativeStudio must be true")
     if not data.get("brandIdentity", {}).get("brandName"):
         issues.append("brandIdentity.brandName is required")
     for key in ["brandStory", "mission", "vision", "brandGuidelines"]:
@@ -68,6 +91,14 @@ def validate_creative_pack_payload(data: dict[str, Any]) -> list[str]:
             issues.append(f"brandIdentity.{key} is required")
     if not data.get("logoVariants"):
         issues.append("logoVariants is required")
+    strategy = data.get("brandStrategy", {})
+    for key in ["brandPurpose", "brandMission", "brandVision", "valueProposition", "emotionalPositioning", "competitivePositioning", "brandArchetype", "positioning", "targetAudience"]:
+        if key not in strategy:
+            issues.append(f"brandStrategy missing key: {key}")
+    guidelines = data.get("brandGuidelinesDocument", {})
+    for key in ["logo", "colors", "typography", "spacing", "imagery", "illustration", "iconography", "tone", "copy", "accessibility", "do", "dont"]:
+        if key not in guidelines:
+            issues.append(f"brandGuidelinesDocument missing key: {key}")
     if not data.get("visualSystem", {}).get("designTokens"):
         issues.append("visualSystem.designTokens is required")
     if len(data.get("colorPalette", [])) < 3:
@@ -101,10 +132,22 @@ def validate_creative_pack_payload(data: dict[str, Any]) -> list[str]:
             issues.append(f"generatedAssets.summary.{key} must be at least 1")
     if not data.get("validationReport"):
         issues.append("validationReport is required")
+    creative_validation = data.get("creativeValidationReport")
+    if not isinstance(creative_validation, dict) or creative_validation.get("status") != "PASS":
+        issues.append("creativeValidationReport.status must be PASS")
+    else:
+        for key in ["validationAreas", "errors", "warnings", "failedAssetsBlocked", "validationHistory"]:
+            if key not in creative_validation:
+                issues.append(f"creativeValidationReport missing key: {key}")
     if not data.get("launchCopyPack", {}).get("taglines"):
         issues.append("launchCopyPack.taglines is required")
     if not data.get("founderApprovalChecklist"):
         issues.append("founderApprovalChecklist is required")
+    if data.get("marketingTransition", {}).get("status") != "READY":
+        issues.append("marketingTransition.status must be READY")
+    for key in ["validationHistory", "departmentMetrics", "auditSummary", "knowledgeBaseEntries"]:
+        if not data.get(key):
+            issues.append(f"{key} is required")
     employee_ids = {output.get("employeeId") for output in data.get("employeeOutputs", []) if isinstance(output, dict)}
     missing = REQUIRED_EMPLOYEES - employee_ids
     if missing:

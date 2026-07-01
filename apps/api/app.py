@@ -209,6 +209,34 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"Marketing pack not found: {marketing_id}") from exc
+            if parsed.path.startswith("/sales/"):
+                sales_path = parsed.path.removeprefix("/sales/").strip("/")
+                parts = [part for part in sales_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Sales ID is required")
+                sales_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None:
+                        self._send_json(200, orchestrator.get_sales(sales_id))
+                    elif section == "package":
+                        self._send_json(200, orchestrator.get_sales_package(sales_id))
+                    elif section == "crm":
+                        self._send_json(200, orchestrator.get_sales_crm(sales_id))
+                    elif section == "quotations":
+                        self._send_json(200, orchestrator.get_sales_quotations(sales_id))
+                    elif section == "pipeline":
+                        self._send_json(200, orchestrator.get_sales_pipeline(sales_id))
+                    elif section == "orders":
+                        self._send_json(200, orchestrator.get_sales_orders(sales_id))
+                    elif section == "analytics":
+                        self._send_json(200, orchestrator.get_sales_analytics(sales_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Sales package not found: {sales_id}") from exc
             if parsed.path.startswith("/launch/"):
                 launch_path = parsed.path.removeprefix("/launch/").strip("/")
                 parts = [part for part in launch_path.split("/") if part]
@@ -498,6 +526,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).generate_business_launch_package(marketing_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/sales/generate":
+                payload = self._read_json()
+                marketing_id = payload.get("marketingId")
+                if not isinstance(marketing_id, str):
+                    raise bad_request("marketingId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_sales_package(marketing_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path == "/businessos/generate":

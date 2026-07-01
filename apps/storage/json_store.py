@@ -60,6 +60,12 @@ class JsonStore:
         self.ads_reports_dir = self.root / "ads_reports"
         self.listing_reports_dir = self.root / "listing_reports"
         self.launch_reports_dir = self.root / "launch_reports"
+        self.sales_packages_dir = self.root / "sales_packages"
+        self.crm_reports_dir = self.root / "crm_reports"
+        self.quotation_reports_dir = self.root / "quotation_reports"
+        self.sales_pipeline_reports_dir = self.root / "sales_pipeline_reports"
+        self.order_handoff_reports_dir = self.root / "order_handoff_reports"
+        self.sales_analytics_reports_dir = self.root / "sales_analytics_reports"
         self.business_launch_packages_dir = self.root / "business_launch_packages"
         self.business_launch_checklists_dir = self.root / "business_launch_checklists"
         self.publishing_plans_dir = self.root / "publishing_plans"
@@ -125,6 +131,12 @@ class JsonStore:
             self.ads_reports_dir,
             self.listing_reports_dir,
             self.launch_reports_dir,
+            self.sales_packages_dir,
+            self.crm_reports_dir,
+            self.quotation_reports_dir,
+            self.sales_pipeline_reports_dir,
+            self.order_handoff_reports_dir,
+            self.sales_analytics_reports_dir,
             self.business_launch_packages_dir,
             self.business_launch_checklists_dir,
             self.publishing_plans_dir,
@@ -542,6 +554,42 @@ class JsonStore:
 
     def get_launch_report(self, marketing_id: str) -> dict[str, Any]:
         return self._read(self.launch_reports_dir / f"{marketing_id}.json")
+
+    def save_sales_package(self, sales_package: dict[str, Any]) -> None:
+        self._write(self.sales_packages_dir / f"{sales_package['salesId']}.json", sales_package)
+
+    def get_sales_package(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.sales_packages_dir / f"{sales_id}.json")
+
+    def save_crm_report(self, sales_id: str, report: dict[str, Any]) -> None:
+        self._write(self.crm_reports_dir / f"{sales_id}.json", report)
+
+    def get_crm_report(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.crm_reports_dir / f"{sales_id}.json")
+
+    def save_quotation_report(self, sales_id: str, report: dict[str, Any]) -> None:
+        self._write(self.quotation_reports_dir / f"{sales_id}.json", report)
+
+    def get_quotation_report(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.quotation_reports_dir / f"{sales_id}.json")
+
+    def save_sales_pipeline_report(self, sales_id: str, report: dict[str, Any]) -> None:
+        self._write(self.sales_pipeline_reports_dir / f"{sales_id}.json", report)
+
+    def get_sales_pipeline_report(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.sales_pipeline_reports_dir / f"{sales_id}.json")
+
+    def save_order_handoff_report(self, sales_id: str, report: dict[str, Any]) -> None:
+        self._write(self.order_handoff_reports_dir / f"{sales_id}.json", report)
+
+    def get_order_handoff_report(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.order_handoff_reports_dir / f"{sales_id}.json")
+
+    def save_sales_analytics_report(self, sales_id: str, report: dict[str, Any]) -> None:
+        self._write(self.sales_analytics_reports_dir / f"{sales_id}.json", report)
+
+    def get_sales_analytics_report(self, sales_id: str) -> dict[str, Any]:
+        return self._read(self.sales_analytics_reports_dir / f"{sales_id}.json")
 
     def save_business_launch_package(self, launch_package: dict[str, Any]) -> None:
         self._write(self.business_launch_packages_dir / f"{launch_package['launchId']}.json", launch_package)

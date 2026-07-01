@@ -140,6 +140,35 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     calendar_alias = json.loads(response.read().decode("utf-8"))
 
+                sales_request = request.Request(
+                    f"http://{host}:{port}/sales/generate",
+                    data=json.dumps({"marketingId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(sales_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    sales_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/package", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_package = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/crm", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_crm = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/quotations", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_quotes = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/pipeline", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_pipeline = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/orders", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_orders = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/sales/{project_id}/analytics", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    sales_analytics = json.loads(response.read().decode("utf-8"))
+
                 launch_request = request.Request(
                     f"http://{host}:{port}/launch/generate",
                     data=json.dumps({"marketingId": project_id}).encode("utf-8"),
@@ -253,6 +282,13 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(marketing_seo["keywords"])
                 self.assertTrue(campaigns_alias["advertisingPlan"]["metaAds"])
                 self.assertTrue(calendar_alias["instagramCalendar"])
+                self.assertEqual(sales_run["salesPackage"]["reportType"], "SALES_PACKAGE")
+                self.assertEqual(sales_package["reportType"], "SALES_PACKAGE")
+                self.assertTrue(sales_crm["customerRecords"])
+                self.assertTrue(sales_quotes["quotes"])
+                self.assertTrue(sales_pipeline["opportunities"])
+                self.assertTrue(sales_orders["orders"])
+                self.assertTrue(sales_analytics["metrics"])
                 self.assertEqual(launch_run["businessLaunchPackage"]["reportType"], "BUSINESS_LAUNCH_PACKAGE")
                 self.assertEqual(launch_package["reportType"], "BUSINESS_LAUNCH_PACKAGE")
                 self.assertIn(launch_status["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})

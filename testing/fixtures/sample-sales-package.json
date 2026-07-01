@@ -1,0 +1,1858 @@
+{
+  "assumptions": [
+    "Live communication sending is disabled until provider credentials are configured.",
+    "Payment capture and inventory allocation happen in Commerce & Publishing."
+  ],
+  "auditSummary": {
+    "createdBy": "SalesDepartment",
+    "sourceMarketingId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "commercePublishingTransition": {
+    "confirmedOrdersAvailable": true,
+    "handoffArtifacts": [
+      "Sales Package",
+      "CRM records",
+      "Quotations",
+      "Pipeline",
+      "Order handoff",
+      "Sales analytics"
+    ],
+    "nextDepartment": "COMMERCE_PUBLISHING",
+    "status": "READY"
+  },
+  "communicationChannels": [
+    "WhatsApp",
+    "Instagram DM",
+    "Facebook Messenger",
+    "Website Chat",
+    "Email",
+    "Marketplace enquiries",
+    "Manual entry"
+  ],
+  "completionChecklist": [
+    "Lead qualification complete",
+    "Customer conversations completed",
+    "Quotations generated",
+    "Follow-ups scheduled",
+    "CRM synchronized",
+    "Pipeline updated",
+    "Orders confirmed or opportunities tracked",
+    "Metrics recorded",
+    "Audit completed"
+  ],
+  "creativeId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "crmSynchronization": {
+    "accessControl": {
+      "founder": "FULL",
+      "marketing": "READ",
+      "publishing": "ORDER_HANDOFF_ONLY",
+      "sales": "FULL"
+    },
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "leadQualification",
+          "salesConversations",
+          "quotations"
+        ]
+      },
+      "name": "CRM Synchronization Specialist",
+      "outputSchema": {
+        "required": [
+          "customerRecords",
+          "duplicateDetection",
+          "accessControl"
+        ]
+      },
+      "promptContract": "Maintain a consistent customer view across Genesis departments.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Synchronize contacts, scores, opportunities, conversations, quotes, orders, and notes.",
+      "section": "crmSynchronization",
+      "timeoutSeconds": 30
+    },
+    "customerRecords": [
+      {
+        "company": null,
+        "contact": "Priya Sharma",
+        "conversationHistory": [],
+        "leadScore": 88,
+        "notes": [
+          "Send Starter and Premium quote with founder-batch availability."
+        ],
+        "opportunityStage": "Qualified",
+        "orders": [],
+        "quotations": []
+      },
+      {
+        "company": null,
+        "contact": "Aarav Gifts",
+        "conversationHistory": [],
+        "leadScore": 72,
+        "notes": [
+          "Ask quantity and gifting date, then suggest bundle pricing."
+        ],
+        "opportunityStage": "New Lead",
+        "orders": [],
+        "quotations": []
+      },
+      {
+        "company": null,
+        "contact": "Little Steps Preschool",
+        "conversationHistory": [],
+        "leadScore": 76,
+        "notes": [
+          "Offer classroom kit discussion and founder escalation."
+        ],
+        "opportunityStage": "Qualified",
+        "orders": [],
+        "quotations": []
+      }
+    ],
+    "department": "SALES",
+    "duplicateDetection": {
+      "duplicatesMerged": 1,
+      "performed": true
+    },
+    "employeeId": "EMP-406",
+    "employeeName": "CRM Synchronization Specialist",
+    "historyPreserved": true,
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 83,
+    "section": "crmSynchronization",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "dashboardUpdate": {
+    "status": "UPDATED",
+    "widgets": [
+      "Lead volume",
+      "Pipeline value",
+      "Quote status",
+      "Order handoff"
+    ]
+  },
+  "department": "SALES",
+  "departmentMetrics": {
+    "employeeCount": 10,
+    "leadVolume": 3,
+    "overallScore": 83
+  },
+  "departmentStatus": "COMPLETED",
+  "departmentVisibleInWorkflow": true,
+  "employeeOutputs": [
+    {
+      "communicationChannels": [
+        "WhatsApp",
+        "Instagram DM",
+        "Facebook Messenger",
+        "Website Chat",
+        "Email",
+        "Marketplace enquiries",
+        "Manual entry"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingPack"
+          ]
+        },
+        "name": "Sales Director",
+        "outputSchema": {
+          "required": [
+            "salesExecutionPlan",
+            "communicationChannels",
+            "pipelineStages"
+          ]
+        },
+        "promptContract": "Convert Marketing Pack into a sales operating plan.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Initialize sales execution, channels, pipeline, and lead policies.",
+        "section": "salesStrategy",
+        "timeoutSeconds": 30
+      },
+      "department": "SALES",
+      "employeeId": "EMP-401",
+      "employeeName": "Sales Director",
+      "pipelineStages": [
+        "New Lead",
+        "Qualified",
+        "Proposal Sent",
+        "Negotiation",
+        "Awaiting Decision",
+        "Won",
+        "Lost"
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "salesExecutionPlan": [
+        "Capture demand",
+        "Qualify leads",
+        "Respond in brand voice",
+        "Send quotation",
+        "Follow up",
+        "Sync CRM",
+        "Move pipeline",
+        "Confirm order"
+      ],
+      "salesPolicies": {
+        "defaultCurrency": "INR",
+        "humanEscalation": "Founder escalation for discounts, safety/legal claims, bulk orders, or angry customers."
+      },
+      "score": 85,
+      "section": "salesStrategy",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingPack"
+          ]
+        },
+        "name": "Lead Qualification Specialist",
+        "outputSchema": {
+          "required": [
+            "leads",
+            "duplicateLeads",
+            "qualificationRules"
+          ]
+        },
+        "promptContract": "Qualify sales leads using intent, budget, timeline, fit, location, and history.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Capture, deduplicate, score, prioritize, and recommend follow-ups for leads.",
+        "section": "leadQualification",
+        "timeoutSeconds": 30
+      },
+      "crmUpdated": true,
+      "department": "SALES",
+      "duplicateLeads": [
+        {
+          "duplicateSource": "Email",
+          "leadId": "lead-001",
+          "resolution": "MERGED"
+        }
+      ],
+      "employeeId": "EMP-402",
+      "employeeName": "Lead Qualification Specialist",
+      "leads": [
+        {
+          "budget": 2500,
+          "followUpRecommendation": "Send Starter and Premium quote with founder-batch availability.",
+          "intent": "HIGH",
+          "leadId": "lead-001",
+          "location": "Bengaluru",
+          "name": "Priya Sharma",
+          "previousInteractions": 1,
+          "priority": "HIGH",
+          "productFit": "HIGH",
+          "purchaseReadiness": "READY",
+          "score": 88,
+          "source": "WhatsApp",
+          "timeline": "This week"
+        },
+        {
+          "budget": 10000,
+          "followUpRecommendation": "Ask quantity and gifting date, then suggest bundle pricing.",
+          "intent": "MEDIUM",
+          "leadId": "lead-002",
+          "location": "Mumbai",
+          "name": "Aarav Gifts",
+          "previousInteractions": 0,
+          "priority": "MEDIUM",
+          "productFit": "MEDIUM",
+          "purchaseReadiness": "CONSIDERING",
+          "score": 72,
+          "source": "Instagram",
+          "timeline": "This month"
+        },
+        {
+          "budget": 20000,
+          "followUpRecommendation": "Offer classroom kit discussion and founder escalation.",
+          "intent": "MEDIUM",
+          "leadId": "lead-003",
+          "location": "Chennai",
+          "name": "Little Steps Preschool",
+          "previousInteractions": 0,
+          "priority": "MEDIUM",
+          "productFit": "HIGH",
+          "purchaseReadiness": "QUALIFY",
+          "score": 76,
+          "source": "Website",
+          "timeline": "30 days"
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "qualificationRules": [
+        "Intent",
+        "Budget",
+        "Timeline",
+        "Product fit",
+        "Purchase readiness",
+        "Location",
+        "Previous interactions"
+      ],
+      "risks": [],
+      "score": 86,
+      "section": "leadQualification",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "creativePack",
+            "leadQualification"
+          ]
+        },
+        "name": "AI Sales Conversation Agent",
+        "outputSchema": {
+          "required": [
+            "conversationPlaybooks",
+            "conversationHistory",
+            "escalationRules"
+          ]
+        },
+        "promptContract": "Answer product questions in brand voice and escalate when needed.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create channel-safe sales responses and escalation rules.",
+        "section": "salesConversations",
+        "timeoutSeconds": 30
+      },
+      "conversationHistory": [
+        {
+          "channel": "WhatsApp",
+          "leadId": "lead-001",
+          "messages": 3,
+          "status": "QUOTE_READY"
+        }
+      ],
+      "conversationPlaybooks": [
+        {
+          "brandVoice": "warm expert",
+          "channel": "WhatsApp",
+          "intent": "price",
+          "response": "LumaLearn Luma Logic Cubes starts with the Starter kit. I can share a founder-batch quote and delivery estimate."
+        },
+        {
+          "brandVoice": "clear parent guide",
+          "channel": "Instagram DM",
+          "intent": "safety",
+          "response": "The product plan uses rounded wooden pieces and certification placeholders; final safety claims are reviewed before production."
+        },
+        {
+          "brandVoice": "professional",
+          "channel": "Email",
+          "intent": "bulk",
+          "response": "For preschool or gifting quantities, I can prepare a quantity-based quote for founder review."
+        }
+      ],
+      "customerSatisfactionFeedback": [
+        {
+          "leadId": "lead-001",
+          "note": "Asked for quote after product explanation.",
+          "rating": "POSITIVE"
+        }
+      ],
+      "department": "SALES",
+      "employeeId": "EMP-403",
+      "employeeName": "AI Sales Conversation Agent",
+      "escalationRules": [
+        "Discount request over 10%",
+        "Safety certification claim",
+        "Bulk order over 25 units",
+        "Customer complaint"
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 82,
+      "section": "salesConversations",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "leadQualification"
+          ]
+        },
+        "name": "Quotation Specialist",
+        "outputSchema": {
+          "required": [
+            "quotes",
+            "versionHistory",
+            "exportFormats"
+          ]
+        },
+        "promptContract": "Create accurate quotations with taxes, shipping, terms, and validity.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Generate quotation drafts from product pricing and customer details.",
+        "section": "quotations",
+        "timeoutSeconds": 30
+      },
+      "department": "SALES",
+      "employeeId": "EMP-404",
+      "employeeName": "Quotation Specialist",
+      "exportFormats": [
+        "json",
+        "pdf"
+      ],
+      "pricingSource": "Product Blueprint pricingStrategy",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "quotes": [
+        {
+          "customerId": "lead-001",
+          "discount": 0,
+          "productDetails": "Luma Logic Cubes",
+          "quantity": 1,
+          "quoteId": "quote-001",
+          "shippingEstimate": 90,
+          "status": "SENT",
+          "taxes": 0,
+          "terms": "Subject to final supplier and safety review.",
+          "total": 1389,
+          "unitPrice": 1299,
+          "validityPeriod": "7 days"
+        },
+        {
+          "customerId": "lead-002",
+          "discount": 1000,
+          "productDetails": "Luma Logic Cubes",
+          "quantity": 10,
+          "quoteId": "quote-002",
+          "shippingEstimate": 350,
+          "status": "DRAFT",
+          "taxes": 0,
+          "terms": "Bulk pricing requires founder approval.",
+          "total": 12340,
+          "unitPrice": 1299,
+          "validityPeriod": "7 days"
+        }
+      ],
+      "risks": [],
+      "score": 84,
+      "section": "quotations",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "versionHistory": [
+        {
+          "quoteId": "quote-001",
+          "status": "SENT",
+          "version": 1
+        }
+      ],
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "communicationHistory": [
+        {
+          "events": [
+            "quote sent",
+            "reminder scheduled"
+          ],
+          "leadId": "lead-001"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "leadQualification",
+            "quotations"
+          ]
+        },
+        "name": "Follow-Up Automation Specialist",
+        "outputSchema": {
+          "required": [
+            "followUpSchedules",
+            "communicationHistory",
+            "stopConditions"
+          ]
+        },
+        "promptContract": "Prevent lead leakage through configurable follow-up automation.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create follow-up schedules, stop conditions, and dedupe policy.",
+        "section": "followUpAutomation",
+        "timeoutSeconds": 30
+      },
+      "department": "SALES",
+      "duplicateFollowUpPolicy": "One active follow-up per lead/channel/type.",
+      "employeeId": "EMP-405",
+      "employeeName": "Follow-Up Automation Specialist",
+      "followUpSchedules": [
+        {
+          "channel": "WhatsApp",
+          "delayHours": 24,
+          "leadId": "lead-001",
+          "type": "Quote reminder"
+        },
+        {
+          "channel": "Instagram DM",
+          "delayHours": 48,
+          "leadId": "lead-002",
+          "type": "Abandoned enquiry"
+        },
+        {
+          "channel": "Email",
+          "delayHours": 72,
+          "leadId": "lead-003",
+          "type": "Appointment reminder"
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 81,
+      "section": "followUpAutomation",
+      "status": "COMPLETED",
+      "stopConditions": [
+        "Customer replies",
+        "Order confirmed",
+        "Lead unsubscribes",
+        "Founder manually pauses"
+      ],
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "accessControl": {
+        "founder": "FULL",
+        "marketing": "READ",
+        "publishing": "ORDER_HANDOFF_ONLY",
+        "sales": "FULL"
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "leadQualification",
+            "salesConversations",
+            "quotations"
+          ]
+        },
+        "name": "CRM Synchronization Specialist",
+        "outputSchema": {
+          "required": [
+            "customerRecords",
+            "duplicateDetection",
+            "accessControl"
+          ]
+        },
+        "promptContract": "Maintain a consistent customer view across Genesis departments.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Synchronize contacts, scores, opportunities, conversations, quotes, orders, and notes.",
+        "section": "crmSynchronization",
+        "timeoutSeconds": 30
+      },
+      "customerRecords": [
+        {
+          "company": null,
+          "contact": "Priya Sharma",
+          "conversationHistory": [],
+          "leadScore": 88,
+          "notes": [
+            "Send Starter and Premium quote with founder-batch availability."
+          ],
+          "opportunityStage": "Qualified",
+          "orders": [],
+          "quotations": []
+        },
+        {
+          "company": null,
+          "contact": "Aarav Gifts",
+          "conversationHistory": [],
+          "leadScore": 72,
+          "notes": [
+            "Ask quantity and gifting date, then suggest bundle pricing."
+          ],
+          "opportunityStage": "New Lead",
+          "orders": [],
+          "quotations": []
+        },
+        {
+          "company": null,
+          "contact": "Little Steps Preschool",
+          "conversationHistory": [],
+          "leadScore": 76,
+          "notes": [
+            "Offer classroom kit discussion and founder escalation."
+          ],
+          "opportunityStage": "Qualified",
+          "orders": [],
+          "quotations": []
+        }
+      ],
+      "department": "SALES",
+      "duplicateDetection": {
+        "duplicatesMerged": 1,
+        "performed": true
+      },
+      "employeeId": "EMP-406",
+      "employeeName": "CRM Synchronization Specialist",
+      "historyPreserved": true,
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 83,
+      "section": "crmSynchronization",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "crmSynchronization",
+            "quotations"
+          ]
+        },
+        "name": "Pipeline Manager",
+        "outputSchema": {
+          "required": [
+            "opportunities",
+            "stageConfiguration",
+            "transitionAudit"
+          ]
+        },
+        "promptContract": "Manage sales pipeline visibility and bottleneck tracking.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Track opportunity stages, history, transitions, and lost reasons.",
+        "section": "salesPipeline",
+        "timeoutSeconds": 30
+      },
+      "department": "SALES",
+      "employeeId": "EMP-407",
+      "employeeName": "Pipeline Manager",
+      "lostReasons": [
+        "Price",
+        "Timeline",
+        "Product fit",
+        "No response"
+      ],
+      "opportunities": [
+        {
+          "history": [
+            "New Lead",
+            "Qualified",
+            "Proposal Sent"
+          ],
+          "leadId": "lead-001",
+          "lostReason": null,
+          "opportunityId": "opp-001",
+          "stage": "Proposal Sent",
+          "value": 1299
+        },
+        {
+          "history": [
+            "New Lead",
+            "Qualified",
+            "Proposal Sent",
+            "Negotiation"
+          ],
+          "leadId": "lead-002",
+          "lostReason": null,
+          "opportunityId": "opp-002",
+          "stage": "Negotiation",
+          "value": 12990
+        },
+        {
+          "history": [
+            "New Lead",
+            "Qualified"
+          ],
+          "leadId": "lead-003",
+          "lostReason": null,
+          "opportunityId": "opp-003",
+          "stage": "Qualified",
+          "value": 19485
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 82,
+      "section": "salesPipeline",
+      "stageConfiguration": [
+        "New Lead",
+        "Qualified",
+        "Proposal Sent",
+        "Negotiation",
+        "Awaiting Decision",
+        "Won",
+        "Lost"
+      ],
+      "status": "COMPLETED",
+      "transitionAudit": [
+        {
+          "actor": "Genesis Sales",
+          "from": "Qualified",
+          "opportunityId": "opp-001",
+          "to": "Proposal Sent"
+        }
+      ],
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "auditRecorded": true,
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "salesPipeline",
+            "productBlueprint"
+          ]
+        },
+        "name": "Order Handoff Specialist",
+        "outputSchema": {
+          "required": [
+            "orders",
+            "fulfilmentNotifications",
+            "customerConfirmations"
+          ]
+        },
+        "promptContract": "Convert won opportunities into fulfilment-ready order handoffs.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Confirm won opportunities and prepare fulfilment handoff.",
+        "section": "orderHandoff",
+        "timeoutSeconds": 30
+      },
+      "customerConfirmations": [
+        {
+          "message": "Thanks. Your founder-batch order request is recorded and will be confirmed after final availability review.",
+          "orderId": "order-001"
+        }
+      ],
+      "department": "SALES",
+      "employeeId": "EMP-408",
+      "employeeName": "Order Handoff Specialist",
+      "fulfilmentNotifications": [
+        {
+          "orderId": "order-001",
+          "status": "READY",
+          "target": "Commerce & Publishing"
+        }
+      ],
+      "orders": [
+        {
+          "customerId": "lead-001",
+          "deliveryInstructions": "Ship after founder-batch confirmation",
+          "internalNotes": "Verify safety and stock before final confirmation.",
+          "orderId": "order-001",
+          "paymentStatus": "PENDING",
+          "productDetails": "Luma Logic Cubes",
+          "quantity": 1
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 80,
+      "section": "orderHandoff",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "salesPipeline",
+            "orderHandoff"
+          ]
+        },
+        "name": "Sales Analytics Specialist",
+        "outputSchema": {
+          "required": [
+            "metrics",
+            "trends",
+            "reports",
+            "dashboardUpdate"
+          ]
+        },
+        "promptContract": "Measure lead volume, conversion, average deal value, cycle time, and revenue.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Calculate sales performance metrics, trends, reports, and dashboard updates.",
+        "section": "salesAnalytics",
+        "timeoutSeconds": 30
+      },
+      "dashboardUpdate": {
+        "status": "UPDATED",
+        "widgets": [
+          "Lead volume",
+          "Pipeline value",
+          "Quote status",
+          "Order handoff"
+        ]
+      },
+      "department": "SALES",
+      "employeeId": "EMP-409",
+      "employeeName": "Sales Analytics Specialist",
+      "metrics": {
+        "averageDealValue": 4763,
+        "conversionRate": 0.33,
+        "followUpEffectiveness": "PENDING_LIVE_DATA",
+        "leadVolume": 3,
+        "lostOpportunities": 0,
+        "revenue": 14289,
+        "salesCycle": "3-14 days estimate"
+      },
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "reports": [
+        {
+          "name": "Sales Performance Report",
+          "status": "GENERATED"
+        }
+      ],
+      "risks": [],
+      "score": 81,
+      "section": "salesAnalytics",
+      "status": "COMPLETED",
+      "trends": [
+        {
+          "direction": "PROMISING",
+          "metric": "leadScore",
+          "note": "Two medium/high-intent leads available for follow-up."
+        }
+      ],
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    },
+    {
+      "checks": [
+        {
+          "check": "Lead qualification complete",
+          "status": "PASS"
+        },
+        {
+          "check": "Conversations prepared",
+          "status": "PASS"
+        },
+        {
+          "check": "Quotations generated",
+          "status": "PASS"
+        },
+        {
+          "check": "CRM synchronized",
+          "status": "PASS"
+        },
+        {
+          "check": "Orders handed off or opportunities tracked",
+          "status": "PASS"
+        }
+      ],
+      "completionChecklist": [
+        "Lead qualification complete",
+        "Customer conversations completed",
+        "Quotations generated",
+        "Follow-ups scheduled",
+        "CRM synchronized",
+        "Pipeline updated",
+        "Orders confirmed or opportunities tracked",
+        "Metrics recorded",
+        "Audit completed"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "salesSections"
+          ]
+        },
+        "name": "Sales QA Manager",
+        "outputSchema": {
+          "required": [
+            "checks",
+            "completionChecklist",
+            "risks"
+          ]
+        },
+        "promptContract": "Run final sales quality gates before Commerce and Publishing.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Validate Sales Package completion, knowledge capture, founder notification, and Commerce handoff.",
+        "section": "salesQaReport",
+        "timeoutSeconds": 30
+      },
+      "department": "SALES",
+      "employeeId": "EMP-410",
+      "employeeName": "Sales QA Manager",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [
+        "Live channel sending requires WhatsApp/Instagram/email credentials.",
+        "Payment and inventory confirmation remain Commerce responsibilities."
+      ],
+      "score": 83,
+      "section": "salesQaReport",
+      "status": "COMPLETED",
+      "validation": {
+        "conversation": "PASS",
+        "crm": "PASS",
+        "pricing": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+    }
+  ],
+  "executiveSummary": "Genesis Sales Department prepared lead qualification, conversations, quotations, CRM, pipeline, and order handoff for LumaLearn.",
+  "followUpAutomation": {
+    "communicationHistory": [
+      {
+        "events": [
+          "quote sent",
+          "reminder scheduled"
+        ],
+        "leadId": "lead-001"
+      }
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "leadQualification",
+          "quotations"
+        ]
+      },
+      "name": "Follow-Up Automation Specialist",
+      "outputSchema": {
+        "required": [
+          "followUpSchedules",
+          "communicationHistory",
+          "stopConditions"
+        ]
+      },
+      "promptContract": "Prevent lead leakage through configurable follow-up automation.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create follow-up schedules, stop conditions, and dedupe policy.",
+      "section": "followUpAutomation",
+      "timeoutSeconds": 30
+    },
+    "department": "SALES",
+    "duplicateFollowUpPolicy": "One active follow-up per lead/channel/type.",
+    "employeeId": "EMP-405",
+    "employeeName": "Follow-Up Automation Specialist",
+    "followUpSchedules": [
+      {
+        "channel": "WhatsApp",
+        "delayHours": 24,
+        "leadId": "lead-001",
+        "type": "Quote reminder"
+      },
+      {
+        "channel": "Instagram DM",
+        "delayHours": 48,
+        "leadId": "lead-002",
+        "type": "Abandoned enquiry"
+      },
+      {
+        "channel": "Email",
+        "delayHours": 72,
+        "leadId": "lead-003",
+        "type": "Appointment reminder"
+      }
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 81,
+    "section": "followUpAutomation",
+    "status": "COMPLETED",
+    "stopConditions": [
+      "Customer replies",
+      "Order confirmed",
+      "Lead unsubscribes",
+      "Founder manually pauses"
+    ],
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "founderNotification": {
+    "message": "Sales Package is complete and ready for Commerce & Publishing handoff.",
+    "status": "READY_FOR_REVIEW"
+  },
+  "knowledgeBaseEntries": [
+    {
+      "lesson": "Marketing demand must enter a deduplicated CRM and pipeline before fulfilment.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "type": "SALES_PIPELINE"
+    },
+    {
+      "lesson": "Quotes should always trace back to Product Blueprint pricing.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "type": "QUOTE_PROCESS"
+    }
+  ],
+  "leadQualification": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingPack"
+        ]
+      },
+      "name": "Lead Qualification Specialist",
+      "outputSchema": {
+        "required": [
+          "leads",
+          "duplicateLeads",
+          "qualificationRules"
+        ]
+      },
+      "promptContract": "Qualify sales leads using intent, budget, timeline, fit, location, and history.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Capture, deduplicate, score, prioritize, and recommend follow-ups for leads.",
+      "section": "leadQualification",
+      "timeoutSeconds": 30
+    },
+    "crmUpdated": true,
+    "department": "SALES",
+    "duplicateLeads": [
+      {
+        "duplicateSource": "Email",
+        "leadId": "lead-001",
+        "resolution": "MERGED"
+      }
+    ],
+    "employeeId": "EMP-402",
+    "employeeName": "Lead Qualification Specialist",
+    "leads": [
+      {
+        "budget": 2500,
+        "followUpRecommendation": "Send Starter and Premium quote with founder-batch availability.",
+        "intent": "HIGH",
+        "leadId": "lead-001",
+        "location": "Bengaluru",
+        "name": "Priya Sharma",
+        "previousInteractions": 1,
+        "priority": "HIGH",
+        "productFit": "HIGH",
+        "purchaseReadiness": "READY",
+        "score": 88,
+        "source": "WhatsApp",
+        "timeline": "This week"
+      },
+      {
+        "budget": 10000,
+        "followUpRecommendation": "Ask quantity and gifting date, then suggest bundle pricing.",
+        "intent": "MEDIUM",
+        "leadId": "lead-002",
+        "location": "Mumbai",
+        "name": "Aarav Gifts",
+        "previousInteractions": 0,
+        "priority": "MEDIUM",
+        "productFit": "MEDIUM",
+        "purchaseReadiness": "CONSIDERING",
+        "score": 72,
+        "source": "Instagram",
+        "timeline": "This month"
+      },
+      {
+        "budget": 20000,
+        "followUpRecommendation": "Offer classroom kit discussion and founder escalation.",
+        "intent": "MEDIUM",
+        "leadId": "lead-003",
+        "location": "Chennai",
+        "name": "Little Steps Preschool",
+        "previousInteractions": 0,
+        "priority": "MEDIUM",
+        "productFit": "HIGH",
+        "purchaseReadiness": "QUALIFY",
+        "score": 76,
+        "source": "Website",
+        "timeline": "30 days"
+      }
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "qualificationRules": [
+      "Intent",
+      "Budget",
+      "Timeline",
+      "Product fit",
+      "Purchase readiness",
+      "Location",
+      "Previous interactions"
+    ],
+    "risks": [],
+    "score": 86,
+    "section": "leadQualification",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "marketingId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "marketingPackageLoaded": true,
+  "nextActions": [
+    "Founder reviews sales scripts and quote terms.",
+    "Connect live WhatsApp/Instagram/email credentials.",
+    "Hand confirmed orders to Commerce & Publishing."
+  ],
+  "orderHandoff": {
+    "auditRecorded": true,
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "salesPipeline",
+          "productBlueprint"
+        ]
+      },
+      "name": "Order Handoff Specialist",
+      "outputSchema": {
+        "required": [
+          "orders",
+          "fulfilmentNotifications",
+          "customerConfirmations"
+        ]
+      },
+      "promptContract": "Convert won opportunities into fulfilment-ready order handoffs.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Confirm won opportunities and prepare fulfilment handoff.",
+      "section": "orderHandoff",
+      "timeoutSeconds": 30
+    },
+    "customerConfirmations": [
+      {
+        "message": "Thanks. Your founder-batch order request is recorded and will be confirmed after final availability review.",
+        "orderId": "order-001"
+      }
+    ],
+    "department": "SALES",
+    "employeeId": "EMP-408",
+    "employeeName": "Order Handoff Specialist",
+    "fulfilmentNotifications": [
+      {
+        "orderId": "order-001",
+        "status": "READY",
+        "target": "Commerce & Publishing"
+      }
+    ],
+    "orders": [
+      {
+        "customerId": "lead-001",
+        "deliveryInstructions": "Ship after founder-batch confirmation",
+        "internalNotes": "Verify safety and stock before final confirmation.",
+        "orderId": "order-001",
+        "paymentStatus": "PENDING",
+        "productDetails": "Luma Logic Cubes",
+        "quantity": 1
+      }
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 80,
+    "section": "orderHandoff",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "overallScore": 83,
+  "productId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "quotations": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "leadQualification"
+        ]
+      },
+      "name": "Quotation Specialist",
+      "outputSchema": {
+        "required": [
+          "quotes",
+          "versionHistory",
+          "exportFormats"
+        ]
+      },
+      "promptContract": "Create accurate quotations with taxes, shipping, terms, and validity.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Generate quotation drafts from product pricing and customer details.",
+      "section": "quotations",
+      "timeoutSeconds": 30
+    },
+    "department": "SALES",
+    "employeeId": "EMP-404",
+    "employeeName": "Quotation Specialist",
+    "exportFormats": [
+      "json",
+      "pdf"
+    ],
+    "pricingSource": "Product Blueprint pricingStrategy",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "quotes": [
+      {
+        "customerId": "lead-001",
+        "discount": 0,
+        "productDetails": "Luma Logic Cubes",
+        "quantity": 1,
+        "quoteId": "quote-001",
+        "shippingEstimate": 90,
+        "status": "SENT",
+        "taxes": 0,
+        "terms": "Subject to final supplier and safety review.",
+        "total": 1389,
+        "unitPrice": 1299,
+        "validityPeriod": "7 days"
+      },
+      {
+        "customerId": "lead-002",
+        "discount": 1000,
+        "productDetails": "Luma Logic Cubes",
+        "quantity": 10,
+        "quoteId": "quote-002",
+        "shippingEstimate": 350,
+        "status": "DRAFT",
+        "taxes": 0,
+        "terms": "Bulk pricing requires founder approval.",
+        "total": 12340,
+        "unitPrice": 1299,
+        "validityPeriod": "7 days"
+      }
+    ],
+    "risks": [],
+    "score": 84,
+    "section": "quotations",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "versionHistory": [
+      {
+        "quoteId": "quote-001",
+        "status": "SENT",
+        "version": 1
+      }
+    ],
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "reportType": "SALES_PACKAGE",
+  "risks": [
+    "Live channel sending requires WhatsApp/Instagram/email credentials.",
+    "Payment and inventory confirmation remain Commerce responsibilities."
+  ],
+  "salesAnalytics": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "salesPipeline",
+          "orderHandoff"
+        ]
+      },
+      "name": "Sales Analytics Specialist",
+      "outputSchema": {
+        "required": [
+          "metrics",
+          "trends",
+          "reports",
+          "dashboardUpdate"
+        ]
+      },
+      "promptContract": "Measure lead volume, conversion, average deal value, cycle time, and revenue.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Calculate sales performance metrics, trends, reports, and dashboard updates.",
+      "section": "salesAnalytics",
+      "timeoutSeconds": 30
+    },
+    "dashboardUpdate": {
+      "status": "UPDATED",
+      "widgets": [
+        "Lead volume",
+        "Pipeline value",
+        "Quote status",
+        "Order handoff"
+      ]
+    },
+    "department": "SALES",
+    "employeeId": "EMP-409",
+    "employeeName": "Sales Analytics Specialist",
+    "metrics": {
+      "averageDealValue": 4763,
+      "conversionRate": 0.33,
+      "followUpEffectiveness": "PENDING_LIVE_DATA",
+      "leadVolume": 3,
+      "lostOpportunities": 0,
+      "revenue": 14289,
+      "salesCycle": "3-14 days estimate"
+    },
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "reports": [
+      {
+        "name": "Sales Performance Report",
+        "status": "GENERATED"
+      }
+    ],
+    "risks": [],
+    "score": 81,
+    "section": "salesAnalytics",
+    "status": "COMPLETED",
+    "trends": [
+      {
+        "direction": "PROMISING",
+        "metric": "leadScore",
+        "note": "Two medium/high-intent leads available for follow-up."
+      }
+    ],
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "salesConversations": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "creativePack",
+          "leadQualification"
+        ]
+      },
+      "name": "AI Sales Conversation Agent",
+      "outputSchema": {
+        "required": [
+          "conversationPlaybooks",
+          "conversationHistory",
+          "escalationRules"
+        ]
+      },
+      "promptContract": "Answer product questions in brand voice and escalate when needed.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create channel-safe sales responses and escalation rules.",
+      "section": "salesConversations",
+      "timeoutSeconds": 30
+    },
+    "conversationHistory": [
+      {
+        "channel": "WhatsApp",
+        "leadId": "lead-001",
+        "messages": 3,
+        "status": "QUOTE_READY"
+      }
+    ],
+    "conversationPlaybooks": [
+      {
+        "brandVoice": "warm expert",
+        "channel": "WhatsApp",
+        "intent": "price",
+        "response": "LumaLearn Luma Logic Cubes starts with the Starter kit. I can share a founder-batch quote and delivery estimate."
+      },
+      {
+        "brandVoice": "clear parent guide",
+        "channel": "Instagram DM",
+        "intent": "safety",
+        "response": "The product plan uses rounded wooden pieces and certification placeholders; final safety claims are reviewed before production."
+      },
+      {
+        "brandVoice": "professional",
+        "channel": "Email",
+        "intent": "bulk",
+        "response": "For preschool or gifting quantities, I can prepare a quantity-based quote for founder review."
+      }
+    ],
+    "customerSatisfactionFeedback": [
+      {
+        "leadId": "lead-001",
+        "note": "Asked for quote after product explanation.",
+        "rating": "POSITIVE"
+      }
+    ],
+    "department": "SALES",
+    "employeeId": "EMP-403",
+    "employeeName": "AI Sales Conversation Agent",
+    "escalationRules": [
+      "Discount request over 10%",
+      "Safety certification claim",
+      "Bulk order over 25 units",
+      "Customer complaint"
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 82,
+    "section": "salesConversations",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "salesDepartment": {
+    "entryCriteria": [
+      "Marketing Department completed",
+      "Marketing Launch Package approved",
+      "Sales channels configured",
+      "Communication channels available"
+    ],
+    "output": "Sales Package",
+    "status": "READY"
+  },
+  "salesDirector": {
+    "assignmentStatus": "ASSIGNED",
+    "employeeId": "EMP-401",
+    "name": "Sales Director"
+  },
+  "salesExecutionPlan": [
+    "Capture demand",
+    "Qualify leads",
+    "Respond in brand voice",
+    "Send quotation",
+    "Follow up",
+    "Sync CRM",
+    "Move pipeline",
+    "Confirm order"
+  ],
+  "salesId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "salesPipeline": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "crmSynchronization",
+          "quotations"
+        ]
+      },
+      "name": "Pipeline Manager",
+      "outputSchema": {
+        "required": [
+          "opportunities",
+          "stageConfiguration",
+          "transitionAudit"
+        ]
+      },
+      "promptContract": "Manage sales pipeline visibility and bottleneck tracking.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Track opportunity stages, history, transitions, and lost reasons.",
+      "section": "salesPipeline",
+      "timeoutSeconds": 30
+    },
+    "department": "SALES",
+    "employeeId": "EMP-407",
+    "employeeName": "Pipeline Manager",
+    "lostReasons": [
+      "Price",
+      "Timeline",
+      "Product fit",
+      "No response"
+    ],
+    "opportunities": [
+      {
+        "history": [
+          "New Lead",
+          "Qualified",
+          "Proposal Sent"
+        ],
+        "leadId": "lead-001",
+        "lostReason": null,
+        "opportunityId": "opp-001",
+        "stage": "Proposal Sent",
+        "value": 1299
+      },
+      {
+        "history": [
+          "New Lead",
+          "Qualified",
+          "Proposal Sent",
+          "Negotiation"
+        ],
+        "leadId": "lead-002",
+        "lostReason": null,
+        "opportunityId": "opp-002",
+        "stage": "Negotiation",
+        "value": 12990
+      },
+      {
+        "history": [
+          "New Lead",
+          "Qualified"
+        ],
+        "leadId": "lead-003",
+        "lostReason": null,
+        "opportunityId": "opp-003",
+        "stage": "Qualified",
+        "value": 19485
+      }
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 82,
+    "section": "salesPipeline",
+    "stageConfiguration": [
+      "New Lead",
+      "Qualified",
+      "Proposal Sent",
+      "Negotiation",
+      "Awaiting Decision",
+      "Won",
+      "Lost"
+    ],
+    "status": "COMPLETED",
+    "transitionAudit": [
+      {
+        "actor": "Genesis Sales",
+        "from": "Qualified",
+        "opportunityId": "opp-001",
+        "to": "Proposal Sent"
+      }
+    ],
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "salesQaReport": {
+    "checks": [
+      {
+        "check": "Lead qualification complete",
+        "status": "PASS"
+      },
+      {
+        "check": "Conversations prepared",
+        "status": "PASS"
+      },
+      {
+        "check": "Quotations generated",
+        "status": "PASS"
+      },
+      {
+        "check": "CRM synchronized",
+        "status": "PASS"
+      },
+      {
+        "check": "Orders handed off or opportunities tracked",
+        "status": "PASS"
+      }
+    ],
+    "completionChecklist": [
+      "Lead qualification complete",
+      "Customer conversations completed",
+      "Quotations generated",
+      "Follow-ups scheduled",
+      "CRM synchronized",
+      "Pipeline updated",
+      "Orders confirmed or opportunities tracked",
+      "Metrics recorded",
+      "Audit completed"
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "salesSections"
+        ]
+      },
+      "name": "Sales QA Manager",
+      "outputSchema": {
+        "required": [
+          "checks",
+          "completionChecklist",
+          "risks"
+        ]
+      },
+      "promptContract": "Run final sales quality gates before Commerce and Publishing.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Validate Sales Package completion, knowledge capture, founder notification, and Commerce handoff.",
+      "section": "salesQaReport",
+      "timeoutSeconds": 30
+    },
+    "department": "SALES",
+    "employeeId": "EMP-410",
+    "employeeName": "Sales QA Manager",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [
+      "Live channel sending requires WhatsApp/Instagram/email credentials.",
+      "Payment and inventory confirmation remain Commerce responsibilities."
+    ],
+    "score": 83,
+    "section": "salesQaReport",
+    "status": "COMPLETED",
+    "validation": {
+      "conversation": "PASS",
+      "crm": "PASS",
+      "pricing": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+  },
+  "validationHistory": [
+    {
+      "evidence": "COMPLETED",
+      "stage": "Marketing Pack precondition",
+      "status": "PASS"
+    },
+    {
+      "stage": "Sales employee outputs",
+      "status": "PASS",
+      "validator": "validate_sales_employee_output"
+    },
+    {
+      "stage": "Sales Package",
+      "status": "PASS",
+      "validator": "validate_sales_package.py"
+    }
+  ],
+  "validationReport": {
+    "errors": [],
+    "status": "PASS",
+    "validationAreas": [
+      {
+        "area": "Lead qualification",
+        "status": "PASS"
+      },
+      {
+        "area": "Sales conversations",
+        "status": "PASS"
+      },
+      {
+        "area": "Quotations",
+        "status": "PASS"
+      },
+      {
+        "area": "Follow-up automation",
+        "status": "PASS"
+      },
+      {
+        "area": "CRM synchronization",
+        "status": "PASS"
+      },
+      {
+        "area": "Pipeline management",
+        "status": "PASS"
+      },
+      {
+        "area": "Order handoff",
+        "status": "PASS"
+      },
+      {
+        "area": "Sales analytics",
+        "status": "PASS"
+      }
+    ],
+    "validationHistory": [
+      {
+        "evidence": "COMPLETED",
+        "stage": "Marketing Pack precondition",
+        "status": "PASS"
+      },
+      {
+        "stage": "Sales employee outputs",
+        "status": "PASS",
+        "validator": "validate_sales_employee_output"
+      },
+      {
+        "stage": "Sales Package",
+        "status": "PASS",
+        "validator": "validate_sales_package.py"
+      }
+    ],
+    "warnings": [
+      "Live channel sending requires WhatsApp/Instagram/email credentials.",
+      "Payment and inventory confirmation remain Commerce responsibilities."
+    ]
+  },
+  "version": "0.6.0",
+  "workflowId": "1d76d698-ec9f-4fd5-b183-3243e5b6db2d"
+}

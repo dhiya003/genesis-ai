@@ -15,6 +15,7 @@ from apps.marketing import MarketingDepartment
 from apps.product import ProductDepartment
 from apps.publishing import PublishingDepartment
 from apps.research import ResearchDepartment
+from apps.sales import SalesDepartment
 from apps.storage import JsonStore
 from apps.workflow import ApprovalManager, WorkflowEngine
 
@@ -334,7 +335,7 @@ class GenesisOrchestrator:
             project["marketingWorkflowId"] = completed_workflow["id"]
             task = self._complete_task(task, {"reportType": "MARKETING_PACK"})
             deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "MARKETING_PACK", completed_workflow.get("result"))
-            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_MARKETING_PACK_APPROVAL", mode=approval_mode)
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_MARKETING_PACK_APPROVAL_AND_SALES_ENTRY", mode=approval_mode)
             project["marketingApprovalId"] = approval["id"]
             project["marketingApprovalStatus"] = approval["status"]
             if approval["status"] == "PENDING":
@@ -390,6 +391,83 @@ class GenesisOrchestrator:
 
     def get_marketing_launch(self, marketing_id: str) -> dict[str, Any]:
         return self.store.get_launch_report(marketing_id)
+
+    def generate_sales_package(self, marketing_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        marketing_pack = self.store.get_marketing_pack(marketing_id)
+        creative_pack = self.store.get_creative_pack(marketing_pack["creativeId"])
+        product_blueprint = self.store.get_product_blueprint(marketing_pack["productId"])
+        project = self.store.get_project(marketing_pack["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "SALES_PACKAGE")
+        workflow = engine.plan(workflow, reason="orchestrator selected AI Sales Department")
+        task = self._create_task(project["id"], workflow["id"], "SALES_DEPARTMENT", "Generate Sprint 6 Sales Package")
+        LOGGER.info("orchestrator routed project to sales department", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "SALES_PACKAGE"})
+
+        department = SalesDepartment(self.store)
+
+        def run_sales(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return department.execute(project, current_workflow, product_blueprint, creative_pack, marketing_pack)
+
+        completed_workflow = engine.run(workflow, run_sales)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "SALES_PACKAGE_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["salesId"] = marketing_id
+            project["salesWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "SALES_PACKAGE"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "SALES_PACKAGE", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_SALES_PACKAGE_APPROVAL", mode=approval_mode)
+            project["salesApprovalId"] = approval["id"]
+            project["salesApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_SALES_APPROVAL"
+        else:
+            project["status"] = "SALES_PACKAGE_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.sales_package_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "sales": {"id": marketing_id, "projectId": project["id"]},
+            "salesPackage": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_sales(self, sales_id: str) -> dict[str, Any]:
+        sales_package = self.store.get_sales_package(sales_id)
+        return {
+            "sales": {"id": sales_id, "projectId": sales_package["projectId"]},
+            "salesPackage": sales_package,
+            "crm": self.store.get_crm_report(sales_id),
+            "quotations": self.store.get_quotation_report(sales_id),
+            "pipeline": self.store.get_sales_pipeline_report(sales_id),
+            "orders": self.store.get_order_handoff_report(sales_id),
+            "analytics": self.store.get_sales_analytics_report(sales_id),
+        }
+
+    def get_sales_package(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_sales_package(sales_id)
+
+    def get_sales_crm(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_crm_report(sales_id)
+
+    def get_sales_quotations(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_quotation_report(sales_id)
+
+    def get_sales_pipeline(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_sales_pipeline_report(sales_id)
+
+    def get_sales_orders(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_order_handoff_report(sales_id)
+
+    def get_sales_analytics(self, sales_id: str) -> dict[str, Any]:
+        return self.store.get_sales_analytics_report(sales_id)
 
     def generate_business_launch_package(self, marketing_id: str, approval_mode: str = "manual") -> dict[str, Any]:
         marketing_pack = self.store.get_marketing_pack(marketing_id)

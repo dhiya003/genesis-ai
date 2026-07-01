@@ -19,6 +19,7 @@ REQUIRED_PATHS = [
     "apps/product/department.py",
     "apps/creative/department.py",
     "apps/marketing/department.py",
+    "apps/sales/department.py",
     "apps/publishing/department.py",
     "apps/businessos/runtime.py",
     "apps/analytics/runtime.py",
@@ -37,6 +38,7 @@ REQUIRED_PATHS = [
     "scripts/validate_product_blueprint.py",
     "scripts/validate_creative_pack.py",
     "scripts/validate_marketing_pack.py",
+    "scripts/validate_sales_package.py",
     "scripts/validate_business_launch_package.py",
     "scripts/validate_business_operating_plan.py",
     "tests/test_sprint2_e2e.py",
@@ -46,6 +48,7 @@ REQUIRED_PATHS = [
     "tests/test_product_blueprint.py",
     "tests/test_creative_pack.py",
     "tests/test_marketing_pack.py",
+    "tests/test_sales_department.py",
     "tests/test_publishing_engine.py",
     "tests/test_businessos_runtime.py",
     "tests/test_analytics_runtime.py",
@@ -57,11 +60,13 @@ REQUIRED_PATHS = [
     "api/schemas/product-blueprint.schema.json",
     "api/schemas/creative-pack.schema.json",
     "api/schemas/marketing-pack.schema.json",
+    "api/schemas/sales-package.schema.json",
     "testing/fixtures/sample-research-report-v2.json",
     "testing/fixtures/sample-product-definition.json",
     "testing/fixtures/sample-product-blueprint.json",
     "testing/fixtures/sample-creative-pack.json",
     "testing/fixtures/sample-marketing-pack.json",
+    "testing/fixtures/sample-sales-package.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -75,6 +80,7 @@ REQUIRED_PATHS = [
     "docs/epic-02-04-lifecycle-validation.md",
     "docs/epic-05-research-intelligence-validation.md",
     "docs/epic-06-08-product-creative-validation.md",
+    "docs/epic-09-10-marketing-sales-validation.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]
@@ -86,12 +92,14 @@ JSON_PATHS = [
     "api/schemas/product-blueprint.schema.json",
     "api/schemas/creative-pack.schema.json",
     "api/schemas/marketing-pack.schema.json",
+    "api/schemas/sales-package.schema.json",
     "testing/fixtures/sample-launch-pack.json",
     "testing/fixtures/sample-research-report-v2.json",
     "testing/fixtures/sample-product-definition.json",
     "testing/fixtures/sample-product-blueprint.json",
     "testing/fixtures/sample-creative-pack.json",
     "testing/fixtures/sample-marketing-pack.json",
+    "testing/fixtures/sample-sales-package.json",
 ]
 
 COMMANDS = [
@@ -102,6 +110,7 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_product_blueprint.py"], "product blueprint validation"),
     ([sys.executable, "scripts/validate_creative_pack.py"], "creative pack validation"),
     ([sys.executable, "scripts/validate_marketing_pack.py"], "marketing pack validation"),
+    ([sys.executable, "scripts/validate_sales_package.py"], "sales package validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

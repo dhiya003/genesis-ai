@@ -100,13 +100,28 @@ def _strategy_output(context: dict[str, Any]) -> dict[str, Any]:
             {"name": "Urban learning-focused parent", "need": "Premium safe learning toy", "trigger": "Birthday or preschool readiness"},
             {"name": "Gift buyer", "need": "Useful premium child gift", "trigger": "Occasion gifting"},
         ],
+        "customerSegments": [
+            {"segment": "Urban learning-focused parents", "priority": 1, "message": "Build early logic through calm screen-free play."},
+            {"segment": "Premium child gift buyers", "priority": 2, "message": "A useful, beautiful gift parents understand quickly."},
+            {"segment": "Preschool educators", "priority": 3, "message": "Simple hands-on pattern activities for small-group learning."},
+        ],
+        "launchObjectives": ["Open founding batch waitlist", "Validate purchase intent", "Collect first reviews", "Prepare repeatable channel data"],
+        "salesChannels": ["Instagram", "WhatsApp", "Amazon/marketplace", "Shopify landing page", "Parent communities"],
+        "successKpis": ["CAC", "Waitlist conversion", "Landing page conversion", "AOV", "Review rate", "Referral rate"],
+        "competitiveDifferentiation": "Clear parent benefit, premium natural material story, and a complete Starter/Standard/Premium product family.",
         "channelStrategy": {"instagram": "Trust and discovery", "marketplace": "Conversion", "whatsapp": "Warm lead follow-up", "email": "Waitlist nurturing"},
         "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion", "Review collection"],
         "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
         "launchRoadmap": ["Week 1: waitlist and education", "Week 2: sample/demo content", "Week 3: founding batch offer", "Week 4: reviews and referrals"],
         "marketingBudget": {"currency": "INR", "pilotBudget": 50000, "allocation": {"content": 10000, "samples": 10000, "metaAds": 20000, "influencers": 10000}},
-        "channelPrioritization": [{"channel": "Instagram", "priority": 1}, {"channel": "Marketplace", "priority": 2}, {"channel": "WhatsApp", "priority": 3}, {"channel": "SEO", "priority": 4}],
+        "channelPrioritization": [
+            {"channel": "Instagram", "priority": 1, "strength": "Visual trust and parent discovery", "budgetAllocation": 12000},
+            {"channel": "Marketplace", "priority": 2, "strength": "Conversion intent", "budgetAllocation": 8000},
+            {"channel": "WhatsApp", "priority": 3, "strength": "Warm lead conversion", "budgetAllocation": 3000},
+            {"channel": "SEO", "priority": 4, "strength": "Compounding discovery", "budgetAllocation": 5000},
+        ],
         "customerAcquisitionStrategy": "Use educational content and founding-batch scarcity to capture parent leads before paid conversion testing.",
+        "customerJourney": ["Awareness", "Interest", "Consideration", "Purchase", "Onboarding", "Retention", "Referral"],
         "retentionStrategy": "Post-purchase activity tips, expansion-card drops, review requests, and referral incentives.",
         "referralStrategy": "Give founding parents a referral code for expansion-pack credit after first purchase.",
         "score": 86,
@@ -126,10 +141,10 @@ def _seo_output(context: dict[str, Any]) -> dict[str, Any]:
 def _social_output(context: dict[str, Any]) -> dict[str, Any]:
     return {
         "instagramCalendar": [
-            {"day": 1, "format": "carousel", "theme": "Problem awareness", "caption": "Playtime can build more than attention."},
-            {"day": 3, "format": "reel", "theme": "Pattern challenge", "caption": "Can your little one finish the pattern?"},
-            {"day": 5, "format": "static", "theme": "Material trust", "caption": "Rounded wood, calm colors, thoughtful play."},
-            {"day": 7, "format": "story", "theme": "Waitlist push", "caption": "Founding batch opens soon."},
+            {"day": 1, "format": "carousel", "theme": "Problem awareness", "caption": "Playtime can build more than attention.", "campaign": "Founder Batch Awareness", "dependencies": ["brand visuals"], "deadline": "Day 0"},
+            {"day": 3, "format": "reel", "theme": "Pattern challenge", "caption": "Can your little one finish the pattern?", "campaign": "Product Education", "dependencies": ["mockup video"], "deadline": "Day 2"},
+            {"day": 5, "format": "static", "theme": "Material trust", "caption": "Rounded wood, calm colors, thoughtful play.", "campaign": "Trust Proof", "dependencies": ["product close-up"], "deadline": "Day 4"},
+            {"day": 7, "format": "story", "theme": "Waitlist push", "caption": "Founding batch opens soon.", "campaign": "Waitlist Conversion", "dependencies": ["landing page"], "deadline": "Day 6"},
         ],
         "facebookCalendar": [
             {"day": 2, "format": "parent group post", "theme": "Screen-free play prompt"},
@@ -145,6 +160,12 @@ def _social_output(context: dict[str, Any]) -> dict[str, Any]:
         "hashtags": ["woodentoysindia", "educationaltoys", "screenfreeplay", "toddlertoys", "earlylearning"],
         "captionLibrary": ["Try one pattern before breakfast.", "A quieter kind of learning toy.", "Made for little hands and big curiosity."],
         "hashtagLibrary": ["woodentoysindia", "educationaltoys", "screenfreeplay", "toddlertoys", "earlylearning", "montessoritoys"],
+        "monthlyThemes": ["Screen-free learning", "Material trust", "Founding batch", "Parent proof"],
+        "weeklyCampaigns": ["Awareness week", "Education week", "Offer week", "Review and referral week"],
+        "seasonalEvents": ["Children's Day", "Birthday gifting season", "Back-to-school"],
+        "promotionalPeriods": ["Founder batch", "Bundle offer", "Referral week"],
+        "campaignOverlap": {"status": "NO_BLOCKING_OVERLAP", "notes": "Education and trust campaigns support the same founder-batch launch."},
+        "exportFormats": ["json", "csv"],
         "score": 84,
     }
 

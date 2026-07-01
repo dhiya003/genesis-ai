@@ -54,7 +54,7 @@ class BusinessOSRuntime:
             },
             "executiveCouncil": _executive_council(),
             "departmentPlans": _department_plans(),
-            "crossDepartmentLoop": ["Research", "Product", "Creative", "Marketing", "Publishing", "Sales", "Analytics", "Optimization", "Research Again"],
+            "crossDepartmentLoop": ["Research", "Product", "Creative", "Marketing", "Sales", "Commerce & Publishing", "Analytics", "Optimization", "Research Again"],
             "strategicPlan": _strategic_plan(project, product_blueprint, marketing_pack),
             "businessPlan": _business_plan(product_blueprint, marketing_pack, launch_package),
             "digitalTwin": digital_twin,
@@ -107,7 +107,8 @@ def _executive_council() -> list[dict[str, str]]:
         {"role": "Chief Product Officer", "department": "Product", "mission": "Convert opportunities into manufacturable products."},
         {"role": "Chief Creative Officer", "department": "Creative", "mission": "Create brand and visual assets."},
         {"role": "Chief Marketing Officer", "department": "Marketing", "mission": "Create demand and launch campaigns."},
-        {"role": "Chief Operations Officer", "department": "Publishing", "mission": "Coordinate safe execution."},
+        {"role": "Chief Sales Officer", "department": "Sales", "mission": "Convert demand into customers, quotes, orders, and revenue."},
+        {"role": "Chief Operations Officer", "department": "Commerce & Publishing", "mission": "Coordinate safe execution, catalog publishing, and fulfilment handoff."},
         {"role": "Chief Finance Officer", "department": "Finance", "mission": "Guard unit economics and capital allocation."},
         {"role": "Chief Customer Officer", "department": "Customer Success", "mission": "Improve retention and feedback loops."},
         {"role": "Chief Analytics Officer", "department": "Analytics", "mission": "Monitor health, risks, and recommendations."},
@@ -115,8 +116,8 @@ def _executive_council() -> list[dict[str, str]]:
 
 
 def _department_plans() -> list[dict[str, Any]]:
-    departments = ["Research", "Product", "Creative", "Marketing", "Publishing", "Sales", "Finance", "Operations", "CRM", "Customer Success", "Inventory", "Procurement", "Legal", "Analytics", "Knowledge"]
-    return [{"department": name, "status": "ACTIVE" if name in {"Research", "Product", "Creative", "Marketing", "Publishing"} else "PLANNED", "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output"} for name in departments]
+    departments = ["Research", "Product", "Creative", "Marketing", "Sales", "Commerce & Publishing", "Finance", "Operations", "CRM", "Customer Success", "Inventory", "Procurement", "Legal", "Analytics", "Knowledge"]
+    return [{"department": name, "status": "ACTIVE" if name in {"Research", "Product", "Creative", "Marketing", "Sales", "Commerce & Publishing"} else "PLANNED", "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output"} for name in departments]
 
 
 def _strategic_plan(project: dict[str, Any], product_blueprint: dict[str, Any], marketing_pack: dict[str, Any]) -> dict[str, Any]:
@@ -124,7 +125,7 @@ def _strategic_plan(project: dict[str, Any], product_blueprint: dict[str, Any], 
         "quarterlyGoals": ["Launch founder batch", "Validate demand", "Collect reviews", "Prepare optimization loop"],
         "monthlyGoals": ["Finalize approvals", "Publish drafts", "Open waitlist", "Measure first signals"],
         "weeklyGoals": marketing_pack.get("launchRoadmap", []),
-        "departmentGoals": {"Product": "Validate supplier assumptions", "Marketing": "Drive qualified demand", "Publishing": "Execute approved launch actions", "Analytics": "Track launch KPIs"},
+        "departmentGoals": {"Product": "Validate supplier assumptions", "Marketing": "Drive qualified demand", "Sales": "Convert leads into orders", "Commerce & Publishing": "Execute approved launch actions", "Analytics": "Track launch KPIs"},
         "milestones": ["Founder approval", "First listing draft", "First campaign draft", "First customer feedback"],
         "dependencies": ["Founder approvals", "Live provider credentials", "Inventory confirmation", "Legal review for child-product claims"],
         "successMetricFocus": product_blueprint.get("profitabilityReport", {}).get("marginScore", "margin validation"),
@@ -150,7 +151,7 @@ def _digital_twin(project: dict[str, Any], research_report: dict[str, Any], prod
         "inventory": launch_package.get("storeManagementPlan", {}).get("inventorySync", {}),
         "customers": {"targetSegments": marketing_pack.get("customerPersonas", []), "knownCustomers": []},
         "marketing": {"strategy": marketing_pack.get("goToMarketStrategy"), "campaigns": launch_package.get("campaignLaunchPlan", {}).get("campaigns", [])},
-        "sales": {"status": "NOT_STARTED", "channels": launch_package.get("launchReport", {}).get("channelsPrepared", [])},
+        "sales": {"status": "READY_FOR_DEPARTMENT_PACKAGE", "channels": launch_package.get("launchReport", {}).get("channelsPrepared", [])},
         "operations": {"publishingStatus": launch_package.get("launchStatus"), "rollbackPlan": launch_package.get("rollbackPlan", {})},
         "finance": product_blueprint.get("costAnalysis", {}),
         "suppliers": product_blueprint.get("supplierRecommendations", {}),

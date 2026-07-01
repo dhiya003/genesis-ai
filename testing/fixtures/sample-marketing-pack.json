@@ -1,164 +1,3454 @@
 {
-  "reportType": "MARKETING_PACK",
-  "version": "0.5.0",
-  "projectId": "00000000-0000-0000-0000-000000000001",
-  "marketingId": "00000000-0000-0000-0000-000000000001",
-  "creativeId": "00000000-0000-0000-0000-000000000001",
-  "productId": "00000000-0000-0000-0000-000000000001",
-  "workflowId": "workflow-marketing-fixture",
-  "department": "MARKETING",
-  "executiveSummary": "Genesis Marketing Engine generated a launch-ready Marketing Pack for LumaLearn.",
-  "marketingStrategy": {
-    "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
-    "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
-    "channelStrategy": { "instagram": "Trust and discovery", "marketplace": "Conversion" },
-    "funnel": ["Awareness", "Waitlist", "Founder batch", "Marketplace conversion"],
-    "goToMarketStrategy": "Founder-batch launch using organic trust-building and controlled paid testing.",
-    "launchRoadmap": ["Week 1: waitlist", "Week 2: demo content"],
-    "marketingBudget": { "currency": "INR", "pilotBudget": 50000 },
-    "channelPrioritization": [{ "channel": "Instagram", "priority": 1 }],
-    "customerAcquisitionStrategy": "Capture parent leads before paid conversion testing.",
-    "retentionStrategy": "Post-purchase activity tips and expansion-card drops.",
-    "referralStrategy": "Referral code for expansion-pack credit."
-  },
-  "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
-  "customerPersonas": [{ "name": "Urban learning-focused parent", "need": "Premium safe learning toy" }],
-  "goToMarketStrategy": "Founder-batch launch using organic trust-building and controlled paid testing.",
-  "launchRoadmap": ["Week 1: waitlist", "Week 2: demo content"],
-  "marketingBudget": { "currency": "INR", "pilotBudget": 50000 },
-  "channelPrioritization": [{ "channel": "Instagram", "priority": 1 }],
-  "customerAcquisitionStrategy": "Capture parent leads before paid conversion testing.",
-  "retentionStrategy": "Post-purchase activity tips and expansion-card drops.",
-  "referralStrategy": "Referral code for expansion-pack credit.",
-  "seoPlan": {
-    "keywords": ["wooden educational toys India", "toys for 3 year olds"],
-    "contentTopics": ["How screen-free toys build early logic"],
-    "titles": ["Premium Wooden Logic Toys for Ages 3-5"],
-    "metaDescriptions": ["Explore premium wooden logic cubes for children aged 3-5."]
-  },
-  "socialMediaPlan": {
-    "instagramCalendar": [{ "day": 1, "format": "carousel", "theme": "Problem awareness" }],
-    "facebookCalendar": [{ "day": 2, "format": "parent group post", "theme": "Screen-free play prompt" }],
-    "linkedinStrategy": "Use only for preschool partnerships.",
-    "pinterestStrategy": "Pin activity ideas and gift guides.",
-    "youtubeContentPlan": ["60-second product demo"],
-    "shortFormVideoIdeas": ["Pattern challenge"],
-    "storySequences": ["Problem poll"],
-    "reelScripts": [{ "title": "Pattern challenge", "script": "Show three cubes and reveal pattern." }],
-    "captions": ["Screen-free play, made a little smarter."],
-    "hashtags": ["woodentoysindia", "educationaltoys"],
-    "captionLibrary": ["Try one pattern before breakfast."],
-    "hashtagLibrary": ["woodentoysindia", "educationaltoys"]
-  },
   "advertisingPlan": {
-    "metaAds": [{ "hook": "A premium wooden toy that teaches before it explains.", "cta": "Join the founding batch" }],
-    "googleAds": [{ "headline": "Premium Wooden Learning Toys" }],
-    "amazonAdsStrategy": { "campaignType": "Sponsored Products placeholder", "status": "READY_FOR_SELLER_ACCOUNT" },
-    "keywordResearch": ["wooden educational toys India"],
-    "audiences": ["Parents 25-40 in Indian metros"],
-    "testingPlan": ["Test learning benefit hook vs gifting hook"],
-    "audienceSegmentation": [{ "segment": "Learning parent", "message": "Build early logic" }],
-    "abTestMatrix": [{ "test": "Hook", "variantA": "Learning benefit", "variantB": "Premium gift" }]
+    "abTestMatrix": [
+      {
+        "test": "Hook",
+        "variantA": "Learning benefit",
+        "variantB": "Premium gift"
+      },
+      {
+        "test": "Creative",
+        "variantA": "Product hero",
+        "variantB": "Parent-child lifestyle"
+      }
+    ],
+    "amazonAdsStrategy": {
+      "campaignType": "Sponsored Products placeholder",
+      "keywords": [
+        "wooden educational toys",
+        "toys for 3 year olds"
+      ],
+      "status": "READY_FOR_SELLER_ACCOUNT"
+    },
+    "audienceSegmentation": [
+      {
+        "message": "Build early logic",
+        "segment": "Learning parent"
+      },
+      {
+        "message": "Premium useful gift",
+        "segment": "Gift buyer"
+      }
+    ],
+    "audiences": [
+      "Parents 25-40 in Indian metros",
+      "Montessori and preschool interest",
+      "Premium gifting buyers"
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy",
+          "creativePack"
+        ]
+      },
+      "name": "Paid Ads Specialist",
+      "outputSchema": {
+        "required": [
+          "metaAds",
+          "googleAds",
+          "audiences",
+          "testingPlan"
+        ]
+      },
+      "promptContract": "Create paid ad concepts without spending budget.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create Meta and Google ad concepts with hooks, audiences, and CTAs.",
+      "section": "adConcepts",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-304",
+    "employeeName": "Paid Ads Specialist",
+    "googleAds": [
+      {
+        "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+        "headline": "Premium Wooden Learning Toys"
+      }
+    ],
+    "keywordResearch": [
+      "wooden educational toys India",
+      "Montessori toys India",
+      "logic toys for kids",
+      "screen free toys"
+    ],
+    "metaAds": [
+      {
+        "creative": "Parent-child pattern play",
+        "cta": "Join the founding batch",
+        "hook": "A premium wooden toy that teaches before it explains."
+      },
+      {
+        "creative": "Luma Logic Cubes unboxing",
+        "cta": "See the Starter kit",
+        "hook": "Screen-free play for ages 3-5."
+      }
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 81,
+    "section": "adConcepts",
+    "status": "COMPLETED",
+    "testingPlan": [
+      "Test learning benefit hook vs gifting hook",
+      "Test Starter kit image vs parent-child lifestyle image"
+    ],
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
   },
-  "marketplaceListing": {
-    "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
-    "bullets": ["Builds logic, pattern recognition, and motor skills"],
-    "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
-    "imageOrder": ["Hero", "What's in the box"],
-    "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
-    "metaDescription": "Premium wooden educational toy for screen-free logic play.",
-    "comparisonTable": { "Starter": "6 cubes", "Standard": "12 cubes", "Premium": "24 cubes" }
-  },
-  "ecommerceDeliverables": {
-    "amazonListing": { "title": "LumaLearn Luma Logic Cubes" },
-    "shopifyProductPage": { "title": "LumaLearn Luma Logic Cubes", "description": "Premium educational wooden toy kit." },
-    "productDescriptions": ["Premium educational wooden toy kit."],
-    "comparisonTables": [{ "columns": ["Starter", "Standard", "Premium"] }]
-  },
-  "crmDeliverables": {
-    "welcomeEmailSequence": [{ "day": 0, "purpose": "Waitlist welcome" }],
-    "cartAbandonmentEmails": [{ "subject": "Still thinking about screen-free play?" }],
-    "postPurchaseEmails": [{ "subject": "How to start with your logic cubes" }],
-    "reviewRequestFlow": ["Day 14 review request"],
-    "whatsappAutomation": { "broadcasts": ["Founding batch opens soon."] },
-    "customerSegmentation": ["Waitlist parent", "Gift buyer"]
-  },
-  "salesFunnel": {
-    "funnelArchitecture": ["Instagram", "Landing page", "Waitlist", "Checkout"],
-    "landingPages": [{ "hero": { "headline": "Premium wooden play" } }],
-    "leadMagnets": ["Printable activity sheet"],
-    "upsells": ["Activity card expansion pack"],
-    "crossSells": ["Replacement cubes"],
-    "bundles": ["Starter", "Standard", "Premium"],
-    "subscriptionStrategy": "Monthly activity-card expansion after repeat demand is validated."
-  },
-  "analyticsPlan": {
-    "kpiDashboard": ["CAC", "ROAS", "CTR", "Conversion Rate", "AOV", "LTV", "Retention", "Funnel Drop-off"],
-    "cac": { "target": "Under INR 250" },
-    "roas": { "target": "2.0x" },
-    "ctr": { "target": "1.5%+" },
-    "conversionRate": { "target": "2-4%" },
-    "aov": { "target": "INR 1299-2499" },
-    "ltv": { "target": "Improve through expansion packs" },
-    "retentionMetrics": ["Repeat purchase"],
-    "funnelDropOffAnalysis": ["Ad click to landing"]
-  },
-  "landingPageCopy": {
-    "hero": { "headline": "Premium wooden play for curious little minds", "cta": "Join the founding batch" },
-    "sections": ["Problem", "How it works"],
-    "cta": "Reserve early access",
-    "faq": [{ "question": "Is it certified?", "answer": "Certification claims are reviewed before production." }]
-  },
-  "emailCampaign": {
-    "subjects": ["A calmer way to build early logic"],
-    "sequence": [{ "day": 0, "purpose": "Waitlist welcome", "body": "Thanks for joining the founding batch list." }]
-  },
-  "whatsappCampaign": {
-    "broadcasts": ["Hi, our premium wooden logic toy founding batch is opening soon."],
-    "replyScripts": [{ "intent": "age", "reply": "Designed for children aged 3-5 with adult supervision." }]
-  },
-  "influencerStrategy": {
-    "creatorProfiles": ["Montessori parent educator"],
-    "outreachScript": "Hi, we are launching a premium screen-free wooden logic toy for ages 3-5.",
-    "collaborationPlan": ["Send sample after safety review"]
-  },
-  "hashtagPlan": ["woodentoysindia", "educationaltoys"],
-  "launchPlan": ["Finalize founder approval", "Open waitlist", "Run founding batch campaign"],
-  "campaignQaReport": {
-    "checks": [{ "check": "Strategy aligns with creative pack", "status": "PASS" }],
-    "launchPlan": ["Finalize founder approval", "Open waitlist"],
-    "approvalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
-    "risks": ["Compliance-sensitive claims need review before publishing."]
+  "advertisingStrategy": {
+    "amazonAds": {
+      "campaignType": "Sponsored Products placeholder",
+      "keywords": [
+        "wooden educational toys",
+        "toys for 3 year olds"
+      ],
+      "status": "READY_FOR_SELLER_ACCOUNT"
+    },
+    "audienceSegmentation": [
+      {
+        "message": "Build early logic",
+        "segment": "Learning parent"
+      },
+      {
+        "message": "Premium useful gift",
+        "segment": "Gift buyer"
+      }
+    ],
+    "budgetAllocation": {
+      "content": 10000,
+      "influencers": 10000,
+      "metaAds": 20000,
+      "samples": 10000
+    },
+    "campaignObjectives": [
+      "Waitlist acquisition",
+      "Founder batch conversion",
+      "Marketplace retargeting"
+    ],
+    "googleAds": [
+      {
+        "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+        "headline": "Premium Wooden Learning Toys"
+      }
+    ],
+    "influencerCollaborations": [
+      "Send sample after safety review",
+      "Request honest play demo",
+      "Use affiliate code after founder approval"
+    ],
+    "marketplacePromotions": [
+      "Founder batch coupon",
+      "Bundle listing test"
+    ],
+    "metaAds": [
+      {
+        "creative": "Parent-child pattern play",
+        "cta": "Join the founding batch",
+        "hook": "A premium wooden toy that teaches before it explains."
+      },
+      {
+        "creative": "Luma Logic Cubes unboxing",
+        "cta": "See the Starter kit",
+        "hook": "Screen-free play for ages 3-5."
+      }
+    ],
+    "remarketing": "Email and WhatsApp reminders for warm prospects.",
+    "retargeting": "Retarget landing page visitors and waitlist non-buyers.",
+    "risks": [
+      "Ad performance cannot be estimated until live campaigns run.",
+      "Compliance-sensitive claims need review before publishing."
+    ],
+    "successMetrics": [
+      "CAC",
+      "Waitlist conversion",
+      "Landing page conversion",
+      "AOV",
+      "Review rate",
+      "Referral rate"
+    ]
   },
   "aiDeliverables": {
-    "marketingPrompts": ["Generate launch calendar variants."],
-    "adPrompts": ["A premium wooden toy that teaches before it explains."],
-    "contentPrompts": ["Screen-free play, made a little smarter."],
-    "campaignTemplates": ["Founder batch launch"],
-    "automationWorkflows": [{ "name": "Waitlist nurture", "trigger": "Lead form submit" }]
+    "adPrompts": [
+      "A premium wooden toy that teaches before it explains.",
+      "Screen-free play for ages 3-5."
+    ],
+    "automationWorkflows": [
+      {
+        "name": "Waitlist nurture",
+        "steps": [
+          "Welcome email",
+          "WhatsApp opt-in",
+          "Launch reminder"
+        ],
+        "trigger": "Lead form submit"
+      },
+      {
+        "name": "Review request",
+        "steps": [
+          "Day 7 check-in",
+          "Day 14 review ask"
+        ],
+        "trigger": "Order delivered"
+      }
+    ],
+    "campaignTemplates": [
+      "Founder batch launch",
+      "Educational benefit campaign",
+      "Gift buyer campaign"
+    ],
+    "contentPrompts": [
+      "Screen-free play, made a little smarter.",
+      "Premium wooden play for curious little minds.",
+      "The founding batch is almost ready."
+    ],
+    "marketingPrompts": [
+      "Generate launch calendar variants using the approved brand voice and parent persona."
+    ]
   },
-  "launchReadinessScore": {
-    "score": 82,
-    "threshold": 85,
-    "recommendation": "HOLD_FOR_FOUNDER_REVIEW",
-    "dimensions": { "researchQuality": 84, "productReadiness": 82 },
-    "blockingIssues": ["Confirm budget availability"]
+  "analyticsPlan": {
+    "aov": {
+      "status": "ESTIMATE",
+      "target": "INR 1299-2499"
+    },
+    "cac": {
+      "status": "ESTIMATE",
+      "target": "Under INR 250 during founder batch"
+    },
+    "conversionRate": {
+      "status": "ESTIMATE",
+      "target": "2-4% landing page"
+    },
+    "ctr": {
+      "status": "ESTIMATE",
+      "target": "1.5%+ Meta cold audience"
+    },
+    "funnelDropOffAnalysis": [
+      "Ad click to landing",
+      "Landing to waitlist",
+      "Waitlist to purchase",
+      "Purchase to review"
+    ],
+    "kpiDashboard": [
+      "CAC",
+      "ROAS",
+      "CTR",
+      "Conversion Rate",
+      "AOV",
+      "LTV",
+      "Retention",
+      "Funnel Drop-off"
+    ],
+    "ltv": {
+      "status": "ESTIMATE",
+      "target": "Improve through expansion packs"
+    },
+    "retentionMetrics": [
+      "Repeat purchase",
+      "Expansion-pack purchase",
+      "Referral rate"
+    ],
+    "roas": {
+      "status": "ESTIMATE",
+      "target": "2.0x after creative testing"
+    }
   },
-  "founderApprovalChecklist": [{ "item": "Approve launch positioning", "status": "READY" }],
-  "risks": [{ "risk": "Marketing Pack does not publish or spend budget in Sprint 5 MVP.", "severity": "LOW", "mitigation": "Use Sprint 6 Publishing Engine." }],
-  "assumptions": ["Sprint 5 MVP produces deterministic campaign plans and copy-ready assets."],
-  "nextActions": ["Founder approves marketing positioning and launch calendar."],
-  "employeeOutputs": [
-    { "employeeId": "EMP-301" },
-    { "employeeId": "EMP-302" },
-    { "employeeId": "EMP-303" },
-    { "employeeId": "EMP-304" },
-    { "employeeId": "EMP-305" },
-    { "employeeId": "EMP-306" },
-    { "employeeId": "EMP-307" },
-    { "employeeId": "EMP-308" },
-    { "employeeId": "EMP-309" },
-    { "employeeId": "EMP-310" }
+  "assumptions": [
+    "Sprint 5 MVP produces deterministic campaign plans and copy-ready assets.",
+    "Founder approval is required before publishing, scheduling, or ad spend.",
+    "Live SEO and ad platform credentials can improve later versions."
   ],
-  "overallScore": 83
+  "auditSummary": {
+    "createdBy": "MarketingDepartment",
+    "sourceCreativeId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "brandAssetsLoaded": true,
+  "campaignQaReport": {
+    "approvalChecklist": [
+      {
+        "item": "Approve launch positioning",
+        "status": "READY"
+      },
+      {
+        "item": "Approve marketplace listing",
+        "status": "READY"
+      },
+      {
+        "item": "Approve social calendar",
+        "status": "READY"
+      },
+      {
+        "item": "Approve ad hooks before spend",
+        "status": "READY"
+      }
+    ],
+    "checks": [
+      {
+        "check": "Strategy aligns with creative pack",
+        "status": "PASS"
+      },
+      {
+        "check": "Launch channels covered",
+        "status": "PASS"
+      },
+      {
+        "check": "Marketplace copy ready",
+        "status": "PASS"
+      },
+      {
+        "check": "No spend/publishing automation triggered",
+        "status": "PASS"
+      }
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingSections"
+        ]
+      },
+      "name": "Launch Manager / QA",
+      "outputSchema": {
+        "required": [
+          "checks",
+          "launchPlan",
+          "approvalChecklist",
+          "risks"
+        ]
+      },
+      "promptContract": "Run marketing quality gates before publishing.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Validate campaign consistency, launch readiness, and founder approval needs.",
+      "section": "launchQaReport",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-310",
+    "employeeName": "Launch Manager / QA",
+    "launchPlan": [
+      "Finalize founder approval",
+      "Collect sample visuals",
+      "Open waitlist",
+      "Run founding batch campaign",
+      "Collect reviews"
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [
+      "Ad performance cannot be estimated until live campaigns run.",
+      "Compliance-sensitive claims need review before publishing."
+    ],
+    "score": 82,
+    "section": "launchQaReport",
+    "status": "COMPLETED",
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "channelPrioritization": [
+    {
+      "budgetAllocation": 12000,
+      "channel": "Instagram",
+      "priority": 1,
+      "strength": "Visual trust and parent discovery"
+    },
+    {
+      "budgetAllocation": 8000,
+      "channel": "Marketplace",
+      "priority": 2,
+      "strength": "Conversion intent"
+    },
+    {
+      "budgetAllocation": 3000,
+      "channel": "WhatsApp",
+      "priority": 3,
+      "strength": "Warm lead conversion"
+    },
+    {
+      "budgetAllocation": 5000,
+      "channel": "SEO",
+      "priority": 4,
+      "strength": "Compounding discovery"
+    }
+  ],
+  "contentStrategy": {
+    "communityContent": [
+      "Parent poll",
+      "Activity challenge",
+      "Feedback request"
+    ],
+    "contentPillars": [
+      "Educational play",
+      "Material trust",
+      "Founder batch",
+      "Parent proof",
+      "Giftability"
+    ],
+    "educationalContent": [
+      "Pattern play tips",
+      "Screen-free routines",
+      "Logic-building activities"
+    ],
+    "launchCampaigns": [
+      "Awareness week",
+      "Education week",
+      "Offer week",
+      "Review and referral week"
+    ],
+    "postingObjectives": [
+      "Build trust",
+      "Capture leads",
+      "Explain product value",
+      "Convert warm prospects"
+    ],
+    "promotionalContent": [
+      "Founder batch open",
+      "Starter kit offer",
+      "Bundle upgrade"
+    ],
+    "seasonalCampaigns": [
+      "Children's Day",
+      "Birthday gifting season",
+      "Back-to-school"
+    ],
+    "targetAudience": [
+      {
+        "message": "Build early logic through calm screen-free play.",
+        "priority": 1,
+        "segment": "Urban learning-focused parents"
+      },
+      {
+        "message": "A useful, beautiful gift parents understand quickly.",
+        "priority": 2,
+        "segment": "Premium child gift buyers"
+      },
+      {
+        "message": "Simple hands-on pattern activities for small-group learning.",
+        "priority": 3,
+        "segment": "Preschool educators"
+      }
+    ],
+    "userGeneratedContent": [
+      "Parent demo",
+      "Child pattern challenge",
+      "Review screenshot"
+    ],
+    "version": "1.0"
+  },
+  "creativeId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "creativePackageLinked": true,
+  "crmDeliverables": {
+    "cartAbandonmentEmails": [
+      {
+        "body": "Your founding batch spot is waiting.",
+        "subject": "Still thinking about screen-free play?"
+      }
+    ],
+    "customerSegmentation": [
+      "Waitlist parent",
+      "Gift buyer",
+      "Founding batch buyer",
+      "Repeat buyer"
+    ],
+    "postPurchaseEmails": [
+      {
+        "body": "Begin with the first activity card and share feedback.",
+        "subject": "How to start with your logic cubes"
+      }
+    ],
+    "reviewRequestFlow": [
+      "Day 7 play feedback",
+      "Day 14 review request",
+      "Day 21 referral ask"
+    ],
+    "welcomeEmailSequence": [
+      {
+        "body": "Thanks for joining the founding batch list. We are building premium screen-free learning for ages 3-5.",
+        "day": 0,
+        "purpose": "Waitlist welcome"
+      },
+      {
+        "body": "Here is how pattern play supports early logic and motor skills.",
+        "day": 2,
+        "purpose": "Product education"
+      },
+      {
+        "body": "The first founding batch is ready for early parent feedback.",
+        "day": 5,
+        "purpose": "Launch CTA"
+      }
+    ],
+    "whatsappAutomation": {
+      "broadcasts": [
+        "Hi, our premium wooden logic toy founding batch is opening soon. Would you like early access?",
+        "The Starter kit includes wooden cubes, activity cards, and gift-ready packaging."
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy"
+          ]
+        },
+        "name": "WhatsApp Campaign Specialist",
+        "outputSchema": {
+          "required": [
+            "broadcasts",
+            "replyScripts"
+          ]
+        },
+        "promptContract": "Create concise WhatsApp launch messages for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create WhatsApp broadcast and reply scripts.",
+        "section": "whatsappCampaign",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-308",
+      "employeeName": "WhatsApp Campaign Specialist",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "replyScripts": [
+        {
+          "intent": "price",
+          "reply": "The final launch price will be confirmed after founder-batch supplier quotes."
+        },
+        {
+          "intent": "age",
+          "reply": "It is designed for children aged 3-5 with adult supervision."
+        }
+      ],
+      "risks": [],
+      "score": 80,
+      "section": "whatsappCampaign",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    }
+  },
+  "customerAcquisitionStrategy": "Use educational content and founding-batch scarcity to capture parent leads before paid conversion testing.",
+  "customerPersonas": [
+    {
+      "name": "Urban learning-focused parent",
+      "need": "Premium safe learning toy",
+      "trigger": "Birthday or preschool readiness"
+    },
+    {
+      "name": "Gift buyer",
+      "need": "Useful premium child gift",
+      "trigger": "Occasion gifting"
+    }
+  ],
+  "customerSegments": [
+    {
+      "message": "Build early logic through calm screen-free play.",
+      "priority": 1,
+      "segment": "Urban learning-focused parents"
+    },
+    {
+      "message": "A useful, beautiful gift parents understand quickly.",
+      "priority": 2,
+      "segment": "Premium child gift buyers"
+    },
+    {
+      "message": "Simple hands-on pattern activities for small-group learning.",
+      "priority": 3,
+      "segment": "Preschool educators"
+    }
+  ],
+  "dashboardUpdate": {
+    "status": "MARKETING_PACK_COMPLETED",
+    "visibleToFounder": true
+  },
+  "department": "MARKETING",
+  "departmentMetrics": {
+    "employeeCount": 10,
+    "launchReadiness": 80,
+    "overallScore": 82
+  },
+  "departmentStatus": "COMPLETED",
+  "ecommerceDeliverables": {
+    "amazonListing": {
+      "bullets": [
+        "Builds logic, pattern recognition, and motor skills",
+        "Premium wooden pieces with rounded-edge design",
+        "Gift-ready packaging for birthdays and early learning",
+        "Includes activity cards for guided play"
+      ],
+      "comparisonTable": {
+        "Premium": "24 cubes and gift packaging",
+        "Standard": "12 cubes",
+        "Starter": "6 cubes"
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "creativePack"
+          ]
+        },
+        "name": "Marketplace Listing Specialist",
+        "outputSchema": {
+          "required": [
+            "title",
+            "bullets",
+            "description",
+            "imageOrder"
+          ]
+        },
+        "promptContract": "Create marketplace listing assets for conversion.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create marketplace listing copy, bullets, image order, and FAQ.",
+        "section": "marketplaceListing",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+      "employeeId": "EMP-305",
+      "employeeName": "Marketplace Listing Specialist",
+      "faq": [
+        {
+          "answer": "Designed for children aged 3-5 with adult supervision.",
+          "question": "What age is this for?"
+        }
+      ],
+      "imageOrder": [
+        "Hero",
+        "What's in the box",
+        "Learning benefits",
+        "Material trust",
+        "Variant comparison"
+      ],
+      "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 85,
+      "section": "marketplaceListing",
+      "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+      "status": "COMPLETED",
+      "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    "comparisonTables": [
+      {
+        "columns": [
+          "Starter",
+          "Standard",
+          "Premium"
+        ],
+        "rows": [
+          "Cubes included",
+          "Activity cards",
+          "Gift packaging",
+          "Price tier"
+        ]
+      }
+    ],
+    "productDescriptions": [
+      "A premium educational wooden toy kit designed for safe, screen-free learning at home."
+    ],
+    "shopifyProductPage": {
+      "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+      "faq": [
+        {
+          "answer": "Designed for children aged 3-5 with adult supervision.",
+          "question": "What age is this for?"
+        }
+      ],
+      "featureBullets": [
+        "Builds logic, pattern recognition, and motor skills",
+        "Premium wooden pieces with rounded-edge design",
+        "Gift-ready packaging for birthdays and early learning",
+        "Includes activity cards for guided play"
+      ],
+      "metaDescription": "Premium wooden educational toy for ages 3-5 with screen-free learning benefits.",
+      "seoTitle": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy ",
+      "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+    }
+  },
+  "emailCampaign": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy"
+        ]
+      },
+      "name": "Email Campaign Specialist",
+      "outputSchema": {
+        "required": [
+          "sequence",
+          "subjects"
+        ]
+      },
+      "promptContract": "Create email campaign copy for launch and follow-up.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create launch email sequence.",
+      "section": "emailCampaign",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-307",
+    "employeeName": "Email Campaign Specialist",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 82,
+    "section": "emailCampaign",
+    "sequence": [
+      {
+        "body": "Thanks for joining the founding batch list. We are building premium screen-free learning for ages 3-5.",
+        "day": 0,
+        "purpose": "Waitlist welcome"
+      },
+      {
+        "body": "Here is how pattern play supports early logic and motor skills.",
+        "day": 2,
+        "purpose": "Product education"
+      },
+      {
+        "body": "The first founding batch is ready for early parent feedback.",
+        "day": 5,
+        "purpose": "Launch CTA"
+      }
+    ],
+    "status": "COMPLETED",
+    "subjects": [
+      "A calmer way to build early logic",
+      "Founding batch opens soon",
+      "Inside the wooden logic kit"
+    ],
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "employeeOutputs": [
+    {
+      "channelPrioritization": [
+        {
+          "budgetAllocation": 12000,
+          "channel": "Instagram",
+          "priority": 1,
+          "strength": "Visual trust and parent discovery"
+        },
+        {
+          "budgetAllocation": 8000,
+          "channel": "Marketplace",
+          "priority": 2,
+          "strength": "Conversion intent"
+        },
+        {
+          "budgetAllocation": 3000,
+          "channel": "WhatsApp",
+          "priority": 3,
+          "strength": "Warm lead conversion"
+        },
+        {
+          "budgetAllocation": 5000,
+          "channel": "SEO",
+          "priority": 4,
+          "strength": "Compounding discovery"
+        }
+      ],
+      "channelStrategy": {
+        "email": "Waitlist nurturing",
+        "instagram": "Trust and discovery",
+        "marketplace": "Conversion",
+        "whatsapp": "Warm lead follow-up"
+      },
+      "competitiveDifferentiation": "Clear parent benefit, premium natural material story, and a complete Starter/Standard/Premium product family.",
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "creativePack"
+          ]
+        },
+        "name": "Marketing Strategist",
+        "outputSchema": {
+          "required": [
+            "launchPositioning",
+            "customerPersonas",
+            "channelStrategy",
+            "funnel"
+          ]
+        },
+        "promptContract": "Convert product and creative assets into a launch strategy.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define launch strategy, personas, channels, funnel, and positioning.",
+        "section": "marketingStrategy",
+        "timeoutSeconds": 30
+      },
+      "customerAcquisitionStrategy": "Use educational content and founding-batch scarcity to capture parent leads before paid conversion testing.",
+      "customerJourney": [
+        "Awareness",
+        "Interest",
+        "Consideration",
+        "Purchase",
+        "Onboarding",
+        "Retention",
+        "Referral"
+      ],
+      "customerPersonas": [
+        {
+          "name": "Urban learning-focused parent",
+          "need": "Premium safe learning toy",
+          "trigger": "Birthday or preschool readiness"
+        },
+        {
+          "name": "Gift buyer",
+          "need": "Useful premium child gift",
+          "trigger": "Occasion gifting"
+        }
+      ],
+      "customerSegments": [
+        {
+          "message": "Build early logic through calm screen-free play.",
+          "priority": 1,
+          "segment": "Urban learning-focused parents"
+        },
+        {
+          "message": "A useful, beautiful gift parents understand quickly.",
+          "priority": 2,
+          "segment": "Premium child gift buyers"
+        },
+        {
+          "message": "Simple hands-on pattern activities for small-group learning.",
+          "priority": 3,
+          "segment": "Preschool educators"
+        }
+      ],
+      "department": "MARKETING",
+      "employeeId": "EMP-301",
+      "employeeName": "Marketing Strategist",
+      "funnel": [
+        "Awareness",
+        "Waitlist",
+        "Founder batch",
+        "Marketplace conversion",
+        "Review collection"
+      ],
+      "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+      "launchObjectives": [
+        "Open founding batch waitlist",
+        "Validate purchase intent",
+        "Collect first reviews",
+        "Prepare repeatable channel data"
+      ],
+      "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
+      "launchRoadmap": [
+        "Week 1: waitlist and education",
+        "Week 2: sample/demo content",
+        "Week 3: founding batch offer",
+        "Week 4: reviews and referrals"
+      ],
+      "marketingBudget": {
+        "allocation": {
+          "content": 10000,
+          "influencers": 10000,
+          "metaAds": 20000,
+          "samples": 10000
+        },
+        "currency": "INR",
+        "pilotBudget": 50000
+      },
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "referralStrategy": "Give founding parents a referral code for expansion-pack credit after first purchase.",
+      "retentionStrategy": "Post-purchase activity tips, expansion-card drops, review requests, and referral incentives.",
+      "risks": [],
+      "salesChannels": [
+        "Instagram",
+        "WhatsApp",
+        "Amazon/marketplace",
+        "Shopify landing page",
+        "Parent communities"
+      ],
+      "score": 86,
+      "section": "marketingStrategy",
+      "status": "COMPLETED",
+      "successKpis": [
+        "CAC",
+        "Waitlist conversion",
+        "Landing page conversion",
+        "AOV",
+        "Review rate",
+        "Referral rate"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contentTopics": [
+        "How screen-free toys build early logic",
+        "Best wooden learning toys for ages 3-5",
+        "Why parents choose open-ended play"
+      ],
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy"
+          ]
+        },
+        "name": "SEO Specialist",
+        "outputSchema": {
+          "required": [
+            "keywords",
+            "contentTopics",
+            "titles",
+            "metaDescriptions"
+          ]
+        },
+        "promptContract": "Create search-ready launch content for discovery.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create SEO keywords, content topics, titles, and descriptions.",
+        "section": "seoPlan",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-302",
+      "employeeName": "SEO Specialist",
+      "keywords": [
+        "wooden educational toys India",
+        "toys for 3 year olds",
+        "premium wooden toys",
+        "screen free learning toys",
+        "logic toys for kids"
+      ],
+      "metaDescriptions": [
+        "Explore premium wooden logic cubes for children aged 3-5, designed for safe screen-free learning and gifting."
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 82,
+      "section": "seoPlan",
+      "status": "COMPLETED",
+      "titles": [
+        "Premium Wooden Logic Toys for Ages 3-5",
+        "Screen-Free Learning Toys for Curious Kids"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "campaignOverlap": {
+        "notes": "Education and trust campaigns support the same founder-batch launch.",
+        "status": "NO_BLOCKING_OVERLAP"
+      },
+      "captionLibrary": [
+        "Try one pattern before breakfast.",
+        "A quieter kind of learning toy.",
+        "Made for little hands and big curiosity."
+      ],
+      "captions": [
+        "Screen-free play, made a little smarter.",
+        "Premium wooden play for curious little minds.",
+        "The founding batch is almost ready."
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "creativePack",
+            "marketingStrategy"
+          ]
+        },
+        "name": "Instagram Content Planner",
+        "outputSchema": {
+          "required": [
+            "instagramCalendar",
+            "captions",
+            "hashtags"
+          ]
+        },
+        "promptContract": "Plan launch content that builds trust and demand.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create Instagram calendar, captions, hashtags, stories, and reels.",
+        "section": "socialCalendar",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-303",
+      "employeeName": "Instagram Content Planner",
+      "exportFormats": [
+        "json",
+        "csv"
+      ],
+      "facebookCalendar": [
+        {
+          "day": 2,
+          "format": "parent group post",
+          "theme": "Screen-free play prompt"
+        },
+        {
+          "day": 6,
+          "format": "founder story",
+          "theme": "Why we built this toy"
+        }
+      ],
+      "hashtagLibrary": [
+        "woodentoysindia",
+        "educationaltoys",
+        "screenfreeplay",
+        "toddlertoys",
+        "earlylearning",
+        "montessoritoys"
+      ],
+      "hashtags": [
+        "woodentoysindia",
+        "educationaltoys",
+        "screenfreeplay",
+        "toddlertoys",
+        "earlylearning"
+      ],
+      "instagramCalendar": [
+        {
+          "campaign": "Founder Batch Awareness",
+          "caption": "Playtime can build more than attention.",
+          "day": 1,
+          "deadline": "Day 0",
+          "dependencies": [
+            "brand visuals"
+          ],
+          "format": "carousel",
+          "theme": "Problem awareness"
+        },
+        {
+          "campaign": "Product Education",
+          "caption": "Can your little one finish the pattern?",
+          "day": 3,
+          "deadline": "Day 2",
+          "dependencies": [
+            "mockup video"
+          ],
+          "format": "reel",
+          "theme": "Pattern challenge"
+        },
+        {
+          "campaign": "Trust Proof",
+          "caption": "Rounded wood, calm colors, thoughtful play.",
+          "day": 5,
+          "deadline": "Day 4",
+          "dependencies": [
+            "product close-up"
+          ],
+          "format": "static",
+          "theme": "Material trust"
+        },
+        {
+          "campaign": "Waitlist Conversion",
+          "caption": "Founding batch opens soon.",
+          "day": 7,
+          "deadline": "Day 6",
+          "dependencies": [
+            "landing page"
+          ],
+          "format": "story",
+          "theme": "Waitlist push"
+        }
+      ],
+      "linkedinStrategy": "Use only if targeting preschool partnerships or founder build-in-public credibility.",
+      "monthlyThemes": [
+        "Screen-free learning",
+        "Material trust",
+        "Founding batch",
+        "Parent proof"
+      ],
+      "pinterestStrategy": "Pin activity ideas, gift guides, and Montessori-inspired play setups.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "promotionalPeriods": [
+        "Founder batch",
+        "Bundle offer",
+        "Referral week"
+      ],
+      "reelScripts": [
+        {
+          "script": "Show three cubes, pause for child choice, reveal pattern, CTA to waitlist.",
+          "title": "Pattern challenge"
+        }
+      ],
+      "risks": [],
+      "score": 84,
+      "seasonalEvents": [
+        "Children's Day",
+        "Birthday gifting season",
+        "Back-to-school"
+      ],
+      "section": "socialCalendar",
+      "shortFormVideoIdeas": [
+        "Pattern challenge",
+        "Unboxing",
+        "Parent testimonial prompt",
+        "Inside the box"
+      ],
+      "status": "COMPLETED",
+      "storySequences": [
+        "Problem poll",
+        "Material trust",
+        "How it works",
+        "Waitlist CTA"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "weeklyCampaigns": [
+        "Awareness week",
+        "Education week",
+        "Offer week",
+        "Review and referral week"
+      ],
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17",
+      "youtubeContentPlan": [
+        "60-second product demo",
+        "Parent guide walkthrough",
+        "3 pattern activities for preschoolers"
+      ]
+    },
+    {
+      "abTestMatrix": [
+        {
+          "test": "Hook",
+          "variantA": "Learning benefit",
+          "variantB": "Premium gift"
+        },
+        {
+          "test": "Creative",
+          "variantA": "Product hero",
+          "variantB": "Parent-child lifestyle"
+        }
+      ],
+      "amazonAdsStrategy": {
+        "campaignType": "Sponsored Products placeholder",
+        "keywords": [
+          "wooden educational toys",
+          "toys for 3 year olds"
+        ],
+        "status": "READY_FOR_SELLER_ACCOUNT"
+      },
+      "audienceSegmentation": [
+        {
+          "message": "Build early logic",
+          "segment": "Learning parent"
+        },
+        {
+          "message": "Premium useful gift",
+          "segment": "Gift buyer"
+        }
+      ],
+      "audiences": [
+        "Parents 25-40 in Indian metros",
+        "Montessori and preschool interest",
+        "Premium gifting buyers"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy",
+            "creativePack"
+          ]
+        },
+        "name": "Paid Ads Specialist",
+        "outputSchema": {
+          "required": [
+            "metaAds",
+            "googleAds",
+            "audiences",
+            "testingPlan"
+          ]
+        },
+        "promptContract": "Create paid ad concepts without spending budget.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create Meta and Google ad concepts with hooks, audiences, and CTAs.",
+        "section": "adConcepts",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-304",
+      "employeeName": "Paid Ads Specialist",
+      "googleAds": [
+        {
+          "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+          "headline": "Premium Wooden Learning Toys"
+        }
+      ],
+      "keywordResearch": [
+        "wooden educational toys India",
+        "Montessori toys India",
+        "logic toys for kids",
+        "screen free toys"
+      ],
+      "metaAds": [
+        {
+          "creative": "Parent-child pattern play",
+          "cta": "Join the founding batch",
+          "hook": "A premium wooden toy that teaches before it explains."
+        },
+        {
+          "creative": "Luma Logic Cubes unboxing",
+          "cta": "See the Starter kit",
+          "hook": "Screen-free play for ages 3-5."
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 81,
+      "section": "adConcepts",
+      "status": "COMPLETED",
+      "testingPlan": [
+        "Test learning benefit hook vs gifting hook",
+        "Test Starter kit image vs parent-child lifestyle image"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "bullets": [
+        "Builds logic, pattern recognition, and motor skills",
+        "Premium wooden pieces with rounded-edge design",
+        "Gift-ready packaging for birthdays and early learning",
+        "Includes activity cards for guided play"
+      ],
+      "comparisonTable": {
+        "Premium": "24 cubes and gift packaging",
+        "Standard": "12 cubes",
+        "Starter": "6 cubes"
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "creativePack"
+          ]
+        },
+        "name": "Marketplace Listing Specialist",
+        "outputSchema": {
+          "required": [
+            "title",
+            "bullets",
+            "description",
+            "imageOrder"
+          ]
+        },
+        "promptContract": "Create marketplace listing assets for conversion.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create marketplace listing copy, bullets, image order, and FAQ.",
+        "section": "marketplaceListing",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+      "employeeId": "EMP-305",
+      "employeeName": "Marketplace Listing Specialist",
+      "faq": [
+        {
+          "answer": "Designed for children aged 3-5 with adult supervision.",
+          "question": "What age is this for?"
+        }
+      ],
+      "imageOrder": [
+        "Hero",
+        "What's in the box",
+        "Learning benefits",
+        "Material trust",
+        "Variant comparison"
+      ],
+      "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 85,
+      "section": "marketplaceListing",
+      "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+      "status": "COMPLETED",
+      "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy",
+            "creativePack"
+          ]
+        },
+        "name": "Landing Page Copywriter",
+        "outputSchema": {
+          "required": [
+            "hero",
+            "sections",
+            "cta",
+            "faq"
+          ]
+        },
+        "promptContract": "Write a launch landing page that captures demand.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create landing page structure, headlines, proof, CTA, and FAQ.",
+        "section": "landingPageCopy",
+        "timeoutSeconds": 30
+      },
+      "cta": "Reserve early access",
+      "department": "MARKETING",
+      "employeeId": "EMP-306",
+      "employeeName": "Landing Page Copywriter",
+      "faq": [
+        {
+          "answer": "Certification and safety claims are reviewed before production release.",
+          "question": "Is it certified?"
+        }
+      ],
+      "funnelRole": "Convert warm social and search traffic into waitlist leads before inventory commitment.",
+      "hero": {
+        "cta": "Join the founding batch",
+        "headline": "Premium wooden play for curious little minds",
+        "subheadline": "A screen-free logic kit for children aged 3-5."
+      },
+      "leadMagnet": "Printable screen-free pattern activity sheet",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 84,
+      "section": "landingPageCopy",
+      "sections": [
+        "Problem",
+        "How it works",
+        "Inside the box",
+        "Why parents trust it",
+        "Variants",
+        "FAQ"
+      ],
+      "status": "COMPLETED",
+      "upsellCopy": "Add expansion activity cards for a longer play journey.",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy"
+          ]
+        },
+        "name": "Email Campaign Specialist",
+        "outputSchema": {
+          "required": [
+            "sequence",
+            "subjects"
+          ]
+        },
+        "promptContract": "Create email campaign copy for launch and follow-up.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create launch email sequence.",
+        "section": "emailCampaign",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-307",
+      "employeeName": "Email Campaign Specialist",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 82,
+      "section": "emailCampaign",
+      "sequence": [
+        {
+          "body": "Thanks for joining the founding batch list. We are building premium screen-free learning for ages 3-5.",
+          "day": 0,
+          "purpose": "Waitlist welcome"
+        },
+        {
+          "body": "Here is how pattern play supports early logic and motor skills.",
+          "day": 2,
+          "purpose": "Product education"
+        },
+        {
+          "body": "The first founding batch is ready for early parent feedback.",
+          "day": 5,
+          "purpose": "Launch CTA"
+        }
+      ],
+      "status": "COMPLETED",
+      "subjects": [
+        "A calmer way to build early logic",
+        "Founding batch opens soon",
+        "Inside the wooden logic kit"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "broadcasts": [
+        "Hi, our premium wooden logic toy founding batch is opening soon. Would you like early access?",
+        "The Starter kit includes wooden cubes, activity cards, and gift-ready packaging."
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy"
+          ]
+        },
+        "name": "WhatsApp Campaign Specialist",
+        "outputSchema": {
+          "required": [
+            "broadcasts",
+            "replyScripts"
+          ]
+        },
+        "promptContract": "Create concise WhatsApp launch messages for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create WhatsApp broadcast and reply scripts.",
+        "section": "whatsappCampaign",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-308",
+      "employeeName": "WhatsApp Campaign Specialist",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "replyScripts": [
+        {
+          "intent": "price",
+          "reply": "The final launch price will be confirmed after founder-batch supplier quotes."
+        },
+        {
+          "intent": "age",
+          "reply": "It is designed for children aged 3-5 with adult supervision."
+        }
+      ],
+      "risks": [],
+      "score": 80,
+      "section": "whatsappCampaign",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "collaborationPlan": [
+        "Send sample after safety review",
+        "Request honest play demo",
+        "Use affiliate code after founder approval"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy"
+          ]
+        },
+        "name": "Influencer Strategist",
+        "outputSchema": {
+          "required": [
+            "creatorProfiles",
+            "outreachScript",
+            "collaborationPlan"
+          ]
+        },
+        "promptContract": "Create a practical influencer launch plan.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create influencer profile, outreach script, and collaboration plan.",
+        "section": "influencerStrategy",
+        "timeoutSeconds": 30
+      },
+      "creatorProfiles": [
+        "Montessori parent educator",
+        "Indian parenting micro-creator",
+        "Preschool activity creator"
+      ],
+      "department": "MARKETING",
+      "employeeId": "EMP-309",
+      "employeeName": "Influencer Strategist",
+      "outreachScript": "Hi, we are launching a premium screen-free wooden logic toy for ages 3-5 and would love your honest parent-focused feedback.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 79,
+      "section": "influencerStrategy",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    {
+      "approvalChecklist": [
+        {
+          "item": "Approve launch positioning",
+          "status": "READY"
+        },
+        {
+          "item": "Approve marketplace listing",
+          "status": "READY"
+        },
+        {
+          "item": "Approve social calendar",
+          "status": "READY"
+        },
+        {
+          "item": "Approve ad hooks before spend",
+          "status": "READY"
+        }
+      ],
+      "checks": [
+        {
+          "check": "Strategy aligns with creative pack",
+          "status": "PASS"
+        },
+        {
+          "check": "Launch channels covered",
+          "status": "PASS"
+        },
+        {
+          "check": "Marketplace copy ready",
+          "status": "PASS"
+        },
+        {
+          "check": "No spend/publishing automation triggered",
+          "status": "PASS"
+        }
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingSections"
+          ]
+        },
+        "name": "Launch Manager / QA",
+        "outputSchema": {
+          "required": [
+            "checks",
+            "launchPlan",
+            "approvalChecklist",
+            "risks"
+          ]
+        },
+        "promptContract": "Run marketing quality gates before publishing.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Validate campaign consistency, launch readiness, and founder approval needs.",
+        "section": "launchQaReport",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-310",
+      "employeeName": "Launch Manager / QA",
+      "launchPlan": [
+        "Finalize founder approval",
+        "Collect sample visuals",
+        "Open waitlist",
+        "Run founding batch campaign",
+        "Collect reviews"
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [
+        "Ad performance cannot be estimated until live campaigns run.",
+        "Compliance-sensitive claims need review before publishing."
+      ],
+      "score": 82,
+      "section": "launchQaReport",
+      "status": "COMPLETED",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    }
+  ],
+  "executiveSummary": "Genesis Marketing Engine generated a launch-ready Marketing Pack for LumaLearn.",
+  "founderApprovalChecklist": [
+    {
+      "item": "Approve launch positioning",
+      "status": "READY"
+    },
+    {
+      "item": "Approve marketplace listing",
+      "status": "READY"
+    },
+    {
+      "item": "Approve social calendar",
+      "status": "READY"
+    },
+    {
+      "item": "Approve ad hooks before spend",
+      "status": "READY"
+    }
+  ],
+  "founderNotification": {
+    "message": "Marketing Launch Package is complete and ready for founder approval before Sales execution.",
+    "status": "READY_FOR_REVIEW"
+  },
+  "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+  "hashtagPlan": [
+    "woodentoysindia",
+    "educationaltoys",
+    "screenfreeplay",
+    "toddlertoys",
+    "earlylearning"
+  ],
+  "influencerStrategy": {
+    "collaborationPlan": [
+      "Send sample after safety review",
+      "Request honest play demo",
+      "Use affiliate code after founder approval"
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy"
+        ]
+      },
+      "name": "Influencer Strategist",
+      "outputSchema": {
+        "required": [
+          "creatorProfiles",
+          "outreachScript",
+          "collaborationPlan"
+        ]
+      },
+      "promptContract": "Create a practical influencer launch plan.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create influencer profile, outreach script, and collaboration plan.",
+      "section": "influencerStrategy",
+      "timeoutSeconds": 30
+    },
+    "creatorProfiles": [
+      "Montessori parent educator",
+      "Indian parenting micro-creator",
+      "Preschool activity creator"
+    ],
+    "department": "MARKETING",
+    "employeeId": "EMP-309",
+    "employeeName": "Influencer Strategist",
+    "outreachScript": "Hi, we are launching a premium screen-free wooden logic toy for ages 3-5 and would love your honest parent-focused feedback.",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 79,
+    "section": "influencerStrategy",
+    "status": "COMPLETED",
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "knowledgeBaseEntries": [
+    {
+      "lesson": "Marketing begins with GTM strategy before channel content.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "type": "MARKETING_STRATEGY"
+    },
+    {
+      "lesson": "Demand generation should hand structured leads and scripts into Sales.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "type": "SALES_HANDOFF"
+    }
+  ],
+  "landingPageCopy": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy",
+          "creativePack"
+        ]
+      },
+      "name": "Landing Page Copywriter",
+      "outputSchema": {
+        "required": [
+          "hero",
+          "sections",
+          "cta",
+          "faq"
+        ]
+      },
+      "promptContract": "Write a launch landing page that captures demand.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create landing page structure, headlines, proof, CTA, and FAQ.",
+      "section": "landingPageCopy",
+      "timeoutSeconds": 30
+    },
+    "cta": "Reserve early access",
+    "department": "MARKETING",
+    "employeeId": "EMP-306",
+    "employeeName": "Landing Page Copywriter",
+    "faq": [
+      {
+        "answer": "Certification and safety claims are reviewed before production release.",
+        "question": "Is it certified?"
+      }
+    ],
+    "funnelRole": "Convert warm social and search traffic into waitlist leads before inventory commitment.",
+    "hero": {
+      "cta": "Join the founding batch",
+      "headline": "Premium wooden play for curious little minds",
+      "subheadline": "A screen-free logic kit for children aged 3-5."
+    },
+    "leadMagnet": "Printable screen-free pattern activity sheet",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 84,
+    "section": "landingPageCopy",
+    "sections": [
+      "Problem",
+      "How it works",
+      "Inside the box",
+      "Why parents trust it",
+      "Variants",
+      "FAQ"
+    ],
+    "status": "COMPLETED",
+    "upsellCopy": "Add expansion activity cards for a longer play journey.",
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "launchPlan": [
+    "Finalize founder approval",
+    "Collect sample visuals",
+    "Open waitlist",
+    "Run founding batch campaign",
+    "Collect reviews"
+  ],
+  "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
+  "launchReadinessScore": {
+    "blockingIssues": [
+      "Confirm budget availability",
+      "Verify final supplier/manufacturing assumptions before publishing"
+    ],
+    "dimensions": {
+      "brandingCompleteness": 85,
+      "budgetAvailability": 72,
+      "manufacturingReadiness": 78,
+      "marketingCompleteness": 83,
+      "productReadiness": 82,
+      "researchQuality": 84,
+      "riskAssessment": 76
+    },
+    "recommendation": "HOLD_FOR_FOUNDER_REVIEW",
+    "score": 80,
+    "threshold": 85
+  },
+  "launchRoadmap": [
+    "Week 1: waitlist and education",
+    "Week 2: sample/demo content",
+    "Week 3: founding batch offer",
+    "Week 4: reviews and referrals"
+  ],
+  "marketingBudget": {
+    "allocation": {
+      "content": 10000,
+      "influencers": 10000,
+      "metaAds": 20000,
+      "samples": 10000
+    },
+    "currency": "INR",
+    "pilotBudget": 50000
+  },
+  "marketingCalendar": {
+    "campaignOverlap": {
+      "notes": "Education and trust campaigns support the same founder-batch launch.",
+      "status": "NO_BLOCKING_OVERLAP"
+    },
+    "contentDeadlines": [
+      "Day 0",
+      "Day 2",
+      "Day 4",
+      "Day 6"
+    ],
+    "dailyPosts": [
+      {
+        "campaign": "Founder Batch Awareness",
+        "caption": "Playtime can build more than attention.",
+        "day": 1,
+        "deadline": "Day 0",
+        "dependencies": [
+          "brand visuals"
+        ],
+        "format": "carousel",
+        "theme": "Problem awareness"
+      },
+      {
+        "campaign": "Product Education",
+        "caption": "Can your little one finish the pattern?",
+        "day": 3,
+        "deadline": "Day 2",
+        "dependencies": [
+          "mockup video"
+        ],
+        "format": "reel",
+        "theme": "Pattern challenge"
+      },
+      {
+        "campaign": "Trust Proof",
+        "caption": "Rounded wood, calm colors, thoughtful play.",
+        "day": 5,
+        "deadline": "Day 4",
+        "dependencies": [
+          "product close-up"
+        ],
+        "format": "static",
+        "theme": "Material trust"
+      },
+      {
+        "campaign": "Waitlist Conversion",
+        "caption": "Founding batch opens soon.",
+        "day": 7,
+        "deadline": "Day 6",
+        "dependencies": [
+          "landing page"
+        ],
+        "format": "story",
+        "theme": "Waitlist push"
+      }
+    ],
+    "dependencies": {
+      "1": [
+        "brand visuals"
+      ],
+      "3": [
+        "mockup video"
+      ],
+      "5": [
+        "product close-up"
+      ],
+      "7": [
+        "landing page"
+      ]
+    },
+    "monthlyThemes": [
+      "Screen-free learning",
+      "Material trust",
+      "Founding batch",
+      "Parent proof"
+    ],
+    "productLaunches": [
+      "Founder batch launch"
+    ],
+    "promotionalPeriods": [
+      "Founder batch",
+      "Bundle offer",
+      "Referral week"
+    ],
+    "scheduleExport": {
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "supported": true
+    },
+    "seasonalEvents": [
+      "Children's Day",
+      "Birthday gifting season",
+      "Back-to-school"
+    ],
+    "weeklyCampaigns": [
+      "Awareness week",
+      "Education week",
+      "Offer week",
+      "Review and referral week"
+    ]
+  },
+  "marketingContent": {
+    "blogOutlines": [
+      "How screen-free toys build early logic",
+      "Best wooden learning toys for ages 3-5",
+      "Why parents choose open-ended play"
+    ],
+    "brandVoice": "Warm expert, clear parent guide, quietly playful",
+    "campaignLinks": [
+      "Founder Batch Awareness",
+      "Product Education",
+      "Trust Proof",
+      "Waitlist Conversion"
+    ],
+    "emailCopy": [
+      {
+        "body": "Thanks for joining the founding batch list. We are building premium screen-free learning for ages 3-5.",
+        "day": 0,
+        "purpose": "Waitlist welcome"
+      },
+      {
+        "body": "Here is how pattern play supports early logic and motor skills.",
+        "day": 2,
+        "purpose": "Product education"
+      },
+      {
+        "body": "The first founding batch is ready for early parent feedback.",
+        "day": 5,
+        "purpose": "Launch CTA"
+      }
+    ],
+    "facebookCaptions": [
+      "Screen-free play prompt",
+      "Why we built this toy"
+    ],
+    "instagramCaptions": [
+      "Screen-free play, made a little smarter.",
+      "Premium wooden play for curious little minds.",
+      "The founding batch is almost ready."
+    ],
+    "linkedinCopy": "Use only if targeting preschool partnerships or founder build-in-public credibility.",
+    "marketplaceCopy": {
+      "bullets": [
+        "Builds logic, pattern recognition, and motor skills",
+        "Premium wooden pieces with rounded-edge design",
+        "Gift-ready packaging for birthdays and early learning",
+        "Includes activity cards for guided play"
+      ],
+      "comparisonTable": {
+        "Premium": "24 cubes and gift packaging",
+        "Standard": "12 cubes",
+        "Starter": "6 cubes"
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "productBlueprint",
+            "creativePack"
+          ]
+        },
+        "name": "Marketplace Listing Specialist",
+        "outputSchema": {
+          "required": [
+            "title",
+            "bullets",
+            "description",
+            "imageOrder"
+          ]
+        },
+        "promptContract": "Create marketplace listing assets for conversion.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create marketplace listing copy, bullets, image order, and FAQ.",
+        "section": "marketplaceListing",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+      "employeeId": "EMP-305",
+      "employeeName": "Marketplace Listing Specialist",
+      "faq": [
+        {
+          "answer": "Designed for children aged 3-5 with adult supervision.",
+          "question": "What age is this for?"
+        }
+      ],
+      "imageOrder": [
+        "Hero",
+        "What's in the box",
+        "Learning benefits",
+        "Material trust",
+        "Variant comparison"
+      ],
+      "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 85,
+      "section": "marketplaceListing",
+      "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+      "status": "COMPLETED",
+      "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    "pinterestDescriptions": [
+      "Pin activity ideas, gift guides, and Montessori-inspired play setups."
+    ],
+    "productDescriptions": [
+      "A premium educational wooden toy kit designed for safe, screen-free learning at home."
+    ],
+    "whatsappMessages": [
+      "Hi, our premium wooden logic toy founding batch is opening soon. Would you like early access?",
+      "The Starter kit includes wooden cubes, activity cards, and gift-ready packaging."
+    ],
+    "xPosts": [
+      "Screen-free play can still feel premium.",
+      "Founder batch soon: logic cubes for ages 3-5."
+    ]
+  },
+  "marketingDepartment": {
+    "entryCriteria": [
+      "Creative Studio completed",
+      "Brand guidelines approved",
+      "Product Blueprint available",
+      "Creative Package available"
+    ],
+    "output": "Marketing Launch Package",
+    "status": "READY"
+  },
+  "marketingDirector": {
+    "assignmentStatus": "ASSIGNED",
+    "employeeId": "EMP-310",
+    "name": "Launch Manager / QA",
+    "responsibilities": [
+      "Validate marketing readiness",
+      "Coordinate launch kit",
+      "Prepare publishing handoff"
+    ]
+  },
+  "marketingExecutionPlan": {
+    "automation": "FULLY_AUTOMATED",
+    "employees": [
+      "marketingStrategy",
+      "seoPlan",
+      "socialCalendar",
+      "adConcepts",
+      "marketplaceListing",
+      "landingPageCopy",
+      "emailCampaign",
+      "whatsappCampaign",
+      "influencerStrategy",
+      "launchQaReport"
+    ],
+    "steps": [
+      "GTM strategy",
+      "Acquisition",
+      "Content strategy",
+      "Calendar",
+      "Content",
+      "Advertising",
+      "Sales funnel",
+      "Launch kit",
+      "Validation"
+    ]
+  },
+  "marketingId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "marketingLaunchKit": {
+    "advertisingStrategy": {
+      "abTestMatrix": [
+        {
+          "test": "Hook",
+          "variantA": "Learning benefit",
+          "variantB": "Premium gift"
+        },
+        {
+          "test": "Creative",
+          "variantA": "Product hero",
+          "variantB": "Parent-child lifestyle"
+        }
+      ],
+      "amazonAdsStrategy": {
+        "campaignType": "Sponsored Products placeholder",
+        "keywords": [
+          "wooden educational toys",
+          "toys for 3 year olds"
+        ],
+        "status": "READY_FOR_SELLER_ACCOUNT"
+      },
+      "audienceSegmentation": [
+        {
+          "message": "Build early logic",
+          "segment": "Learning parent"
+        },
+        {
+          "message": "Premium useful gift",
+          "segment": "Gift buyer"
+        }
+      ],
+      "audiences": [
+        "Parents 25-40 in Indian metros",
+        "Montessori and preschool interest",
+        "Premium gifting buyers"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.75
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "marketingStrategy",
+            "creativePack"
+          ]
+        },
+        "name": "Paid Ads Specialist",
+        "outputSchema": {
+          "required": [
+            "metaAds",
+            "googleAds",
+            "audiences",
+            "testingPlan"
+          ]
+        },
+        "promptContract": "Create paid ad concepts without spending budget.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Create Meta and Google ad concepts with hooks, audiences, and CTAs.",
+        "section": "adConcepts",
+        "timeoutSeconds": 30
+      },
+      "department": "MARKETING",
+      "employeeId": "EMP-304",
+      "employeeName": "Paid Ads Specialist",
+      "googleAds": [
+        {
+          "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+          "headline": "Premium Wooden Learning Toys"
+        }
+      ],
+      "keywordResearch": [
+        "wooden educational toys India",
+        "Montessori toys India",
+        "logic toys for kids",
+        "screen free toys"
+      ],
+      "metaAds": [
+        {
+          "creative": "Parent-child pattern play",
+          "cta": "Join the founding batch",
+          "hook": "A premium wooden toy that teaches before it explains."
+        },
+        {
+          "creative": "Luma Logic Cubes unboxing",
+          "cta": "See the Starter kit",
+          "hook": "Screen-free play for ages 3-5."
+        }
+      ],
+      "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+      "risks": [],
+      "score": 81,
+      "section": "adConcepts",
+      "status": "COMPLETED",
+      "testingPlan": [
+        "Test learning benefit hook vs gifting hook",
+        "Test Starter kit image vs parent-child lifestyle image"
+      ],
+      "validation": {
+        "business": "PASS",
+        "channel": "PASS",
+        "confidence": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+    },
+    "assetsLinked": true,
+    "budgetPlan": {
+      "allocation": {
+        "content": 10000,
+        "influencers": 10000,
+        "metaAds": 20000,
+        "samples": 10000
+      },
+      "currency": "INR",
+      "pilotBudget": 50000
+    },
+    "channelStrategy": {
+      "email": "Waitlist nurturing",
+      "instagram": "Trust and discovery",
+      "marketplace": "Conversion",
+      "whatsapp": "Warm lead follow-up"
+    },
+    "contentCalendar": {
+      "campaignOverlap": {
+        "notes": "Education and trust campaigns support the same founder-batch launch.",
+        "status": "NO_BLOCKING_OVERLAP"
+      },
+      "contentDeadlines": [
+        "Day 0",
+        "Day 2",
+        "Day 4",
+        "Day 6"
+      ],
+      "dailyPosts": [
+        {
+          "campaign": "Founder Batch Awareness",
+          "caption": "Playtime can build more than attention.",
+          "day": 1,
+          "deadline": "Day 0",
+          "dependencies": [
+            "brand visuals"
+          ],
+          "format": "carousel",
+          "theme": "Problem awareness"
+        },
+        {
+          "campaign": "Product Education",
+          "caption": "Can your little one finish the pattern?",
+          "day": 3,
+          "deadline": "Day 2",
+          "dependencies": [
+            "mockup video"
+          ],
+          "format": "reel",
+          "theme": "Pattern challenge"
+        },
+        {
+          "campaign": "Trust Proof",
+          "caption": "Rounded wood, calm colors, thoughtful play.",
+          "day": 5,
+          "deadline": "Day 4",
+          "dependencies": [
+            "product close-up"
+          ],
+          "format": "static",
+          "theme": "Material trust"
+        },
+        {
+          "campaign": "Waitlist Conversion",
+          "caption": "Founding batch opens soon.",
+          "day": 7,
+          "deadline": "Day 6",
+          "dependencies": [
+            "landing page"
+          ],
+          "format": "story",
+          "theme": "Waitlist push"
+        }
+      ],
+      "dependencies": {
+        "1": [
+          "brand visuals"
+        ],
+        "3": [
+          "mockup video"
+        ],
+        "5": [
+          "product close-up"
+        ],
+        "7": [
+          "landing page"
+        ]
+      },
+      "monthlyThemes": [
+        "Screen-free learning",
+        "Material trust",
+        "Founding batch",
+        "Parent proof"
+      ],
+      "productLaunches": [
+        "Founder batch launch"
+      ],
+      "promotionalPeriods": [
+        "Founder batch",
+        "Bundle offer",
+        "Referral week"
+      ],
+      "scheduleExport": {
+        "formats": [
+          "json",
+          "csv"
+        ],
+        "supported": true
+      },
+      "seasonalEvents": [
+        "Children's Day",
+        "Birthday gifting season",
+        "Back-to-school"
+      ],
+      "weeklyCampaigns": [
+        "Awareness week",
+        "Education week",
+        "Offer week",
+        "Review and referral week"
+      ]
+    },
+    "downloadable": {
+      "formats": [
+        "json"
+      ],
+      "supported": true
+    },
+    "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+    "kpis": [
+      "CAC",
+      "Waitlist conversion",
+      "Landing page conversion",
+      "AOV",
+      "Review rate",
+      "Referral rate"
+    ],
+    "launchChecklist": [
+      {
+        "item": "Approve launch positioning",
+        "status": "READY"
+      },
+      {
+        "item": "Approve marketplace listing",
+        "status": "READY"
+      },
+      {
+        "item": "Approve social calendar",
+        "status": "READY"
+      },
+      {
+        "item": "Approve ad hooks before spend",
+        "status": "READY"
+      }
+    ],
+    "marketingContent": {
+      "blogOutlines": [
+        "How screen-free toys build early logic",
+        "Best wooden learning toys for ages 3-5",
+        "Why parents choose open-ended play"
+      ],
+      "brandVoice": "Warm expert, clear parent guide, quietly playful",
+      "campaignLinks": [
+        "Founder Batch Awareness",
+        "Product Education",
+        "Trust Proof",
+        "Waitlist Conversion"
+      ],
+      "emailCopy": [
+        {
+          "body": "Thanks for joining the founding batch list. We are building premium screen-free learning for ages 3-5.",
+          "day": 0,
+          "purpose": "Waitlist welcome"
+        },
+        {
+          "body": "Here is how pattern play supports early logic and motor skills.",
+          "day": 2,
+          "purpose": "Product education"
+        },
+        {
+          "body": "The first founding batch is ready for early parent feedback.",
+          "day": 5,
+          "purpose": "Launch CTA"
+        }
+      ],
+      "facebookCaptions": [
+        "Screen-free play prompt",
+        "Why we built this toy"
+      ],
+      "instagramCaptions": [
+        "Screen-free play, made a little smarter.",
+        "Premium wooden play for curious little minds.",
+        "The founding batch is almost ready."
+      ],
+      "linkedinCopy": "Use only if targeting preschool partnerships or founder build-in-public credibility.",
+      "marketplaceCopy": {
+        "bullets": [
+          "Builds logic, pattern recognition, and motor skills",
+          "Premium wooden pieces with rounded-edge design",
+          "Gift-ready packaging for birthdays and early learning",
+          "Includes activity cards for guided play"
+        ],
+        "comparisonTable": {
+          "Premium": "24 cubes and gift packaging",
+          "Standard": "12 cubes",
+          "Starter": "6 cubes"
+        },
+        "confidence": {
+          "level": "MEDIUM",
+          "score": 0.75
+        },
+        "contract": {
+          "inputSchema": {
+            "required": [
+              "productBlueprint",
+              "creativePack"
+            ]
+          },
+          "name": "Marketplace Listing Specialist",
+          "outputSchema": {
+            "required": [
+              "title",
+              "bullets",
+              "description",
+              "imageOrder"
+            ]
+          },
+          "promptContract": "Create marketplace listing assets for conversion.",
+          "retryPolicy": {
+            "maxAttempts": 2
+          },
+          "role": "Create marketplace listing copy, bullets, image order, and FAQ.",
+          "section": "marketplaceListing",
+          "timeoutSeconds": 30
+        },
+        "department": "MARKETING",
+        "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+        "employeeId": "EMP-305",
+        "employeeName": "Marketplace Listing Specialist",
+        "faq": [
+          {
+            "answer": "Designed for children aged 3-5 with adult supervision.",
+            "question": "What age is this for?"
+          }
+        ],
+        "imageOrder": [
+          "Hero",
+          "What's in the box",
+          "Learning benefits",
+          "Material trust",
+          "Variant comparison"
+        ],
+        "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+        "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+        "risks": [],
+        "score": 85,
+        "section": "marketplaceListing",
+        "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+        "status": "COMPLETED",
+        "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+        "validation": {
+          "business": "PASS",
+          "channel": "PASS",
+          "confidence": "PASS",
+          "risk": "PASS",
+          "schema": "PASS"
+        },
+        "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+      },
+      "pinterestDescriptions": [
+        "Pin activity ideas, gift guides, and Montessori-inspired play setups."
+      ],
+      "productDescriptions": [
+        "A premium educational wooden toy kit designed for safe, screen-free learning at home."
+      ],
+      "whatsappMessages": [
+        "Hi, our premium wooden logic toy founding batch is opening soon. Would you like early access?",
+        "The Starter kit includes wooden cubes, activity cards, and gift-ready packaging."
+      ],
+      "xPosts": [
+        "Screen-free play can still feel premium.",
+        "Founder batch soon: logic cubes for ages 3-5."
+      ]
+    },
+    "readiness": {
+      "blockingIssues": [
+        "Confirm budget availability",
+        "Verify final supplier/manufacturing assumptions before publishing"
+      ],
+      "dimensions": {
+        "brandingCompleteness": 85,
+        "budgetAvailability": 72,
+        "manufacturingReadiness": 78,
+        "marketingCompleteness": 83,
+        "productReadiness": 82,
+        "researchQuality": 84,
+        "riskAssessment": 76
+      },
+      "recommendation": "HOLD_FOR_FOUNDER_REVIEW",
+      "score": 80,
+      "threshold": 85
+    },
+    "salesFunnel": [
+      "Awareness",
+      "Waitlist",
+      "Founder batch",
+      "Marketplace conversion",
+      "Review collection"
+    ],
+    "version": "1.0"
+  },
+  "marketingStrategy": {
+    "channelPrioritization": [
+      {
+        "budgetAllocation": 12000,
+        "channel": "Instagram",
+        "priority": 1,
+        "strength": "Visual trust and parent discovery"
+      },
+      {
+        "budgetAllocation": 8000,
+        "channel": "Marketplace",
+        "priority": 2,
+        "strength": "Conversion intent"
+      },
+      {
+        "budgetAllocation": 3000,
+        "channel": "WhatsApp",
+        "priority": 3,
+        "strength": "Warm lead conversion"
+      },
+      {
+        "budgetAllocation": 5000,
+        "channel": "SEO",
+        "priority": 4,
+        "strength": "Compounding discovery"
+      }
+    ],
+    "channelStrategy": {
+      "email": "Waitlist nurturing",
+      "instagram": "Trust and discovery",
+      "marketplace": "Conversion",
+      "whatsapp": "Warm lead follow-up"
+    },
+    "competitiveDifferentiation": "Clear parent benefit, premium natural material story, and a complete Starter/Standard/Premium product family.",
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "creativePack"
+        ]
+      },
+      "name": "Marketing Strategist",
+      "outputSchema": {
+        "required": [
+          "launchPositioning",
+          "customerPersonas",
+          "channelStrategy",
+          "funnel"
+        ]
+      },
+      "promptContract": "Convert product and creative assets into a launch strategy.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Define launch strategy, personas, channels, funnel, and positioning.",
+      "section": "marketingStrategy",
+      "timeoutSeconds": 30
+    },
+    "customerAcquisitionStrategy": "Use educational content and founding-batch scarcity to capture parent leads before paid conversion testing.",
+    "customerJourney": [
+      "Awareness",
+      "Interest",
+      "Consideration",
+      "Purchase",
+      "Onboarding",
+      "Retention",
+      "Referral"
+    ],
+    "customerPersonas": [
+      {
+        "name": "Urban learning-focused parent",
+        "need": "Premium safe learning toy",
+        "trigger": "Birthday or preschool readiness"
+      },
+      {
+        "name": "Gift buyer",
+        "need": "Useful premium child gift",
+        "trigger": "Occasion gifting"
+      }
+    ],
+    "customerSegments": [
+      {
+        "message": "Build early logic through calm screen-free play.",
+        "priority": 1,
+        "segment": "Urban learning-focused parents"
+      },
+      {
+        "message": "A useful, beautiful gift parents understand quickly.",
+        "priority": 2,
+        "segment": "Premium child gift buyers"
+      },
+      {
+        "message": "Simple hands-on pattern activities for small-group learning.",
+        "priority": 3,
+        "segment": "Preschool educators"
+      }
+    ],
+    "department": "MARKETING",
+    "employeeId": "EMP-301",
+    "employeeName": "Marketing Strategist",
+    "funnel": [
+      "Awareness",
+      "Waitlist",
+      "Founder batch",
+      "Marketplace conversion",
+      "Review collection"
+    ],
+    "goToMarketStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+    "launchObjectives": [
+      "Open founding batch waitlist",
+      "Validate purchase intent",
+      "Collect first reviews",
+      "Prepare repeatable channel data"
+    ],
+    "launchPositioning": "LumaLearn launches as a premium screen-free learning brand for parents of children aged 3-5 in India.",
+    "launchRoadmap": [
+      "Week 1: waitlist and education",
+      "Week 2: sample/demo content",
+      "Week 3: founding batch offer",
+      "Week 4: reviews and referrals"
+    ],
+    "marketingBudget": {
+      "allocation": {
+        "content": 10000,
+        "influencers": 10000,
+        "metaAds": 20000,
+        "samples": 10000
+      },
+      "currency": "INR",
+      "pilotBudget": 50000
+    },
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "referralStrategy": "Give founding parents a referral code for expansion-pack credit after first purchase.",
+    "retentionStrategy": "Post-purchase activity tips, expansion-card drops, review requests, and referral incentives.",
+    "risks": [],
+    "salesChannels": [
+      "Instagram",
+      "WhatsApp",
+      "Amazon/marketplace",
+      "Shopify landing page",
+      "Parent communities"
+    ],
+    "score": 86,
+    "section": "marketingStrategy",
+    "status": "COMPLETED",
+    "successKpis": [
+      "CAC",
+      "Waitlist conversion",
+      "Landing page conversion",
+      "AOV",
+      "Review rate",
+      "Referral rate"
+    ],
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "marketplaceListing": {
+    "bullets": [
+      "Builds logic, pattern recognition, and motor skills",
+      "Premium wooden pieces with rounded-edge design",
+      "Gift-ready packaging for birthdays and early learning",
+      "Includes activity cards for guided play"
+    ],
+    "comparisonTable": {
+      "Premium": "24 cubes and gift packaging",
+      "Standard": "12 cubes",
+      "Starter": "6 cubes"
+    },
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "productBlueprint",
+          "creativePack"
+        ]
+      },
+      "name": "Marketplace Listing Specialist",
+      "outputSchema": {
+        "required": [
+          "title",
+          "bullets",
+          "description",
+          "imageOrder"
+        ]
+      },
+      "promptContract": "Create marketplace listing assets for conversion.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create marketplace listing copy, bullets, image order, and FAQ.",
+      "section": "marketplaceListing",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "description": "A premium educational wooden toy kit designed for safe, screen-free learning at home.",
+    "employeeId": "EMP-305",
+    "employeeName": "Marketplace Listing Specialist",
+    "faq": [
+      {
+        "answer": "Designed for children aged 3-5 with adult supervision.",
+        "question": "What age is this for?"
+      }
+    ],
+    "imageOrder": [
+      "Hero",
+      "What's in the box",
+      "Learning benefits",
+      "Material trust",
+      "Variant comparison"
+    ],
+    "metaDescription": "Premium wooden educational toy for screen-free logic, motor skills, and pattern play.",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 85,
+    "section": "marketplaceListing",
+    "seoTitle": "LumaLearn Luma Logic Cubes for Ages 3-5",
+    "status": "COMPLETED",
+    "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5",
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "nextActions": [
+    "Founder approves marketing positioning and launch calendar.",
+    "Attach final creative assets from Sprint 4 visual production.",
+    "Hand approved Marketing Pack to Sprint 6 Sales Department."
+  ],
+  "overallScore": 82,
+  "productBlueprintLoaded": true,
+  "productId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+  "referralStrategy": "Give founding parents a referral code for expansion-pack credit after first purchase.",
+  "reportType": "MARKETING_PACK",
+  "retentionStrategy": "Post-purchase activity tips, expansion-card drops, review requests, and referral incentives.",
+  "risks": [
+    {
+      "mitigation": "Use Sprint 6 Publishing Engine for approved automation.",
+      "risk": "Marketing Pack does not publish or spend budget in Sprint 5 MVP.",
+      "severity": "LOW"
+    },
+    {
+      "mitigation": "Track analytics after launch and feed Sprint 7 intelligence.",
+      "risk": "Performance estimates require live campaign data.",
+      "severity": "MEDIUM"
+    }
+  ],
+  "salesFunnel": {
+    "bundles": [
+      {
+        "contents": [
+          "Core product",
+          "Simple packaging"
+        ],
+        "level": "Starter",
+        "name": "Luma Logic Cubes Starter",
+        "purpose": "Validate demand with minimum inventory risk"
+      },
+      {
+        "contents": [
+          "Core product",
+          "Bonus item",
+          "Gift-ready packaging"
+        ],
+        "level": "Standard",
+        "name": "Luma Logic Cubes Standard",
+        "purpose": "Increase perceived value"
+      },
+      {
+        "contents": [
+          "Expanded product set",
+          "Premium packaging"
+        ],
+        "level": "Premium",
+        "name": "Luma Logic Cubes Premium",
+        "purpose": "Serve gifting and higher-margin buyers"
+      },
+      {
+        "contents": [
+          "Multiple units",
+          "Occasion-based bundle"
+        ],
+        "level": "Bundle",
+        "name": "Luma Logic Cubes Bundle",
+        "purpose": "Raise average order value"
+      },
+      {
+        "contents": [
+          "Recurring monthly variation"
+        ],
+        "level": "Subscription",
+        "name": "Luma Logic Cubes Club",
+        "purpose": "Test repeat purchase potential"
+      },
+      {
+        "contents": [
+          "Replacement or add-on parts"
+        ],
+        "level": "Accessories",
+        "name": "Luma Logic Cubes Accessories",
+        "purpose": "Create low-cost upsells"
+      },
+      {
+        "contents": [
+          "New themes",
+          "Advanced variants"
+        ],
+        "level": "Expansion Packs",
+        "name": "Luma Logic Cubes Expansion Pack",
+        "purpose": "Build a product family"
+      }
+    ],
+    "conversionGoals": {
+      "awarenessToInterest": "2% click-through",
+      "interestToLead": "10% waitlist conversion",
+      "leadToPurchase": "5% founder-batch conversion"
+    },
+    "crossSells": [
+      "Replacement cubes",
+      "Advanced pattern cards"
+    ],
+    "customerTouchpoints": [
+      "Instagram",
+      "SEO article",
+      "Landing page",
+      "WhatsApp reply",
+      "Marketplace listing",
+      "Email nurture"
+    ],
+    "dropOffRisks": [
+      "Low trust before sample visuals",
+      "Price objection",
+      "Safety claim uncertainty",
+      "Shipping delay concerns"
+    ],
+    "funnelArchitecture": [
+      "Awareness",
+      "Interest",
+      "Consideration",
+      "Purchase",
+      "Onboarding",
+      "Retention",
+      "Referral"
+    ],
+    "landingPages": [
+      {
+        "confidence": {
+          "level": "MEDIUM",
+          "score": 0.75
+        },
+        "contract": {
+          "inputSchema": {
+            "required": [
+              "marketingStrategy",
+              "creativePack"
+            ]
+          },
+          "name": "Landing Page Copywriter",
+          "outputSchema": {
+            "required": [
+              "hero",
+              "sections",
+              "cta",
+              "faq"
+            ]
+          },
+          "promptContract": "Write a launch landing page that captures demand.",
+          "retryPolicy": {
+            "maxAttempts": 2
+          },
+          "role": "Create landing page structure, headlines, proof, CTA, and FAQ.",
+          "section": "landingPageCopy",
+          "timeoutSeconds": 30
+        },
+        "cta": "Reserve early access",
+        "department": "MARKETING",
+        "employeeId": "EMP-306",
+        "employeeName": "Landing Page Copywriter",
+        "faq": [
+          {
+            "answer": "Certification and safety claims are reviewed before production release.",
+            "question": "Is it certified?"
+          }
+        ],
+        "funnelRole": "Convert warm social and search traffic into waitlist leads before inventory commitment.",
+        "hero": {
+          "cta": "Join the founding batch",
+          "headline": "Premium wooden play for curious little minds",
+          "subheadline": "A screen-free logic kit for children aged 3-5."
+        },
+        "leadMagnet": "Printable screen-free pattern activity sheet",
+        "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+        "risks": [],
+        "score": 84,
+        "section": "landingPageCopy",
+        "sections": [
+          "Problem",
+          "How it works",
+          "Inside the box",
+          "Why parents trust it",
+          "Variants",
+          "FAQ"
+        ],
+        "status": "COMPLETED",
+        "upsellCopy": "Add expansion activity cards for a longer play journey.",
+        "validation": {
+          "business": "PASS",
+          "channel": "PASS",
+          "confidence": "PASS",
+          "risk": "PASS",
+          "schema": "PASS"
+        },
+        "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+      }
+    ],
+    "leadMagnets": [
+      "Printable pattern activity sheet",
+      "Screen-free play guide"
+    ],
+    "subscriptionStrategy": "Monthly activity-card expansion after repeat demand is validated.",
+    "upsells": [
+      "Activity card expansion pack",
+      "Gift wrap"
+    ]
+  },
+  "salesTransition": {
+    "handoffArtifacts": [
+      "Marketing Pack",
+      "Campaign calendar",
+      "Lead magnets",
+      "WhatsApp scripts",
+      "Sales funnel"
+    ],
+    "nextDepartment": "SALES",
+    "status": "READY"
+  },
+  "seoPlan": {
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contentTopics": [
+      "How screen-free toys build early logic",
+      "Best wooden learning toys for ages 3-5",
+      "Why parents choose open-ended play"
+    ],
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy"
+        ]
+      },
+      "name": "SEO Specialist",
+      "outputSchema": {
+        "required": [
+          "keywords",
+          "contentTopics",
+          "titles",
+          "metaDescriptions"
+        ]
+      },
+      "promptContract": "Create search-ready launch content for discovery.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create SEO keywords, content topics, titles, and descriptions.",
+      "section": "seoPlan",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-302",
+    "employeeName": "SEO Specialist",
+    "keywords": [
+      "wooden educational toys India",
+      "toys for 3 year olds",
+      "premium wooden toys",
+      "screen free learning toys",
+      "logic toys for kids"
+    ],
+    "metaDescriptions": [
+      "Explore premium wooden logic cubes for children aged 3-5, designed for safe screen-free learning and gifting."
+    ],
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "risks": [],
+    "score": 82,
+    "section": "seoPlan",
+    "status": "COMPLETED",
+    "titles": [
+      "Premium Wooden Logic Toys for Ages 3-5",
+      "Screen-Free Learning Toys for Curious Kids"
+    ],
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "socialMediaPlan": {
+    "campaignOverlap": {
+      "notes": "Education and trust campaigns support the same founder-batch launch.",
+      "status": "NO_BLOCKING_OVERLAP"
+    },
+    "captionLibrary": [
+      "Try one pattern before breakfast.",
+      "A quieter kind of learning toy.",
+      "Made for little hands and big curiosity."
+    ],
+    "captions": [
+      "Screen-free play, made a little smarter.",
+      "Premium wooden play for curious little minds.",
+      "The founding batch is almost ready."
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "creativePack",
+          "marketingStrategy"
+        ]
+      },
+      "name": "Instagram Content Planner",
+      "outputSchema": {
+        "required": [
+          "instagramCalendar",
+          "captions",
+          "hashtags"
+        ]
+      },
+      "promptContract": "Plan launch content that builds trust and demand.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create Instagram calendar, captions, hashtags, stories, and reels.",
+      "section": "socialCalendar",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-303",
+    "employeeName": "Instagram Content Planner",
+    "exportFormats": [
+      "json",
+      "csv"
+    ],
+    "facebookCalendar": [
+      {
+        "day": 2,
+        "format": "parent group post",
+        "theme": "Screen-free play prompt"
+      },
+      {
+        "day": 6,
+        "format": "founder story",
+        "theme": "Why we built this toy"
+      }
+    ],
+    "hashtagLibrary": [
+      "woodentoysindia",
+      "educationaltoys",
+      "screenfreeplay",
+      "toddlertoys",
+      "earlylearning",
+      "montessoritoys"
+    ],
+    "hashtags": [
+      "woodentoysindia",
+      "educationaltoys",
+      "screenfreeplay",
+      "toddlertoys",
+      "earlylearning"
+    ],
+    "instagramCalendar": [
+      {
+        "campaign": "Founder Batch Awareness",
+        "caption": "Playtime can build more than attention.",
+        "day": 1,
+        "deadline": "Day 0",
+        "dependencies": [
+          "brand visuals"
+        ],
+        "format": "carousel",
+        "theme": "Problem awareness"
+      },
+      {
+        "campaign": "Product Education",
+        "caption": "Can your little one finish the pattern?",
+        "day": 3,
+        "deadline": "Day 2",
+        "dependencies": [
+          "mockup video"
+        ],
+        "format": "reel",
+        "theme": "Pattern challenge"
+      },
+      {
+        "campaign": "Trust Proof",
+        "caption": "Rounded wood, calm colors, thoughtful play.",
+        "day": 5,
+        "deadline": "Day 4",
+        "dependencies": [
+          "product close-up"
+        ],
+        "format": "static",
+        "theme": "Material trust"
+      },
+      {
+        "campaign": "Waitlist Conversion",
+        "caption": "Founding batch opens soon.",
+        "day": 7,
+        "deadline": "Day 6",
+        "dependencies": [
+          "landing page"
+        ],
+        "format": "story",
+        "theme": "Waitlist push"
+      }
+    ],
+    "linkedinStrategy": "Use only if targeting preschool partnerships or founder build-in-public credibility.",
+    "monthlyThemes": [
+      "Screen-free learning",
+      "Material trust",
+      "Founding batch",
+      "Parent proof"
+    ],
+    "pinterestStrategy": "Pin activity ideas, gift guides, and Montessori-inspired play setups.",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "promotionalPeriods": [
+      "Founder batch",
+      "Bundle offer",
+      "Referral week"
+    ],
+    "reelScripts": [
+      {
+        "script": "Show three cubes, pause for child choice, reveal pattern, CTA to waitlist.",
+        "title": "Pattern challenge"
+      }
+    ],
+    "risks": [],
+    "score": 84,
+    "seasonalEvents": [
+      "Children's Day",
+      "Birthday gifting season",
+      "Back-to-school"
+    ],
+    "section": "socialCalendar",
+    "shortFormVideoIdeas": [
+      "Pattern challenge",
+      "Unboxing",
+      "Parent testimonial prompt",
+      "Inside the box"
+    ],
+    "status": "COMPLETED",
+    "storySequences": [
+      "Problem poll",
+      "Material trust",
+      "How it works",
+      "Waitlist CTA"
+    ],
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "weeklyCampaigns": [
+      "Awareness week",
+      "Education week",
+      "Offer week",
+      "Review and referral week"
+    ],
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17",
+    "youtubeContentPlan": [
+      "60-second product demo",
+      "Parent guide walkthrough",
+      "3 pattern activities for preschoolers"
+    ]
+  },
+  "validationHistory": [
+    {
+      "evidence": "COMPLETED",
+      "stage": "Creative Pack precondition",
+      "status": "PASS"
+    },
+    {
+      "stage": "Marketing employee outputs",
+      "status": "PASS",
+      "validator": "validate_marketing_employee_output"
+    },
+    {
+      "stage": "Marketing Pack",
+      "status": "PASS",
+      "validator": "validate_marketing_pack.py"
+    }
+  ],
+  "validationReport": {
+    "errors": [],
+    "status": "PASS",
+    "validationAreas": [
+      {
+        "area": "GTM strategy",
+        "status": "PASS"
+      },
+      {
+        "area": "Acquisition strategy",
+        "status": "PASS"
+      },
+      {
+        "area": "Content strategy",
+        "status": "PASS"
+      },
+      {
+        "area": "Calendar",
+        "status": "PASS"
+      },
+      {
+        "area": "Advertising",
+        "status": "PASS"
+      },
+      {
+        "area": "Sales funnel",
+        "status": "PASS"
+      },
+      {
+        "area": "Launch kit",
+        "status": "PASS"
+      }
+    ],
+    "validationHistory": [
+      {
+        "evidence": "COMPLETED",
+        "stage": "Creative Pack precondition",
+        "status": "PASS"
+      },
+      {
+        "stage": "Marketing employee outputs",
+        "status": "PASS",
+        "validator": "validate_marketing_employee_output"
+      },
+      {
+        "stage": "Marketing Pack",
+        "status": "PASS",
+        "validator": "validate_marketing_pack.py"
+      }
+    ],
+    "warnings": [
+      "Ad performance cannot be estimated until live campaigns run.",
+      "Compliance-sensitive claims need review before publishing."
+    ]
+  },
+  "version": "0.5.0",
+  "whatsappCampaign": {
+    "broadcasts": [
+      "Hi, our premium wooden logic toy founding batch is opening soon. Would you like early access?",
+      "The Starter kit includes wooden cubes, activity cards, and gift-ready packaging."
+    ],
+    "confidence": {
+      "level": "MEDIUM",
+      "score": 0.75
+    },
+    "contract": {
+      "inputSchema": {
+        "required": [
+          "marketingStrategy"
+        ]
+      },
+      "name": "WhatsApp Campaign Specialist",
+      "outputSchema": {
+        "required": [
+          "broadcasts",
+          "replyScripts"
+        ]
+      },
+      "promptContract": "Create concise WhatsApp launch messages for founder review.",
+      "retryPolicy": {
+        "maxAttempts": 2
+      },
+      "role": "Create WhatsApp broadcast and reply scripts.",
+      "section": "whatsappCampaign",
+      "timeoutSeconds": 30
+    },
+    "department": "MARKETING",
+    "employeeId": "EMP-308",
+    "employeeName": "WhatsApp Campaign Specialist",
+    "projectId": "6b3cdd20-fae7-46f2-9fdc-5e0b9d45f14d",
+    "replyScripts": [
+      {
+        "intent": "price",
+        "reply": "The final launch price will be confirmed after founder-batch supplier quotes."
+      },
+      {
+        "intent": "age",
+        "reply": "It is designed for children aged 3-5 with adult supervision."
+      }
+    ],
+    "risks": [],
+    "score": 80,
+    "section": "whatsappCampaign",
+    "status": "COMPLETED",
+    "validation": {
+      "business": "PASS",
+      "channel": "PASS",
+      "confidence": "PASS",
+      "risk": "PASS",
+      "schema": "PASS"
+    },
+    "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
+  },
+  "workflowId": "f5ebd2f7-5f57-48f0-afd7-87c23596bb17"
 }

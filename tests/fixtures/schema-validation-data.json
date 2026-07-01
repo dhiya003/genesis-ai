@@ -2,13 +2,16 @@
   "validFiles": [
     "tests/fixtures/sample-trend-report.json",
     "tests/fixtures/sample-product-blueprint.json",
-    "tests/fixtures/sample-creative-pack.json"
+    "tests/fixtures/sample-creative-pack.json",
+    "testing/fixtures/sample-marketing-pack.json",
+    "testing/fixtures/sample-sales-package.json"
   ],
   "schemas": [
     "schemas/research-report.schema.json",
     "schemas/product-blueprint.schema.json",
     "schemas/creative-pack.schema.json",
     "schemas/marketing-pack.schema.json",
+    "schemas/sales-package.schema.json",
     "schemas/publishing-package.schema.json",
     "schemas/analytics-report.schema.json",
     "schemas/common-error.schema.json"

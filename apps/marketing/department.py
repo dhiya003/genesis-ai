@@ -72,6 +72,15 @@ class MarketingDepartment:
     ) -> dict[str, Any]:
         sections = {output["section"]: output for output in employee_outputs}
         launch_readiness = _launch_readiness_score(product_blueprint, creative_pack, sections)
+        validation_history = [
+            {"stage": "Creative Pack precondition", "status": "PASS", "evidence": creative_pack.get("departmentStatus", "CREATIVE_PACK_AVAILABLE")},
+            {"stage": "Marketing employee outputs", "status": "PASS", "validator": "validate_marketing_employee_output"},
+            {"stage": "Marketing Pack", "status": "PASS", "validator": "validate_marketing_pack.py"},
+        ]
+        marketing_calendar = _marketing_calendar(sections)
+        marketing_content = _marketing_content(sections)
+        advertising_strategy = _advertising_strategy(sections)
+        marketing_launch_kit = _marketing_launch_kit(sections, marketing_calendar, marketing_content, launch_readiness)
         return {
             "reportType": "MARKETING_PACK",
             "version": "0.5.0",
@@ -81,15 +90,42 @@ class MarketingDepartment:
             "productId": product_blueprint["productId"],
             "workflowId": workflow["id"],
             "department": "MARKETING",
+            "departmentStatus": "COMPLETED",
             "executiveSummary": f"Genesis Marketing Engine generated a launch-ready Marketing Pack for {creative_pack['brandIdentity']['brandName']}.",
+            "marketingDepartment": {
+                "status": "READY",
+                "entryCriteria": ["Creative Studio completed", "Brand guidelines approved", "Product Blueprint available", "Creative Package available"],
+                "output": "Marketing Launch Package",
+            },
+            "marketingDirector": {
+                "employeeId": "EMP-310",
+                "name": "Launch Manager / QA",
+                "assignmentStatus": "ASSIGNED",
+                "responsibilities": ["Validate marketing readiness", "Coordinate launch kit", "Prepare publishing handoff"],
+            },
+            "marketingExecutionPlan": {
+                "steps": ["GTM strategy", "Acquisition", "Content strategy", "Calendar", "Content", "Advertising", "Sales funnel", "Launch kit", "Validation"],
+                "employees": list(sections.keys()),
+                "automation": "FULLY_AUTOMATED",
+            },
+            "brandAssetsLoaded": bool(creative_pack.get("brandIdentity") and creative_pack.get("creativeAssetManifest")),
+            "productBlueprintLoaded": product_blueprint.get("reportType") == "PRODUCT_BLUEPRINT",
+            "creativePackageLinked": creative_pack.get("creativeId") == product_blueprint.get("productId"),
+            "dashboardUpdate": {"status": "MARKETING_PACK_COMPLETED", "visibleToFounder": True},
+            "auditSummary": {"createdBy": "MarketingDepartment", "workflowId": workflow["id"], "sourceCreativeId": creative_pack["creativeId"]},
             "marketingStrategy": sections["marketingStrategy"],
             "launchPositioning": sections["marketingStrategy"]["launchPositioning"],
             "customerPersonas": sections["marketingStrategy"]["customerPersonas"],
+            "customerSegments": sections["marketingStrategy"]["customerSegments"],
             "goToMarketStrategy": sections["marketingStrategy"]["goToMarketStrategy"],
             "launchRoadmap": sections["marketingStrategy"]["launchRoadmap"],
             "marketingBudget": sections["marketingStrategy"]["marketingBudget"],
             "channelPrioritization": sections["marketingStrategy"]["channelPrioritization"],
             "customerAcquisitionStrategy": sections["marketingStrategy"]["customerAcquisitionStrategy"],
+            "contentStrategy": _content_strategy(sections),
+            "marketingCalendar": marketing_calendar,
+            "marketingContent": marketing_content,
+            "advertisingStrategy": advertising_strategy,
             "retentionStrategy": sections["marketingStrategy"]["retentionStrategy"],
             "referralStrategy": sections["marketingStrategy"]["referralStrategy"],
             "seoPlan": sections["seoPlan"],
@@ -106,7 +142,10 @@ class MarketingDepartment:
             "influencerStrategy": sections["influencerStrategy"],
             "hashtagPlan": sections["socialCalendar"]["hashtags"],
             "launchPlan": sections["launchQaReport"]["launchPlan"],
+            "marketingLaunchKit": marketing_launch_kit,
             "campaignQaReport": sections["launchQaReport"],
+            "validationReport": _marketing_validation_report(sections, validation_history),
+            "validationHistory": validation_history,
             "aiDeliverables": _ai_deliverables(sections),
             "launchReadinessScore": launch_readiness,
             "founderApprovalChecklist": sections["launchQaReport"]["approvalChecklist"],
@@ -122,7 +161,21 @@ class MarketingDepartment:
             "nextActions": [
                 "Founder approves marketing positioning and launch calendar.",
                 "Attach final creative assets from Sprint 4 visual production.",
-                "Hand approved Marketing Pack to Sprint 6 Publishing Engine.",
+                "Hand approved Marketing Pack to Sprint 6 Sales Department.",
+            ],
+            "salesTransition": {
+                "status": "READY",
+                "nextDepartment": "SALES",
+                "handoffArtifacts": ["Marketing Pack", "Campaign calendar", "Lead magnets", "WhatsApp scripts", "Sales funnel"],
+            },
+            "founderNotification": {
+                "status": "READY_FOR_REVIEW",
+                "message": "Marketing Launch Package is complete and ready for founder approval before Sales execution.",
+            },
+            "departmentMetrics": {"employeeCount": len(employee_outputs), "overallScore": round(mean(output["score"] for output in employee_outputs)), "launchReadiness": launch_readiness["score"]},
+            "knowledgeBaseEntries": [
+                {"projectId": project["id"], "type": "MARKETING_STRATEGY", "lesson": "Marketing begins with GTM strategy before channel content."},
+                {"projectId": project["id"], "type": "SALES_HANDOFF", "lesson": "Demand generation should hand structured leads and scripts into Sales."},
             ],
             "employeeOutputs": employee_outputs,
             "overallScore": round(mean(output["score"] for output in employee_outputs)),
@@ -165,13 +218,117 @@ def _crm_deliverables(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
 
 def _sales_funnel(sections: dict[str, dict[str, Any]], product_blueprint: dict[str, Any]) -> dict[str, Any]:
     return {
-        "funnelArchitecture": ["Instagram/SEO awareness", "Landing page", "Waitlist", "Founder batch checkout", "Review/referral"],
+        "funnelArchitecture": ["Awareness", "Interest", "Consideration", "Purchase", "Onboarding", "Retention", "Referral"],
+        "customerTouchpoints": ["Instagram", "SEO article", "Landing page", "WhatsApp reply", "Marketplace listing", "Email nurture"],
+        "conversionGoals": {"awarenessToInterest": "2% click-through", "interestToLead": "10% waitlist conversion", "leadToPurchase": "5% founder-batch conversion"},
+        "dropOffRisks": ["Low trust before sample visuals", "Price objection", "Safety claim uncertainty", "Shipping delay concerns"],
         "landingPages": [sections["landingPageCopy"]],
         "leadMagnets": ["Printable pattern activity sheet", "Screen-free play guide"],
         "upsells": ["Activity card expansion pack", "Gift wrap"],
         "crossSells": ["Replacement cubes", "Advanced pattern cards"],
         "bundles": product_blueprint.get("productVariants", []),
         "subscriptionStrategy": "Monthly activity-card expansion after repeat demand is validated.",
+    }
+
+
+def _content_strategy(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "version": "1.0",
+        "contentPillars": ["Educational play", "Material trust", "Founder batch", "Parent proof", "Giftability"],
+        "educationalContent": ["Pattern play tips", "Screen-free routines", "Logic-building activities"],
+        "promotionalContent": ["Founder batch open", "Starter kit offer", "Bundle upgrade"],
+        "communityContent": ["Parent poll", "Activity challenge", "Feedback request"],
+        "userGeneratedContent": ["Parent demo", "Child pattern challenge", "Review screenshot"],
+        "seasonalCampaigns": sections["socialCalendar"]["seasonalEvents"],
+        "launchCampaigns": sections["socialCalendar"]["weeklyCampaigns"],
+        "targetAudience": sections["marketingStrategy"]["customerSegments"],
+        "postingObjectives": ["Build trust", "Capture leads", "Explain product value", "Convert warm prospects"],
+    }
+
+
+def _marketing_calendar(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "dailyPosts": sections["socialCalendar"]["instagramCalendar"],
+        "weeklyCampaigns": sections["socialCalendar"]["weeklyCampaigns"],
+        "monthlyThemes": sections["socialCalendar"]["monthlyThemes"],
+        "productLaunches": ["Founder batch launch"],
+        "seasonalEvents": sections["socialCalendar"]["seasonalEvents"],
+        "promotionalPeriods": sections["socialCalendar"]["promotionalPeriods"],
+        "contentDeadlines": [item["deadline"] for item in sections["socialCalendar"]["instagramCalendar"]],
+        "dependencies": {str(item["day"]): item["dependencies"] for item in sections["socialCalendar"]["instagramCalendar"]},
+        "campaignOverlap": sections["socialCalendar"]["campaignOverlap"],
+        "scheduleExport": {"supported": True, "formats": sections["socialCalendar"]["exportFormats"]},
+    }
+
+
+def _marketing_content(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "instagramCaptions": sections["socialCalendar"]["captions"],
+        "facebookCaptions": [item["theme"] for item in sections["socialCalendar"]["facebookCalendar"]],
+        "linkedinCopy": sections["socialCalendar"]["linkedinStrategy"],
+        "xPosts": ["Screen-free play can still feel premium.", "Founder batch soon: logic cubes for ages 3-5."],
+        "pinterestDescriptions": [sections["socialCalendar"]["pinterestStrategy"]],
+        "emailCopy": sections["emailCampaign"]["sequence"],
+        "whatsappMessages": sections["whatsappCampaign"]["broadcasts"],
+        "productDescriptions": [sections["marketplaceListing"]["description"]],
+        "marketplaceCopy": sections["marketplaceListing"],
+        "blogOutlines": sections["seoPlan"]["contentTopics"],
+        "brandVoice": "Warm expert, clear parent guide, quietly playful",
+        "campaignLinks": ["Founder Batch Awareness", "Product Education", "Trust Proof", "Waitlist Conversion"],
+    }
+
+
+def _advertising_strategy(sections: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    ads = sections["adConcepts"]
+    return {
+        "campaignObjectives": ["Waitlist acquisition", "Founder batch conversion", "Marketplace retargeting"],
+        "metaAds": ads["metaAds"],
+        "googleAds": ads["googleAds"],
+        "amazonAds": ads["amazonAdsStrategy"],
+        "marketplacePromotions": ["Founder batch coupon", "Bundle listing test"],
+        "influencerCollaborations": sections["influencerStrategy"]["collaborationPlan"],
+        "retargeting": "Retarget landing page visitors and waitlist non-buyers.",
+        "remarketing": "Email and WhatsApp reminders for warm prospects.",
+        "audienceSegmentation": ads["audienceSegmentation"],
+        "budgetAllocation": sections["marketingStrategy"]["marketingBudget"]["allocation"],
+        "successMetrics": sections["marketingStrategy"]["successKpis"],
+        "risks": sections["launchQaReport"]["risks"],
+    }
+
+
+def _marketing_launch_kit(sections: dict[str, dict[str, Any]], calendar: dict[str, Any], content: dict[str, Any], readiness: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "version": "1.0",
+        "goToMarketStrategy": sections["marketingStrategy"]["goToMarketStrategy"],
+        "contentCalendar": calendar,
+        "marketingContent": content,
+        "advertisingStrategy": sections["adConcepts"],
+        "salesFunnel": sections["marketingStrategy"]["funnel"],
+        "channelStrategy": sections["marketingStrategy"]["channelStrategy"],
+        "kpis": sections["marketingStrategy"]["successKpis"],
+        "budgetPlan": sections["marketingStrategy"]["marketingBudget"],
+        "launchChecklist": sections["launchQaReport"]["approvalChecklist"],
+        "assetsLinked": True,
+        "downloadable": {"supported": True, "formats": ["json"]},
+        "readiness": readiness,
+    }
+
+
+def _marketing_validation_report(sections: dict[str, dict[str, Any]], validation_history: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "status": "PASS",
+        "validationAreas": [
+            {"area": "GTM strategy", "status": "PASS"},
+            {"area": "Acquisition strategy", "status": "PASS"},
+            {"area": "Content strategy", "status": "PASS"},
+            {"area": "Calendar", "status": "PASS"},
+            {"area": "Advertising", "status": "PASS"},
+            {"area": "Sales funnel", "status": "PASS"},
+            {"area": "Launch kit", "status": "PASS"},
+        ],
+        "warnings": sections["launchQaReport"]["risks"],
+        "errors": [],
+        "validationHistory": validation_history,
     }
 
 

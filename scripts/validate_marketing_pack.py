@@ -17,6 +17,15 @@ REQUIRED_TOP_LEVEL = [
     "productId",
     "workflowId",
     "department",
+    "departmentStatus",
+    "marketingDepartment",
+    "marketingDirector",
+    "marketingExecutionPlan",
+    "brandAssetsLoaded",
+    "productBlueprintLoaded",
+    "creativePackageLinked",
+    "dashboardUpdate",
+    "auditSummary",
     "marketingStrategy",
     "launchPositioning",
     "customerPersonas",
@@ -25,6 +34,10 @@ REQUIRED_TOP_LEVEL = [
     "marketingBudget",
     "channelPrioritization",
     "customerAcquisitionStrategy",
+    "contentStrategy",
+    "marketingCalendar",
+    "marketingContent",
+    "advertisingStrategy",
     "retentionStrategy",
     "referralStrategy",
     "seoPlan",
@@ -41,13 +54,20 @@ REQUIRED_TOP_LEVEL = [
     "influencerStrategy",
     "hashtagPlan",
     "launchPlan",
+    "marketingLaunchKit",
     "campaignQaReport",
+    "validationReport",
+    "validationHistory",
     "aiDeliverables",
     "launchReadinessScore",
     "founderApprovalChecklist",
     "risks",
     "assumptions",
     "nextActions",
+    "salesTransition",
+    "founderNotification",
+    "departmentMetrics",
+    "knowledgeBaseEntries",
     "employeeOutputs",
     "overallScore",
 ]
@@ -64,6 +84,14 @@ def validate_marketing_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("reportType must be MARKETING_PACK")
     if data.get("department") != "MARKETING":
         issues.append("department must be MARKETING")
+    if data.get("departmentStatus") != "COMPLETED":
+        issues.append("departmentStatus must be COMPLETED")
+    for key in ["marketingDepartment", "marketingDirector", "marketingExecutionPlan", "dashboardUpdate", "auditSummary"]:
+        if not isinstance(data.get(key), dict) or not data.get(key):
+            issues.append(f"{key} must be a non-empty object")
+    for key in ["brandAssetsLoaded", "productBlueprintLoaded", "creativePackageLinked"]:
+        if data.get(key) is not True:
+            issues.append(f"{key} must be true")
     if not data.get("seoPlan", {}).get("keywords"):
         issues.append("seoPlan.keywords is required")
     for key in ["goToMarketStrategy", "launchRoadmap", "marketingBudget", "retentionStrategy", "referralStrategy"]:
@@ -87,6 +115,25 @@ def validate_marketing_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("crmDeliverables.cartAbandonmentEmails is required")
     if not data.get("salesFunnel", {}).get("funnelArchitecture"):
         issues.append("salesFunnel.funnelArchitecture is required")
+    for key in ["customerTouchpoints", "conversionGoals", "dropOffRisks"]:
+        if not data.get("salesFunnel", {}).get(key):
+            issues.append(f"salesFunnel.{key} is required")
+    content_strategy = data.get("contentStrategy", {})
+    for key in ["contentPillars", "educationalContent", "promotionalContent", "communityContent", "userGeneratedContent", "seasonalCampaigns", "launchCampaigns", "targetAudience", "postingObjectives"]:
+        if not content_strategy.get(key):
+            issues.append(f"contentStrategy.{key} is required")
+    calendar = data.get("marketingCalendar", {})
+    for key in ["dailyPosts", "weeklyCampaigns", "monthlyThemes", "productLaunches", "seasonalEvents", "promotionalPeriods", "contentDeadlines", "dependencies", "campaignOverlap", "scheduleExport"]:
+        if not calendar.get(key):
+            issues.append(f"marketingCalendar.{key} is required")
+    content = data.get("marketingContent", {})
+    for key in ["instagramCaptions", "facebookCaptions", "linkedinCopy", "xPosts", "pinterestDescriptions", "emailCopy", "whatsappMessages", "productDescriptions", "marketplaceCopy", "blogOutlines", "campaignLinks"]:
+        if not content.get(key):
+            issues.append(f"marketingContent.{key} is required")
+    ad_strategy = data.get("advertisingStrategy", {})
+    for key in ["campaignObjectives", "audienceSegmentation", "budgetAllocation", "successMetrics", "risks"]:
+        if not ad_strategy.get(key):
+            issues.append(f"advertisingStrategy.{key} is required")
     analytics = data.get("analyticsPlan", {})
     for key in ["kpiDashboard", "cac", "roas", "ctr", "conversionRate", "aov", "ltv", "retentionMetrics", "funnelDropOffAnalysis"]:
         if not analytics.get(key):
@@ -101,6 +148,17 @@ def validate_marketing_pack_payload(data: dict[str, Any]) -> list[str]:
         issues.append("influencerStrategy.creatorProfiles is required")
     if not data.get("aiDeliverables", {}).get("automationWorkflows"):
         issues.append("aiDeliverables.automationWorkflows is required")
+    launch_kit = data.get("marketingLaunchKit", {})
+    for key in ["goToMarketStrategy", "contentCalendar", "marketingContent", "advertisingStrategy", "salesFunnel", "channelStrategy", "kpis", "budgetPlan", "launchChecklist", "assetsLinked", "downloadable"]:
+        if key not in launch_kit or not launch_kit.get(key):
+            issues.append(f"marketingLaunchKit.{key} is required")
+    if data.get("validationReport", {}).get("status") != "PASS":
+        issues.append("validationReport.status must be PASS")
+    if data.get("salesTransition", {}).get("status") != "READY":
+        issues.append("salesTransition.status must be READY")
+    for key in ["validationHistory", "departmentMetrics", "knowledgeBaseEntries"]:
+        if not data.get(key):
+            issues.append(f"{key} is required")
     readiness = data.get("launchReadinessScore", {})
     if not isinstance(readiness.get("score"), (int, float)) or not 0 <= readiness.get("score", -1) <= 100:
         issues.append("launchReadinessScore.score must be 0-100")

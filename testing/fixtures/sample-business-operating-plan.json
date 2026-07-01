@@ -1,0 +1,3018 @@
+{
+  "approvalPolicy": {
+    "automatic": [
+      "draft generation",
+      "non-spend analysis",
+      "knowledge capture"
+    ],
+    "conditional": [
+      {
+        "approval": "budget approval",
+        "condition": "budget <= approved cap and legal risk low"
+      }
+    ],
+    "default": "manual",
+    "legalApproval": [
+      "child safety claims",
+      "certification claims"
+    ],
+    "manual": [
+      "publishing",
+      "campaign launch",
+      "pricing change"
+    ],
+    "source": {
+      "approvalGates": [
+        {
+          "approver": "founder",
+          "gate": "Publishing",
+          "requiredFor": [
+            "marketplace listings",
+            "social posts"
+          ]
+        },
+        {
+          "approver": "founder",
+          "gate": "Budget",
+          "requiredFor": [
+            "paid ads",
+            "influencer spend"
+          ]
+        },
+        {
+          "approver": "human reviewer",
+          "gate": "Legal",
+          "requiredFor": [
+            "safety claims",
+            "child-product compliance claims"
+          ]
+        },
+        {
+          "approver": "operator or founder",
+          "gate": "Rollback",
+          "requiredFor": [
+            "remove listing",
+            "pause campaign"
+          ]
+        }
+      ],
+      "approvalPolicy": {
+        "autoApprovalAllowed": [
+          "non-spend draft creation"
+        ],
+        "defaultMode": "manual",
+        "manualApprovalRequired": [
+          "publish",
+          "ad spend",
+          "legal claims"
+        ]
+      },
+      "auditRequirements": [
+        "requester",
+        "evidence",
+        "approval policy",
+        "decision",
+        "execution result",
+        "rollback result if needed"
+      ],
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.76
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "publishingSections"
+          ]
+        },
+        "name": "Approval Manager",
+        "outputSchema": {
+          "required": [
+            "approvalGates",
+            "approvalPolicy",
+            "auditRequirements"
+          ]
+        },
+        "promptContract": "Ensure every execution action has evidence, policy, approval, and auditability.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Define approval gates for publishing, budget, legal, and rollback-sensitive actions.",
+        "section": "approvalPlan",
+        "timeoutSeconds": 30
+      },
+      "department": "COMMERCE_AND_PUBLISHING",
+      "employeeId": "EMP-207",
+      "employeeName": "Approval Manager",
+      "metrics": {
+        "estimatedActionCount": 1,
+        "manualApprovalRequired": true
+      },
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "risks": [],
+      "score": 87,
+      "section": "approvalPlan",
+      "status": "COMPLETED",
+      "validation": {
+        "approval": "PASS",
+        "business": "PASS",
+        "execution": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "6936ebb7-7d6b-468c-9832-a6ef6d09a3d6"
+    },
+    "strategicApproval": [
+      "new product",
+      "new supplier",
+      "international expansion"
+    ]
+  },
+  "businessHealth": {
+    "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+    "cashFlowHealth": 52,
+    "customerHealth": 55,
+    "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+    "inventoryHealth": 60,
+    "marketingHealth": 80,
+    "operationsHealth": 91,
+    "overallBusinessHealthScore": 67,
+    "profitHealth": 78,
+    "revenueHealth": 50,
+    "status": "PRE_LAUNCH_ESTIMATE"
+  },
+  "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+  "businessMemory": {
+    "approvals": [
+      {
+        "approver": "founder",
+        "gate": "Publishing",
+        "requiredFor": [
+          "marketplace listings",
+          "social posts"
+        ]
+      },
+      {
+        "approver": "founder",
+        "gate": "Budget",
+        "requiredFor": [
+          "paid ads",
+          "influencer spend"
+        ]
+      },
+      {
+        "approver": "human reviewer",
+        "gate": "Legal",
+        "requiredFor": [
+          "safety claims",
+          "child-product compliance claims"
+        ]
+      },
+      {
+        "approver": "operator or founder",
+        "gate": "Rollback",
+        "requiredFor": [
+          "remove listing",
+          "pause campaign"
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "assetId": "primary-horizontal-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-primary-horizontal.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Primary Horizontal Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-primary-horizontal.svg",
+        "sizeBytes": 658,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "stacked-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-stacked.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Stacked Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-stacked.svg",
+        "sizeBytes": 567,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "icon-mark",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-icon-mark.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Icon Mark",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-icon-mark.svg",
+        "sizeBytes": 452,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "monochrome-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-monochrome.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Monochrome Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-monochrome.svg",
+        "sizeBytes": 650,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "product-hero-image",
+        "contentType": "image/png",
+        "fileName": "product-hero.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Product Hero Image",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/product-hero.png",
+        "sizeBytes": 2501,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-variant-mockup",
+        "contentType": "image/png",
+        "fileName": "product-mockup-starter.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Starter Variant Mockup",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/product-mockup-starter.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "amazon-main-image",
+        "contentType": "image/png",
+        "fileName": "amazon-main-image.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Amazon Main Image",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/amazon-main-image.png",
+        "sizeBytes": 6235,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "shopify-product-card",
+        "contentType": "image/png",
+        "fileName": "shopify-product-card.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Shopify Product Card",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/shopify-product-card.png",
+        "sizeBytes": 4398,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-launch-post",
+        "contentType": "image/png",
+        "fileName": "instagram-launch-post.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Launch Post",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instagram-launch-post.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-story",
+        "contentType": "image/png",
+        "fileName": "instagram-story.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Story",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instagram-story.png",
+        "sizeBytes": 5326,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "email-launch-header",
+        "contentType": "image/png",
+        "fileName": "email-launch-header.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Email Launch Header",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/email-launch-header.png",
+        "sizeBytes": 1853,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-box-dieline",
+        "contentType": "image/svg+xml",
+        "fileName": "starter-box-dieline.svg",
+        "format": "svg",
+        "kind": "document",
+        "name": "Starter Box Dieline",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/starter-box-dieline.svg",
+        "sizeBytes": 967,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "packaging-specification-pdf",
+        "contentType": "application/pdf",
+        "fileName": "packaging-spec.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Packaging Specification PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/packaging-spec.pdf",
+        "sizeBytes": 753,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "parent-guide-pdf",
+        "contentType": "application/pdf",
+        "fileName": "parent-guide.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Parent Guide PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/parent-guide.pdf",
+        "sizeBytes": 697,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instruction-cards-pdf",
+        "contentType": "application/pdf",
+        "fileName": "instruction-cards.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Instruction Cards PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instruction-cards.pdf",
+        "sizeBytes": 701,
+        "status": "GENERATED"
+      }
+    ],
+    "brandAssets": [
+      {
+        "assetId": "primary-horizontal-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-primary-horizontal.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Primary Horizontal Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-primary-horizontal.svg",
+        "sizeBytes": 658,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "stacked-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-stacked.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Stacked Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-stacked.svg",
+        "sizeBytes": 567,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "icon-mark",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-icon-mark.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Icon Mark",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-icon-mark.svg",
+        "sizeBytes": 452,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "monochrome-logo",
+        "contentType": "image/svg+xml",
+        "fileName": "logo-monochrome.svg",
+        "format": "svg",
+        "kind": "logo",
+        "name": "Monochrome Logo",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/logo-monochrome.svg",
+        "sizeBytes": 650,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "product-hero-image",
+        "contentType": "image/png",
+        "fileName": "product-hero.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Product Hero Image",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/product-hero.png",
+        "sizeBytes": 2501,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-variant-mockup",
+        "contentType": "image/png",
+        "fileName": "product-mockup-starter.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Starter Variant Mockup",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/product-mockup-starter.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "amazon-main-image",
+        "contentType": "image/png",
+        "fileName": "amazon-main-image.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Amazon Main Image",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/amazon-main-image.png",
+        "sizeBytes": 6235,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "shopify-product-card",
+        "contentType": "image/png",
+        "fileName": "shopify-product-card.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Shopify Product Card",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/shopify-product-card.png",
+        "sizeBytes": 4398,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-launch-post",
+        "contentType": "image/png",
+        "fileName": "instagram-launch-post.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Launch Post",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instagram-launch-post.png",
+        "sizeBytes": 3311,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instagram-story",
+        "contentType": "image/png",
+        "fileName": "instagram-story.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Instagram Story",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instagram-story.png",
+        "sizeBytes": 5326,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "email-launch-header",
+        "contentType": "image/png",
+        "fileName": "email-launch-header.png",
+        "format": "png",
+        "kind": "raster",
+        "name": "Email Launch Header",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/email-launch-header.png",
+        "sizeBytes": 1853,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "starter-box-dieline",
+        "contentType": "image/svg+xml",
+        "fileName": "starter-box-dieline.svg",
+        "format": "svg",
+        "kind": "document",
+        "name": "Starter Box Dieline",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/starter-box-dieline.svg",
+        "sizeBytes": 967,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "packaging-specification-pdf",
+        "contentType": "application/pdf",
+        "fileName": "packaging-spec.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Packaging Specification PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/packaging-spec.pdf",
+        "sizeBytes": 753,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "parent-guide-pdf",
+        "contentType": "application/pdf",
+        "fileName": "parent-guide.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Parent Guide PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/parent-guide.pdf",
+        "sizeBytes": 697,
+        "status": "GENERATED"
+      },
+      {
+        "assetId": "instruction-cards-pdf",
+        "contentType": "application/pdf",
+        "fileName": "instruction-cards.pdf",
+        "format": "pdf",
+        "kind": "document",
+        "name": "Instruction Cards PDF",
+        "path": "/var/folders/r0/kf80g9ps4z9csdqh0vvyp4m40000gn/T/tmp9mqem78w/creative_assets/31537d4b-e240-4fd5-a28c-952219b8042a/instruction-cards.pdf",
+        "sizeBytes": 701,
+        "status": "GENERATED"
+      }
+    ],
+    "businessReports": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "businesses": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "campaigns": [
+      {
+        "budgetApprovalRequired": true,
+        "channel": "Meta Ads",
+        "source": [
+          {
+            "creative": "Parent-child pattern play",
+            "cta": "Join the founding batch",
+            "hook": "A premium wooden toy that teaches before it explains."
+          },
+          {
+            "creative": "Luma Logic Cubes unboxing",
+            "cta": "See the Starter kit",
+            "hook": "Screen-free play for ages 3-5."
+          }
+        ],
+        "status": "DRAFT_READY"
+      },
+      {
+        "budgetApprovalRequired": true,
+        "channel": "Google Ads",
+        "source": [
+          {
+            "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+            "headline": "Premium Wooden Learning Toys"
+          }
+        ],
+        "status": "DRAFT_READY"
+      },
+      {
+        "budgetApprovalRequired": true,
+        "channel": "Amazon Ads",
+        "source": {
+          "campaignType": "Sponsored Products placeholder",
+          "keywords": [
+            "wooden educational toys",
+            "toys for 3 year olds"
+          ],
+          "status": "READY_FOR_SELLER_ACCOUNT"
+        },
+        "status": "SELLER_ACCOUNT_REQUIRED"
+      },
+      {
+        "budgetApprovalRequired": false,
+        "channel": "Email",
+        "status": "READY_FOR_PROVIDER"
+      },
+      {
+        "budgetApprovalRequired": false,
+        "channel": "WhatsApp",
+        "status": "READY_FOR_PROVIDER"
+      }
+    ],
+    "competitors": {
+      "competitiveRisks": [
+        "Fast copycats",
+        "Paid ad inflation",
+        "Marketplace commoditization"
+      ],
+      "competitorTypes": [
+        "Generic print-on-demand merchandise pages",
+        "Coffee roasters selling lifestyle accessories",
+        "Instagram gifting stores"
+      ],
+      "confidence": {
+        "evidenceCount": 1,
+        "level": "LOW",
+        "reasons": [
+          "1 evidence items collected.",
+          "1 unique source groups found.",
+          "1 items include snippets."
+        ],
+        "score": 0.39,
+        "sourceCount": 1
+      },
+      "differentiation": [
+        "Focus on India-specific coffee lover identity.",
+        "Bundle products into launch kits instead of selling single commodity items.",
+        "Use founder-led validation content before ads."
+      ],
+      "employeeId": "EMP-002",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "snippet": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-002 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+          "url": "genesis://research/EMP-002/competitorAnalysis"
+        }
+      ],
+      "evidenceLevel": "model_assumption",
+      "majorCompetitors": [
+        "Generic print-on-demand merchandise pages",
+        "Coffee roasters selling lifestyle accessories",
+        "Instagram gifting stores"
+      ],
+      "marketGaps": [
+        "Focus on India-specific coffee lover identity.",
+        "Bundle products into launch kits instead of selling single commodity items.",
+        "Use founder-led validation content before ads."
+      ],
+      "metrics": {
+        "evidenceCount": 1,
+        "runtimeSeconds": 0.0001,
+        "score": 70
+      },
+      "outputPersisted": true,
+      "pricingAnalysis": "Benchmark live prices before procurement; deterministic range assumes affordable premium positioning.",
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "retryPolicy": {
+        "maxAttempts": 2,
+        "strategy": "retry employee output before failing workflow"
+      },
+      "score": 70,
+      "section": "competitorAnalysis",
+      "status": "COMPLETED",
+      "strengths": [
+        "Existing competitors prove category demand",
+        "Social channels can validate quickly"
+      ],
+      "summary": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+      "timeoutSeconds": 30,
+      "validation": {
+        "confidence": "PASS",
+        "evidence": "PASS",
+        "schema": "PASS",
+        "status": "PASS"
+      },
+      "weaknesses": [
+        "Generic positioning",
+        "Limited bundle differentiation"
+      ],
+      "workflowId": "18bd7876-ec12-4b9f-ab03-a9e87b752d02"
+    },
+    "customers": [
+      {
+        "name": "Urban learning-focused parent",
+        "need": "Premium safe learning toy",
+        "trigger": "Birthday or preschool readiness"
+      },
+      {
+        "name": "Gift buyer",
+        "need": "Useful premium child gift",
+        "trigger": "Occasion gifting"
+      }
+    ],
+    "decisions": [
+      "Approve launch package for draft execution",
+      "Use BI baseline before optimization"
+    ],
+    "experiments": [
+      "founder batch demand validation"
+    ],
+    "founderPreferences": {},
+    "historicalDecisions": [],
+    "immutableHistoryPreserved": true,
+    "knowledgeLinkedToBusiness": true,
+    "lessonsLearned": [
+      "Founder approval is required before any public publishing or ad spend.",
+      "Marketplace, social, CRM, and ad integrations can execute the same action manifest when credentials are added.",
+      "Asset exports are available from Sprint 4 local asset manifests or optional Drive uploads."
+    ],
+    "marketingPlans": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "productBlueprints": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "products": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "projects": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "researchReports": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a"
+    ],
+    "salesReports": [
+      "31537d4b-e240-4fd5-a28c-952219b8042a:sales"
+    ],
+    "searchSupported": true,
+    "suppliers": {
+      "alternativeSuppliers": [
+        "Alibaba verified wooden toy supplier",
+        "Local CNC woodworking vendor",
+        "Print-and-pack assembly vendor"
+      ],
+      "comparison": {
+        "bestPilotSupplier": "Educational kit assembler placeholder",
+        "lowestMOQ": 100,
+        "lowestRiskScore": 38
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "materialRecommendation",
+            "country"
+          ]
+        },
+        "name": "Supplier Analyst",
+        "outputSchema": {
+          "required": [
+            "shortlist",
+            "comparison",
+            "alternativeSuppliers"
+          ]
+        },
+        "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+        "section": "supplierRecommendations",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-108",
+      "employeeName": "Supplier Analyst",
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "risks": [],
+      "score": 78,
+      "section": "supplierRecommendations",
+      "shortlist": [
+        {
+          "capacity": "Pilot-ready; verify monthly capacity",
+          "category": "Wooden toys",
+          "country": "India",
+          "estimatedPricing": "INR 260-360 per starter set before final packaging",
+          "leadTimeDays": 21,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka / NCR supplier cluster",
+          "moq": 100,
+          "name": "India wooden toy manufacturer placeholder",
+          "productRange": [
+            "Wooden cubes",
+            "Painted learning toys",
+            "Starter educational kits"
+          ],
+          "qualityIndicators": [
+            "Sample approval required",
+            "Toy-safe coating declaration required"
+          ],
+          "riskScore": 42,
+          "risks": [
+            "Certification not verified",
+            "Paint finish consistency"
+          ]
+        },
+        {
+          "capacity": "Small-batch; verify repeatability",
+          "category": "Wood craft",
+          "country": "India",
+          "estimatedPricing": "INR 300-420 per starter set depending finish",
+          "leadTimeDays": 28,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka",
+          "moq": 150,
+          "name": "Channapatna craft cluster placeholder",
+          "productRange": [
+            "Hand-finished wooden toys",
+            "Lacquered educational pieces"
+          ],
+          "qualityIndicators": [
+            "Craft quality",
+            "Needs standardized tolerances"
+          ],
+          "riskScore": 48,
+          "risks": [
+            "Tolerance variation",
+            "Higher lead time"
+          ]
+        },
+        {
+          "capacity": "Pilot-ready",
+          "category": "Assembly and packaging",
+          "country": "India",
+          "estimatedPricing": "INR 80-140 assembly and printed collateral",
+          "leadTimeDays": 14,
+          "linkedBomItems": [
+            "LUMA-003",
+            "LUMA-004"
+          ],
+          "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+          "moq": 100,
+          "name": "Educational kit assembler placeholder",
+          "productRange": [
+            "Kit collation",
+            "Activity cards",
+            "Retail packaging"
+          ],
+          "qualityIndicators": [
+            "Packaging sample required",
+            "Barcode and label check required"
+          ],
+          "riskScore": 38,
+          "risks": [
+            "Needs coordination with component supplier"
+          ]
+        }
+      ],
+      "status": "COMPLETED",
+      "supplierAssumptions": [
+        "Supplier names are placeholders until live supplier research credentials are connected.",
+        "Founder must verify certifications and samples."
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "e0cad1b5-1a5d-44ac-a3a8-e5e5f9ebf95b"
+    },
+    "versionHistoryMaintained": true
+  },
+  "businessMemoryService": {
+    "immutableHistoryPreserved": true,
+    "knowledgeLinkedToBusiness": true,
+    "operational": true,
+    "searchSupported": true,
+    "versionHistoryMaintained": true
+  },
+  "businessPlan": {
+    "businessStrategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing.",
+    "financialRoadmap": {
+      "assemblyCost": 35,
+      "breakEvenQuantity": 115,
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "packagingSpecification",
+            "constraints"
+          ]
+        },
+        "name": "Cost Engineer",
+        "outputSchema": {
+          "required": [
+            "rawMaterialCost",
+            "landedCost",
+            "grossMargin",
+            "pricingStrategy"
+          ]
+        },
+        "promptContract": "Calculate realistic unit economics and recommended selling prices.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Calculate landed cost, margin, break-even quantity, ROI, and pricing.",
+        "section": "costAnalysis",
+        "timeoutSeconds": 30
+      },
+      "costAssumptions": [
+        "Costs are deterministic planning estimates until supplier quotes are collected.",
+        "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+        "Pilot costing assumes 100-500 units and manual quality inspection."
+      ],
+      "department": "PRODUCT",
+      "employeeId": "EMP-106",
+      "employeeName": "Cost Engineer",
+      "grossMargin": 453,
+      "labelCost": 12,
+      "landedCost": 846,
+      "manufacturingCost": 90,
+      "marketingAllowance": 120,
+      "marketplaceFees": 130,
+      "miscBuffer": 25,
+      "netMargin": 373,
+      "packagingCost": 55,
+      "pricingStrategy": {
+        "bundlePricing": 2499,
+        "currency": "INR",
+        "distributorPrice": 999,
+        "manufacturingPrice": 846,
+        "marketplaceSellingPrice": 1399,
+        "premiumPricingOption": 1799,
+        "retailPrice": 1299,
+        "wholesalePrice": 899
+      },
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "rawMaterialCost": 421,
+      "returnsAllowance": 35,
+      "risks": [],
+      "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+      "score": 81,
+      "section": "costAnalysis",
+      "sensitivityAnalysis": {
+        "materialCostPlus10Percent": 463.1,
+        "minimumViableRetailPrice": 1196,
+        "shippingCostPlus20Percent": 84.0
+      },
+      "shippingCost": 70,
+      "status": "COMPLETED",
+      "taxes": 80,
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "warehousingCost": 18,
+      "workflowId": "e0cad1b5-1a5d-44ac-a3a8-e5e5f9ebf95b"
+    },
+    "goToMarketRoadmap": [
+      "Week 1: waitlist and education",
+      "Week 2: sample/demo content",
+      "Week 3: founding batch offer",
+      "Week 4: reviews and referrals"
+    ],
+    "growthRoadmap": [
+      "Founder batch",
+      "Review flywheel",
+      "Expansion packs",
+      "Retail/marketplace scale"
+    ],
+    "productRoadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "riskRoadmap": [
+      {
+        "mitigation": "Keep actions in approval-gated draft mode until provider credentials are configured.",
+        "risk": "Live publish APIs are not connected in deterministic Sprint 6 MVP.",
+        "severity": "MEDIUM"
+      },
+      {
+        "mitigation": "Legal approval gate blocks safety and certification claims before publishing.",
+        "risk": "Child-product claims may require legal review.",
+        "severity": "HIGH"
+      }
+    ]
+  },
+  "businessPlanningEngine": {
+    "annualPlan": [
+      "Launch first validated business",
+      "Build repeatable product family",
+      "Grow profitable channel mix"
+    ],
+    "businessContext": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+    "departmentObjectivesAligned": true,
+    "dependenciesIdentified": true,
+    "expansionPlan": [
+      "Expansion packs",
+      "Teacher kit",
+      "Marketplace scale"
+    ],
+    "growthPlan": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "launchPlan": {
+      "campaigns": [
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Meta Ads",
+          "source": [
+            {
+              "creative": "Parent-child pattern play",
+              "cta": "Join the founding batch",
+              "hook": "A premium wooden toy that teaches before it explains."
+            },
+            {
+              "creative": "Luma Logic Cubes unboxing",
+              "cta": "See the Starter kit",
+              "hook": "Screen-free play for ages 3-5."
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Google Ads",
+          "source": [
+            {
+              "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+              "headline": "Premium Wooden Learning Toys"
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Amazon Ads",
+          "source": {
+            "campaignType": "Sponsored Products placeholder",
+            "keywords": [
+              "wooden educational toys",
+              "toys for 3 year olds"
+            ],
+            "status": "READY_FOR_SELLER_ACCOUNT"
+          },
+          "status": "SELLER_ACCOUNT_REQUIRED"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "Email",
+          "status": "READY_FOR_PROVIDER"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "WhatsApp",
+          "status": "READY_FOR_PROVIDER"
+        }
+      ],
+      "executionMode": "DRAFT_AND_APPROVAL_GATE",
+      "marketplaces": [
+        {
+          "channel": "Shopify",
+          "priceSource": "productBlueprint.pricingStrategy",
+          "status": "READY_FOR_APPROVAL",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        },
+        {
+          "channel": "Amazon",
+          "imageOrder": [
+            "Hero",
+            "What's in the box",
+            "Learning benefits",
+            "Material trust",
+            "Variant comparison"
+          ],
+          "status": "READY_FOR_SELLER_ACCOUNT",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        },
+        {
+          "category": "Educational toys",
+          "channel": "Etsy",
+          "status": "READY_FOR_ADAPTER",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        },
+        {
+          "category": "Kids learning",
+          "channel": "WooCommerce",
+          "status": "READY_FOR_ADAPTER",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        },
+        {
+          "category": "Product landing page",
+          "channel": "Website",
+          "status": "READY_FOR_ADAPTER",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        },
+        {
+          "category": "Mapped through catalogue adapter",
+          "channel": "Future Marketplace",
+          "status": "FUTURE_ADAPTER_READY",
+          "title": "LumaLearn Luma Logic Cubes - Premium Wooden Educational Toy for Ages 3-5"
+        }
+      ],
+      "schedule": [
+        {
+          "action": "Publish waitlist announcement",
+          "approval": "PUBLISHING",
+          "day": 1,
+          "time": "10:00"
+        },
+        {
+          "action": "Publish product demo content",
+          "approval": "PUBLISHING",
+          "day": 3,
+          "time": "18:00"
+        },
+        {
+          "action": "Open founder-batch listing draft",
+          "approval": "FOUNDER",
+          "day": 5,
+          "time": "11:00"
+        },
+        {
+          "action": "Launch WhatsApp/email reminder",
+          "approval": "BUDGET",
+          "day": 7,
+          "time": "19:00"
+        }
+      ],
+      "socialChannels": [
+        {
+          "action": "Schedule launch carousel and reel",
+          "channel": "Instagram",
+          "status": "READY_FOR_APPROVAL"
+        },
+        {
+          "action": "Schedule parent-community launch post",
+          "channel": "Facebook",
+          "status": "READY_FOR_APPROVAL"
+        },
+        {
+          "action": "Create educational activity pins",
+          "channel": "Pinterest",
+          "status": "READY_FOR_APPROVAL"
+        },
+        {
+          "action": "Optional founder build-in-public post",
+          "channel": "LinkedIn",
+          "status": "OPTIONAL"
+        },
+        {
+          "action": "Prepare short product demonstration upload",
+          "channel": "YouTube",
+          "status": "READY_FOR_APPROVAL"
+        },
+        {
+          "action": "Future concise launch thread",
+          "channel": "Threads",
+          "status": "FUTURE"
+        }
+      ],
+      "versionControl": "Each launch action is immutable after approval decision."
+    },
+    "milestonesDefined": true,
+    "monthlyPlan": [
+      "Approve launch",
+      "Collect demand signals",
+      "Tune offer and content"
+    ],
+    "plansGenerated": true,
+    "quarterlyPlan": [
+      "Founder batch",
+      "Live metrics",
+      "Optimization sprint"
+    ],
+    "recoveryPlan": {
+      "rollbackTriggers": [
+        "publish failure",
+        "wrong asset",
+        "budget guardrail breach",
+        "legal rejection",
+        "founder cancellation"
+      ],
+      "supportedActions": [
+        "unpublish listing",
+        "pause campaign",
+        "delete scheduled post",
+        "revert price",
+        "restore previous asset manifest"
+      ],
+      "validation": [
+        "Confirm public state",
+        "Record rollback audit event",
+        "Notify founder"
+      ]
+    },
+    "weeklyPlan": [
+      "Week 1: waitlist and education",
+      "Week 2: sample/demo content",
+      "Week 3: founding batch offer",
+      "Week 4: reviews and referrals"
+    ]
+  },
+  "createdAt": "2026-07-01T15:28:31+00:00",
+  "crossDepartmentLoop": [
+    "Research",
+    "Product",
+    "Creative",
+    "Marketing",
+    "Sales",
+    "Commerce",
+    "Business Intelligence",
+    "Executive Intelligence",
+    "Optimization",
+    "Research Again"
+  ],
+  "crossDepartmentOrchestration": {
+    "deliverablesHandedOverAutomatically": true,
+    "dependenciesResolved": true,
+    "failedDepartmentsBlockDownstreamExecution": true,
+    "handoffs": [
+      "Research -> Product",
+      "Product -> Creative",
+      "Creative -> Marketing",
+      "Marketing -> Sales",
+      "Sales -> Commerce",
+      "Commerce -> Business Intelligence",
+      "Business Intelligence -> Executive Intelligence"
+    ],
+    "handoffsAudited": true,
+    "workflowContinuityMaintained": true
+  },
+  "dashboards": [
+    "Founder Dashboard",
+    "Executive Dashboard",
+    "Department Dashboard",
+    "Business Dashboard",
+    "Portfolio Dashboard",
+    "Financial Dashboard",
+    "Marketing Dashboard",
+    "Operations Dashboard",
+    "Knowledge Dashboard",
+    "System Dashboard"
+  ],
+  "decisionIntelligence": {
+    "alternativesIncluded": true,
+    "confidenceDisplayed": true,
+    "everyRecommendationJustified": true,
+    "evidenceLinked": true,
+    "risksDocumented": true
+  },
+  "decisionRegister": [
+    {
+      "alternatives": [
+        "Hold for manual review",
+        "Approve only non-spend drafts"
+      ],
+      "approvalRequirement": "Founder approval",
+      "confidence": 0.91,
+      "decision": "Approve launch package for draft execution",
+      "evidence": [
+        "BUSINESS_LAUNCH_PACKAGE",
+        "launchValidation"
+      ],
+      "expectedOutcome": "Execution-ready launch drafts without irreversible public action.",
+      "reason": "All upstream packages are present and launch actions are approval-gated.",
+      "risk": "Live publishing credentials and legal review may still be missing."
+    },
+    {
+      "alternatives": [
+        "Wait for live metrics",
+        "Use conservative assumptions"
+      ],
+      "approvalRequirement": "Strategic approval",
+      "confidence": 0.72,
+      "decision": "Run simulation before price or budget changes",
+      "evidence": [
+        "Increase price by 10%",
+        "Double ad budget",
+        "Add subscription expansion pack",
+        "Switch supplier"
+      ],
+      "expectedOutcome": "Better decisions with explicit assumptions.",
+      "reason": "Sprint 8 requires scenario analysis before recommendations.",
+      "risk": "No live sales data yet."
+    }
+  ],
+  "department": "EXECUTIVE_INTELLIGENCE",
+  "departmentPlans": [
+    {
+      "department": "Research",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Product",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Creative",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Marketing",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Sales",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Commerce & Publishing",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Business Intelligence",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Executive Intelligence",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "ACTIVE"
+    },
+    {
+      "department": "Finance",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Operations",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "CRM",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Customer Success",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Inventory",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Procurement",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Legal",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    },
+    {
+      "department": "Knowledge",
+      "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+      "status": "PLANNED"
+    }
+  ],
+  "departmentStatus": "COMPLETED",
+  "digitalTwin": {
+    "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+    "currentState": "PRE_LAUNCH_APPROVAL_GATED",
+    "customers": {
+      "knownCustomers": [],
+      "targetSegments": [
+        {
+          "name": "Urban learning-focused parent",
+          "need": "Premium safe learning toy",
+          "trigger": "Birthday or preschool readiness"
+        },
+        {
+          "name": "Gift buyer",
+          "need": "Useful premium child gift",
+          "trigger": "Occasion gifting"
+        }
+      ]
+    },
+    "evidence": [
+      "RESEARCH_REPORT",
+      "PRODUCT_BLUEPRINT",
+      "CREATIVE_PACK",
+      "MARKETING_PACK",
+      "BUSINESS_LAUNCH_PACKAGE"
+    ],
+    "finance": {
+      "assemblyCost": 35,
+      "breakEvenQuantity": 115,
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "packagingSpecification",
+            "constraints"
+          ]
+        },
+        "name": "Cost Engineer",
+        "outputSchema": {
+          "required": [
+            "rawMaterialCost",
+            "landedCost",
+            "grossMargin",
+            "pricingStrategy"
+          ]
+        },
+        "promptContract": "Calculate realistic unit economics and recommended selling prices.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Calculate landed cost, margin, break-even quantity, ROI, and pricing.",
+        "section": "costAnalysis",
+        "timeoutSeconds": 30
+      },
+      "costAssumptions": [
+        "Costs are deterministic planning estimates until supplier quotes are collected.",
+        "Taxes, marketplace fees, and shipping slabs must be verified before purchase order.",
+        "Pilot costing assumes 100-500 units and manual quality inspection."
+      ],
+      "department": "PRODUCT",
+      "employeeId": "EMP-106",
+      "employeeName": "Cost Engineer",
+      "grossMargin": 453,
+      "labelCost": 12,
+      "landedCost": 846,
+      "manufacturingCost": 90,
+      "marketingAllowance": 120,
+      "marketplaceFees": 130,
+      "miscBuffer": 25,
+      "netMargin": 373,
+      "packagingCost": 55,
+      "pricingStrategy": {
+        "bundlePricing": 2499,
+        "currency": "INR",
+        "distributorPrice": 999,
+        "manufacturingPrice": 846,
+        "marketplaceSellingPrice": 1399,
+        "premiumPricingOption": 1799,
+        "retailPrice": 1299,
+        "wholesalePrice": 899
+      },
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "rawMaterialCost": 421,
+      "returnsAllowance": 35,
+      "risks": [],
+      "roiEstimate": "1.8x on first 500 units if sell-through exceeds 70%",
+      "score": 81,
+      "section": "costAnalysis",
+      "sensitivityAnalysis": {
+        "materialCostPlus10Percent": 463.1,
+        "minimumViableRetailPrice": 1196,
+        "shippingCostPlus20Percent": 84.0
+      },
+      "shippingCost": 70,
+      "status": "COMPLETED",
+      "taxes": 80,
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "warehousingCost": 18,
+      "workflowId": "e0cad1b5-1a5d-44ac-a3a8-e5e5f9ebf95b"
+    },
+    "goals": [
+      "Launch safely",
+      "Validate demand",
+      "Protect margins",
+      "Capture learnings"
+    ],
+    "inventory": {
+      "manualReconciliation": true,
+      "mode": "MANUAL_CONFIRMATION_REQUIRED",
+      "negativeInventoryPolicy": "BLOCK_ORDER_WHEN_STOCK_ZERO",
+      "reorderThreshold": 25,
+      "startingInventoryAssumption": 100
+    },
+    "kpis": [
+      "CAC",
+      "ROAS",
+      "CTR",
+      "Conversion Rate",
+      "AOV",
+      "LTV",
+      "Retention",
+      "Funnel Drop-off"
+    ],
+    "marketing": {
+      "campaigns": [
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Meta Ads",
+          "source": [
+            {
+              "creative": "Parent-child pattern play",
+              "cta": "Join the founding batch",
+              "hook": "A premium wooden toy that teaches before it explains."
+            },
+            {
+              "creative": "Luma Logic Cubes unboxing",
+              "cta": "See the Starter kit",
+              "hook": "Screen-free play for ages 3-5."
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Google Ads",
+          "source": [
+            {
+              "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+              "headline": "Premium Wooden Learning Toys"
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Amazon Ads",
+          "source": {
+            "campaignType": "Sponsored Products placeholder",
+            "keywords": [
+              "wooden educational toys",
+              "toys for 3 year olds"
+            ],
+            "status": "READY_FOR_SELLER_ACCOUNT"
+          },
+          "status": "SELLER_ACCOUNT_REQUIRED"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "Email",
+          "status": "READY_FOR_PROVIDER"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "WhatsApp",
+          "status": "READY_FOR_PROVIDER"
+        }
+      ],
+      "strategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing."
+    },
+    "operations": {
+      "commerceStatus": "READY_FOR_FOUNDER_APPROVAL",
+      "rollbackPlan": {
+        "rollbackTriggers": [
+          "publish failure",
+          "wrong asset",
+          "budget guardrail breach",
+          "legal rejection",
+          "founder cancellation"
+        ],
+        "supportedActions": [
+          "unpublish listing",
+          "pause campaign",
+          "delete scheduled post",
+          "revert price",
+          "restore previous asset manifest"
+        ],
+        "validation": [
+          "Confirm public state",
+          "Record rollback audit event",
+          "Notify founder"
+        ]
+      }
+    },
+    "products": [
+      {
+        "name": "Luma Logic Cubes",
+        "productId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "variants": [
+          {
+            "contents": [
+              "Core product",
+              "Simple packaging"
+            ],
+            "level": "Starter",
+            "name": "Luma Logic Cubes Starter",
+            "purpose": "Validate demand with minimum inventory risk"
+          },
+          {
+            "contents": [
+              "Core product",
+              "Bonus item",
+              "Gift-ready packaging"
+            ],
+            "level": "Standard",
+            "name": "Luma Logic Cubes Standard",
+            "purpose": "Increase perceived value"
+          },
+          {
+            "contents": [
+              "Expanded product set",
+              "Premium packaging"
+            ],
+            "level": "Premium",
+            "name": "Luma Logic Cubes Premium",
+            "purpose": "Serve gifting and higher-margin buyers"
+          },
+          {
+            "contents": [
+              "Multiple units",
+              "Occasion-based bundle"
+            ],
+            "level": "Bundle",
+            "name": "Luma Logic Cubes Bundle",
+            "purpose": "Raise average order value"
+          },
+          {
+            "contents": [
+              "Recurring monthly variation"
+            ],
+            "level": "Subscription",
+            "name": "Luma Logic Cubes Club",
+            "purpose": "Test repeat purchase potential"
+          },
+          {
+            "contents": [
+              "Replacement or add-on parts"
+            ],
+            "level": "Accessories",
+            "name": "Luma Logic Cubes Accessories",
+            "purpose": "Create low-cost upsells"
+          },
+          {
+            "contents": [
+              "New themes",
+              "Advanced variants"
+            ],
+            "level": "Expansion Packs",
+            "name": "Luma Logic Cubes Expansion Pack",
+            "purpose": "Build a product family"
+          }
+        ]
+      }
+    ],
+    "sales": {
+      "channels": [
+        "Shopify",
+        "Amazon",
+        "Etsy",
+        "WooCommerce",
+        "Website",
+        "Future Marketplace",
+        "Instagram",
+        "Facebook",
+        "Pinterest",
+        "LinkedIn",
+        "YouTube",
+        "Threads"
+      ],
+      "status": "READY_FOR_DEPARTMENT_PACKAGE"
+    },
+    "suppliers": {
+      "alternativeSuppliers": [
+        "Alibaba verified wooden toy supplier",
+        "Local CNC woodworking vendor",
+        "Print-and-pack assembly vendor"
+      ],
+      "comparison": {
+        "bestPilotSupplier": "Educational kit assembler placeholder",
+        "lowestMOQ": 100,
+        "lowestRiskScore": 38
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "materialRecommendation",
+            "country"
+          ]
+        },
+        "name": "Supplier Analyst",
+        "outputSchema": {
+          "required": [
+            "shortlist",
+            "comparison",
+            "alternativeSuppliers"
+          ]
+        },
+        "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+        "section": "supplierRecommendations",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-108",
+      "employeeName": "Supplier Analyst",
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "risks": [],
+      "score": 78,
+      "section": "supplierRecommendations",
+      "shortlist": [
+        {
+          "capacity": "Pilot-ready; verify monthly capacity",
+          "category": "Wooden toys",
+          "country": "India",
+          "estimatedPricing": "INR 260-360 per starter set before final packaging",
+          "leadTimeDays": 21,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka / NCR supplier cluster",
+          "moq": 100,
+          "name": "India wooden toy manufacturer placeholder",
+          "productRange": [
+            "Wooden cubes",
+            "Painted learning toys",
+            "Starter educational kits"
+          ],
+          "qualityIndicators": [
+            "Sample approval required",
+            "Toy-safe coating declaration required"
+          ],
+          "riskScore": 42,
+          "risks": [
+            "Certification not verified",
+            "Paint finish consistency"
+          ]
+        },
+        {
+          "capacity": "Small-batch; verify repeatability",
+          "category": "Wood craft",
+          "country": "India",
+          "estimatedPricing": "INR 300-420 per starter set depending finish",
+          "leadTimeDays": 28,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka",
+          "moq": 150,
+          "name": "Channapatna craft cluster placeholder",
+          "productRange": [
+            "Hand-finished wooden toys",
+            "Lacquered educational pieces"
+          ],
+          "qualityIndicators": [
+            "Craft quality",
+            "Needs standardized tolerances"
+          ],
+          "riskScore": 48,
+          "risks": [
+            "Tolerance variation",
+            "Higher lead time"
+          ]
+        },
+        {
+          "capacity": "Pilot-ready",
+          "category": "Assembly and packaging",
+          "country": "India",
+          "estimatedPricing": "INR 80-140 assembly and printed collateral",
+          "leadTimeDays": 14,
+          "linkedBomItems": [
+            "LUMA-003",
+            "LUMA-004"
+          ],
+          "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+          "moq": 100,
+          "name": "Educational kit assembler placeholder",
+          "productRange": [
+            "Kit collation",
+            "Activity cards",
+            "Retail packaging"
+          ],
+          "qualityIndicators": [
+            "Packaging sample required",
+            "Barcode and label check required"
+          ],
+          "riskScore": 38,
+          "risks": [
+            "Needs coordination with component supplier"
+          ]
+        }
+      ],
+      "status": "COMPLETED",
+      "supplierAssumptions": [
+        "Supplier names are placeholders until live supplier research credentials are connected.",
+        "Founder must verify certifications and samples."
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "e0cad1b5-1a5d-44ac-a3a8-e5e5f9ebf95b"
+    }
+  },
+  "executiveCouncil": [
+    {
+      "department": "Research",
+      "mission": "Continuously identify validated opportunities.",
+      "role": "Chief Research Officer"
+    },
+    {
+      "department": "Product",
+      "mission": "Convert opportunities into manufacturable products.",
+      "role": "Chief Product Officer"
+    },
+    {
+      "department": "Creative",
+      "mission": "Create brand and visual assets.",
+      "role": "Chief Creative Officer"
+    },
+    {
+      "department": "Marketing",
+      "mission": "Create demand and launch campaigns.",
+      "role": "Chief Marketing Officer"
+    },
+    {
+      "department": "Sales",
+      "mission": "Convert demand into customers, quotes, orders, and revenue.",
+      "role": "Chief Sales Officer"
+    },
+    {
+      "department": "Commerce & Publishing",
+      "mission": "Coordinate safe execution, catalog publishing, and fulfilment handoff.",
+      "role": "Chief Commerce Officer"
+    },
+    {
+      "department": "Business Intelligence",
+      "mission": "Monitor health, risks, opportunities, and recommendations.",
+      "role": "Chief Business Intelligence Officer"
+    }
+  ],
+  "executiveCouncilStatus": {
+    "auditGenerated": true,
+    "departmentHeadsAssigned": true,
+    "departmentsRegistered": true,
+    "initialized": true,
+    "metricsEnabled": true
+  },
+  "executiveDashboard": {
+    "approvals": [
+      {
+        "approver": "founder",
+        "gate": "Publishing",
+        "requiredFor": [
+          "marketplace listings",
+          "social posts"
+        ]
+      },
+      {
+        "approver": "founder",
+        "gate": "Budget",
+        "requiredFor": [
+          "paid ads",
+          "influencer spend"
+        ]
+      },
+      {
+        "approver": "human reviewer",
+        "gate": "Legal",
+        "requiredFor": [
+          "safety claims",
+          "child-product compliance claims"
+        ]
+      },
+      {
+        "approver": "operator or founder",
+        "gate": "Rollback",
+        "requiredFor": [
+          "remove listing",
+          "pause campaign"
+        ]
+      }
+    ],
+    "businessHealth": {
+      "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "cashFlowHealth": 52,
+      "customerHealth": 55,
+      "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+      "inventoryHealth": 60,
+      "marketingHealth": 80,
+      "operationsHealth": 91,
+      "overallBusinessHealthScore": 67,
+      "profitHealth": 78,
+      "revenueHealth": 50,
+      "status": "PRE_LAUNCH_ESTIMATE"
+    },
+    "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+    "departmentStatus": [
+      {
+        "department": "Research",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Product",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Creative",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Marketing",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Sales",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Commerce & Publishing",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Business Intelligence",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Executive Intelligence",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "ACTIVE"
+      },
+      {
+        "department": "Finance",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Operations",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "CRM",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Customer Success",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Inventory",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Procurement",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Legal",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      },
+      {
+        "department": "Knowledge",
+        "managerContract": "Mission -> Manager -> Employees -> Workflow -> Deliverables -> Validation -> Approval -> Output",
+        "status": "PLANNED"
+      }
+    ],
+    "departmentSummariesAvailable": true,
+    "drillDownSupported": true,
+    "exportSupported": true,
+    "generatedAt": "2026-07-01T15:28:31+00:00",
+    "kpis": [
+      "Revenue",
+      "Orders",
+      "CAC",
+      "ROAS",
+      "Inventory",
+      "Business Health"
+    ],
+    "liveStatusShown": true,
+    "mobileFriendly": true,
+    "opportunities": [
+      "Bundles",
+      "Expansion packs",
+      "Preschool partnerships"
+    ],
+    "projects": [
+      {
+        "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "status": "BUSINESS_INTELLIGENCE_COMPLETED"
+      }
+    ],
+    "recentActivity": [
+      "Research completed",
+      "Product blueprint generated",
+      "Commerce baseline created",
+      "Executive Intelligence initialized"
+    ],
+    "recommendations": [
+      {
+        "alternatives": [
+          "Hold launch",
+          "Approve only catalogue drafts"
+        ],
+        "approvalRequirement": "Founder approval",
+        "confidence": 0.82,
+        "evidence": {
+          "blockingIssues": [],
+          "checksPassed": 11,
+          "checksTotal": 11,
+          "recommendation": "READY_FOR_FOUNDER_APPROVAL",
+          "score": 91
+        },
+        "expectedOutcome": "Execution-ready drafts without irreversible public action.",
+        "priority": "HIGH",
+        "recommendation": "Approve non-spend launch drafts first",
+        "risk": "Credentials and legal review may still block live publication."
+      },
+      {
+        "alternatives": [
+          "Manual daily reporting",
+          "Wait for first 20 orders"
+        ],
+        "approvalRequirement": "Strategic approval",
+        "confidence": 0.78,
+        "evidence": {
+          "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+          "cashFlowHealth": 52,
+          "customerHealth": 55,
+          "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+          "inventoryHealth": 60,
+          "marketingHealth": 80,
+          "operationsHealth": 91,
+          "overallBusinessHealthScore": 67,
+          "profitHealth": 78,
+          "revenueHealth": 50,
+          "status": "PRE_LAUNCH_ESTIMATE"
+        },
+        "expectedOutcome": "Better optimization decisions from live evidence.",
+        "priority": "HIGH",
+        "recommendation": "Connect live metrics before budget scaling",
+        "risk": "Scaling without ROAS evidence can waste cash."
+      },
+      {
+        "alternatives": [
+          "Use current supplier only",
+          "Delay scale"
+        ],
+        "approvalRequirement": "Operations approval",
+        "confidence": 0.74,
+        "evidence": {
+          "assumption": "Alternative supplier lowers landed cost",
+          "estimatedImpact": {
+            "margin": "potentially higher",
+            "qualityRisk": "requires sample validation"
+          },
+          "recommendation": "Request second quote before scale",
+          "scenario": "Switch supplier"
+        },
+        "expectedOutcome": "Improved margin confidence before bulk orders.",
+        "priority": "MEDIUM",
+        "recommendation": "Run supplier quote comparison before inventory scale",
+        "risk": "Quality and lead-time assumptions may be wrong."
+      }
+    ],
+    "reportType": "EXECUTIVE_BUSINESS_DASHBOARD",
+    "revenue": 0,
+    "risks": [
+      {
+        "mitigation": "Keep actions in approval-gated draft mode until provider credentials are configured.",
+        "risk": "Live publish APIs are not connected in deterministic Sprint 6 MVP.",
+        "severity": "MEDIUM"
+      },
+      {
+        "mitigation": "Legal approval gate blocks safety and certification claims before publishing.",
+        "risk": "Child-product claims may require legal review.",
+        "severity": "HIGH"
+      }
+    ]
+  },
+  "founderVision": {
+    "budget": "300000 INR",
+    "constraints": [],
+    "idea": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+    "successMetrics": [
+      "monthly revenue",
+      "gross margin",
+      "customer acquisition cost",
+      "repeat purchase rate"
+    ],
+    "timeline": "45 days"
+  },
+  "governanceBoundaries": [
+    "No irreversible action without configured approval policy.",
+    "No legal, financial, or ad-spend action without founder or delegated human approval.",
+    "Self-improvement may improve workflows and prompts but cannot change immutable governance rules."
+  ],
+  "integrationRegistry": [
+    {
+      "interface": "reasoning/image generation",
+      "provider": "OpenAI",
+      "status": "OPTIONAL_CONFIGURED_BY_ENV"
+    },
+    {
+      "interface": "market evidence",
+      "provider": "Search Providers",
+      "status": "OPTIONAL_CONFIGURED_BY_ENV"
+    },
+    {
+      "interface": "asset export",
+      "provider": "Google Drive",
+      "status": "OPTIONAL_CONFIGURED_BY_ENV"
+    },
+    {
+      "interface": "approval-gated execution",
+      "provider": "Amazon/Shopify/Etsy/Meta/WhatsApp/Email",
+      "status": "PLANNED"
+    },
+    {
+      "interface": "business state ingestion",
+      "provider": "Accounting/ERP/CRM",
+      "status": "PLANNED"
+    }
+  ],
+  "knowledgeGraph": {
+    "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+    "crossEntityNavigationSupported": true,
+    "edges": [
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "has_research",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "validated_opportunity",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "owns_product",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "has_brand_assets",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "feeds_marketing",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "feeds_sales",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a:sales"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a:sales",
+        "relationship": "feeds_commerce",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "creates_revenue_baseline",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a:revenue"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a:revenue",
+        "relationship": "feeds_insights",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a:insights"
+      },
+      {
+        "from": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "relationship": "generates_insights",
+        "to": "31537d4b-e240-4fd5-a28c-952219b8042a:insights"
+      }
+    ],
+    "impactAnalysisPossible": true,
+    "knowledgeReusable": true,
+    "nodes": [
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "type": "business"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Research Report",
+        "type": "research"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Luma Logic Cubes",
+        "type": "product"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "LumaLearn",
+        "type": "brand"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Marketing Pack",
+        "type": "marketing"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a:sales",
+        "label": "Sales Package",
+        "type": "sales"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Business Launch Package",
+        "type": "launch"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a:revenue",
+        "label": "Revenue Baseline",
+        "type": "revenue"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a:insights",
+        "label": "Business Insights",
+        "type": "insights"
+      },
+      {
+        "id": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "label": "Business Intelligence Report",
+        "type": "business_intelligence"
+      }
+    ],
+    "reasoningMode": "relationship-aware deterministic graph"
+  },
+  "knowledgeGraphService": {
+    "crossEntityNavigationSupported": true,
+    "impactAnalysisPossible": true,
+    "knowledgeReusable": true,
+    "operational": true,
+    "relationshipsMaintained": true
+  },
+  "launchId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+  "learningEngine": {
+    "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+    "captures": [
+      "decision outcomes",
+      "campaign results",
+      "supplier performance",
+      "product performance",
+      "failed experiments",
+      "winning creative"
+    ],
+    "initialLessons": [
+      "Founder approval is required before any public publishing or ad spend.",
+      "Marketplace, social, CRM, and ad integrations can execute the same action manifest when credentials are added.",
+      "Asset exports are available from Sprint 4 local asset manifests or optional Drive uploads."
+    ],
+    "knowledgeUpdatePolicy": "Append-only evidence with confidence and source."
+  },
+  "nextActions": [
+    "Continue live metrics ingestion for continuous monitoring.",
+    "Connect publishing integrations behind approval gates.",
+    "Review executive dashboard, opportunities, risks, and next actions."
+  ],
+  "observabilityPlan": {
+    "businessMetrics": [
+      "revenue",
+      "margin",
+      "CAC",
+      "ROAS",
+      "inventory",
+      "customer feedback",
+      "business health"
+    ],
+    "runtimeMetrics": [
+      "workflow runtime",
+      "department runtime",
+      "employee runtime",
+      "provider usage",
+      "cost",
+      "latency",
+      "failures",
+      "retries"
+    ],
+    "status": "FOUNDATION_READY"
+  },
+  "opportunities": [
+    {
+      "evidence": [
+        {
+          "contents": [
+            "Core product",
+            "Simple packaging"
+          ],
+          "level": "Starter",
+          "name": "Luma Logic Cubes Starter",
+          "purpose": "Validate demand with minimum inventory risk"
+        },
+        {
+          "contents": [
+            "Core product",
+            "Bonus item",
+            "Gift-ready packaging"
+          ],
+          "level": "Standard",
+          "name": "Luma Logic Cubes Standard",
+          "purpose": "Increase perceived value"
+        },
+        {
+          "contents": [
+            "Expanded product set",
+            "Premium packaging"
+          ],
+          "level": "Premium",
+          "name": "Luma Logic Cubes Premium",
+          "purpose": "Serve gifting and higher-margin buyers"
+        },
+        {
+          "contents": [
+            "Multiple units",
+            "Occasion-based bundle"
+          ],
+          "level": "Bundle",
+          "name": "Luma Logic Cubes Bundle",
+          "purpose": "Raise average order value"
+        },
+        {
+          "contents": [
+            "Recurring monthly variation"
+          ],
+          "level": "Subscription",
+          "name": "Luma Logic Cubes Club",
+          "purpose": "Test repeat purchase potential"
+        },
+        {
+          "contents": [
+            "Replacement or add-on parts"
+          ],
+          "level": "Accessories",
+          "name": "Luma Logic Cubes Accessories",
+          "purpose": "Create low-cost upsells"
+        },
+        {
+          "contents": [
+            "New themes",
+            "Advanced variants"
+          ],
+          "level": "Expansion Packs",
+          "name": "Luma Logic Cubes Expansion Pack",
+          "purpose": "Build a product family"
+        }
+      ],
+      "opportunity": "Bundle Starter and Premium variants",
+      "priority": "HIGH",
+      "type": "bundle"
+    },
+    {
+      "evidence": [
+        "Activity card expansion pack",
+        "Gift wrap"
+      ],
+      "opportunity": "Expansion activity-card pack",
+      "priority": "MEDIUM",
+      "type": "upsell"
+    },
+    {
+      "evidence": [
+        {
+          "budgetAllocation": 12000,
+          "channel": "Instagram",
+          "priority": 1,
+          "strength": "Visual trust and parent discovery"
+        },
+        {
+          "budgetAllocation": 8000,
+          "channel": "Marketplace",
+          "priority": 2,
+          "strength": "Conversion intent"
+        },
+        {
+          "budgetAllocation": 3000,
+          "channel": "WhatsApp",
+          "priority": 3,
+          "strength": "Warm lead conversion"
+        },
+        {
+          "budgetAllocation": 5000,
+          "channel": "SEO",
+          "priority": 4,
+          "strength": "Compounding discovery"
+        }
+      ],
+      "opportunity": "Preschool partnership pilot",
+      "priority": "MEDIUM",
+      "type": "channel expansion"
+    }
+  ],
+  "opportunityEngine": {
+    "opportunities": [
+      {
+        "evidence": [
+          {
+            "contents": [
+              "Core product",
+              "Simple packaging"
+            ],
+            "level": "Starter",
+            "name": "Luma Logic Cubes Starter",
+            "purpose": "Validate demand with minimum inventory risk"
+          },
+          {
+            "contents": [
+              "Core product",
+              "Bonus item",
+              "Gift-ready packaging"
+            ],
+            "level": "Standard",
+            "name": "Luma Logic Cubes Standard",
+            "purpose": "Increase perceived value"
+          },
+          {
+            "contents": [
+              "Expanded product set",
+              "Premium packaging"
+            ],
+            "level": "Premium",
+            "name": "Luma Logic Cubes Premium",
+            "purpose": "Serve gifting and higher-margin buyers"
+          },
+          {
+            "contents": [
+              "Multiple units",
+              "Occasion-based bundle"
+            ],
+            "level": "Bundle",
+            "name": "Luma Logic Cubes Bundle",
+            "purpose": "Raise average order value"
+          },
+          {
+            "contents": [
+              "Recurring monthly variation"
+            ],
+            "level": "Subscription",
+            "name": "Luma Logic Cubes Club",
+            "purpose": "Test repeat purchase potential"
+          },
+          {
+            "contents": [
+              "Replacement or add-on parts"
+            ],
+            "level": "Accessories",
+            "name": "Luma Logic Cubes Accessories",
+            "purpose": "Create low-cost upsells"
+          },
+          {
+            "contents": [
+              "New themes",
+              "Advanced variants"
+            ],
+            "level": "Expansion Packs",
+            "name": "Luma Logic Cubes Expansion Pack",
+            "purpose": "Build a product family"
+          }
+        ],
+        "opportunity": "Bundle Starter and Premium variants",
+        "priority": "HIGH",
+        "type": "bundle"
+      },
+      {
+        "evidence": [
+          "Activity card expansion pack",
+          "Gift wrap"
+        ],
+        "opportunity": "Expansion activity-card pack",
+        "priority": "MEDIUM",
+        "type": "upsell"
+      },
+      {
+        "evidence": [
+          {
+            "budgetAllocation": 12000,
+            "channel": "Instagram",
+            "priority": 1,
+            "strength": "Visual trust and parent discovery"
+          },
+          {
+            "budgetAllocation": 8000,
+            "channel": "Marketplace",
+            "priority": 2,
+            "strength": "Conversion intent"
+          },
+          {
+            "budgetAllocation": 3000,
+            "channel": "WhatsApp",
+            "priority": 3,
+            "strength": "Warm lead conversion"
+          },
+          {
+            "budgetAllocation": 5000,
+            "channel": "SEO",
+            "priority": 4,
+            "strength": "Compounding discovery"
+          }
+        ],
+        "opportunity": "Preschool partnership pilot",
+        "priority": "MEDIUM",
+        "type": "channel expansion"
+      }
+    ],
+    "opportunitiesIdentified": true,
+    "rankedByImpact": true,
+    "recommendationsGenerated": true,
+    "risksAssessed": true
+  },
+  "overallScore": 77,
+  "portfolioPlan": {
+    "businesses": [
+      {
+        "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "status": "ACTIVE_PRE_LAUNCH"
+      }
+    ],
+    "capitalAllocationPolicy": "Founder approval required before reallocating capital across businesses.",
+    "founderId": "founder",
+    "organizationId": "default-org",
+    "sharedResources": [
+      "supplier knowledge",
+      "marketing learnings",
+      "creative assets",
+      "research evidence"
+    ]
+  },
+  "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+  "recommendations": [
+    {
+      "alternatives": [
+        "Hold launch",
+        "Approve only catalogue drafts"
+      ],
+      "approvalRequirement": "Founder approval",
+      "confidence": 0.82,
+      "evidence": {
+        "blockingIssues": [],
+        "checksPassed": 11,
+        "checksTotal": 11,
+        "recommendation": "READY_FOR_FOUNDER_APPROVAL",
+        "score": 91
+      },
+      "expectedOutcome": "Execution-ready drafts without irreversible public action.",
+      "priority": "HIGH",
+      "recommendation": "Approve non-spend launch drafts first",
+      "risk": "Credentials and legal review may still block live publication."
+    },
+    {
+      "alternatives": [
+        "Manual daily reporting",
+        "Wait for first 20 orders"
+      ],
+      "approvalRequirement": "Strategic approval",
+      "confidence": 0.78,
+      "evidence": {
+        "businessId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+        "cashFlowHealth": 52,
+        "customerHealth": 55,
+        "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+        "inventoryHealth": 60,
+        "marketingHealth": 80,
+        "operationsHealth": 91,
+        "overallBusinessHealthScore": 67,
+        "profitHealth": 78,
+        "revenueHealth": 50,
+        "status": "PRE_LAUNCH_ESTIMATE"
+      },
+      "expectedOutcome": "Better optimization decisions from live evidence.",
+      "priority": "HIGH",
+      "recommendation": "Connect live metrics before budget scaling",
+      "risk": "Scaling without ROAS evidence can waste cash."
+    },
+    {
+      "alternatives": [
+        "Use current supplier only",
+        "Delay scale"
+      ],
+      "approvalRequirement": "Operations approval",
+      "confidence": 0.74,
+      "evidence": {
+        "assumption": "Alternative supplier lowers landed cost",
+        "estimatedImpact": {
+          "margin": "potentially higher",
+          "qualityRisk": "requires sample validation"
+        },
+        "recommendation": "Request second quote before scale",
+        "scenario": "Switch supplier"
+      },
+      "expectedOutcome": "Improved margin confidence before bulk orders.",
+      "priority": "MEDIUM",
+      "recommendation": "Run supplier quote comparison before inventory scale",
+      "risk": "Quality and lead-time assumptions may be wrong."
+    }
+  ],
+  "releaseReadiness": {
+    "credentialDependentLiveActions": [
+      "commerce publishing",
+      "paid ads",
+      "CRM sync",
+      "payments",
+      "fulfilment"
+    ],
+    "endToEndWorkflowExecuted": true,
+    "founderCanOperateBusiness": true,
+    "genesisV1ProductionReady": true
+  },
+  "reportType": "BUSINESS_OPERATING_PLAN",
+  "resourcePlan": {
+    "budget": "300000 INR",
+    "cash": "UNKNOWN_UNTIL_CONNECTED",
+    "constraints": [],
+    "founderAvailability": "Strategic approvals only",
+    "inventory": "MANUAL_CONFIRMATION_REQUIRED",
+    "supplierCapacity": {
+      "alternativeSuppliers": [
+        "Alibaba verified wooden toy supplier",
+        "Local CNC woodworking vendor",
+        "Print-and-pack assembly vendor"
+      ],
+      "comparison": {
+        "bestPilotSupplier": "Educational kit assembler placeholder",
+        "lowestMOQ": 100,
+        "lowestRiskScore": 38
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "materialRecommendation",
+            "country"
+          ]
+        },
+        "name": "Supplier Analyst",
+        "outputSchema": {
+          "required": [
+            "shortlist",
+            "comparison",
+            "alternativeSuppliers"
+          ]
+        },
+        "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+        "section": "supplierRecommendations",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-108",
+      "employeeName": "Supplier Analyst",
+      "projectId": "31537d4b-e240-4fd5-a28c-952219b8042a",
+      "risks": [],
+      "score": 78,
+      "section": "supplierRecommendations",
+      "shortlist": [
+        {
+          "capacity": "Pilot-ready; verify monthly capacity",
+          "category": "Wooden toys",
+          "country": "India",
+          "estimatedPricing": "INR 260-360 per starter set before final packaging",
+          "leadTimeDays": 21,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka / NCR supplier cluster",
+          "moq": 100,
+          "name": "India wooden toy manufacturer placeholder",
+          "productRange": [
+            "Wooden cubes",
+            "Painted learning toys",
+            "Starter educational kits"
+          ],
+          "qualityIndicators": [
+            "Sample approval required",
+            "Toy-safe coating declaration required"
+          ],
+          "riskScore": 42,
+          "risks": [
+            "Certification not verified",
+            "Paint finish consistency"
+          ]
+        },
+        {
+          "capacity": "Small-batch; verify repeatability",
+          "category": "Wood craft",
+          "country": "India",
+          "estimatedPricing": "INR 300-420 per starter set depending finish",
+          "leadTimeDays": 28,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka",
+          "moq": 150,
+          "name": "Channapatna craft cluster placeholder",
+          "productRange": [
+            "Hand-finished wooden toys",
+            "Lacquered educational pieces"
+          ],
+          "qualityIndicators": [
+            "Craft quality",
+            "Needs standardized tolerances"
+          ],
+          "riskScore": 48,
+          "risks": [
+            "Tolerance variation",
+            "Higher lead time"
+          ]
+        },
+        {
+          "capacity": "Pilot-ready",
+          "category": "Assembly and packaging",
+          "country": "India",
+          "estimatedPricing": "INR 80-140 assembly and printed collateral",
+          "leadTimeDays": 14,
+          "linkedBomItems": [
+            "LUMA-003",
+            "LUMA-004"
+          ],
+          "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+          "moq": 100,
+          "name": "Educational kit assembler placeholder",
+          "productRange": [
+            "Kit collation",
+            "Activity cards",
+            "Retail packaging"
+          ],
+          "qualityIndicators": [
+            "Packaging sample required",
+            "Barcode and label check required"
+          ],
+          "riskScore": 38,
+          "risks": [
+            "Needs coordination with component supplier"
+          ]
+        }
+      ],
+      "status": "COMPLETED",
+      "supplierAssumptions": [
+        "Supplier names are placeholders until live supplier research credentials are connected.",
+        "Founder must verify certifications and samples."
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "e0cad1b5-1a5d-44ac-a3a8-e5e5f9ebf95b"
+    }
+  },
+  "result": "Genesis Business Operating System",
+  "riskIntelligenceEngine": {
+    "alertsCreated": true,
+    "likelihoodEstimated": true,
+    "mitigationRecommendationsGenerated": true,
+    "risks": [
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Keep actions in approval-gated draft mode until provider credentials are configured.",
+        "risk": "Live publish APIs are not connected in deterministic Sprint 6 MVP.",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Legal approval gate blocks safety and certification claims before publishing.",
+        "risk": "Child-product claims may require legal review.",
+        "severity": "HIGH"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Connect supplier APIs or collect founder-approved quotes.",
+        "risk": "Supplier assumptions are not live-verified",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "HIGH",
+        "mitigation": "Continue Sprint 7 data ingestion before automated optimization.",
+        "risk": "Inventory and cash data are not connected",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Legal approval gate remains mandatory.",
+        "risk": "Safety/legal claims need human review",
+        "severity": "HIGH"
+      }
+    ],
+    "risksDetected": true,
+    "severityAssigned": true
+  },
+  "risks": [
+    {
+      "alertCreated": true,
+      "likelihood": "MEDIUM",
+      "mitigation": "Keep actions in approval-gated draft mode until provider credentials are configured.",
+      "risk": "Live publish APIs are not connected in deterministic Sprint 6 MVP.",
+      "severity": "MEDIUM"
+    },
+    {
+      "alertCreated": true,
+      "likelihood": "MEDIUM",
+      "mitigation": "Legal approval gate blocks safety and certification claims before publishing.",
+      "risk": "Child-product claims may require legal review.",
+      "severity": "HIGH"
+    },
+    {
+      "alertCreated": true,
+      "likelihood": "MEDIUM",
+      "mitigation": "Connect supplier APIs or collect founder-approved quotes.",
+      "risk": "Supplier assumptions are not live-verified",
+      "severity": "MEDIUM"
+    },
+    {
+      "alertCreated": true,
+      "likelihood": "HIGH",
+      "mitigation": "Continue Sprint 7 data ingestion before automated optimization.",
+      "risk": "Inventory and cash data are not connected",
+      "severity": "MEDIUM"
+    },
+    {
+      "alertCreated": true,
+      "likelihood": "MEDIUM",
+      "mitigation": "Legal approval gate remains mandatory.",
+      "risk": "Safety/legal claims need human review",
+      "severity": "HIGH"
+    }
+  ],
+  "runtime": "Genesis CEO Runtime",
+  "securityPlan": {
+    "currentMvp": [
+      "audit logging",
+      "approval enforcement",
+      "runtime secret placeholders"
+    ],
+    "required": [
+      "authentication",
+      "authorization",
+      "RBAC",
+      "secrets management",
+      "audit logging",
+      "encryption",
+      "data privacy",
+      "approval enforcement",
+      "tenant isolation"
+    ],
+    "status": "PRODUCTION_SECURITY_NOT_COMPLETE"
+  },
+  "selfImprovementPlan": {
+    "improvable": [
+      "department workflows",
+      "employee prompts",
+      "decision quality",
+      "knowledge quality",
+      "execution plans"
+    ],
+    "protected": [
+      "approval policy",
+      "audit requirements",
+      "tenant isolation",
+      "legal restrictions"
+    ],
+    "reviewCadence": "after each completed launch or material business event"
+  },
+  "simulationResults": [
+    {
+      "assumption": "Demand reduction below margin gain",
+      "estimatedImpact": {
+        "conversionRisk": "medium",
+        "margin": "improves",
+        "price": 1429
+      },
+      "recommendation": "Test after initial demand signal",
+      "scenario": "Increase price by 10%"
+    },
+    {
+      "assumption": "Creative performance remains stable",
+      "estimatedImpact": {
+        "approval": "budget required",
+        "cashRisk": "higher",
+        "reach": "higher"
+      },
+      "recommendation": "Wait for ROAS baseline",
+      "scenario": "Double ad budget"
+    },
+    {
+      "assumption": "Parents want recurring activities",
+      "estimatedImpact": {
+        "ltv": "higher",
+        "operations": "more complex"
+      },
+      "recommendation": "Validate after repeat purchase signal",
+      "scenario": "Add subscription expansion pack"
+    },
+    {
+      "assumption": "Alternative supplier lowers landed cost",
+      "estimatedImpact": {
+        "margin": "potentially higher",
+        "qualityRisk": "requires sample validation"
+      },
+      "recommendation": "Request second quote before scale",
+      "scenario": "Switch supplier"
+    }
+  ],
+  "sprintName": "Executive Intelligence & Business Orchestration",
+  "strategicPlan": {
+    "departmentGoals": {
+      "Analytics": "Track launch KPIs",
+      "Commerce & Publishing": "Execute approved launch actions",
+      "Marketing": "Drive qualified demand",
+      "Product": "Validate supplier assumptions",
+      "Sales": "Convert leads into orders"
+    },
+    "dependencies": [
+      "Founder approvals",
+      "Live provider credentials",
+      "Inventory confirmation",
+      "Legal review for child-product claims"
+    ],
+    "milestones": [
+      "Founder approval",
+      "First listing draft",
+      "First campaign draft",
+      "First customer feedback"
+    ],
+    "monthlyGoals": [
+      "Finalize approvals",
+      "Publish drafts",
+      "Open waitlist",
+      "Measure first signals"
+    ],
+    "quarterlyGoals": [
+      "Launch founder batch",
+      "Validate demand",
+      "Collect reviews",
+      "Prepare optimization loop"
+    ],
+    "successMetricFocus": 78,
+    "weeklyGoals": [
+      "Week 1: waitlist and education",
+      "Week 2: sample/demo content",
+      "Week 3: founding batch offer",
+      "Week 4: reviews and referrals"
+    ]
+  },
+  "systemAudit": {
+    "completed": true,
+    "departmentsIntegrated": true,
+    "knowledgeCaptured": true,
+    "metricsCollected": true,
+    "workflowId": "ee80d831-60aa-40e1-b51b-45ce2cb54096"
+  },
+  "version": "1.0.0-foundation",
+  "workflowId": "ee80d831-60aa-40e1-b51b-45ce2cb54096"
+}

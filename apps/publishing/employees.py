@@ -1,4 +1,4 @@
-"""Executable Publishing Department employees for Sprint 6."""
+"""Executable Commerce & Publishing Department employees for Sprint 6."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from typing import Any
 
 
 PUBLISHING_EMPLOYEES: dict[str, dict[str, Any]] = {
-    "EMP-201": {"name": "Marketplace Publisher", "section": "marketplacePublishingPlan", "role": "Prepare marketplace listings for Amazon, Shopify, Etsy, and WooCommerce.", "inputSchema": {"required": ["productBlueprint", "creativePack", "marketingPack"]}, "outputSchema": {"required": ["listings", "publishingActions", "validationChecks"]}, "promptContract": "Convert approved product, creative, and marketing assets into marketplace publishing actions.", "retryPolicy": {"maxAttempts": 2}, "timeoutSeconds": 30},
+    "EMP-201": {"name": "Commerce Publisher", "section": "marketplacePublishingPlan", "role": "Prepare commerce listings for Amazon, Shopify, Etsy, WooCommerce, website, and future marketplaces.", "inputSchema": {"required": ["productBlueprint", "creativePack", "marketingPack"]}, "outputSchema": {"required": ["listings", "publishingActions", "validationChecks"]}, "promptContract": "Convert approved product, creative, and marketing assets into commerce publishing actions.", "retryPolicy": {"maxAttempts": 2}, "timeoutSeconds": 30},
     "EMP-202": {"name": "Social Publisher", "section": "socialPublishingPlan", "role": "Prepare social media publishing actions across Instagram, Facebook, Pinterest, LinkedIn, and X.", "inputSchema": {"required": ["creativePack", "marketingPack"]}, "outputSchema": {"required": ["channels", "publishingActions", "mediaRequirements"]}, "promptContract": "Prepare social posts with channel-specific execution metadata.", "retryPolicy": {"maxAttempts": 2}, "timeoutSeconds": 30},
     "EMP-203": {"name": "Content Scheduler", "section": "contentSchedule", "role": "Create launch schedule with time-zone awareness and recurring campaigns.", "inputSchema": {"required": ["marketingPack"]}, "outputSchema": {"required": ["timezone", "schedule", "recurringCampaigns"]}, "promptContract": "Transform campaign calendar into executable schedule.", "retryPolicy": {"maxAttempts": 2}, "timeoutSeconds": 30},
     "EMP-204": {"name": "Asset Manager", "section": "assetRepository", "role": "Catalog images, logos, packaging files, documents, and generated assets.", "inputSchema": {"required": ["creativePack", "productBlueprint"]}, "outputSchema": {"required": ["assets", "repositoryPolicy", "versionHistory"]}, "promptContract": "Build an asset repository manifest for launch execution.", "retryPolicy": {"maxAttempts": 2}, "timeoutSeconds": 30},
@@ -35,7 +35,7 @@ def run_publishing_employee(employee_id: str, context: dict[str, Any]) -> dict[s
     output = {
         "employeeId": employee_id,
         "employeeName": contract["name"],
-        "department": "PUBLISHING",
+        "department": "COMMERCE_AND_PUBLISHING",
         "section": contract["section"],
         "status": "COMPLETED",
         "score": data.pop("score", 82),
@@ -60,8 +60,8 @@ def validate_publishing_employee_output(output: dict[str, Any]) -> list[str]:
     for key in ["employeeId", "employeeName", "department", "section", "status", "score", "confidence", "validation", "metrics", "contract"]:
         if key not in output:
             issues.append(f"missing key: {key}")
-    if output.get("department") != "PUBLISHING":
-        issues.append("department must be PUBLISHING")
+    if output.get("department") != "COMMERCE_AND_PUBLISHING":
+        issues.append("department must be COMMERCE_AND_PUBLISHING")
     if output.get("section") != contract["section"]:
         issues.append(f"section must be {contract['section']}")
     score = output.get("score")
@@ -96,6 +96,8 @@ def _marketplace_output(context: dict[str, Any]) -> dict[str, Any]:
             {"channel": "Amazon", "status": "READY_FOR_SELLER_ACCOUNT", "title": listing.get("title", _product_name(context)), "imageOrder": listing.get("imageOrder", [])},
             {"channel": "Etsy", "status": "READY_FOR_ADAPTER", "title": listing.get("title", _product_name(context)), "category": "Educational toys"},
             {"channel": "WooCommerce", "status": "READY_FOR_ADAPTER", "title": listing.get("title", _product_name(context)), "category": "Kids learning"},
+            {"channel": "Website", "status": "READY_FOR_ADAPTER", "title": listing.get("title", _product_name(context)), "category": "Product landing page"},
+            {"channel": "Future Marketplace", "status": "FUTURE_ADAPTER_READY", "title": listing.get("title", _product_name(context)), "category": "Mapped through catalogue adapter"},
         ],
         "publishingActions": ["Create draft listing", "Attach approved media", "Apply pricing", "Submit for founder approval", "Publish after approval"],
         "validationChecks": ["Title present", "Bullets present", "Images mapped", "Price available", "No compliance-sensitive claims without review"],
@@ -106,13 +108,14 @@ def _marketplace_output(context: dict[str, Any]) -> dict[str, Any]:
 def _social_output(context: dict[str, Any]) -> dict[str, Any]:
     social = context["marketingPack"].get("socialMediaPlan", {})
     return {
-        "channels": ["Instagram", "Facebook", "Pinterest", "LinkedIn", "X"],
+        "channels": ["Instagram", "Facebook", "Pinterest", "LinkedIn", "YouTube", "Threads"],
         "publishingActions": [
             {"channel": "Instagram", "action": "Schedule launch carousel and reel", "status": "READY_FOR_APPROVAL"},
             {"channel": "Facebook", "action": "Schedule parent-community launch post", "status": "READY_FOR_APPROVAL"},
             {"channel": "Pinterest", "action": "Create educational activity pins", "status": "READY_FOR_APPROVAL"},
             {"channel": "LinkedIn", "action": "Optional founder build-in-public post", "status": "OPTIONAL"},
-            {"channel": "X", "action": "Optional concise launch thread", "status": "OPTIONAL"},
+            {"channel": "YouTube", "action": "Prepare short product demonstration upload", "status": "READY_FOR_APPROVAL"},
+            {"channel": "Threads", "action": "Future concise launch thread", "status": "FUTURE"},
         ],
         "mediaRequirements": social.get("instagramCalendar", []),
         "score": 82,
@@ -154,9 +157,10 @@ def _store_output(context: dict[str, Any]) -> dict[str, Any]:
     blueprint = context["productBlueprint"]
     pricing = blueprint.get("pricingStrategy", {})
     return {
-        "catalog": {"productName": _product_name(context), "variants": blueprint.get("productVariants", []), "collections": ["Educational toys", "Premium wooden toys", "Ages 3-5"]},
+        "catalog": {"productName": _product_name(context), "variants": blueprint.get("productVariants", []), "collections": ["Educational toys", "Premium wooden toys", "Ages 3-5"], "lifecycleStatus": "LAUNCH_READY"},
         "pricing": pricing,
-        "inventorySync": {"mode": "MANUAL_CONFIRMATION_REQUIRED", "startingInventoryAssumption": 100, "reorderThreshold": 25},
+        "inventorySync": {"mode": "MANUAL_CONFIRMATION_REQUIRED", "startingInventoryAssumption": 100, "reorderThreshold": 25, "negativeInventoryPolicy": "BLOCK_ORDER_WHEN_STOCK_ZERO", "manualReconciliation": True},
+        "pricingSync": {"basePriceSource": "productBlueprint.pricingStrategy", "channelOverridesSupported": True, "effectiveDatePolicy": "ISO date per price version", "historyStored": True},
         "collections": ["Founder batch", "Screen-free learning", "Gift-ready toys"],
         "score": 81,
     }

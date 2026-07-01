@@ -4,7 +4,10 @@
     "tests/fixtures/sample-product-blueprint.json",
     "tests/fixtures/sample-creative-pack.json",
     "testing/fixtures/sample-marketing-pack.json",
-    "testing/fixtures/sample-sales-package.json"
+    "testing/fixtures/sample-sales-package.json",
+    "testing/fixtures/sample-business-launch-package.json",
+    "testing/fixtures/sample-business-intelligence-report.json",
+    "testing/fixtures/sample-business-operating-plan.json"
   ],
   "schemas": [
     "schemas/research-report.schema.json",

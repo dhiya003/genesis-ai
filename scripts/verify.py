@@ -40,6 +40,7 @@ REQUIRED_PATHS = [
     "scripts/validate_marketing_pack.py",
     "scripts/validate_sales_package.py",
     "scripts/validate_business_launch_package.py",
+    "scripts/validate_business_intelligence_report.py",
     "scripts/validate_business_operating_plan.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
@@ -67,6 +68,9 @@ REQUIRED_PATHS = [
     "testing/fixtures/sample-creative-pack.json",
     "testing/fixtures/sample-marketing-pack.json",
     "testing/fixtures/sample-sales-package.json",
+    "testing/fixtures/sample-business-launch-package.json",
+    "testing/fixtures/sample-business-intelligence-report.json",
+    "testing/fixtures/sample-business-operating-plan.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -81,6 +85,7 @@ REQUIRED_PATHS = [
     "docs/epic-05-research-intelligence-validation.md",
     "docs/epic-06-08-product-creative-validation.md",
     "docs/epic-09-10-marketing-sales-validation.md",
+    "docs/epic-11-13-commerce-bi-executive-validation.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]
@@ -100,6 +105,9 @@ JSON_PATHS = [
     "testing/fixtures/sample-creative-pack.json",
     "testing/fixtures/sample-marketing-pack.json",
     "testing/fixtures/sample-sales-package.json",
+    "testing/fixtures/sample-business-launch-package.json",
+    "testing/fixtures/sample-business-intelligence-report.json",
+    "testing/fixtures/sample-business-operating-plan.json",
 ]
 
 COMMANDS = [
@@ -111,6 +119,9 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_creative_pack.py"], "creative pack validation"),
     ([sys.executable, "scripts/validate_marketing_pack.py"], "marketing pack validation"),
     ([sys.executable, "scripts/validate_sales_package.py"], "sales package validation"),
+    ([sys.executable, "scripts/validate_business_launch_package.py"], "business launch package validation"),
+    ([sys.executable, "scripts/validate_business_intelligence_report.py"], "business intelligence report validation"),
+    ([sys.executable, "scripts/validate_business_operating_plan.py"], "business operating plan validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

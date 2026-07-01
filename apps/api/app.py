@@ -263,6 +263,22 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"Business launch package not found: {launch_id}") from exc
+            if parsed.path.startswith("/business-intelligence/"):
+                intelligence_path = parsed.path.removeprefix("/business-intelligence/").strip("/")
+                parts = [part for part in intelligence_path.split("/") if part]
+                if not parts:
+                    raise bad_request("Business ID is required")
+                business_id = parts[0]
+                section = parts[1] if len(parts) > 1 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if section is None or section == "report":
+                        self._send_json(200, orchestrator.get_business_intelligence_report(business_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"Business intelligence report not found: {business_id}") from exc
             if parsed.path.startswith("/businessos/"):
                 business_path = parsed.path.removeprefix("/businessos/").strip("/")
                 parts = [part for part in business_path.split("/") if part]
@@ -537,6 +553,17 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if not isinstance(approval_mode, str):
                     raise bad_request("approvalMode must be a string")
                 result = GenesisOrchestrator(self.store).generate_sales_package(marketing_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/business-intelligence/generate":
+                payload = self._read_json()
+                launch_id = payload.get("launchId")
+                if not isinstance(launch_id, str):
+                    raise bad_request("launchId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_business_intelligence_report(launch_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path == "/businessos/generate":

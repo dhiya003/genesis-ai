@@ -192,6 +192,20 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     launch_report = json.loads(response.read().decode("utf-8"))
 
+                intelligence_request = request.Request(
+                    f"http://{host}:{port}/business-intelligence/generate",
+                    data=json.dumps({"launchId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(intelligence_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    intelligence_run = json.loads(response.read().decode("utf-8"))
+
+                with request.urlopen(f"http://{host}:{port}/business-intelligence/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    intelligence_report = json.loads(response.read().decode("utf-8"))
+
                 businessos_request = request.Request(
                     f"http://{host}:{port}/businessos/generate",
                     data=json.dumps({"launchId": project_id}).encode("utf-8"),
@@ -294,8 +308,15 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertIn(launch_status["status"], {"READY_FOR_FOUNDER_APPROVAL", "NEEDS_REVIEW"})
                 self.assertTrue(launch_assets["assets"])
                 self.assertTrue(launch_report["channelsPrepared"])
+                self.assertTrue(launch_package["productCatalogue"]["items"])
+                self.assertEqual(launch_package["workflowTransition"], "BUSINESS_INTELLIGENCE")
+                self.assertEqual(intelligence_run["businessIntelligenceReport"]["reportType"], "BUSINESS_INTELLIGENCE_REPORT")
+                self.assertEqual(intelligence_report["departmentStatus"], "COMPLETED")
+                self.assertTrue(intelligence_report["executiveBusinessReport"]["kpiDashboard"])
                 self.assertEqual(businessos_run["businessOperatingPlan"]["reportType"], "BUSINESS_OPERATING_PLAN")
                 self.assertEqual(businessos_plan["reportType"], "BUSINESS_OPERATING_PLAN")
+                self.assertEqual(businessos_plan["department"], "EXECUTIVE_INTELLIGENCE")
+                self.assertTrue(businessos_plan["executiveDashboard"]["departmentSummariesAvailable"])
                 self.assertTrue(digital_twin["products"])
                 self.assertGreaterEqual(business_health["overallBusinessHealthScore"], 0)
                 self.assertTrue(recommendations["recommendations"])

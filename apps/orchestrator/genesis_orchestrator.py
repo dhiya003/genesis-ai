@@ -476,9 +476,9 @@ class GenesisOrchestrator:
         project = self.store.get_project(marketing_pack["projectId"])
         engine = WorkflowEngine(self.store)
         workflow = engine.create(project["id"], "BUSINESS_LAUNCH_PACKAGE")
-        workflow = engine.plan(workflow, reason="orchestrator selected Publishing and Business Execution Engine")
-        task = self._create_task(project["id"], workflow["id"], "PUBLISHING_ENGINE", "Generate Sprint 6 Business Launch Package")
-        LOGGER.info("orchestrator routed project to publishing engine", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "BUSINESS_LAUNCH_PACKAGE"})
+        workflow = engine.plan(workflow, reason="orchestrator selected Commerce & Publishing Department")
+        task = self._create_task(project["id"], workflow["id"], "COMMERCE_AND_PUBLISHING", "Generate Sprint 6 Commerce Package")
+        LOGGER.info("orchestrator routed project to commerce and publishing", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "BUSINESS_LAUNCH_PACKAGE"})
 
         department = PublishingDepartment(self.store)
 
@@ -549,6 +549,54 @@ class GenesisOrchestrator:
 
     def get_business_launch_checklist(self, launch_id: str) -> dict[str, Any]:
         return self.store.get_launch_checklist(launch_id)
+
+    def generate_business_intelligence_report(self, launch_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        launch_package = self.store.get_business_launch_package(launch_id)
+        project = self.store.get_project(launch_package["projectId"])
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "BUSINESS_INTELLIGENCE_REPORT")
+        workflow = engine.plan(workflow, reason="orchestrator selected Business Intelligence Department")
+        task = self._create_task(project["id"], workflow["id"], "BUSINESS_INTELLIGENCE", "Generate Sprint 7 Business Intelligence Report")
+        LOGGER.info("orchestrator routed project to business intelligence", extra={"event": "orchestrator.routed", "project_id": project["id"], "workflow_id": workflow["id"], "status": "BUSINESS_INTELLIGENCE_REPORT"})
+
+        runtime = AnalyticsRuntime(self.store)
+
+        def run_business_intelligence(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return runtime.generate_business_intelligence_report(launch_package, project, current_workflow)
+
+        completed_workflow = engine.run(workflow, run_business_intelligence)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "BUSINESS_INTELLIGENCE_COMPLETED"
+            project["updatedAt"] = now_iso()
+            project["businessIntelligenceId"] = project["id"]
+            project["businessIntelligenceWorkflowId"] = completed_workflow["id"]
+            task = self._complete_task(task, {"reportType": "BUSINESS_INTELLIGENCE_REPORT"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "BUSINESS_INTELLIGENCE_REPORT", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_BUSINESS_INTELLIGENCE_APPROVAL", mode=approval_mode)
+            project["businessIntelligenceApprovalId"] = approval["id"]
+            project["businessIntelligenceApprovalStatus"] = approval["status"]
+            if approval["status"] == "PENDING":
+                project["status"] = "AWAITING_BUSINESS_INTELLIGENCE_APPROVAL"
+        else:
+            project["status"] = "BUSINESS_INTELLIGENCE_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.business_intelligence_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {
+            "project": project,
+            "workflow": completed_workflow,
+            "businessIntelligence": {"id": project["id"], "projectId": project["id"]},
+            "businessIntelligenceReport": completed_workflow.get("result"),
+            "approval": approval,
+            "task": task,
+            "deliverable": deliverable,
+        }
+
+    def get_business_intelligence_report(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_business_intelligence_report(business_id)
 
     def generate_business_operating_plan(self, launch_id: str, approval_mode: str = "manual") -> dict[str, Any]:
         launch_package = self.store.get_business_launch_package(launch_id)

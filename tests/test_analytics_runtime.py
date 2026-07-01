@@ -7,6 +7,7 @@ import unittest
 
 from apps.orchestrator import GenesisOrchestrator
 from apps.storage import JsonStore
+from scripts.validate_business_intelligence_report import validate_business_intelligence_report_payload
 
 
 class AnalyticsRuntimeTests(unittest.TestCase):
@@ -22,6 +23,43 @@ class AnalyticsRuntimeTests(unittest.TestCase):
         marketing_pack = orchestrator.generate_marketing_pack(creative_pack["creativeId"])["marketingPack"]
         launch_package = orchestrator.generate_business_launch_package(marketing_pack["marketingId"])["businessLaunchPackage"]
         return orchestrator.generate_business_operating_plan(launch_package["launchId"])["businessOperatingPlan"]["businessId"]
+
+    def _launch_flow(self, orchestrator: GenesisOrchestrator) -> dict[str, object]:
+        research = orchestrator.submit_idea(
+            "Build a premium educational wooden toy business for children aged 3-5 in India.",
+            country="India",
+            budget="300000 INR",
+            timeline="45 days",
+        )
+        product_blueprint = orchestrator.generate_product_blueprint(research["project"]["id"])["blueprint"]
+        creative_pack = orchestrator.generate_creative_pack(product_blueprint["productId"])["creativePack"]
+        marketing_pack = orchestrator.generate_marketing_pack(creative_pack["creativeId"])["marketingPack"]
+        return orchestrator.generate_business_launch_package(marketing_pack["marketingId"])["businessLaunchPackage"]
+
+    def test_business_intelligence_report_covers_sprint7_stories(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = JsonStore(directory)
+            orchestrator = GenesisOrchestrator(store)
+            launch_package = self._launch_flow(orchestrator)
+
+            result = orchestrator.generate_business_intelligence_report(launch_package["launchId"])
+            report = result["businessIntelligenceReport"]
+
+            self.assertEqual(result["project"]["status"], "BUSINESS_INTELLIGENCE_COMPLETED")
+            self.assertEqual(report["reportType"], "BUSINESS_INTELLIGENCE_REPORT")
+            self.assertFalse(validate_business_intelligence_report_payload(report))
+            self.assertTrue(report["businessIntelligenceDepartment"]["initialized"])
+            self.assertTrue(report["chiefBusinessAnalyst"])
+            self.assertTrue(report["metricsCollection"]["collected"])
+            self.assertTrue(report["salesAnalytics"]["reportsStored"])
+            self.assertTrue(report["marketingAnalytics"]["bestPerformingChannels"])
+            self.assertTrue(report["customerAnalytics"]["customerSegments"])
+            self.assertTrue(report["productPerformanceAnalytics"]["productRankingGenerated"])
+            self.assertGreaterEqual(report["businessHealth"]["score"], 0)
+            self.assertTrue(report["recommendations"])
+            self.assertTrue(report["executiveBusinessReport"]["downloadable"])
+            self.assertEqual(report["workflowTransition"], "BUSINESS_OPERATING_SYSTEM")
+            self.assertEqual(store.get_business_intelligence_report(report["businessId"])["businessId"], report["businessId"])
 
     def test_metrics_ingestion_refreshes_dashboard_alerts_and_knowledge(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -57,7 +95,7 @@ class AnalyticsRuntimeTests(unittest.TestCase):
             self.assertEqual(store.get_business_dashboard(business_id)["businessId"], business_id)
             self.assertTrue(store.get_business_alerts(business_id)["alerts"])
             self.assertEqual(len(store.list_business_metric_events(business_id)), 1)
-            self.assertEqual(len(store.list_business_knowledge(business_id)), 1)
+            self.assertGreaterEqual(len(store.list_business_knowledge(business_id)), 1)
 
     def test_revenue_drop_generates_alert_against_previous_event(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

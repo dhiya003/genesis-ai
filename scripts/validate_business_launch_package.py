@@ -18,22 +18,41 @@ REQUIRED_TOP_LEVEL = [
     "productId",
     "workflowId",
     "department",
+    "departmentName",
+    "departmentStatus",
+    "commerceDepartment",
     "manager",
+    "commerceManager",
+    "commerceExecutionPlan",
     "executiveSummary",
+    "productCatalogue",
+    "catalogueSearch",
+    "catalogueVersionHistory",
+    "productLifecycle",
+    "channelsDetected",
     "launchChecklist",
     "marketplacePublishingPlan",
     "socialPublishingPlan",
     "contentSchedule",
     "assetRepository",
     "storeManagementPlan",
+    "inventorySynchronization",
+    "pricingSynchronization",
     "campaignLaunchPlan",
     "approvalPlan",
     "notificationPlan",
     "publishingPlan",
     "rollbackPlan",
+    "launchMonitoring",
     "launchValidation",
     "launchStatus",
     "launchReport",
+    "founderNotification",
+    "businessIntelligenceTransition",
+    "workflowTransition",
+    "auditSummary",
+    "departmentMetrics",
+    "knowledgeBaseEntries",
     "risks",
     "assumptions",
     "nextActions",
@@ -51,8 +70,24 @@ def validate_business_launch_package_payload(data: dict[str, Any]) -> list[str]:
             issues.append(f"missing top-level key: {key}")
     if data.get("reportType") != "BUSINESS_LAUNCH_PACKAGE":
         issues.append("reportType must be BUSINESS_LAUNCH_PACKAGE")
-    if data.get("department") != "PUBLISHING":
-        issues.append("department must be PUBLISHING")
+    if data.get("department") != "COMMERCE_AND_PUBLISHING":
+        issues.append("department must be COMMERCE_AND_PUBLISHING")
+    if data.get("departmentStatus") != "COMPLETED":
+        issues.append("departmentStatus must be COMPLETED")
+    if not data.get("commerceManager"):
+        issues.append("commerceManager is required")
+    catalogue = data.get("productCatalogue", {})
+    items = catalogue.get("items", [])
+    if not items:
+        issues.append("productCatalogue.items is required")
+    skus = [item.get("sku") for item in items if isinstance(item, dict)]
+    if len(skus) != len(set(skus)):
+        issues.append("productCatalogue SKUs must be unique")
+    for key in ["searchSupported", "versionHistoryMaintained", "lifecycleTracked", "variantsLinked"]:
+        if catalogue.get(key) is not True:
+            issues.append(f"productCatalogue.{key} must be true")
+    if not data.get("channelsDetected"):
+        issues.append("channelsDetected is required")
     if not data.get("launchChecklist"):
         issues.append("launchChecklist is required")
     if not data.get("marketplacePublishingPlan", {}).get("listings"):
@@ -65,6 +100,14 @@ def validate_business_launch_package_payload(data: dict[str, Any]) -> list[str]:
         issues.append("assetRepository.assets is required")
     if not data.get("storeManagementPlan", {}).get("catalog"):
         issues.append("storeManagementPlan.catalog is required")
+    inventory = data.get("inventorySynchronization", {})
+    for key in ["negativeInventoryPrevented", "stockChangesAudited", "syncFailuresReported", "manualReconciliationSupported"]:
+        if inventory.get(key) is not True:
+            issues.append(f"inventorySynchronization.{key} must be true")
+    pricing = data.get("pricingSynchronization", {})
+    for key in ["basePriceMaintained", "channelOverridesSupported", "priceHistoryStored", "effectiveDatesSupported", "synchronizationLogged"]:
+        if pricing.get(key) is not True:
+            issues.append(f"pricingSynchronization.{key} must be true")
     if not data.get("campaignLaunchPlan", {}).get("campaigns"):
         issues.append("campaignLaunchPlan.campaigns is required")
     if not data.get("approvalPlan", {}).get("approvalGates"):
@@ -75,6 +118,9 @@ def validate_business_launch_package_payload(data: dict[str, Any]) -> list[str]:
         issues.append("publishingPlan.executionMode is required")
     if not data.get("rollbackPlan", {}).get("supportedActions"):
         issues.append("rollbackPlan.supportedActions is required")
+    monitoring = data.get("launchMonitoring", {})
+    if monitoring.get("activeDuringLaunch") is not True or not monitoring.get("failureCategories") or not monitoring.get("recoveryRecommendations"):
+        issues.append("launchMonitoring must be active with failure categories and recovery recommendations")
     validation = data.get("launchValidation", {})
     if not isinstance(validation.get("score"), (int, float)) or not 0 <= validation.get("score", -1) <= 100:
         issues.append("launchValidation.score must be 0-100")
@@ -82,6 +128,17 @@ def validate_business_launch_package_payload(data: dict[str, Any]) -> list[str]:
         issues.append("launchValidation.recommendation is required")
     if not data.get("launchReport", {}).get("channelsPrepared"):
         issues.append("launchReport.channelsPrepared is required")
+    launch_report = data.get("launchReport", {})
+    for key in ["versionControlled", "searchable", "downloadable", "linkedToProject", "warnings", "failures", "recommendations"]:
+        if key not in launch_report:
+            issues.append(f"launchReport.{key} is required")
+    if data.get("workflowTransition") != "BUSINESS_INTELLIGENCE":
+        issues.append("workflowTransition must be BUSINESS_INTELLIGENCE")
+    if not data.get("businessIntelligenceTransition", {}).get("nextDepartment"):
+        issues.append("businessIntelligenceTransition.nextDepartment is required")
+    for key in ["auditSummary", "departmentMetrics", "knowledgeBaseEntries"]:
+        if not data.get(key):
+            issues.append(f"{key} is required")
     employee_ids = {output.get("employeeId") for output in data.get("employeeOutputs", []) if isinstance(output, dict)}
     missing = REQUIRED_EMPLOYEES - employee_ids
     if missing:

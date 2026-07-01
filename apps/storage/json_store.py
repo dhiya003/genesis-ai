@@ -71,6 +71,7 @@ class JsonStore:
         self.publishing_plans_dir = self.root / "publishing_plans"
         self.asset_manifests_dir = self.root / "asset_manifests"
         self.business_launch_reports_dir = self.root / "business_launch_reports"
+        self.business_intelligence_reports_dir = self.root / "business_intelligence_reports"
         self.business_operating_plans_dir = self.root / "business_operating_plans"
         self.digital_twins_dir = self.root / "digital_twins"
         self.knowledge_graphs_dir = self.root / "knowledge_graphs"
@@ -142,6 +143,7 @@ class JsonStore:
             self.publishing_plans_dir,
             self.asset_manifests_dir,
             self.business_launch_reports_dir,
+            self.business_intelligence_reports_dir,
             self.business_operating_plans_dir,
             self.digital_twins_dir,
             self.knowledge_graphs_dir,
@@ -620,6 +622,12 @@ class JsonStore:
 
     def get_business_launch_report(self, launch_id: str) -> dict[str, Any]:
         return self._read(self.business_launch_reports_dir / f"{launch_id}.json")
+
+    def save_business_intelligence_report(self, report: dict[str, Any]) -> None:
+        self._write(self.business_intelligence_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_business_intelligence_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.business_intelligence_reports_dir / f"{business_id}.json")
 
     def save_business_operating_plan(self, plan: dict[str, Any]) -> None:
         self._write(self.business_operating_plans_dir / f"{plan['businessId']}.json", plan)

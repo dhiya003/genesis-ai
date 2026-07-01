@@ -262,6 +262,45 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     knowledge = json.loads(response.read().decode("utf-8"))
 
+                organizational_request = request.Request(
+                    f"http://{host}:{port}/v2/organizational-intelligence/generate",
+                    data=json.dumps({"businessId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(organizational_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    organizational_run = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/v2/organizational-intelligence/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    organizational_report = json.loads(response.read().decode("utf-8"))
+
+                simulation_request = request.Request(
+                    f"http://{host}:{port}/v2/simulation/generate",
+                    data=json.dumps({"businessId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(simulation_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    simulation_run = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/v2/simulation/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    simulation_report = json.loads(response.read().decode("utf-8"))
+
+                planning_request = request.Request(
+                    f"http://{host}:{port}/v2/executive-planning/generate",
+                    data=json.dumps({"businessId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(planning_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    planning_run = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/v2/executive-planning/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    planning_report = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -324,6 +363,12 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertEqual(dashboard["reportType"], "BUSINESS_DASHBOARD")
                 self.assertTrue(alerts["alerts"])
                 self.assertTrue(knowledge["knowledge"])
+                self.assertEqual(organizational_run["organizationalIntelligenceReport"]["reportType"], "ORGANIZATIONAL_INTELLIGENCE_REPORT")
+                self.assertTrue(organizational_report["organizationalMemory"]["initialized"])
+                self.assertEqual(simulation_run["simulationReport"]["reportType"], "SIMULATION_SCENARIO_REPORT")
+                self.assertTrue(simulation_report["executiveRecommendation"]["bestScenarioSelected"])
+                self.assertEqual(planning_run["executivePlanningReport"]["reportType"], "EXECUTIVE_PLANNING_REPORT")
+                self.assertTrue(planning_report["completionStatus"]["executivePlanningMarkedComplete"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

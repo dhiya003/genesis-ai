@@ -1,0 +1,760 @@
+{
+  "annualBusinessPlan": {
+    "budgetAllocation": {
+      "inventory": 45,
+      "marketing": 35,
+      "operations": 20
+    },
+    "businessObjectives": [
+      "Reach repeatable monthly revenue",
+      "Validate scalable product family"
+    ],
+    "departmentObjectivesAligned": true,
+    "expansionPlan": [
+      "marketplace expansion",
+      "school partnerships"
+    ],
+    "financialTargetsIncluded": true,
+    "generated": true,
+    "hiringPlan": [
+      "part-time operations support after demand validation"
+    ],
+    "kpis": [
+      "revenue",
+      "gross margin",
+      "CAC",
+      "ROAS",
+      "inventory turnover"
+    ],
+    "majorOpportunities": [
+      {
+        "evidence": [
+          {
+            "contents": [
+              "Core product",
+              "Simple packaging"
+            ],
+            "level": "Starter",
+            "name": "Luma Logic Cubes Starter",
+            "purpose": "Validate demand with minimum inventory risk"
+          },
+          {
+            "contents": [
+              "Core product",
+              "Bonus item",
+              "Gift-ready packaging"
+            ],
+            "level": "Standard",
+            "name": "Luma Logic Cubes Standard",
+            "purpose": "Increase perceived value"
+          },
+          {
+            "contents": [
+              "Expanded product set",
+              "Premium packaging"
+            ],
+            "level": "Premium",
+            "name": "Luma Logic Cubes Premium",
+            "purpose": "Serve gifting and higher-margin buyers"
+          },
+          {
+            "contents": [
+              "Multiple units",
+              "Occasion-based bundle"
+            ],
+            "level": "Bundle",
+            "name": "Luma Logic Cubes Bundle",
+            "purpose": "Raise average order value"
+          },
+          {
+            "contents": [
+              "Recurring monthly variation"
+            ],
+            "level": "Subscription",
+            "name": "Luma Logic Cubes Club",
+            "purpose": "Test repeat purchase potential"
+          },
+          {
+            "contents": [
+              "Replacement or add-on parts"
+            ],
+            "level": "Accessories",
+            "name": "Luma Logic Cubes Accessories",
+            "purpose": "Create low-cost upsells"
+          },
+          {
+            "contents": [
+              "New themes",
+              "Advanced variants"
+            ],
+            "level": "Expansion Packs",
+            "name": "Luma Logic Cubes Expansion Pack",
+            "purpose": "Build a product family"
+          }
+        ],
+        "opportunity": "Bundle Starter and Premium variants",
+        "priority": "HIGH",
+        "type": "bundle"
+      },
+      {
+        "evidence": [
+          "Activity card expansion pack",
+          "Gift wrap"
+        ],
+        "opportunity": "Expansion activity-card pack",
+        "priority": "MEDIUM",
+        "type": "upsell"
+      },
+      {
+        "evidence": [
+          {
+            "budgetAllocation": 12000,
+            "channel": "Instagram",
+            "priority": 1,
+            "strength": "Visual trust and parent discovery"
+          },
+          {
+            "budgetAllocation": 8000,
+            "channel": "Marketplace",
+            "priority": 2,
+            "strength": "Conversion intent"
+          },
+          {
+            "budgetAllocation": 3000,
+            "channel": "WhatsApp",
+            "priority": 3,
+            "strength": "Warm lead conversion"
+          },
+          {
+            "budgetAllocation": 5000,
+            "channel": "SEO",
+            "priority": 4,
+            "strength": "Compounding discovery"
+          }
+        ],
+        "opportunity": "Preschool partnership pilot",
+        "priority": "MEDIUM",
+        "type": "channel expansion"
+      }
+    ],
+    "majorRisks": [
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Keep actions in approval-gated draft mode until provider credentials are configured.",
+        "risk": "Live publish APIs are not connected in deterministic Sprint 6 MVP.",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Legal approval gate blocks safety and certification claims before publishing.",
+        "risk": "Child-product claims may require legal review.",
+        "severity": "HIGH"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Connect supplier APIs or collect founder-approved quotes.",
+        "risk": "Supplier assumptions are not live-verified",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "HIGH",
+        "mitigation": "Continue Sprint 7 data ingestion before automated optimization.",
+        "risk": "Inventory and cash data are not connected",
+        "severity": "MEDIUM"
+      },
+      {
+        "alertCreated": true,
+        "likelihood": "MEDIUM",
+        "mitigation": "Legal approval gate remains mandatory.",
+        "risk": "Safety/legal claims need human review",
+        "severity": "HIGH"
+      }
+    ],
+    "marketingRoadmap": [
+      "baseline",
+      "scale winning channels"
+    ],
+    "milestonesIdentified": true,
+    "productRoadmap": {
+      "accessories": [
+        "Replacement parts",
+        "Add-on cards",
+        "Gift wrap"
+      ],
+      "digitalCompanion": "Landing page with founder story, waitlist, and customer feedback capture",
+      "expansionOpportunities": [
+        "Bundles",
+        "Corporate gifting",
+        "Retail-ready packaging"
+      ],
+      "futureFeatures": [
+        "Seasonal themes",
+        "Personalization",
+        "Limited editions"
+      ],
+      "subscription": "Monthly themed drop if repeat demand is validated",
+      "version1": "Luma Logic Cubes Starter validation kit",
+      "version2": "Gift-ready standard kit with improved packaging",
+      "version3": "Premium bundle with stronger brand story and add-ons"
+    },
+    "profitTargets": {
+      "grossMargin": "45%+"
+    },
+    "revenueTargets": {
+      "year1": 1200000
+    },
+    "risksDocumented": true,
+    "salesRoadmap": [
+      "lead capture",
+      "quotes",
+      "orders"
+    ],
+    "score": 84,
+    "version": "annual-v2.0",
+    "versionControlled": true
+  },
+  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+  "completionChecklist": [
+    {
+      "item": "Annual plan completed",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Quarterly objectives defined",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Weekly execution generated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Resources allocated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Priorities ranked",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Strategic conflicts resolved",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Executive action plan generated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Executive review completed",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Decision register updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Knowledge captured",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Metrics recorded",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Audit completed",
+      "status": "COMPLETED"
+    }
+  ],
+  "completionStatus": {
+    "executiveDashboardUpdated": true,
+    "executivePlanningMarkedComplete": true,
+    "founderNotified": true,
+    "futurePlanningReferencesPreviousPlans": true,
+    "organizationalMemoryUpdated": true,
+    "plansAvailableAcrossDepartments": true
+  },
+  "createdAt": "2026-07-01T15:41:50+00:00",
+  "decisionRegisterUpdated": true,
+  "executiveActionPlan": {
+    "actions": [
+      {
+        "deliverables": [
+          "decision memo",
+          "updated dashboard"
+        ],
+        "departmentGoal": "Execute controlled test",
+        "dependencies": [
+          "approval",
+          "pricing update"
+        ],
+        "employeeTasks": [
+          "prepare",
+          "validate",
+          "measure"
+        ],
+        "kpis": [
+          "revenue",
+          "margin",
+          "conversion"
+        ],
+        "project": "Genesis v2 optimization",
+        "strategicObjective": "Increase price by 10%",
+        "workflow": "approval-gated execution"
+      },
+      {
+        "deliverables": [
+          "decision memo",
+          "updated dashboard"
+        ],
+        "departmentGoal": "Execute controlled test",
+        "dependencies": [
+          "catalogue"
+        ],
+        "employeeTasks": [
+          "prepare",
+          "validate",
+          "measure"
+        ],
+        "kpis": [
+          "revenue",
+          "margin",
+          "conversion"
+        ],
+        "project": "Genesis v2 optimization",
+        "strategicObjective": "Bundle products",
+        "workflow": "approval-gated execution"
+      }
+    ],
+    "departmentOwnershipAssigned": true,
+    "dependenciesLinked": true,
+    "milestonesDefined": true,
+    "strategyDecomposedIntoActions": true,
+    "successMetricsIncluded": true
+  },
+  "executivePlanningEngine": {
+    "auditRecorded": true,
+    "businessContextLoaded": true,
+    "dashboardUpdated": true,
+    "executiveCouncilConnected": true,
+    "initialized": true,
+    "organizationalMemoryConnected": true
+  },
+  "executiveReview": {
+    "agenda": [
+      "Business Health",
+      "Revenue",
+      "Marketing",
+      "Sales",
+      "Products",
+      "Customers",
+      "Risks",
+      "Opportunities",
+      "Pending Decisions",
+      "Recommended Changes"
+    ],
+    "decisionRegisterUpdated": true,
+    "departmentSummariesIncluded": true,
+    "executiveMinutes": "Executive Planning recommends controlled optimization before scale.",
+    "followUpActions": [
+      "cap spend until metric threshold",
+      "request second quote"
+    ],
+    "founderApprovalRequestedWhereRequired": true,
+    "generated": true,
+    "recommendedChanges": [
+      "Adopt weekly executive review cadence"
+    ],
+    "score": 86,
+    "strategicActionsProposed": true,
+    "strategicDecisions": [
+      {
+        "confidence": 0.84,
+        "customerImpact": 65,
+        "dependencies": [
+          "approval",
+          "pricing update"
+        ],
+        "implementationCost": 25,
+        "implementationTime": "short",
+        "initiative": "Increase price by 10%",
+        "profitImpact": 90,
+        "rank": 1,
+        "revenueImpact": 85,
+        "risk": "medium",
+        "strategicImportance": 80
+      },
+      {
+        "confidence": 0.81,
+        "customerImpact": 80,
+        "dependencies": [
+          "catalogue"
+        ],
+        "implementationCost": 45,
+        "implementationTime": "medium",
+        "initiative": "Bundle products",
+        "profitImpact": 76,
+        "rank": 2,
+        "revenueImpact": 78,
+        "risk": "medium",
+        "strategicImportance": 82
+      }
+    ],
+    "updatedPriorities": [
+      "Increase price by 10%",
+      "Bundle products"
+    ]
+  },
+  "initiativePrioritization": {
+    "alternativePrioritiesSuggested": true,
+    "ranked": true,
+    "rankedInitiatives": [
+      {
+        "confidence": 0.84,
+        "customerImpact": 65,
+        "dependencies": [
+          "approval",
+          "pricing update"
+        ],
+        "implementationCost": 25,
+        "implementationTime": "short",
+        "initiative": "Increase price by 10%",
+        "profitImpact": 90,
+        "rank": 1,
+        "revenueImpact": 85,
+        "risk": "medium",
+        "strategicImportance": 80
+      },
+      {
+        "confidence": 0.81,
+        "customerImpact": 80,
+        "dependencies": [
+          "catalogue"
+        ],
+        "implementationCost": 45,
+        "implementationTime": "medium",
+        "initiative": "Bundle products",
+        "profitImpact": 76,
+        "rank": 2,
+        "revenueImpact": 78,
+        "risk": "medium",
+        "strategicImportance": 82
+      }
+    ],
+    "score": 85,
+    "scoringExplained": true,
+    "supportingEvidenceLinked": true
+  },
+  "overallScore": 84,
+  "projectId": "08220537-afd6-47db-a566-8692665879e9",
+  "quarterlyObjectives": {
+    "departmentOwnershipAssigned": true,
+    "dependenciesIdentified": true,
+    "keyResultsDefined": true,
+    "objectivesMeasurable": true,
+    "okrs": [
+      {
+        "department": "Research",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Research execution quality",
+        "owner": "Research"
+      },
+      {
+        "department": "Product",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Product execution quality",
+        "owner": "Product"
+      },
+      {
+        "department": "Creative",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Creative execution quality",
+        "owner": "Creative"
+      },
+      {
+        "department": "Marketing",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Marketing execution quality",
+        "owner": "Marketing"
+      },
+      {
+        "department": "Sales",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Sales execution quality",
+        "owner": "Sales"
+      },
+      {
+        "department": "Commerce",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Commerce execution quality",
+        "owner": "Commerce"
+      },
+      {
+        "department": "Operations",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Operations execution quality",
+        "owner": "Operations"
+      },
+      {
+        "department": "Finance",
+        "keyResults": [
+          "ship baseline",
+          "measure outcome",
+          "record learning"
+        ],
+        "objective": "Improve Finance execution quality",
+        "owner": "Finance"
+      }
+    ],
+    "progressTrackingEnabled": true
+  },
+  "reportType": "EXECUTIVE_PLANNING_REPORT",
+  "resourceAllocation": {
+    "calculated": true,
+    "conflictsHighlighted": true,
+    "overallocationPrevented": true,
+    "recommendationsGenerated": true,
+    "resources": {
+      "aiCapacity": "daily planning and monitoring",
+      "budget": "300000 INR",
+      "founderAvailability": "Strategic approvals only",
+      "humanTime": "founder approvals only",
+      "inventory": "confirm 100 units before full launch",
+      "manufacturingCapacity": "sample validated before bulk",
+      "marketingSpend": "cap until ROAS baseline",
+      "supplierCapacity": {
+        "alternativeSuppliers": [
+          "Alibaba verified wooden toy supplier",
+          "Local CNC woodworking vendor",
+          "Print-and-pack assembly vendor"
+        ],
+        "comparison": {
+          "bestPilotSupplier": "Educational kit assembler placeholder",
+          "lowestMOQ": 100,
+          "lowestRiskScore": 38
+        },
+        "confidence": {
+          "level": "MEDIUM",
+          "score": 0.74
+        },
+        "contract": {
+          "inputSchema": {
+            "required": [
+              "bom",
+              "materialRecommendation",
+              "country"
+            ]
+          },
+          "name": "Supplier Analyst",
+          "outputSchema": {
+            "required": [
+              "shortlist",
+              "comparison",
+              "alternativeSuppliers"
+            ]
+          },
+          "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+          "retryPolicy": {
+            "maxAttempts": 2
+          },
+          "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+          "section": "supplierRecommendations",
+          "timeoutSeconds": 30
+        },
+        "department": "PRODUCT",
+        "employeeId": "EMP-108",
+        "employeeName": "Supplier Analyst",
+        "projectId": "08220537-afd6-47db-a566-8692665879e9",
+        "risks": [],
+        "score": 78,
+        "section": "supplierRecommendations",
+        "shortlist": [
+          {
+            "capacity": "Pilot-ready; verify monthly capacity",
+            "category": "Wooden toys",
+            "country": "India",
+            "estimatedPricing": "INR 260-360 per starter set before final packaging",
+            "leadTimeDays": 21,
+            "linkedBomItems": [
+              "LUMA-001",
+              "LUMA-002"
+            ],
+            "location": "Karnataka / NCR supplier cluster",
+            "moq": 100,
+            "name": "India wooden toy manufacturer placeholder",
+            "productRange": [
+              "Wooden cubes",
+              "Painted learning toys",
+              "Starter educational kits"
+            ],
+            "qualityIndicators": [
+              "Sample approval required",
+              "Toy-safe coating declaration required"
+            ],
+            "riskScore": 42,
+            "risks": [
+              "Certification not verified",
+              "Paint finish consistency"
+            ]
+          },
+          {
+            "capacity": "Small-batch; verify repeatability",
+            "category": "Wood craft",
+            "country": "India",
+            "estimatedPricing": "INR 300-420 per starter set depending finish",
+            "leadTimeDays": 28,
+            "linkedBomItems": [
+              "LUMA-001",
+              "LUMA-002"
+            ],
+            "location": "Karnataka",
+            "moq": 150,
+            "name": "Channapatna craft cluster placeholder",
+            "productRange": [
+              "Hand-finished wooden toys",
+              "Lacquered educational pieces"
+            ],
+            "qualityIndicators": [
+              "Craft quality",
+              "Needs standardized tolerances"
+            ],
+            "riskScore": 48,
+            "risks": [
+              "Tolerance variation",
+              "Higher lead time"
+            ]
+          },
+          {
+            "capacity": "Pilot-ready",
+            "category": "Assembly and packaging",
+            "country": "India",
+            "estimatedPricing": "INR 80-140 assembly and printed collateral",
+            "leadTimeDays": 14,
+            "linkedBomItems": [
+              "LUMA-003",
+              "LUMA-004"
+            ],
+            "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+            "moq": 100,
+            "name": "Educational kit assembler placeholder",
+            "productRange": [
+              "Kit collation",
+              "Activity cards",
+              "Retail packaging"
+            ],
+            "qualityIndicators": [
+              "Packaging sample required",
+              "Barcode and label check required"
+            ],
+            "riskScore": 38,
+            "risks": [
+              "Needs coordination with component supplier"
+            ]
+          }
+        ],
+        "status": "COMPLETED",
+        "supplierAssumptions": [
+          "Supplier names are placeholders until live supplier research credentials are connected.",
+          "Founder must verify certifications and samples."
+        ],
+        "validation": {
+          "business": "PASS",
+          "confidence": "PASS",
+          "engineering": "PASS",
+          "risk": "PASS",
+          "schema": "PASS"
+        },
+        "workflowId": "d8642750-bf95-4f81-bfbf-f8a2adb2477f"
+      }
+    },
+    "score": 82,
+    "tradeOffsExplained": true
+  },
+  "strategicConflicts": {
+    "conflicts": [
+      {
+        "conflict": "Marketing budget scale before ROAS baseline",
+        "departmentsAffected": [
+          "Marketing",
+          "Finance"
+        ],
+        "resolution": "cap spend until metric threshold",
+        "severity": "HIGH"
+      },
+      {
+        "conflict": "Inventory expansion before supplier quote",
+        "departmentsAffected": [
+          "Commerce",
+          "Operations"
+        ],
+        "resolution": "request second quote",
+        "severity": "MEDIUM"
+      }
+    ],
+    "conflictsIdentified": true,
+    "departmentsAffectedListed": true,
+    "resolutionRecommendationsGenerated": true,
+    "severityAssigned": true
+  },
+  "version": "2.0.0",
+  "weeklyExecutionPlan": {
+    "bottlenecksIdentified": true,
+    "generated": true,
+    "resourceConflictsDetected": true,
+    "tasks": [
+      {
+        "deliverable": "launch checklist",
+        "department": "Commerce",
+        "dependencies": [
+          "founder approval"
+        ],
+        "expectedOutcome": "launch-ready",
+        "priority": 1,
+        "task": "Confirm inventory and publishing readiness"
+      },
+      {
+        "deliverable": "KPI baseline",
+        "department": "Marketing",
+        "dependencies": [
+          "campaign IDs"
+        ],
+        "expectedOutcome": "measurable launch",
+        "priority": 2,
+        "task": "Prepare measurement dashboard"
+      }
+    ],
+    "tasksPrioritized": true,
+    "timelineGenerated": true
+  },
+  "workflowId": "6dd954de-ed6a-4f02-b37b-05c492a509e8"
+}

@@ -23,6 +23,7 @@ REQUIRED_PATHS = [
     "apps/publishing/department.py",
     "apps/businessos/runtime.py",
     "apps/analytics/runtime.py",
+    "apps/intelligence/runtime.py",
     "apps/dashboard.py",
     "apps/security.py",
     "apps/founder/management.py",
@@ -42,6 +43,9 @@ REQUIRED_PATHS = [
     "scripts/validate_business_launch_package.py",
     "scripts/validate_business_intelligence_report.py",
     "scripts/validate_business_operating_plan.py",
+    "scripts/validate_organizational_intelligence_report.py",
+    "scripts/validate_simulation_report.py",
+    "scripts/validate_executive_planning_report.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
@@ -53,6 +57,7 @@ REQUIRED_PATHS = [
     "tests/test_publishing_engine.py",
     "tests/test_businessos_runtime.py",
     "tests/test_analytics_runtime.py",
+    "tests/test_v2_intelligence.py",
     "tests/test_production_guardrails.py",
     "tests/test_founder_management.py",
     "tests/test_project_lifecycle.py",
@@ -71,6 +76,9 @@ REQUIRED_PATHS = [
     "testing/fixtures/sample-business-launch-package.json",
     "testing/fixtures/sample-business-intelligence-report.json",
     "testing/fixtures/sample-business-operating-plan.json",
+    "testing/fixtures/sample-organizational-intelligence-report.json",
+    "testing/fixtures/sample-simulation-report.json",
+    "testing/fixtures/sample-executive-planning-report.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -86,6 +94,7 @@ REQUIRED_PATHS = [
     "docs/epic-06-08-product-creative-validation.md",
     "docs/epic-09-10-marketing-sales-validation.md",
     "docs/epic-11-13-commerce-bi-executive-validation.md",
+    "docs/epic-14-16-v2-intelligence-validation.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]
@@ -108,6 +117,9 @@ JSON_PATHS = [
     "testing/fixtures/sample-business-launch-package.json",
     "testing/fixtures/sample-business-intelligence-report.json",
     "testing/fixtures/sample-business-operating-plan.json",
+    "testing/fixtures/sample-organizational-intelligence-report.json",
+    "testing/fixtures/sample-simulation-report.json",
+    "testing/fixtures/sample-executive-planning-report.json",
 ]
 
 COMMANDS = [
@@ -122,6 +134,9 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_business_launch_package.py"], "business launch package validation"),
     ([sys.executable, "scripts/validate_business_intelligence_report.py"], "business intelligence report validation"),
     ([sys.executable, "scripts/validate_business_operating_plan.py"], "business operating plan validation"),
+    ([sys.executable, "scripts/validate_organizational_intelligence_report.py"], "organizational intelligence report validation"),
+    ([sys.executable, "scripts/validate_simulation_report.py"], "simulation report validation"),
+    ([sys.executable, "scripts/validate_executive_planning_report.py"], "executive planning report validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

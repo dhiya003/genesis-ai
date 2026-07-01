@@ -1,0 +1,303 @@
+{
+  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+  "completionChecklist": [
+    {
+      "item": "Simulation completed",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Recommendation generated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Evidence attached",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Confidence calculated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Decision stored",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Knowledge updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Organizational Memory updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Knowledge Graph updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Executive Dashboard updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Audit completed",
+      "status": "COMPLETED"
+    }
+  ],
+  "createdAt": "2026-07-01T15:41:50+00:00",
+  "decisionRegisterEntry": {
+    "actualBusinessOutcome": "PENDING",
+    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+    "confidence": 0.84,
+    "founderDecision": "PENDING",
+    "id": "48f4446e-0b45-4710-b4d3-0b3fdb4227c6",
+    "lessonsLearned": [],
+    "originalRecommendation": "Increase price by 10%",
+    "supportingEvidence": {
+      "confidence": 0.72,
+      "demandChange": "-6%",
+      "estimatedProfit": 48000,
+      "estimatedRevenue": 106000,
+      "marginImpact": "positive",
+      "riskAssessment": "MEDIUM",
+      "scenario": "Increase price by 10%",
+      "sellingPrice": 1429
+    }
+  },
+  "executiveRecommendation": {
+    "alternativeOptions": [
+      {
+        "rank": 2,
+        "scenario": "Bundle products",
+        "score": 81
+      },
+      {
+        "rank": 3,
+        "scenario": "Increase marketing budget",
+        "score": 74
+      },
+      {
+        "rank": 4,
+        "scenario": "Subscription model",
+        "score": 70
+      }
+    ],
+    "bestScenarioSelected": true,
+    "confidenceExplained": "Moderate confidence because live conversion elasticity is not yet known.",
+    "confidenceScore": 84,
+    "evidenceLinked": true,
+    "expectedBenefits": [
+      "higher unit margin",
+      "more cash per order"
+    ],
+    "justification": "Highest score with margin upside and manageable demand risk.",
+    "preferredScenario": "Increase price by 10%",
+    "risks": [
+      "conversion dip"
+    ],
+    "supportingEvidence": {
+      "confidence": 0.72,
+      "demandChange": "-6%",
+      "estimatedProfit": 48000,
+      "estimatedRevenue": 106000,
+      "marginImpact": "positive",
+      "riskAssessment": "MEDIUM",
+      "scenario": "Increase price by 10%",
+      "sellingPrice": 1429
+    },
+    "whyOtherOptionsWereRejected": "Lower confidence or higher cash/operational risk."
+  },
+  "expansionSimulation": {
+    "estimatedInvestmentCalculated": 150000,
+    "expansionOpportunitiesAnalyzed": [
+      "new city",
+      "new marketplace",
+      "new customer segment"
+    ],
+    "expectedBusinessImpactEstimated": "15-25% revenue upside after proof",
+    "recommendedSequenceProvided": [
+      "Marketplace expansion",
+      "City pilot",
+      "New category"
+    ],
+    "risksAssessed": [
+      "unknown demand",
+      "fulfilment complexity"
+    ]
+  },
+  "marketingInvestmentSimulation": {
+    "assumptionsDocumented": true,
+    "budgetScenariosSupported": true,
+    "channelsCompared": [
+      "Meta Ads",
+      "Google Ads",
+      "Amazon Ads"
+    ],
+    "confidenceCalculated": 0.74,
+    "estimatedCAC": 450,
+    "estimatedLeads": 900,
+    "estimatedROAS": 2.4,
+    "estimatedReach": 60000,
+    "estimatedRevenue": 108000,
+    "estimatedSales": 45,
+    "risksExplained": true
+  },
+  "overallScore": 84,
+  "pricingSimulation": {
+    "confidenceDisplayed": true,
+    "historicalComparisonAvailable": true,
+    "multipleScenariosSupported": true,
+    "risksExplained": true,
+    "sideBySideComparison": [
+      {
+        "confidence": 0.76,
+        "demandChange": "baseline",
+        "estimatedProfit": 42000,
+        "estimatedRevenue": 100000,
+        "marginImpact": "baseline",
+        "riskAssessment": "LOW",
+        "scenario": "Base price",
+        "sellingPrice": 1299
+      },
+      {
+        "confidence": 0.72,
+        "demandChange": "-6%",
+        "estimatedProfit": 48000,
+        "estimatedRevenue": 106000,
+        "marginImpact": "positive",
+        "riskAssessment": "MEDIUM",
+        "scenario": "Increase price by 10%",
+        "sellingPrice": 1429
+      },
+      {
+        "confidence": 0.7,
+        "demandChange": "+12%",
+        "estimatedProfit": 33000,
+        "estimatedRevenue": 97000,
+        "marginImpact": "negative",
+        "riskAssessment": "MEDIUM",
+        "scenario": "Discount 10%",
+        "sellingPrice": 1169
+      }
+    ]
+  },
+  "productLaunchSimulation": {
+    "executiveRecommendationGenerated": true,
+    "financialImpactEstimated": {
+      "expectedRevenue": 450000,
+      "investment": 300000
+    },
+    "launchFeasibilityEstimated": true,
+    "operationalRisksIdentified": [
+      "inventory confirmation",
+      "legal review"
+    ],
+    "resourceRequirementsDisplayed": [
+      "inventory",
+      "creative assets",
+      "ad budget",
+      "founder approval"
+    ]
+  },
+  "projectId": "08220537-afd6-47db-a566-8692665879e9",
+  "reportGovernance": {
+    "executiveNotified": true,
+    "historicalComparisonsAvailable": true,
+    "linkedToBusiness": true,
+    "linkedToProject": true,
+    "recommendationsReusable": true,
+    "searchable": true,
+    "versioned": true
+  },
+  "reportType": "SIMULATION_SCENARIO_REPORT",
+  "scenarioComparison": {
+    "confidenceDisplayed": true,
+    "kpisCompared": [
+      "revenue",
+      "profit",
+      "CAC",
+      "ROAS",
+      "cash risk"
+    ],
+    "multipleScenariosCompared": true,
+    "rankedScenarios": [
+      {
+        "rank": 1,
+        "scenario": "Increase price by 10%",
+        "score": 84
+      },
+      {
+        "rank": 2,
+        "scenario": "Bundle products",
+        "score": 81
+      },
+      {
+        "rank": 3,
+        "scenario": "Increase marketing budget",
+        "score": 74
+      },
+      {
+        "rank": 4,
+        "scenario": "Subscription model",
+        "score": 70
+      }
+    ],
+    "rankingGenerated": true,
+    "risksCompared": true
+  },
+  "simulationEngine": {
+    "auditCreated": true,
+    "businessContextLoaded": true,
+    "businessMemoryConnected": true,
+    "executiveDashboardUpdated": true,
+    "historicalKnowledgeLoaded": true,
+    "initialized": true,
+    "knowledgeGraphConnected": true,
+    "supportedSimulations": [
+      "pricing",
+      "marketingBudget",
+      "productLaunch",
+      "supplierChange",
+      "manufacturingChange",
+      "expansion",
+      "inventory",
+      "hiring",
+      "cashFlow",
+      "subscriptionModels"
+    ]
+  },
+  "simulationLearning": {
+    "accuracyMeasured": true,
+    "actualOutcomesCaptured": true,
+    "baselinePrediction": {
+      "rank": 1,
+      "scenario": "Increase price by 10%",
+      "score": 84
+    },
+    "learningHistoryUpdated": true,
+    "learningSources": [
+      "revenue",
+      "profit",
+      "sales",
+      "marketing",
+      "customer behavior",
+      "operational results"
+    ],
+    "modelsImprovedUsingOrganizationalKnowledge": true,
+    "predictionsTracked": true
+  },
+  "supplierChangeSimulation": {
+    "alternativesRanked": [
+      "current supplier",
+      "backup supplier",
+      "regional supplier"
+    ],
+    "costDifferenceCalculated": "Potential 8-12% landed cost reduction",
+    "recommendationProvided": "Request second quote before scale.",
+    "risksIdentified": [
+      "quality variance",
+      "lead time"
+    ],
+    "supplierComparisonGenerated": true
+  },
+  "version": "2.0.0",
+  "workflowId": "130b8540-bd18-4f86-8ac2-ec4bf9707aae"
+}

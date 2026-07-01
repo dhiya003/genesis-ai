@@ -11,6 +11,7 @@ from apps.analytics import AnalyticsRuntime
 from apps.audit import now_iso, record_audit
 from apps.businessos import BusinessOSRuntime
 from apps.creative import CreativeDepartment
+from apps.intelligence import GenesisV2IntelligenceRuntime
 from apps.marketing import MarketingDepartment
 from apps.product import ProductDepartment
 from apps.publishing import PublishingDepartment
@@ -693,6 +694,108 @@ class GenesisOrchestrator:
 
     def list_business_metric_events(self, business_id: str) -> dict[str, Any]:
         return {"businessId": business_id, "events": self.store.list_business_metric_events(business_id)}
+
+    def generate_organizational_intelligence_report(self, business_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        project = self.store.get_project(business_id)
+        self.store.get_business_operating_plan(business_id)
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "ORGANIZATIONAL_INTELLIGENCE_REPORT")
+        workflow = engine.plan(workflow, reason="orchestrator selected Genesis v2 Organizational Memory")
+        task = self._create_task(project["id"], workflow["id"], "ORGANIZATIONAL_MEMORY", "Generate Genesis v2 Organizational Intelligence Report")
+        runtime = GenesisV2IntelligenceRuntime(self.store)
+
+        def run_learning(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return runtime.generate_organizational_intelligence(business_id, current_workflow)
+
+        completed_workflow = engine.run(workflow, run_learning)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "ORGANIZATIONAL_INTELLIGENCE_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": "ORGANIZATIONAL_INTELLIGENCE_REPORT"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "ORGANIZATIONAL_INTELLIGENCE_REPORT", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_ORGANIZATIONAL_INTELLIGENCE_APPROVAL", mode=approval_mode)
+        else:
+            project["status"] = "ORGANIZATIONAL_INTELLIGENCE_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.organizational_intelligence_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {"project": project, "workflow": completed_workflow, "organizationalIntelligenceReport": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
+
+    def generate_simulation_report(self, business_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        project = self.store.get_project(business_id)
+        self.store.get_business_operating_plan(business_id)
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "SIMULATION_SCENARIO_REPORT")
+        workflow = engine.plan(workflow, reason="orchestrator selected Genesis v2 Simulation Engine")
+        task = self._create_task(project["id"], workflow["id"], "SIMULATION_ENGINE", "Generate Genesis v2 Simulation Scenario Report")
+        runtime = GenesisV2IntelligenceRuntime(self.store)
+
+        def run_simulation(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return runtime.generate_simulation_report(business_id, current_workflow)
+
+        completed_workflow = engine.run(workflow, run_simulation)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "SIMULATION_SCENARIO_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": "SIMULATION_SCENARIO_REPORT"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "SIMULATION_SCENARIO_REPORT", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_SIMULATION_APPROVAL", mode=approval_mode)
+        else:
+            project["status"] = "SIMULATION_SCENARIO_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.simulation_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {"project": project, "workflow": completed_workflow, "simulationReport": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
+
+    def generate_executive_planning_report(self, business_id: str, approval_mode: str = "auto") -> dict[str, Any]:
+        project = self.store.get_project(business_id)
+        self.store.get_business_operating_plan(business_id)
+        engine = WorkflowEngine(self.store)
+        workflow = engine.create(project["id"], "EXECUTIVE_PLANNING_REPORT")
+        workflow = engine.plan(workflow, reason="orchestrator selected Genesis v2 Executive Planning Engine")
+        task = self._create_task(project["id"], workflow["id"], "EXECUTIVE_PLANNING", "Generate Genesis v2 Executive Planning Report")
+        runtime = GenesisV2IntelligenceRuntime(self.store)
+
+        def run_planning(current_workflow: dict[str, Any]) -> dict[str, Any]:
+            return runtime.generate_executive_planning_report(business_id, current_workflow)
+
+        completed_workflow = engine.run(workflow, run_planning)
+        if completed_workflow["status"] == "COMPLETED":
+            project["status"] = "EXECUTIVE_PLANNING_COMPLETED"
+            project["updatedAt"] = now_iso()
+            task = self._complete_task(task, {"reportType": "EXECUTIVE_PLANNING_REPORT"})
+            deliverable = self._create_deliverable(project["id"], completed_workflow["id"], "EXECUTIVE_PLANNING_REPORT", completed_workflow.get("result"))
+            approval = ApprovalManager(self.store).request(project["id"], completed_workflow["id"], "FOUNDER_EXECUTIVE_PLANNING_APPROVAL", mode=approval_mode)
+        else:
+            project["status"] = "EXECUTIVE_PLANNING_FAILED"
+            project["updatedAt"] = now_iso()
+            task = self._fail_task(task, completed_workflow.get("error", {}))
+            deliverable = None
+            approval = None
+        self.store.save_project(project)
+        record_audit(self.store, "project.executive_planning_finished", project_id=project["id"], workflow_id=completed_workflow["id"], details={"status": project["status"]})
+        return {"project": project, "workflow": completed_workflow, "executivePlanningReport": completed_workflow.get("result"), "approval": approval, "task": task, "deliverable": deliverable}
+
+    def get_organizational_intelligence_report(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_organizational_intelligence_report(business_id)
+
+    def get_executive_knowledge_base(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_executive_knowledge_base(business_id)
+
+    def get_v2_simulation_report(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_v2_simulation_report(business_id)
+
+    def get_v2_decision_register(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_v2_decision_register(business_id)
+
+    def get_executive_planning_report(self, business_id: str) -> dict[str, Any]:
+        return self.store.get_executive_planning_report(business_id)
 
     def resume_research_workflow(self, workflow_id: str, approval_mode: str = "auto") -> dict[str, Any]:
         workflow = self.store.get_workflow(workflow_id)

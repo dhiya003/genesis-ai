@@ -317,6 +317,30 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                     return
                 except FileNotFoundError as exc:
                     raise not_found(f"BusinessOS plan not found: {business_id}") from exc
+            if parsed.path.startswith("/v2/"):
+                v2_path = parsed.path.removeprefix("/v2/").strip("/")
+                parts = [part for part in v2_path.split("/") if part]
+                if len(parts) < 2:
+                    raise bad_request("V2 route must include resource and business ID")
+                resource, business_id = parts[0], parts[1]
+                section = parts[2] if len(parts) > 2 else None
+                orchestrator = GenesisOrchestrator(self.store)
+                try:
+                    if resource == "organizational-intelligence" and section in {None, "report"}:
+                        self._send_json(200, orchestrator.get_organizational_intelligence_report(business_id))
+                    elif resource == "organizational-intelligence" and section == "knowledge-base":
+                        self._send_json(200, orchestrator.get_executive_knowledge_base(business_id))
+                    elif resource == "simulation" and section in {None, "report"}:
+                        self._send_json(200, orchestrator.get_v2_simulation_report(business_id))
+                    elif resource == "simulation" and section == "decisions":
+                        self._send_json(200, orchestrator.get_v2_decision_register(business_id))
+                    elif resource == "executive-planning" and section in {None, "report"}:
+                        self._send_json(200, orchestrator.get_executive_planning_report(business_id))
+                    else:
+                        self._send_json(404, {"status": "not_found", "path": parsed.path})
+                    return
+                except FileNotFoundError as exc:
+                    raise not_found(f"V2 report not found: {business_id}") from exc
             if parsed.path.startswith("/creative/"):
                 creative_path = parsed.path.removeprefix("/creative/").strip("/")
                 parts = [part for part in creative_path.split("/") if part]
@@ -592,6 +616,39 @@ class GenesisApiHandler(BaseHTTPRequestHandler):
                 if observed_at is not None and not isinstance(observed_at, str):
                     raise bad_request("observedAt must be a string")
                 result = GenesisOrchestrator(self.store).ingest_business_metrics(business_id, metrics, source=source, observed_at=observed_at)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/v2/organizational-intelligence/generate":
+                payload = self._read_json()
+                business_id = payload.get("businessId")
+                if not isinstance(business_id, str):
+                    raise bad_request("businessId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_organizational_intelligence_report(business_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/v2/simulation/generate":
+                payload = self._read_json()
+                business_id = payload.get("businessId")
+                if not isinstance(business_id, str):
+                    raise bad_request("businessId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_simulation_report(business_id, approval_mode=approval_mode)
+                self._send_json(201, result)
+                return
+            if parsed.path == "/v2/executive-planning/generate":
+                payload = self._read_json()
+                business_id = payload.get("businessId")
+                if not isinstance(business_id, str):
+                    raise bad_request("businessId must be a string")
+                approval_mode = payload.get("approvalMode", "auto")
+                if not isinstance(approval_mode, str):
+                    raise bad_request("approvalMode must be a string")
+                result = GenesisOrchestrator(self.store).generate_executive_planning_report(business_id, approval_mode=approval_mode)
                 self._send_json(201, result)
                 return
             if parsed.path == "/creative/generate":

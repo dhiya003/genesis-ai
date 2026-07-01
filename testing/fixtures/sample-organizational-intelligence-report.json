@@ -1,0 +1,2811 @@
+{
+  "auditSummary": {
+    "recorded": true,
+    "workflowId": "dcecdf3f-9503-48ec-a344-fa7e15df2a18"
+  },
+  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+  "businessPatterns": [
+    {
+      "pattern": "Approval-gated launch sequence",
+      "reusable": true,
+      "statisticalConfidence": 0.82,
+      "supportingEvidence": [
+        {
+          "category": "Marketing",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Product",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Variant-level catalogue data is required before inventory scaling.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Sales",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Lead qualification should happen before founder time is spent.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Operations",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        }
+      ]
+    },
+    {
+      "pattern": "Budget scaling after ROAS baseline",
+      "reusable": true,
+      "statisticalConfidence": 0.79,
+      "supportingEvidence": [
+        {
+          "alternatives": [
+            "Hold launch",
+            "Approve only catalogue drafts"
+          ],
+          "approvalRequirement": "Founder approval",
+          "confidence": 0.82,
+          "evidence": {
+            "blockingIssues": [],
+            "checksPassed": 11,
+            "checksTotal": 11,
+            "recommendation": "READY_FOR_FOUNDER_APPROVAL",
+            "score": 91
+          },
+          "expectedOutcome": "Execution-ready drafts without irreversible public action.",
+          "priority": "HIGH",
+          "recommendation": "Approve non-spend launch drafts first",
+          "risk": "Credentials and legal review may still block live publication."
+        },
+        {
+          "alternatives": [
+            "Manual daily reporting",
+            "Wait for first 20 orders"
+          ],
+          "approvalRequirement": "Strategic approval",
+          "confidence": 0.78,
+          "evidence": {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "cashFlowHealth": 52,
+            "customerHealth": 55,
+            "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+            "inventoryHealth": 60,
+            "marketingHealth": 80,
+            "operationsHealth": 91,
+            "overallBusinessHealthScore": 67,
+            "profitHealth": 78,
+            "revenueHealth": 50,
+            "status": "PRE_LAUNCH_ESTIMATE"
+          },
+          "expectedOutcome": "Better optimization decisions from live evidence.",
+          "priority": "HIGH",
+          "recommendation": "Connect live metrics before budget scaling",
+          "risk": "Scaling without ROAS evidence can waste cash."
+        },
+        {
+          "alternatives": [
+            "Use current supplier only",
+            "Delay scale"
+          ],
+          "approvalRequirement": "Operations approval",
+          "confidence": 0.74,
+          "evidence": {
+            "assumption": "Alternative supplier lowers landed cost",
+            "estimatedImpact": {
+              "margin": "potentially higher",
+              "qualityRisk": "requires sample validation"
+            },
+            "recommendation": "Request second quote before scale",
+            "scenario": "Switch supplier"
+          },
+          "expectedOutcome": "Improved margin confidence before bulk orders.",
+          "priority": "MEDIUM",
+          "recommendation": "Run supplier quote comparison before inventory scale",
+          "risk": "Quality and lead-time assumptions may be wrong."
+        }
+      ]
+    },
+    {
+      "pattern": "Supplier comparison before inventory scale",
+      "reusable": true,
+      "statisticalConfidence": 0.76,
+      "supportingEvidence": [
+        {
+          "assumption": "Demand reduction below margin gain",
+          "estimatedImpact": {
+            "conversionRisk": "medium",
+            "margin": "improves",
+            "price": 1429
+          },
+          "recommendation": "Test after initial demand signal",
+          "scenario": "Increase price by 10%"
+        },
+        {
+          "assumption": "Creative performance remains stable",
+          "estimatedImpact": {
+            "approval": "budget required",
+            "cashRisk": "higher",
+            "reach": "higher"
+          },
+          "recommendation": "Wait for ROAS baseline",
+          "scenario": "Double ad budget"
+        },
+        {
+          "assumption": "Parents want recurring activities",
+          "estimatedImpact": {
+            "ltv": "higher",
+            "operations": "more complex"
+          },
+          "recommendation": "Validate after repeat purchase signal",
+          "scenario": "Add subscription expansion pack"
+        },
+        {
+          "assumption": "Alternative supplier lowers landed cost",
+          "estimatedImpact": {
+            "margin": "potentially higher",
+            "qualityRisk": "requires sample validation"
+          },
+          "recommendation": "Request second quote before scale",
+          "scenario": "Switch supplier"
+        }
+      ]
+    }
+  ],
+  "completionChecklist": [
+    {
+      "item": "Memory updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Decisions captured",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Lessons stored",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Knowledge graph updated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Patterns identified",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Executive knowledge base refreshed",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Intelligence report generated",
+      "status": "COMPLETED"
+    },
+    {
+      "item": "Audit completed",
+      "status": "COMPLETED"
+    }
+  ],
+  "createdAt": "2026-07-01T15:41:50+00:00",
+  "decisionHistory": [
+    {
+      "actualOutcome": "PENDING_LIVE_DATA",
+      "confidence": 0.91,
+      "decision": "Approve launch package for draft execution",
+      "evidence": [
+        "BUSINESS_LAUNCH_PACKAGE",
+        "launchValidation"
+      ],
+      "id": "071975d1-c4b9-4fab-8b47-2cdbc432d187",
+      "outcomeTracked": true,
+      "reason": "All upstream packages are present and launch actions are approval-gated.",
+      "type": "Expansion Decisions"
+    },
+    {
+      "actualOutcome": "PENDING_LIVE_DATA",
+      "confidence": 0.72,
+      "decision": "Run simulation before price or budget changes",
+      "evidence": [
+        "Increase price by 10%",
+        "Double ad budget",
+        "Add subscription expansion pack",
+        "Switch supplier"
+      ],
+      "id": "e02cd265-d296-4519-bdb9-e5976e2cc3ac",
+      "outcomeTracked": true,
+      "reason": "Sprint 8 requires scenario analysis before recommendations.",
+      "type": "Pricing Decisions"
+    }
+  ],
+  "departmentAvailability": {
+    "availableToAllDepartments": true,
+    "historicalContextAutomaticallyRetrieved": true,
+    "learningVisibleInExecutiveDashboard": true,
+    "organizationalMemoryVersionUpdated": true
+  },
+  "executiveKnowledgeBase": {
+    "businessStrategies": {
+      "departmentGoals": {
+        "Analytics": "Track launch KPIs",
+        "Commerce & Publishing": "Execute approved launch actions",
+        "Marketing": "Drive qualified demand",
+        "Product": "Validate supplier assumptions",
+        "Sales": "Convert leads into orders"
+      },
+      "dependencies": [
+        "Founder approvals",
+        "Live provider credentials",
+        "Inventory confirmation",
+        "Legal review for child-product claims"
+      ],
+      "milestones": [
+        "Founder approval",
+        "First listing draft",
+        "First campaign draft",
+        "First customer feedback"
+      ],
+      "monthlyGoals": [
+        "Finalize approvals",
+        "Publish drafts",
+        "Open waitlist",
+        "Measure first signals"
+      ],
+      "quarterlyGoals": [
+        "Launch founder batch",
+        "Validate demand",
+        "Collect reviews",
+        "Prepare optimization loop"
+      ],
+      "successMetricFocus": 78,
+      "weeklyGoals": [
+        "Week 1: waitlist and education",
+        "Week 2: sample/demo content",
+        "Week 3: founding batch offer",
+        "Week 4: reviews and referrals"
+      ]
+    },
+    "crossReferenced": true,
+    "customerKnowledge": {
+      "knownCustomers": [],
+      "targetSegments": [
+        {
+          "name": "Urban learning-focused parent",
+          "need": "Premium safe learning toy",
+          "trigger": "Birthday or preschool readiness"
+        },
+        {
+          "name": "Gift buyer",
+          "need": "Useful premium child gift",
+          "trigger": "Occasion gifting"
+        }
+      ]
+    },
+    "industryKnowledge": {
+      "competitiveRisks": [
+        "Fast copycats",
+        "Paid ad inflation",
+        "Marketplace commoditization"
+      ],
+      "competitorTypes": [
+        "Generic print-on-demand merchandise pages",
+        "Coffee roasters selling lifestyle accessories",
+        "Instagram gifting stores"
+      ],
+      "confidence": {
+        "evidenceCount": 1,
+        "level": "LOW",
+        "reasons": [
+          "1 evidence items collected.",
+          "1 unique source groups found.",
+          "1 items include snippets."
+        ],
+        "score": 0.39,
+        "sourceCount": 1
+      },
+      "differentiation": [
+        "Focus on India-specific coffee lover identity.",
+        "Bundle products into launch kits instead of selling single commodity items.",
+        "Use founder-led validation content before ads."
+      ],
+      "employeeId": "EMP-002",
+      "evidence": [
+        {
+          "freshness": "PLACEHOLDER_UNTIL_LIVE_RESEARCH",
+          "publishedDate": null,
+          "reliability": "MEDIUM",
+          "retrievedDate": "runtime",
+          "snippet": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+          "source": "genesis_deterministic_provider",
+          "title": "EMP-002 deterministic research assumption for Build a premium educational wooden toy business for children aged 3-5 in India.",
+          "url": "genesis://research/EMP-002/competitorAnalysis"
+        }
+      ],
+      "evidenceLevel": "model_assumption",
+      "majorCompetitors": [
+        "Generic print-on-demand merchandise pages",
+        "Coffee roasters selling lifestyle accessories",
+        "Instagram gifting stores"
+      ],
+      "marketGaps": [
+        "Focus on India-specific coffee lover identity.",
+        "Bundle products into launch kits instead of selling single commodity items.",
+        "Use founder-led validation content before ads."
+      ],
+      "metrics": {
+        "evidenceCount": 1,
+        "runtimeSeconds": 0.0,
+        "score": 70
+      },
+      "outputPersisted": true,
+      "pricingAnalysis": "Benchmark live prices before procurement; deterministic range assumes affordable premium positioning.",
+      "projectId": "08220537-afd6-47db-a566-8692665879e9",
+      "retryPolicy": {
+        "maxAttempts": 2,
+        "strategy": "retry employee output before failing workflow"
+      },
+      "score": 70,
+      "section": "competitorAnalysis",
+      "status": "COMPLETED",
+      "strengths": [
+        "Existing competitors prove category demand",
+        "Social channels can validate quickly"
+      ],
+      "summary": "Competitors for 'Build a premium educational wooden toy business for children aged 3-5 in India.' are likely split between generic merchandise sellers and premium coffee accessory brands.",
+      "timeoutSeconds": 30,
+      "validation": {
+        "confidence": "PASS",
+        "evidence": "PASS",
+        "schema": "PASS",
+        "status": "PASS"
+      },
+      "weaknesses": [
+        "Generic positioning",
+        "Limited bundle differentiation"
+      ],
+      "workflowId": "f66106a5-d642-44c5-a0e5-81424053a86b"
+    },
+    "knowledgeIndexed": true,
+    "marketingKnowledge": {
+      "campaigns": [
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Meta Ads",
+          "source": [
+            {
+              "creative": "Parent-child pattern play",
+              "cta": "Join the founding batch",
+              "hook": "A premium wooden toy that teaches before it explains."
+            },
+            {
+              "creative": "Luma Logic Cubes unboxing",
+              "cta": "See the Starter kit",
+              "hook": "Screen-free play for ages 3-5."
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Google Ads",
+          "source": [
+            {
+              "description": "Logic cubes for ages 3-5. Gift-ready founding batch.",
+              "headline": "Premium Wooden Learning Toys"
+            }
+          ],
+          "status": "DRAFT_READY"
+        },
+        {
+          "budgetApprovalRequired": true,
+          "channel": "Amazon Ads",
+          "source": {
+            "campaignType": "Sponsored Products placeholder",
+            "keywords": [
+              "wooden educational toys",
+              "toys for 3 year olds"
+            ],
+            "status": "READY_FOR_SELLER_ACCOUNT"
+          },
+          "status": "SELLER_ACCOUNT_REQUIRED"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "Email",
+          "status": "READY_FOR_PROVIDER"
+        },
+        {
+          "budgetApprovalRequired": false,
+          "channel": "WhatsApp",
+          "status": "READY_FOR_PROVIDER"
+        }
+      ],
+      "strategy": "Founder-batch launch using organic trust-building, waitlist capture, marketplace conversion, and controlled paid testing."
+    },
+    "operationalKnowledge": {
+      "lessons": [
+        {
+          "category": "Marketing",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Product",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Variant-level catalogue data is required before inventory scaling.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Sales",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Lead qualification should happen before founder time is spent.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        },
+        {
+          "category": "Operations",
+          "evidence": [
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.86,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "departmentCount": 16,
+                "health": {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "cashFlowHealth": 52,
+                  "customerHealth": 55,
+                  "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                  "inventoryHealth": 60,
+                  "marketingHealth": 80,
+                  "operationsHealth": 91,
+                  "overallBusinessHealthScore": 67,
+                  "profitHealth": 78,
+                  "revenueHealth": 50,
+                  "status": "PRE_LAUNCH_ESTIMATE"
+                },
+                "knowledgeGraphNodes": 10
+              },
+              "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+              "lessons": [
+                "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+              ],
+              "type": "BUSINESS_OS_BASELINE"
+            },
+            {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "confidence": 0.82,
+              "createdAt": "2026-07-01T15:41:50+00:00",
+              "evidence": {
+                "health": {
+                  "businessHealthScore": 73,
+                  "customerHealth": 70,
+                  "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                  "growthHealth": 72,
+                  "healthRating": "Stable",
+                  "historicalComparison": "FIRST_BASELINE",
+                  "inventoryHealth": 80,
+                  "marketingHealth": 76,
+                  "operationalHealth": 82,
+                  "productHealth": 78,
+                  "revenueHealth": 55,
+                  "score": 73,
+                  "trends": {
+                    "current": "BASELINE",
+                    "direction": "PENDING_LIVE_DATA"
+                  }
+                },
+                "launchId": "08220537-afd6-47db-a566-8692665879e9"
+              },
+              "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+              "lessons": [
+                "Launch readiness creates the first operating baseline before live order data arrives."
+              ],
+              "type": "BUSINESS_INTELLIGENCE_BASELINE"
+            }
+          ],
+          "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+          "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+          "reusableAcrossBusinesses": true,
+          "searchSupported": true
+        }
+      ],
+      "patterns": [
+        {
+          "pattern": "Approval-gated launch sequence",
+          "reusable": true,
+          "statisticalConfidence": 0.82,
+          "supportingEvidence": [
+            {
+              "category": "Marketing",
+              "evidence": [
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.86,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "departmentCount": 16,
+                    "health": {
+                      "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                      "cashFlowHealth": 52,
+                      "customerHealth": 55,
+                      "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                      "inventoryHealth": 60,
+                      "marketingHealth": 80,
+                      "operationsHealth": 91,
+                      "overallBusinessHealthScore": 67,
+                      "profitHealth": 78,
+                      "revenueHealth": 50,
+                      "status": "PRE_LAUNCH_ESTIMATE"
+                    },
+                    "knowledgeGraphNodes": 10
+                  },
+                  "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                  "lessons": [
+                    "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                  ],
+                  "type": "BUSINESS_OS_BASELINE"
+                },
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.82,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "health": {
+                      "businessHealthScore": 73,
+                      "customerHealth": 70,
+                      "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                      "growthHealth": 72,
+                      "healthRating": "Stable",
+                      "historicalComparison": "FIRST_BASELINE",
+                      "inventoryHealth": 80,
+                      "marketingHealth": 76,
+                      "operationalHealth": 82,
+                      "productHealth": 78,
+                      "revenueHealth": 55,
+                      "score": 73,
+                      "trends": {
+                        "current": "BASELINE",
+                        "direction": "PENDING_LIVE_DATA"
+                      }
+                    },
+                    "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                  },
+                  "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                  "lessons": [
+                    "Launch readiness creates the first operating baseline before live order data arrives."
+                  ],
+                  "type": "BUSINESS_INTELLIGENCE_BASELINE"
+                }
+              ],
+              "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+              "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+              "reusableAcrossBusinesses": true,
+              "searchSupported": true
+            },
+            {
+              "category": "Product",
+              "evidence": [
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.86,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "departmentCount": 16,
+                    "health": {
+                      "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                      "cashFlowHealth": 52,
+                      "customerHealth": 55,
+                      "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                      "inventoryHealth": 60,
+                      "marketingHealth": 80,
+                      "operationsHealth": 91,
+                      "overallBusinessHealthScore": 67,
+                      "profitHealth": 78,
+                      "revenueHealth": 50,
+                      "status": "PRE_LAUNCH_ESTIMATE"
+                    },
+                    "knowledgeGraphNodes": 10
+                  },
+                  "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                  "lessons": [
+                    "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                  ],
+                  "type": "BUSINESS_OS_BASELINE"
+                },
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.82,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "health": {
+                      "businessHealthScore": 73,
+                      "customerHealth": 70,
+                      "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                      "growthHealth": 72,
+                      "healthRating": "Stable",
+                      "historicalComparison": "FIRST_BASELINE",
+                      "inventoryHealth": 80,
+                      "marketingHealth": 76,
+                      "operationalHealth": 82,
+                      "productHealth": 78,
+                      "revenueHealth": 55,
+                      "score": 73,
+                      "trends": {
+                        "current": "BASELINE",
+                        "direction": "PENDING_LIVE_DATA"
+                      }
+                    },
+                    "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                  },
+                  "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                  "lessons": [
+                    "Launch readiness creates the first operating baseline before live order data arrives."
+                  ],
+                  "type": "BUSINESS_INTELLIGENCE_BASELINE"
+                }
+              ],
+              "lesson": "Variant-level catalogue data is required before inventory scaling.",
+              "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+              "reusableAcrossBusinesses": true,
+              "searchSupported": true
+            },
+            {
+              "category": "Sales",
+              "evidence": [
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.86,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "departmentCount": 16,
+                    "health": {
+                      "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                      "cashFlowHealth": 52,
+                      "customerHealth": 55,
+                      "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                      "inventoryHealth": 60,
+                      "marketingHealth": 80,
+                      "operationsHealth": 91,
+                      "overallBusinessHealthScore": 67,
+                      "profitHealth": 78,
+                      "revenueHealth": 50,
+                      "status": "PRE_LAUNCH_ESTIMATE"
+                    },
+                    "knowledgeGraphNodes": 10
+                  },
+                  "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                  "lessons": [
+                    "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                  ],
+                  "type": "BUSINESS_OS_BASELINE"
+                },
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.82,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "health": {
+                      "businessHealthScore": 73,
+                      "customerHealth": 70,
+                      "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                      "growthHealth": 72,
+                      "healthRating": "Stable",
+                      "historicalComparison": "FIRST_BASELINE",
+                      "inventoryHealth": 80,
+                      "marketingHealth": 76,
+                      "operationalHealth": 82,
+                      "productHealth": 78,
+                      "revenueHealth": 55,
+                      "score": 73,
+                      "trends": {
+                        "current": "BASELINE",
+                        "direction": "PENDING_LIVE_DATA"
+                      }
+                    },
+                    "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                  },
+                  "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                  "lessons": [
+                    "Launch readiness creates the first operating baseline before live order data arrives."
+                  ],
+                  "type": "BUSINESS_INTELLIGENCE_BASELINE"
+                }
+              ],
+              "lesson": "Lead qualification should happen before founder time is spent.",
+              "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+              "reusableAcrossBusinesses": true,
+              "searchSupported": true
+            },
+            {
+              "category": "Operations",
+              "evidence": [
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.86,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "departmentCount": 16,
+                    "health": {
+                      "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                      "cashFlowHealth": 52,
+                      "customerHealth": 55,
+                      "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                      "inventoryHealth": 60,
+                      "marketingHealth": 80,
+                      "operationsHealth": 91,
+                      "overallBusinessHealthScore": 67,
+                      "profitHealth": 78,
+                      "revenueHealth": 50,
+                      "status": "PRE_LAUNCH_ESTIMATE"
+                    },
+                    "knowledgeGraphNodes": 10
+                  },
+                  "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                  "lessons": [
+                    "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                  ],
+                  "type": "BUSINESS_OS_BASELINE"
+                },
+                {
+                  "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                  "confidence": 0.82,
+                  "createdAt": "2026-07-01T15:41:50+00:00",
+                  "evidence": {
+                    "health": {
+                      "businessHealthScore": 73,
+                      "customerHealth": 70,
+                      "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                      "growthHealth": 72,
+                      "healthRating": "Stable",
+                      "historicalComparison": "FIRST_BASELINE",
+                      "inventoryHealth": 80,
+                      "marketingHealth": 76,
+                      "operationalHealth": 82,
+                      "productHealth": 78,
+                      "revenueHealth": 55,
+                      "score": 73,
+                      "trends": {
+                        "current": "BASELINE",
+                        "direction": "PENDING_LIVE_DATA"
+                      }
+                    },
+                    "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                  },
+                  "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                  "lessons": [
+                    "Launch readiness creates the first operating baseline before live order data arrives."
+                  ],
+                  "type": "BUSINESS_INTELLIGENCE_BASELINE"
+                }
+              ],
+              "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+              "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+              "reusableAcrossBusinesses": true,
+              "searchSupported": true
+            }
+          ]
+        },
+        {
+          "pattern": "Budget scaling after ROAS baseline",
+          "reusable": true,
+          "statisticalConfidence": 0.79,
+          "supportingEvidence": [
+            {
+              "alternatives": [
+                "Hold launch",
+                "Approve only catalogue drafts"
+              ],
+              "approvalRequirement": "Founder approval",
+              "confidence": 0.82,
+              "evidence": {
+                "blockingIssues": [],
+                "checksPassed": 11,
+                "checksTotal": 11,
+                "recommendation": "READY_FOR_FOUNDER_APPROVAL",
+                "score": 91
+              },
+              "expectedOutcome": "Execution-ready drafts without irreversible public action.",
+              "priority": "HIGH",
+              "recommendation": "Approve non-spend launch drafts first",
+              "risk": "Credentials and legal review may still block live publication."
+            },
+            {
+              "alternatives": [
+                "Manual daily reporting",
+                "Wait for first 20 orders"
+              ],
+              "approvalRequirement": "Strategic approval",
+              "confidence": 0.78,
+              "evidence": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "expectedOutcome": "Better optimization decisions from live evidence.",
+              "priority": "HIGH",
+              "recommendation": "Connect live metrics before budget scaling",
+              "risk": "Scaling without ROAS evidence can waste cash."
+            },
+            {
+              "alternatives": [
+                "Use current supplier only",
+                "Delay scale"
+              ],
+              "approvalRequirement": "Operations approval",
+              "confidence": 0.74,
+              "evidence": {
+                "assumption": "Alternative supplier lowers landed cost",
+                "estimatedImpact": {
+                  "margin": "potentially higher",
+                  "qualityRisk": "requires sample validation"
+                },
+                "recommendation": "Request second quote before scale",
+                "scenario": "Switch supplier"
+              },
+              "expectedOutcome": "Improved margin confidence before bulk orders.",
+              "priority": "MEDIUM",
+              "recommendation": "Run supplier quote comparison before inventory scale",
+              "risk": "Quality and lead-time assumptions may be wrong."
+            }
+          ]
+        },
+        {
+          "pattern": "Supplier comparison before inventory scale",
+          "reusable": true,
+          "statisticalConfidence": 0.76,
+          "supportingEvidence": [
+            {
+              "assumption": "Demand reduction below margin gain",
+              "estimatedImpact": {
+                "conversionRisk": "medium",
+                "margin": "improves",
+                "price": 1429
+              },
+              "recommendation": "Test after initial demand signal",
+              "scenario": "Increase price by 10%"
+            },
+            {
+              "assumption": "Creative performance remains stable",
+              "estimatedImpact": {
+                "approval": "budget required",
+                "cashRisk": "higher",
+                "reach": "higher"
+              },
+              "recommendation": "Wait for ROAS baseline",
+              "scenario": "Double ad budget"
+            },
+            {
+              "assumption": "Parents want recurring activities",
+              "estimatedImpact": {
+                "ltv": "higher",
+                "operations": "more complex"
+              },
+              "recommendation": "Validate after repeat purchase signal",
+              "scenario": "Add subscription expansion pack"
+            },
+            {
+              "assumption": "Alternative supplier lowers landed cost",
+              "estimatedImpact": {
+                "margin": "potentially higher",
+                "qualityRisk": "requires sample validation"
+              },
+              "recommendation": "Request second quote before scale",
+              "scenario": "Switch supplier"
+            }
+          ]
+        }
+      ]
+    },
+    "productKnowledge": [
+      {
+        "name": "Luma Logic Cubes",
+        "productId": "08220537-afd6-47db-a566-8692665879e9",
+        "variants": [
+          {
+            "contents": [
+              "Core product",
+              "Simple packaging"
+            ],
+            "level": "Starter",
+            "name": "Luma Logic Cubes Starter",
+            "purpose": "Validate demand with minimum inventory risk"
+          },
+          {
+            "contents": [
+              "Core product",
+              "Bonus item",
+              "Gift-ready packaging"
+            ],
+            "level": "Standard",
+            "name": "Luma Logic Cubes Standard",
+            "purpose": "Increase perceived value"
+          },
+          {
+            "contents": [
+              "Expanded product set",
+              "Premium packaging"
+            ],
+            "level": "Premium",
+            "name": "Luma Logic Cubes Premium",
+            "purpose": "Serve gifting and higher-margin buyers"
+          },
+          {
+            "contents": [
+              "Multiple units",
+              "Occasion-based bundle"
+            ],
+            "level": "Bundle",
+            "name": "Luma Logic Cubes Bundle",
+            "purpose": "Raise average order value"
+          },
+          {
+            "contents": [
+              "Recurring monthly variation"
+            ],
+            "level": "Subscription",
+            "name": "Luma Logic Cubes Club",
+            "purpose": "Test repeat purchase potential"
+          },
+          {
+            "contents": [
+              "Replacement or add-on parts"
+            ],
+            "level": "Accessories",
+            "name": "Luma Logic Cubes Accessories",
+            "purpose": "Create low-cost upsells"
+          },
+          {
+            "contents": [
+              "New themes",
+              "Advanced variants"
+            ],
+            "level": "Expansion Packs",
+            "name": "Luma Logic Cubes Expansion Pack",
+            "purpose": "Build a product family"
+          }
+        ]
+      }
+    ],
+    "searchSupported": true,
+    "supplierKnowledge": {
+      "alternativeSuppliers": [
+        "Alibaba verified wooden toy supplier",
+        "Local CNC woodworking vendor",
+        "Print-and-pack assembly vendor"
+      ],
+      "comparison": {
+        "bestPilotSupplier": "Educational kit assembler placeholder",
+        "lowestMOQ": 100,
+        "lowestRiskScore": 38
+      },
+      "confidence": {
+        "level": "MEDIUM",
+        "score": 0.74
+      },
+      "contract": {
+        "inputSchema": {
+          "required": [
+            "bom",
+            "materialRecommendation",
+            "country"
+          ]
+        },
+        "name": "Supplier Analyst",
+        "outputSchema": {
+          "required": [
+            "shortlist",
+            "comparison",
+            "alternativeSuppliers"
+          ]
+        },
+        "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+        "retryPolicy": {
+          "maxAttempts": 2
+        },
+        "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+        "section": "supplierRecommendations",
+        "timeoutSeconds": 30
+      },
+      "department": "PRODUCT",
+      "employeeId": "EMP-108",
+      "employeeName": "Supplier Analyst",
+      "projectId": "08220537-afd6-47db-a566-8692665879e9",
+      "risks": [],
+      "score": 78,
+      "section": "supplierRecommendations",
+      "shortlist": [
+        {
+          "capacity": "Pilot-ready; verify monthly capacity",
+          "category": "Wooden toys",
+          "country": "India",
+          "estimatedPricing": "INR 260-360 per starter set before final packaging",
+          "leadTimeDays": 21,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka / NCR supplier cluster",
+          "moq": 100,
+          "name": "India wooden toy manufacturer placeholder",
+          "productRange": [
+            "Wooden cubes",
+            "Painted learning toys",
+            "Starter educational kits"
+          ],
+          "qualityIndicators": [
+            "Sample approval required",
+            "Toy-safe coating declaration required"
+          ],
+          "riskScore": 42,
+          "risks": [
+            "Certification not verified",
+            "Paint finish consistency"
+          ]
+        },
+        {
+          "capacity": "Small-batch; verify repeatability",
+          "category": "Wood craft",
+          "country": "India",
+          "estimatedPricing": "INR 300-420 per starter set depending finish",
+          "leadTimeDays": 28,
+          "linkedBomItems": [
+            "LUMA-001",
+            "LUMA-002"
+          ],
+          "location": "Karnataka",
+          "moq": 150,
+          "name": "Channapatna craft cluster placeholder",
+          "productRange": [
+            "Hand-finished wooden toys",
+            "Lacquered educational pieces"
+          ],
+          "qualityIndicators": [
+            "Craft quality",
+            "Needs standardized tolerances"
+          ],
+          "riskScore": 48,
+          "risks": [
+            "Tolerance variation",
+            "Higher lead time"
+          ]
+        },
+        {
+          "capacity": "Pilot-ready",
+          "category": "Assembly and packaging",
+          "country": "India",
+          "estimatedPricing": "INR 80-140 assembly and printed collateral",
+          "leadTimeDays": 14,
+          "linkedBomItems": [
+            "LUMA-003",
+            "LUMA-004"
+          ],
+          "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+          "moq": 100,
+          "name": "Educational kit assembler placeholder",
+          "productRange": [
+            "Kit collation",
+            "Activity cards",
+            "Retail packaging"
+          ],
+          "qualityIndicators": [
+            "Packaging sample required",
+            "Barcode and label check required"
+          ],
+          "riskScore": 38,
+          "risks": [
+            "Needs coordination with component supplier"
+          ]
+        }
+      ],
+      "status": "COMPLETED",
+      "supplierAssumptions": [
+        "Supplier names are placeholders until live supplier research credentials are connected.",
+        "Founder must verify certifications and samples."
+      ],
+      "validation": {
+        "business": "PASS",
+        "confidence": "PASS",
+        "engineering": "PASS",
+        "risk": "PASS",
+        "schema": "PASS"
+      },
+      "workflowId": "d8642750-bf95-4f81-bfbf-f8a2adb2477f"
+    },
+    "versionControlled": true
+  },
+  "intelligenceReport": {
+    "commonFailures": [
+      "Scaling spend before live ROAS",
+      "Launching without confirmed inventory"
+    ],
+    "decisionAccuracy": {
+      "currentAccuracy": 0.78,
+      "method": "compare recommendation assumptions with future metrics"
+    },
+    "executiveDashboardUpdated": true,
+    "mostValuableInsights": [
+      "Scale paid campaigns only after ROAS evidence is available.",
+      "Variant-level catalogue data is required before inventory scaling.",
+      "Lead qualification should happen before founder time is spent."
+    ],
+    "newLessons": [
+      {
+        "category": "Marketing",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      },
+      {
+        "category": "Product",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Variant-level catalogue data is required before inventory scaling.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      },
+      {
+        "category": "Sales",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Lead qualification should happen before founder time is spent.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      },
+      {
+        "category": "Operations",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      }
+    ],
+    "recommendedImprovements": [
+      "Record outcome for every executive recommendation",
+      "Compare simulations to actuals after each metric ingestion"
+    ],
+    "searchable": true,
+    "updatedBusinessPatterns": [
+      {
+        "pattern": "Approval-gated launch sequence",
+        "reusable": true,
+        "statisticalConfidence": 0.82,
+        "supportingEvidence": [
+          {
+            "category": "Marketing",
+            "evidence": [
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.86,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "departmentCount": 16,
+                  "health": {
+                    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                    "cashFlowHealth": 52,
+                    "customerHealth": 55,
+                    "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                    "inventoryHealth": 60,
+                    "marketingHealth": 80,
+                    "operationsHealth": 91,
+                    "overallBusinessHealthScore": 67,
+                    "profitHealth": 78,
+                    "revenueHealth": 50,
+                    "status": "PRE_LAUNCH_ESTIMATE"
+                  },
+                  "knowledgeGraphNodes": 10
+                },
+                "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                "lessons": [
+                  "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                ],
+                "type": "BUSINESS_OS_BASELINE"
+              },
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.82,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "health": {
+                    "businessHealthScore": 73,
+                    "customerHealth": 70,
+                    "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                    "growthHealth": 72,
+                    "healthRating": "Stable",
+                    "historicalComparison": "FIRST_BASELINE",
+                    "inventoryHealth": 80,
+                    "marketingHealth": 76,
+                    "operationalHealth": 82,
+                    "productHealth": 78,
+                    "revenueHealth": 55,
+                    "score": 73,
+                    "trends": {
+                      "current": "BASELINE",
+                      "direction": "PENDING_LIVE_DATA"
+                    }
+                  },
+                  "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                },
+                "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                "lessons": [
+                  "Launch readiness creates the first operating baseline before live order data arrives."
+                ],
+                "type": "BUSINESS_INTELLIGENCE_BASELINE"
+              }
+            ],
+            "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+            "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+            "reusableAcrossBusinesses": true,
+            "searchSupported": true
+          },
+          {
+            "category": "Product",
+            "evidence": [
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.86,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "departmentCount": 16,
+                  "health": {
+                    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                    "cashFlowHealth": 52,
+                    "customerHealth": 55,
+                    "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                    "inventoryHealth": 60,
+                    "marketingHealth": 80,
+                    "operationsHealth": 91,
+                    "overallBusinessHealthScore": 67,
+                    "profitHealth": 78,
+                    "revenueHealth": 50,
+                    "status": "PRE_LAUNCH_ESTIMATE"
+                  },
+                  "knowledgeGraphNodes": 10
+                },
+                "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                "lessons": [
+                  "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                ],
+                "type": "BUSINESS_OS_BASELINE"
+              },
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.82,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "health": {
+                    "businessHealthScore": 73,
+                    "customerHealth": 70,
+                    "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                    "growthHealth": 72,
+                    "healthRating": "Stable",
+                    "historicalComparison": "FIRST_BASELINE",
+                    "inventoryHealth": 80,
+                    "marketingHealth": 76,
+                    "operationalHealth": 82,
+                    "productHealth": 78,
+                    "revenueHealth": 55,
+                    "score": 73,
+                    "trends": {
+                      "current": "BASELINE",
+                      "direction": "PENDING_LIVE_DATA"
+                    }
+                  },
+                  "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                },
+                "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                "lessons": [
+                  "Launch readiness creates the first operating baseline before live order data arrives."
+                ],
+                "type": "BUSINESS_INTELLIGENCE_BASELINE"
+              }
+            ],
+            "lesson": "Variant-level catalogue data is required before inventory scaling.",
+            "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+            "reusableAcrossBusinesses": true,
+            "searchSupported": true
+          },
+          {
+            "category": "Sales",
+            "evidence": [
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.86,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "departmentCount": 16,
+                  "health": {
+                    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                    "cashFlowHealth": 52,
+                    "customerHealth": 55,
+                    "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                    "inventoryHealth": 60,
+                    "marketingHealth": 80,
+                    "operationsHealth": 91,
+                    "overallBusinessHealthScore": 67,
+                    "profitHealth": 78,
+                    "revenueHealth": 50,
+                    "status": "PRE_LAUNCH_ESTIMATE"
+                  },
+                  "knowledgeGraphNodes": 10
+                },
+                "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                "lessons": [
+                  "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                ],
+                "type": "BUSINESS_OS_BASELINE"
+              },
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.82,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "health": {
+                    "businessHealthScore": 73,
+                    "customerHealth": 70,
+                    "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                    "growthHealth": 72,
+                    "healthRating": "Stable",
+                    "historicalComparison": "FIRST_BASELINE",
+                    "inventoryHealth": 80,
+                    "marketingHealth": 76,
+                    "operationalHealth": 82,
+                    "productHealth": 78,
+                    "revenueHealth": 55,
+                    "score": 73,
+                    "trends": {
+                      "current": "BASELINE",
+                      "direction": "PENDING_LIVE_DATA"
+                    }
+                  },
+                  "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                },
+                "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                "lessons": [
+                  "Launch readiness creates the first operating baseline before live order data arrives."
+                ],
+                "type": "BUSINESS_INTELLIGENCE_BASELINE"
+              }
+            ],
+            "lesson": "Lead qualification should happen before founder time is spent.",
+            "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+            "reusableAcrossBusinesses": true,
+            "searchSupported": true
+          },
+          {
+            "category": "Operations",
+            "evidence": [
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.86,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "departmentCount": 16,
+                  "health": {
+                    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                    "cashFlowHealth": 52,
+                    "customerHealth": 55,
+                    "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                    "inventoryHealth": 60,
+                    "marketingHealth": 80,
+                    "operationsHealth": 91,
+                    "overallBusinessHealthScore": 67,
+                    "profitHealth": 78,
+                    "revenueHealth": 50,
+                    "status": "PRE_LAUNCH_ESTIMATE"
+                  },
+                  "knowledgeGraphNodes": 10
+                },
+                "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+                "lessons": [
+                  "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+                ],
+                "type": "BUSINESS_OS_BASELINE"
+              },
+              {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "confidence": 0.82,
+                "createdAt": "2026-07-01T15:41:50+00:00",
+                "evidence": {
+                  "health": {
+                    "businessHealthScore": 73,
+                    "customerHealth": 70,
+                    "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                    "growthHealth": 72,
+                    "healthRating": "Stable",
+                    "historicalComparison": "FIRST_BASELINE",
+                    "inventoryHealth": 80,
+                    "marketingHealth": 76,
+                    "operationalHealth": 82,
+                    "productHealth": 78,
+                    "revenueHealth": 55,
+                    "score": 73,
+                    "trends": {
+                      "current": "BASELINE",
+                      "direction": "PENDING_LIVE_DATA"
+                    }
+                  },
+                  "launchId": "08220537-afd6-47db-a566-8692665879e9"
+                },
+                "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+                "lessons": [
+                  "Launch readiness creates the first operating baseline before live order data arrives."
+                ],
+                "type": "BUSINESS_INTELLIGENCE_BASELINE"
+              }
+            ],
+            "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+            "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+            "reusableAcrossBusinesses": true,
+            "searchSupported": true
+          }
+        ]
+      },
+      {
+        "pattern": "Budget scaling after ROAS baseline",
+        "reusable": true,
+        "statisticalConfidence": 0.79,
+        "supportingEvidence": [
+          {
+            "alternatives": [
+              "Hold launch",
+              "Approve only catalogue drafts"
+            ],
+            "approvalRequirement": "Founder approval",
+            "confidence": 0.82,
+            "evidence": {
+              "blockingIssues": [],
+              "checksPassed": 11,
+              "checksTotal": 11,
+              "recommendation": "READY_FOR_FOUNDER_APPROVAL",
+              "score": 91
+            },
+            "expectedOutcome": "Execution-ready drafts without irreversible public action.",
+            "priority": "HIGH",
+            "recommendation": "Approve non-spend launch drafts first",
+            "risk": "Credentials and legal review may still block live publication."
+          },
+          {
+            "alternatives": [
+              "Manual daily reporting",
+              "Wait for first 20 orders"
+            ],
+            "approvalRequirement": "Strategic approval",
+            "confidence": 0.78,
+            "evidence": {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "cashFlowHealth": 52,
+              "customerHealth": 55,
+              "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+              "inventoryHealth": 60,
+              "marketingHealth": 80,
+              "operationsHealth": 91,
+              "overallBusinessHealthScore": 67,
+              "profitHealth": 78,
+              "revenueHealth": 50,
+              "status": "PRE_LAUNCH_ESTIMATE"
+            },
+            "expectedOutcome": "Better optimization decisions from live evidence.",
+            "priority": "HIGH",
+            "recommendation": "Connect live metrics before budget scaling",
+            "risk": "Scaling without ROAS evidence can waste cash."
+          },
+          {
+            "alternatives": [
+              "Use current supplier only",
+              "Delay scale"
+            ],
+            "approvalRequirement": "Operations approval",
+            "confidence": 0.74,
+            "evidence": {
+              "assumption": "Alternative supplier lowers landed cost",
+              "estimatedImpact": {
+                "margin": "potentially higher",
+                "qualityRisk": "requires sample validation"
+              },
+              "recommendation": "Request second quote before scale",
+              "scenario": "Switch supplier"
+            },
+            "expectedOutcome": "Improved margin confidence before bulk orders.",
+            "priority": "MEDIUM",
+            "recommendation": "Run supplier quote comparison before inventory scale",
+            "risk": "Quality and lead-time assumptions may be wrong."
+          }
+        ]
+      },
+      {
+        "pattern": "Supplier comparison before inventory scale",
+        "reusable": true,
+        "statisticalConfidence": 0.76,
+        "supportingEvidence": [
+          {
+            "assumption": "Demand reduction below margin gain",
+            "estimatedImpact": {
+              "conversionRisk": "medium",
+              "margin": "improves",
+              "price": 1429
+            },
+            "recommendation": "Test after initial demand signal",
+            "scenario": "Increase price by 10%"
+          },
+          {
+            "assumption": "Creative performance remains stable",
+            "estimatedImpact": {
+              "approval": "budget required",
+              "cashRisk": "higher",
+              "reach": "higher"
+            },
+            "recommendation": "Wait for ROAS baseline",
+            "scenario": "Double ad budget"
+          },
+          {
+            "assumption": "Parents want recurring activities",
+            "estimatedImpact": {
+              "ltv": "higher",
+              "operations": "more complex"
+            },
+            "recommendation": "Validate after repeat purchase signal",
+            "scenario": "Add subscription expansion pack"
+          },
+          {
+            "assumption": "Alternative supplier lowers landed cost",
+            "estimatedImpact": {
+              "margin": "potentially higher",
+              "qualityRisk": "requires sample validation"
+            },
+            "recommendation": "Request second quote before scale",
+            "scenario": "Switch supplier"
+          }
+        ]
+      }
+    ],
+    "versioned": true
+  },
+  "knowledgeGraph": {
+    "businessId": "08220537-afd6-47db-a566-8692665879e9",
+    "crossEntityNavigationSupported": true,
+    "dependenciesNavigable": true,
+    "edges": [
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "has_research",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "validated_opportunity",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "owns_product",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "has_brand_assets",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "feeds_marketing",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "feeds_sales",
+        "to": "08220537-afd6-47db-a566-8692665879e9:sales"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9:sales",
+        "relationship": "feeds_commerce",
+        "to": "08220537-afd6-47db-a566-8692665879e9"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "creates_revenue_baseline",
+        "to": "08220537-afd6-47db-a566-8692665879e9:revenue"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9:revenue",
+        "relationship": "feeds_insights",
+        "to": "08220537-afd6-47db-a566-8692665879e9:insights"
+      },
+      {
+        "from": "08220537-afd6-47db-a566-8692665879e9",
+        "relationship": "generates_insights",
+        "to": "08220537-afd6-47db-a566-8692665879e9:insights"
+      }
+    ],
+    "graphSearchable": true,
+    "impactAnalysisPossible": true,
+    "impactAnalysisSupported": true,
+    "knowledgeReusable": true,
+    "nodes": [
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Build a premium educational wooden toy business for children aged 3-5 in India.",
+        "type": "business"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Research Report",
+        "type": "research"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Luma Logic Cubes",
+        "type": "product"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "LumaLearn",
+        "type": "brand"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Marketing Pack",
+        "type": "marketing"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9:sales",
+        "label": "Sales Package",
+        "type": "sales"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Business Launch Package",
+        "type": "launch"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9:revenue",
+        "label": "Revenue Baseline",
+        "type": "revenue"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9:insights",
+        "label": "Business Insights",
+        "type": "insights"
+      },
+      {
+        "id": "08220537-afd6-47db-a566-8692665879e9",
+        "label": "Business Intelligence Report",
+        "type": "business_intelligence"
+      }
+    ],
+    "reasoningMode": "relationship-aware deterministic graph",
+    "relationshipsStored": true
+  },
+  "knowledgeReuse": {
+    "founderOverrideSupported": true,
+    "relevantKnowledgeSuggested": [
+      {
+        "category": "Marketing",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      },
+      {
+        "category": "Product",
+        "evidence": [
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.86,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "departmentCount": 16,
+              "health": {
+                "businessId": "08220537-afd6-47db-a566-8692665879e9",
+                "cashFlowHealth": 52,
+                "customerHealth": 55,
+                "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+                "inventoryHealth": 60,
+                "marketingHealth": 80,
+                "operationsHealth": 91,
+                "overallBusinessHealthScore": 67,
+                "profitHealth": 78,
+                "revenueHealth": 50,
+                "status": "PRE_LAUNCH_ESTIMATE"
+              },
+              "knowledgeGraphNodes": 10
+            },
+            "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+            "lessons": [
+              "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+            ],
+            "type": "BUSINESS_OS_BASELINE"
+          },
+          {
+            "businessId": "08220537-afd6-47db-a566-8692665879e9",
+            "confidence": 0.82,
+            "createdAt": "2026-07-01T15:41:50+00:00",
+            "evidence": {
+              "health": {
+                "businessHealthScore": 73,
+                "customerHealth": 70,
+                "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+                "growthHealth": 72,
+                "healthRating": "Stable",
+                "historicalComparison": "FIRST_BASELINE",
+                "inventoryHealth": 80,
+                "marketingHealth": 76,
+                "operationalHealth": 82,
+                "productHealth": 78,
+                "revenueHealth": 55,
+                "score": 73,
+                "trends": {
+                  "current": "BASELINE",
+                  "direction": "PENDING_LIVE_DATA"
+                }
+              },
+              "launchId": "08220537-afd6-47db-a566-8692665879e9"
+            },
+            "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+            "lessons": [
+              "Launch readiness creates the first operating baseline before live order data arrives."
+            ],
+            "type": "BUSINESS_INTELLIGENCE_BASELINE"
+          }
+        ],
+        "lesson": "Variant-level catalogue data is required before inventory scaling.",
+        "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+        "reusableAcrossBusinesses": true,
+        "searchSupported": true
+      }
+    ],
+    "reuseExplained": "Prior launch, budget, and supplier lessons match this business context.",
+    "similarProjectsDetected": true
+  },
+  "lessonsLearned": [
+    {
+      "category": "Marketing",
+      "evidence": [
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.86,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "departmentCount": 16,
+            "health": {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "cashFlowHealth": 52,
+              "customerHealth": 55,
+              "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+              "inventoryHealth": 60,
+              "marketingHealth": 80,
+              "operationsHealth": 91,
+              "overallBusinessHealthScore": 67,
+              "profitHealth": 78,
+              "revenueHealth": 50,
+              "status": "PRE_LAUNCH_ESTIMATE"
+            },
+            "knowledgeGraphNodes": 10
+          },
+          "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+          "lessons": [
+            "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+          ],
+          "type": "BUSINESS_OS_BASELINE"
+        },
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.82,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "health": {
+              "businessHealthScore": 73,
+              "customerHealth": 70,
+              "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+              "growthHealth": 72,
+              "healthRating": "Stable",
+              "historicalComparison": "FIRST_BASELINE",
+              "inventoryHealth": 80,
+              "marketingHealth": 76,
+              "operationalHealth": 82,
+              "productHealth": 78,
+              "revenueHealth": 55,
+              "score": 73,
+              "trends": {
+                "current": "BASELINE",
+                "direction": "PENDING_LIVE_DATA"
+              }
+            },
+            "launchId": "08220537-afd6-47db-a566-8692665879e9"
+          },
+          "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+          "lessons": [
+            "Launch readiness creates the first operating baseline before live order data arrives."
+          ],
+          "type": "BUSINESS_INTELLIGENCE_BASELINE"
+        }
+      ],
+      "lesson": "Scale paid campaigns only after ROAS evidence is available.",
+      "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+      "reusableAcrossBusinesses": true,
+      "searchSupported": true
+    },
+    {
+      "category": "Product",
+      "evidence": [
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.86,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "departmentCount": 16,
+            "health": {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "cashFlowHealth": 52,
+              "customerHealth": 55,
+              "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+              "inventoryHealth": 60,
+              "marketingHealth": 80,
+              "operationsHealth": 91,
+              "overallBusinessHealthScore": 67,
+              "profitHealth": 78,
+              "revenueHealth": 50,
+              "status": "PRE_LAUNCH_ESTIMATE"
+            },
+            "knowledgeGraphNodes": 10
+          },
+          "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+          "lessons": [
+            "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+          ],
+          "type": "BUSINESS_OS_BASELINE"
+        },
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.82,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "health": {
+              "businessHealthScore": 73,
+              "customerHealth": 70,
+              "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+              "growthHealth": 72,
+              "healthRating": "Stable",
+              "historicalComparison": "FIRST_BASELINE",
+              "inventoryHealth": 80,
+              "marketingHealth": 76,
+              "operationalHealth": 82,
+              "productHealth": 78,
+              "revenueHealth": 55,
+              "score": 73,
+              "trends": {
+                "current": "BASELINE",
+                "direction": "PENDING_LIVE_DATA"
+              }
+            },
+            "launchId": "08220537-afd6-47db-a566-8692665879e9"
+          },
+          "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+          "lessons": [
+            "Launch readiness creates the first operating baseline before live order data arrives."
+          ],
+          "type": "BUSINESS_INTELLIGENCE_BASELINE"
+        }
+      ],
+      "lesson": "Variant-level catalogue data is required before inventory scaling.",
+      "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+      "reusableAcrossBusinesses": true,
+      "searchSupported": true
+    },
+    {
+      "category": "Sales",
+      "evidence": [
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.86,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "departmentCount": 16,
+            "health": {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "cashFlowHealth": 52,
+              "customerHealth": 55,
+              "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+              "inventoryHealth": 60,
+              "marketingHealth": 80,
+              "operationsHealth": 91,
+              "overallBusinessHealthScore": 67,
+              "profitHealth": 78,
+              "revenueHealth": 50,
+              "status": "PRE_LAUNCH_ESTIMATE"
+            },
+            "knowledgeGraphNodes": 10
+          },
+          "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+          "lessons": [
+            "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+          ],
+          "type": "BUSINESS_OS_BASELINE"
+        },
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.82,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "health": {
+              "businessHealthScore": 73,
+              "customerHealth": 70,
+              "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+              "growthHealth": 72,
+              "healthRating": "Stable",
+              "historicalComparison": "FIRST_BASELINE",
+              "inventoryHealth": 80,
+              "marketingHealth": 76,
+              "operationalHealth": 82,
+              "productHealth": 78,
+              "revenueHealth": 55,
+              "score": 73,
+              "trends": {
+                "current": "BASELINE",
+                "direction": "PENDING_LIVE_DATA"
+              }
+            },
+            "launchId": "08220537-afd6-47db-a566-8692665879e9"
+          },
+          "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+          "lessons": [
+            "Launch readiness creates the first operating baseline before live order data arrives."
+          ],
+          "type": "BUSINESS_INTELLIGENCE_BASELINE"
+        }
+      ],
+      "lesson": "Lead qualification should happen before founder time is spent.",
+      "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+      "reusableAcrossBusinesses": true,
+      "searchSupported": true
+    },
+    {
+      "category": "Operations",
+      "evidence": [
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.86,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "departmentCount": 16,
+            "health": {
+              "businessId": "08220537-afd6-47db-a566-8692665879e9",
+              "cashFlowHealth": 52,
+              "customerHealth": 55,
+              "explanation": "Health is estimated until Sprint 7 live metrics ingestion is connected.",
+              "inventoryHealth": 60,
+              "marketingHealth": 80,
+              "operationsHealth": 91,
+              "overallBusinessHealthScore": 67,
+              "profitHealth": 78,
+              "revenueHealth": 50,
+              "status": "PRE_LAUNCH_ESTIMATE"
+            },
+            "knowledgeGraphNodes": 10
+          },
+          "id": "08220537-afd6-47db-a566-8692665879e9__businessos-baseline",
+          "lessons": [
+            "Genesis v1 can coordinate Research through Executive Intelligence as one Business Operating System."
+          ],
+          "type": "BUSINESS_OS_BASELINE"
+        },
+        {
+          "businessId": "08220537-afd6-47db-a566-8692665879e9",
+          "confidence": 0.82,
+          "createdAt": "2026-07-01T15:41:50+00:00",
+          "evidence": {
+            "health": {
+              "businessHealthScore": 73,
+              "customerHealth": 70,
+              "explanation": "Baseline score uses launch readiness, catalogue completeness, and channel coverage until live metrics arrive.",
+              "growthHealth": 72,
+              "healthRating": "Stable",
+              "historicalComparison": "FIRST_BASELINE",
+              "inventoryHealth": 80,
+              "marketingHealth": 76,
+              "operationalHealth": 82,
+              "productHealth": 78,
+              "revenueHealth": 55,
+              "score": 73,
+              "trends": {
+                "current": "BASELINE",
+                "direction": "PENDING_LIVE_DATA"
+              }
+            },
+            "launchId": "08220537-afd6-47db-a566-8692665879e9"
+          },
+          "id": "7ee66cb9-cb4e-4d4a-871b-5a35e4f120c7",
+          "lessons": [
+            "Launch readiness creates the first operating baseline before live order data arrives."
+          ],
+          "type": "BUSINESS_INTELLIGENCE_BASELINE"
+        }
+      ],
+      "lesson": "Approval-gated launch manifests reduce irreversible execution risk.",
+      "linkedProjectId": "08220537-afd6-47db-a566-8692665879e9",
+      "reusableAcrossBusinesses": true,
+      "searchSupported": true
+    }
+  ],
+  "organizationalMemory": {
+    "auditRecorded": true,
+    "historicalRetrievalSupported": true,
+    "initialized": true,
+    "knowledgePersisted": true,
+    "searchSupported": true,
+    "stores": [
+      "businesses",
+      "projects",
+      "workflows",
+      "departmentDeliverables",
+      "executiveDecisions",
+      "productBlueprints",
+      "researchReports",
+      "marketingCampaigns",
+      "customerInsights",
+      "supplierHistory",
+      "financialMetrics",
+      "lessonsLearned",
+      "experiments",
+      "businessOutcomes"
+    ],
+    "versionHistoryMaintained": true
+  },
+  "outcomeLearning": {
+    "accuracyMeasured": {
+      "currentAccuracy": 0.78,
+      "method": "compare recommendation assumptions with future metrics"
+    },
+    "futureRecommendationsReferencePriorOutcomes": true,
+    "learningHistoryStored": true,
+    "predictionsComparedWithOutcomes": true,
+    "sources": [
+      "sales results",
+      "marketing performance",
+      "customer reviews",
+      "profitability",
+      "delivery metrics",
+      "founder feedback"
+    ]
+  },
+  "overallScore": 86,
+  "projectId": "08220537-afd6-47db-a566-8692665879e9",
+  "reportType": "ORGANIZATIONAL_INTELLIGENCE_REPORT",
+  "version": "2.0.0",
+  "workflowId": "dcecdf3f-9503-48ec-a344-fa7e15df2a18"
+}

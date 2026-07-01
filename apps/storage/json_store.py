@@ -83,6 +83,11 @@ class JsonStore:
         self.business_dashboards_dir = self.root / "business_dashboards"
         self.business_alerts_dir = self.root / "business_alerts"
         self.business_knowledge_dir = self.root / "business_knowledge"
+        self.organizational_intelligence_reports_dir = self.root / "organizational_intelligence_reports"
+        self.executive_knowledge_bases_dir = self.root / "executive_knowledge_bases"
+        self.v2_simulation_reports_dir = self.root / "v2_simulation_reports"
+        self.v2_decision_registers_dir = self.root / "v2_decision_registers"
+        self.executive_planning_reports_dir = self.root / "executive_planning_reports"
         for directory in [
             self.businesses_dir,
             self.founder_profiles_dir,
@@ -155,6 +160,11 @@ class JsonStore:
             self.business_dashboards_dir,
             self.business_alerts_dir,
             self.business_knowledge_dir,
+            self.organizational_intelligence_reports_dir,
+            self.executive_knowledge_bases_dir,
+            self.v2_simulation_reports_dir,
+            self.v2_decision_registers_dir,
+            self.executive_planning_reports_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -698,6 +708,38 @@ class JsonStore:
         entries = [self._read(path) for path in sorted(self.business_knowledge_dir.glob(f"{business_id}__*.json"))]
         entries.sort(key=lambda item: str(item.get("createdAt", "")))
         return entries
+
+    def save_organizational_intelligence_report(self, report: dict[str, Any]) -> None:
+        self._write(self.organizational_intelligence_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_organizational_intelligence_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.organizational_intelligence_reports_dir / f"{business_id}.json")
+
+    def save_executive_knowledge_base(self, business_id: str, knowledge_base: dict[str, Any]) -> None:
+        self._write(self.executive_knowledge_bases_dir / f"{business_id}.json", knowledge_base)
+
+    def get_executive_knowledge_base(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.executive_knowledge_bases_dir / f"{business_id}.json")
+
+    def save_v2_simulation_report(self, report: dict[str, Any]) -> None:
+        self._write(self.v2_simulation_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_v2_simulation_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.v2_simulation_reports_dir / f"{business_id}.json")
+
+    def append_v2_decision_register(self, business_id: str, decision: dict[str, Any]) -> None:
+        register = self.get_v2_decision_register(business_id) if (self.v2_decision_registers_dir / f"{business_id}.json").exists() else {"businessId": business_id, "decisions": []}
+        register["decisions"].append(decision)
+        self._write(self.v2_decision_registers_dir / f"{business_id}.json", register)
+
+    def get_v2_decision_register(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.v2_decision_registers_dir / f"{business_id}.json")
+
+    def save_executive_planning_report(self, report: dict[str, Any]) -> None:
+        self._write(self.executive_planning_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_executive_planning_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.executive_planning_reports_dir / f"{business_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

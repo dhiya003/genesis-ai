@@ -10,7 +10,10 @@
     "testing/fixtures/sample-business-operating-plan.json",
     "testing/fixtures/sample-organizational-intelligence-report.json",
     "testing/fixtures/sample-simulation-report.json",
-    "testing/fixtures/sample-executive-planning-report.json"
+    "testing/fixtures/sample-executive-planning-report.json",
+    "testing/fixtures/sample-opportunity-discovery-report.json",
+    "testing/fixtures/sample-execution-optimization-report.json",
+    "testing/fixtures/sample-enterprise-organization.json"
   ],
   "schemas": [
     "schemas/research-report.schema.json",

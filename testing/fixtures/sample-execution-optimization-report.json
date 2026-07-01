@@ -1,0 +1,355 @@
+{
+  "adaptiveGovernanceBoundary": {
+    "adaptiveIntelligenceAllowed": true,
+    "changesRequiringGovernance": [
+      "approval policy changes",
+      "budget limits",
+      "legal policies",
+      "security permissions"
+    ],
+    "governanceRulesProtected": true,
+    "notAppliedAutomatically": true
+  },
+  "businessId": "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c",
+  "collaborationOptimization": {
+    "crossDepartmentMetricsAvailable": true,
+    "duplicateWorkReduced": true,
+    "handoffImprovements": [
+      "include sales readiness in commerce package",
+      "feed BI baseline into planning"
+    ],
+    "handoffsImproved": true,
+    "knowledgeShared": true,
+    "metrics": [
+      "handoff completeness",
+      "rework rate",
+      "dependency wait time"
+    ]
+  },
+  "completionStatus": {
+    "executiveCouncilNotified": true,
+    "founderReceivesSummary": true,
+    "governedChangesNotAppliedAutomatically": true,
+    "improvementHistoryPreserved": true,
+    "learningAvailableForFutureExecution": true,
+    "optimizationCycleCompleted": true,
+    "recommendationsEvidenceBacked": true
+  },
+  "createdAt": "2026-07-01T15:54:57+00:00",
+  "employeeOptimization": {
+    "historicalTrendsAvailable": true,
+    "improvementOpportunities": [
+      "raise evidence requirements",
+      "add prompt examples"
+    ],
+    "improvementOpportunitiesGenerated": true,
+    "metrics": [
+      "task completion",
+      "accuracy",
+      "confidence",
+      "evidence quality",
+      "latency",
+      "cost",
+      "retry frequency",
+      "founder feedback"
+    ],
+    "metricsStored": true,
+    "performanceMeasured": true,
+    "weakPerformers": [
+      "employees with low confidence or repeated retry"
+    ],
+    "weakPerformersIdentified": true
+  },
+  "executiveOptimizationReport": {
+    "businessOutcomeImprovements": [
+      "compare outcome deltas after every approved change"
+    ],
+    "dashboardUpdated": true,
+    "departmentImprovements": [
+      "include sales readiness in commerce package",
+      "feed BI baseline into planning"
+    ],
+    "employeeImprovements": [
+      "raise evidence requirements",
+      "add prompt examples"
+    ],
+    "futureOptimizationRoadmap": [
+      "connect live channel metrics",
+      "expand outcome comparison",
+      "add approval SLA analytics"
+    ],
+    "generated": true,
+    "historicalComparisonAvailable": true,
+    "knowledgeStored": true,
+    "promptImprovements": [
+      "planning-first employee prompt",
+      "evidence-backed recommendation prompt"
+    ],
+    "recommendationAccuracy": {
+      "baseline": 0.78,
+      "target": 0.84
+    },
+    "resourceImprovements": [
+      "reuse organizational memory before new research",
+      "cap paid testing until BI threshold"
+    ],
+    "versionControlled": true,
+    "workflowImprovements": [
+      "parallelize independent employee runs",
+      "pre-check approval prerequisites"
+    ]
+  },
+  "optimizationEngine": {
+    "auditCreated": true,
+    "executiveDashboardUpdated": true,
+    "historicalDataLoaded": true,
+    "initialized": true,
+    "knowledgeGraphConnected": true,
+    "opportunityDiscoveryConnected": true,
+    "organizationalMemoryConnected": true,
+    "scope": [
+      "workflow execution",
+      "department coordination",
+      "AI employees",
+      "resource allocation",
+      "prompt selection",
+      "decision quality",
+      "business recommendations",
+      "report generation"
+    ]
+  },
+  "overallScore": 84,
+  "projectId": "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c",
+  "promptOptimization": {
+    "changeHistory": [
+      "baseline v1",
+      "v2 evidence extension"
+    ],
+    "changeHistoryPreserved": true,
+    "performanceMetricsStored": true,
+    "preferredPrompts": [
+      "planning-first employee prompt",
+      "evidence-backed recommendation prompt"
+    ],
+    "preferredPromptsIdentified": true,
+    "promptVersionsCompared": true,
+    "rollbackSupported": true
+  },
+  "recommendationOptimization": {
+    "accuracy": {
+      "baseline": 0.78,
+      "target": 0.84
+    },
+    "confidencePolicy": "lower confidence when actual outcomes are unavailable",
+    "confidenceRecalibrated": true,
+    "predictionAccuracyTracked": true,
+    "recommendationQualityMeasured": true,
+    "weakPatterns": [
+      "recommendations without live outcome evidence"
+    ],
+    "weakRecommendationPatternsIdentified": true
+  },
+  "reportType": "EXECUTION_OPTIMIZATION_REPORT",
+  "resourceOptimization": {
+    "conflicts": [
+      "budget scale before ROAS"
+    ],
+    "conflictsDetected": true,
+    "optimizationRecommendationsGenerated": true,
+    "recommendations": [
+      "reuse organizational memory before new research",
+      "cap paid testing until BI threshold"
+    ],
+    "resourceUtilizationAnalyzed": true,
+    "resources": {
+      "budget": "300000 INR",
+      "cash": "UNKNOWN_UNTIL_CONNECTED",
+      "constraints": [],
+      "founderAvailability": "Strategic approvals only",
+      "inventory": "MANUAL_CONFIRMATION_REQUIRED",
+      "supplierCapacity": {
+        "alternativeSuppliers": [
+          "Alibaba verified wooden toy supplier",
+          "Local CNC woodworking vendor",
+          "Print-and-pack assembly vendor"
+        ],
+        "comparison": {
+          "bestPilotSupplier": "Educational kit assembler placeholder",
+          "lowestMOQ": 100,
+          "lowestRiskScore": 38
+        },
+        "confidence": {
+          "level": "MEDIUM",
+          "score": 0.74
+        },
+        "contract": {
+          "inputSchema": {
+            "required": [
+              "bom",
+              "materialRecommendation",
+              "country"
+            ]
+          },
+          "name": "Supplier Analyst",
+          "outputSchema": {
+            "required": [
+              "shortlist",
+              "comparison",
+              "alternativeSuppliers"
+            ]
+          },
+          "promptContract": "Find supplier categories and shortlist assumptions for founder review.",
+          "retryPolicy": {
+            "maxAttempts": 2
+          },
+          "role": "Produce supplier shortlist, comparison, MOQ, lead time, and risk score.",
+          "section": "supplierRecommendations",
+          "timeoutSeconds": 30
+        },
+        "department": "PRODUCT",
+        "employeeId": "EMP-108",
+        "employeeName": "Supplier Analyst",
+        "projectId": "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c",
+        "risks": [],
+        "score": 78,
+        "section": "supplierRecommendations",
+        "shortlist": [
+          {
+            "capacity": "Pilot-ready; verify monthly capacity",
+            "category": "Wooden toys",
+            "country": "India",
+            "estimatedPricing": "INR 260-360 per starter set before final packaging",
+            "leadTimeDays": 21,
+            "linkedBomItems": [
+              "LUMA-001",
+              "LUMA-002"
+            ],
+            "location": "Karnataka / NCR supplier cluster",
+            "moq": 100,
+            "name": "India wooden toy manufacturer placeholder",
+            "productRange": [
+              "Wooden cubes",
+              "Painted learning toys",
+              "Starter educational kits"
+            ],
+            "qualityIndicators": [
+              "Sample approval required",
+              "Toy-safe coating declaration required"
+            ],
+            "riskScore": 42,
+            "risks": [
+              "Certification not verified",
+              "Paint finish consistency"
+            ]
+          },
+          {
+            "capacity": "Small-batch; verify repeatability",
+            "category": "Wood craft",
+            "country": "India",
+            "estimatedPricing": "INR 300-420 per starter set depending finish",
+            "leadTimeDays": 28,
+            "linkedBomItems": [
+              "LUMA-001",
+              "LUMA-002"
+            ],
+            "location": "Karnataka",
+            "moq": 150,
+            "name": "Channapatna craft cluster placeholder",
+            "productRange": [
+              "Hand-finished wooden toys",
+              "Lacquered educational pieces"
+            ],
+            "qualityIndicators": [
+              "Craft quality",
+              "Needs standardized tolerances"
+            ],
+            "riskScore": 48,
+            "risks": [
+              "Tolerance variation",
+              "Higher lead time"
+            ]
+          },
+          {
+            "capacity": "Pilot-ready",
+            "category": "Assembly and packaging",
+            "country": "India",
+            "estimatedPricing": "INR 80-140 assembly and printed collateral",
+            "leadTimeDays": 14,
+            "linkedBomItems": [
+              "LUMA-003",
+              "LUMA-004"
+            ],
+            "location": "Mumbai / Delhi NCR print-and-pack vendor base",
+            "moq": 100,
+            "name": "Educational kit assembler placeholder",
+            "productRange": [
+              "Kit collation",
+              "Activity cards",
+              "Retail packaging"
+            ],
+            "qualityIndicators": [
+              "Packaging sample required",
+              "Barcode and label check required"
+            ],
+            "riskScore": 38,
+            "risks": [
+              "Needs coordination with component supplier"
+            ]
+          }
+        ],
+        "status": "COMPLETED",
+        "supplierAssumptions": [
+          "Supplier names are placeholders until live supplier research credentials are connected.",
+          "Founder must verify certifications and samples."
+        ],
+        "validation": {
+          "business": "PASS",
+          "confidence": "PASS",
+          "engineering": "PASS",
+          "risk": "PASS",
+          "schema": "PASS"
+        },
+        "workflowId": "5b390995-da37-4a70-b2b3-08d2a3a045a1"
+      }
+    },
+    "tradeOffsExplained": true,
+    "waste": [
+      "duplicate report summaries"
+    ],
+    "wasteIdentified": true
+  },
+  "selfEvaluation": {
+    "evaluationReportsGenerated": true,
+    "evaluationScheduleSupported": true,
+    "improvementBacklog": [
+      "connect live channel metrics",
+      "expand outcome comparison",
+      "add approval SLA analytics"
+    ],
+    "improvementBacklogGenerated": true,
+    "schedule": "after every completed BusinessOS or v2 cycle",
+    "weaknesses": [
+      "live credential dependency",
+      "limited external market data"
+    ],
+    "weaknessesIdentified": true
+  },
+  "version": "2.1.0",
+  "workflowId": "8340a818-a8e5-44b9-901b-06e25fbf623e",
+  "workflowOptimization": {
+    "bottlenecks": [
+      "approval waits",
+      "serial report validation"
+    ],
+    "bottlenecksDetected": true,
+    "expectedImpact": "10-18% faster deterministic flow",
+    "expectedImpactEstimated": true,
+    "founderApprovalRequiredForGovernedChanges": true,
+    "historicalComparisonAvailable": true,
+    "improvementSuggestionsGenerated": true,
+    "suggestions": [
+      "parallelize independent employee runs",
+      "pre-check approval prerequisites"
+    ]
+  }
+}

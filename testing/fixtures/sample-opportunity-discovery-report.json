@@ -1,0 +1,435 @@
+{
+  "auditSummary": {
+    "recorded": true,
+    "workflowId": "f73b8921-6b26-4673-a725-dfee5df53db6"
+  },
+  "businessId": "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c",
+  "competitorWeaknesses": [
+    {
+      "businessOpportunityLinked": "position beech wood durability",
+      "competitorSignal": "Poor reviews on durability",
+      "recommendation": "Highlight durability and replacement policy.",
+      "supportingEvidenceRetained": true,
+      "weaknessIdentified": true
+    },
+    {
+      "businessOpportunityLinked": "seasonal pre-order offer",
+      "competitorSignal": "Stock shortages during school season",
+      "recommendation": "Launch school-season preorder campaign.",
+      "supportingEvidenceRetained": true,
+      "weaknessIdentified": true
+    }
+  ],
+  "completionStatus": {
+    "departmentCompleted": true,
+    "executiveCouncilNotified": true,
+    "founderNotified": true,
+    "futureMonitoringScheduled": true,
+    "knowledgeAvailableForFuturePlanning": true,
+    "opportunityPipelineCreated": true,
+    "recommendationsStored": true
+  },
+  "createdAt": "2026-07-01T15:54:57+00:00",
+  "customerNeeds": {
+    "customerSegmentsUpdated": true,
+    "frequentlyRequestedFeatures": [
+      "difficulty levels",
+      "storage box",
+      "guide cards"
+    ],
+    "newOpportunitiesGenerated": [
+      "activity-card subscription",
+      "teacher kit"
+    ],
+    "painPointsIdentified": [
+      "parents want screen-free learning",
+      "teachers need structured activities"
+    ]
+  },
+  "discoveryEngine": {
+    "auditRecorded": true,
+    "dashboardUpdated": true,
+    "dataSourcesConnected": true,
+    "discoveryHistoryMaintained": true,
+    "initialized": true,
+    "monitoringScheduleCreated": true,
+    "organizationalMemoryConnected": true,
+    "sources": [
+      "market trends",
+      "search trends",
+      "competitor activity",
+      "customer feedback",
+      "product performance",
+      "supplier changes",
+      "technology trends",
+      "seasonal trends",
+      "internal business data",
+      "organizational memory"
+    ]
+  },
+  "executiveOpportunityReport": {
+    "downloadable": true,
+    "executiveSummary": "Genesis discovered product, market, pricing, supplier, and growth opportunities from the v2 intelligence baseline.",
+    "generated": true,
+    "linkedToBusinessMemory": true,
+    "opportunityHistoryPreserved": true,
+    "rankings": [
+      {
+        "dependencies": [
+          "supplier sample",
+          "creative pack"
+        ],
+        "expectedRoi": "2.1x",
+        "growthType": "Product Expansion",
+        "investmentEstimate": 75000,
+        "priority": 1,
+        "recommendation": "Validate with teacher and parent segments.",
+        "risksExplained": [
+          "manufacturing validation"
+        ]
+      },
+      {
+        "dependencies": [
+          "localized ads",
+          "inventory"
+        ],
+        "expectedRoi": "1.7x",
+        "growthType": "Market Expansion",
+        "investmentEstimate": 50000,
+        "priority": 2,
+        "recommendation": "Enter Bengaluru preschool parents first.",
+        "risksExplained": [
+          "local competition"
+        ]
+      },
+      {
+        "dependencies": [
+          "customer feedback",
+          "content calendar"
+        ],
+        "expectedRoi": "2.4x after retention proof",
+        "growthType": "Subscription",
+        "investmentEstimate": 90000,
+        "priority": 3,
+        "recommendation": "Validate activity-card subscription after repeat purchases.",
+        "risksExplained": [
+          "retention uncertainty"
+        ]
+      }
+    ],
+    "recommendedActions": [
+      "Validate top product opportunity",
+      "Run pricing simulation",
+      "Request supplier comparison"
+    ],
+    "risks": [
+      "live external trend feeds not connected"
+    ],
+    "searchable": true,
+    "versionControlled": true
+  },
+  "growthOpportunities": [
+    {
+      "dependencies": [
+        "supplier sample",
+        "creative pack"
+      ],
+      "expectedRoi": "2.1x",
+      "growthType": "Product Expansion",
+      "investmentEstimate": 75000,
+      "priority": 1,
+      "recommendation": "Validate with teacher and parent segments.",
+      "risksExplained": [
+        "manufacturing validation"
+      ]
+    },
+    {
+      "dependencies": [
+        "localized ads",
+        "inventory"
+      ],
+      "expectedRoi": "1.7x",
+      "growthType": "Market Expansion",
+      "investmentEstimate": 50000,
+      "priority": 2,
+      "recommendation": "Enter Bengaluru preschool parents first.",
+      "risksExplained": [
+        "local competition"
+      ]
+    },
+    {
+      "dependencies": [
+        "customer feedback",
+        "content calendar"
+      ],
+      "expectedRoi": "2.4x after retention proof",
+      "growthType": "Subscription",
+      "investmentEstimate": 90000,
+      "priority": 3,
+      "recommendation": "Validate activity-card subscription after repeat purchases.",
+      "risksExplained": [
+        "retention uncertainty"
+      ]
+    }
+  ],
+  "marketOpportunities": [
+    {
+      "entryRisks": [
+        "local competition"
+      ],
+      "expansionFeasibility": "HIGH",
+      "expectedRevenue": 180000,
+      "market": "Bengaluru preschool parents",
+      "recommendedSequence": 1,
+      "type": "City"
+    },
+    {
+      "entryRisks": [
+        "bulk discount pressure"
+      ],
+      "expansionFeasibility": "MEDIUM",
+      "expectedRevenue": 120000,
+      "market": "Teacher kits",
+      "recommendedSequence": 2,
+      "type": "Customer Segment"
+    }
+  ],
+  "opportunityPipeline": {
+    "created": true,
+    "futureMonitoringSchedule": "weekly",
+    "items": [
+      {
+        "dependencies": [
+          "supplier sample",
+          "creative pack"
+        ],
+        "expectedRoi": "2.1x",
+        "growthType": "Product Expansion",
+        "investmentEstimate": 75000,
+        "priority": 1,
+        "recommendation": "Validate with teacher and parent segments.",
+        "risksExplained": [
+          "manufacturing validation"
+        ]
+      },
+      {
+        "dependencies": [
+          "localized ads",
+          "inventory"
+        ],
+        "expectedRoi": "1.7x",
+        "growthType": "Market Expansion",
+        "investmentEstimate": 50000,
+        "priority": 2,
+        "recommendation": "Enter Bengaluru preschool parents first.",
+        "risksExplained": [
+          "local competition"
+        ]
+      },
+      {
+        "dependencies": [
+          "customer feedback",
+          "content calendar"
+        ],
+        "expectedRoi": "2.4x after retention proof",
+        "growthType": "Subscription",
+        "investmentEstimate": 90000,
+        "priority": 3,
+        "recommendation": "Validate activity-card subscription after repeat purchases.",
+        "risksExplained": [
+          "retention uncertainty"
+        ]
+      },
+      {
+        "confidence": 0.82,
+        "estimatedMargin": "42-48%",
+        "estimatedMarketSize": "medium-high India metro demand",
+        "opportunityName": "Montessori logic expansion pack",
+        "opportunityScore": 88,
+        "recommendation": "Validate with teacher and parent segments.",
+        "risks": [
+          "supplier sample validation"
+        ],
+        "supportingEvidence": [
+          "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c"
+        ]
+      }
+    ],
+    "prioritized": true
+  },
+  "overallScore": 85,
+  "pricingOpportunities": [
+    {
+      "confidenceDisplayed": 0.78,
+      "marginImpactEstimated": "+6 margin points",
+      "recommendationGenerated": true,
+      "risksDocumented": [
+        "conversion risk"
+      ],
+      "strategy": "Premium pricing"
+    },
+    {
+      "confidenceDisplayed": 0.81,
+      "marginImpactEstimated": "+12% AOV",
+      "recommendationGenerated": true,
+      "risksDocumented": [
+        "inventory complexity"
+      ],
+      "strategy": "Bundle pricing"
+    }
+  ],
+  "productOpportunities": [
+    {
+      "confidence": 0.82,
+      "estimatedMargin": "42-48%",
+      "estimatedMarketSize": "medium-high India metro demand",
+      "opportunityName": "Montessori logic expansion pack",
+      "opportunityScore": 88,
+      "recommendation": "Validate with teacher and parent segments.",
+      "risks": [
+        "supplier sample validation"
+      ],
+      "supportingEvidence": [
+        "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c"
+      ]
+    },
+    {
+      "confidence": 0.76,
+      "estimatedMargin": "38-44%",
+      "estimatedMarketSize": "preschool B2B niche",
+      "opportunityName": "Premium classroom bundle",
+      "opportunityScore": 81,
+      "recommendation": "Pilot with 3 preschools before scale.",
+      "risks": [
+        "longer sales cycle"
+      ],
+      "supportingEvidence": [
+        {
+          "evidence": [
+            {
+              "contents": [
+                "Core product",
+                "Simple packaging"
+              ],
+              "level": "Starter",
+              "name": "Luma Logic Cubes Starter",
+              "purpose": "Validate demand with minimum inventory risk"
+            },
+            {
+              "contents": [
+                "Core product",
+                "Bonus item",
+                "Gift-ready packaging"
+              ],
+              "level": "Standard",
+              "name": "Luma Logic Cubes Standard",
+              "purpose": "Increase perceived value"
+            },
+            {
+              "contents": [
+                "Expanded product set",
+                "Premium packaging"
+              ],
+              "level": "Premium",
+              "name": "Luma Logic Cubes Premium",
+              "purpose": "Serve gifting and higher-margin buyers"
+            },
+            {
+              "contents": [
+                "Multiple units",
+                "Occasion-based bundle"
+              ],
+              "level": "Bundle",
+              "name": "Luma Logic Cubes Bundle",
+              "purpose": "Raise average order value"
+            },
+            {
+              "contents": [
+                "Recurring monthly variation"
+              ],
+              "level": "Subscription",
+              "name": "Luma Logic Cubes Club",
+              "purpose": "Test repeat purchase potential"
+            },
+            {
+              "contents": [
+                "Replacement or add-on parts"
+              ],
+              "level": "Accessories",
+              "name": "Luma Logic Cubes Accessories",
+              "purpose": "Create low-cost upsells"
+            },
+            {
+              "contents": [
+                "New themes",
+                "Advanced variants"
+              ],
+              "level": "Expansion Packs",
+              "name": "Luma Logic Cubes Expansion Pack",
+              "purpose": "Build a product family"
+            }
+          ],
+          "opportunity": "Bundle Starter and Premium variants",
+          "priority": "HIGH",
+          "type": "bundle"
+        },
+        {
+          "evidence": [
+            "Activity card expansion pack",
+            "Gift wrap"
+          ],
+          "opportunity": "Expansion activity-card pack",
+          "priority": "MEDIUM",
+          "type": "upsell"
+        },
+        {
+          "evidence": [
+            {
+              "budgetAllocation": 12000,
+              "channel": "Instagram",
+              "priority": 1,
+              "strength": "Visual trust and parent discovery"
+            },
+            {
+              "budgetAllocation": 8000,
+              "channel": "Marketplace",
+              "priority": 2,
+              "strength": "Conversion intent"
+            },
+            {
+              "budgetAllocation": 3000,
+              "channel": "WhatsApp",
+              "priority": 3,
+              "strength": "Warm lead conversion"
+            },
+            {
+              "budgetAllocation": 5000,
+              "channel": "SEO",
+              "priority": 4,
+              "strength": "Compounding discovery"
+            }
+          ],
+          "opportunity": "Preschool partnership pilot",
+          "priority": "MEDIUM",
+          "type": "channel expansion"
+        }
+      ]
+    }
+  ],
+  "projectId": "0df5acf6-a94f-4bc6-94f9-da7ae6e25e7c",
+  "reportType": "OPPORTUNITY_DISCOVERY_REPORT",
+  "supplierOpportunities": [
+    {
+      "betterSupplierIdentified": true,
+      "estimatedSavings": "8-12%",
+      "migrationRecommendation": "Request sample and second quote before migrating.",
+      "risksAssessed": [
+        "sample quality",
+        "lead time"
+      ],
+      "supplierType": "regional wooden toy manufacturer"
+    }
+  ],
+  "version": "2.1.0",
+  "workflowId": "f73b8921-6b26-4673-a725-dfee5df53db6"
+}

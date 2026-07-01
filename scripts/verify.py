@@ -24,6 +24,7 @@ REQUIRED_PATHS = [
     "apps/businessos/runtime.py",
     "apps/analytics/runtime.py",
     "apps/intelligence/runtime.py",
+    "apps/enterprise/runtime.py",
     "apps/dashboard.py",
     "apps/security.py",
     "apps/founder/management.py",
@@ -46,6 +47,9 @@ REQUIRED_PATHS = [
     "scripts/validate_organizational_intelligence_report.py",
     "scripts/validate_simulation_report.py",
     "scripts/validate_executive_planning_report.py",
+    "scripts/validate_opportunity_discovery_report.py",
+    "scripts/validate_execution_optimization_report.py",
+    "scripts/validate_enterprise_organization.py",
     "tests/test_sprint2_e2e.py",
     "tests/test_api_http_e2e.py",
     "tests/test_research_providers.py",
@@ -79,6 +83,9 @@ REQUIRED_PATHS = [
     "testing/fixtures/sample-organizational-intelligence-report.json",
     "testing/fixtures/sample-simulation-report.json",
     "testing/fixtures/sample-executive-planning-report.json",
+    "testing/fixtures/sample-opportunity-discovery-report.json",
+    "testing/fixtures/sample-execution-optimization-report.json",
+    "testing/fixtures/sample-enterprise-organization.json",
     "docs/sprint-2-run-guide.md",
     "docs/sprint-2-provider-guide.md",
     "docs/sprint-3-kickoff.md",
@@ -95,6 +102,7 @@ REQUIRED_PATHS = [
     "docs/epic-09-10-marketing-sales-validation.md",
     "docs/epic-11-13-commerce-bi-executive-validation.md",
     "docs/epic-14-16-v2-intelligence-validation.md",
+    "docs/epic-17-19-v2-v3-validation.md",
     "database/migrations/0002_epic_01_founder_business_management.sql",
     "database/migrations/0003_project_workflow_lifecycle.sql",
 ]
@@ -120,6 +128,9 @@ JSON_PATHS = [
     "testing/fixtures/sample-organizational-intelligence-report.json",
     "testing/fixtures/sample-simulation-report.json",
     "testing/fixtures/sample-executive-planning-report.json",
+    "testing/fixtures/sample-opportunity-discovery-report.json",
+    "testing/fixtures/sample-execution-optimization-report.json",
+    "testing/fixtures/sample-enterprise-organization.json",
 ]
 
 COMMANDS = [
@@ -137,6 +148,9 @@ COMMANDS = [
     ([sys.executable, "scripts/validate_organizational_intelligence_report.py"], "organizational intelligence report validation"),
     ([sys.executable, "scripts/validate_simulation_report.py"], "simulation report validation"),
     ([sys.executable, "scripts/validate_executive_planning_report.py"], "executive planning report validation"),
+    ([sys.executable, "scripts/validate_opportunity_discovery_report.py"], "opportunity discovery report validation"),
+    ([sys.executable, "scripts/validate_execution_optimization_report.py"], "execution optimization report validation"),
+    ([sys.executable, "scripts/validate_enterprise_organization.py"], "enterprise organization validation"),
     ([sys.executable, "scripts/sprint2_e2e.py"], "Sprint 2 e2e acceptance"),
 ]
 

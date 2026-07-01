@@ -15,6 +15,7 @@ This folder contains the Genesis AI Engineering Handbook and supporting implemen
 - [Epic 09-10 Marketing and Sales Validation](epic-09-10-marketing-sales-validation.md)
 - [Epic 11-13 Commerce, BI, and Executive Intelligence Validation](epic-11-13-commerce-bi-executive-validation.md)
 - [Epic 14-16 Genesis v2 Intelligence Validation](epic-14-16-v2-intelligence-validation.md)
+- [Epic 17-19 Genesis v2/v3 Validation](epic-17-19-v2-v3-validation.md)
 
 ## Sprint 1 Documentation Sets
 

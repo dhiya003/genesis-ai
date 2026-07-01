@@ -88,6 +88,9 @@ class JsonStore:
         self.v2_simulation_reports_dir = self.root / "v2_simulation_reports"
         self.v2_decision_registers_dir = self.root / "v2_decision_registers"
         self.executive_planning_reports_dir = self.root / "executive_planning_reports"
+        self.opportunity_discovery_reports_dir = self.root / "opportunity_discovery_reports"
+        self.execution_optimization_reports_dir = self.root / "execution_optimization_reports"
+        self.enterprise_organizations_dir = self.root / "enterprise_organizations"
         for directory in [
             self.businesses_dir,
             self.founder_profiles_dir,
@@ -165,6 +168,9 @@ class JsonStore:
             self.v2_simulation_reports_dir,
             self.v2_decision_registers_dir,
             self.executive_planning_reports_dir,
+            self.opportunity_discovery_reports_dir,
+            self.execution_optimization_reports_dir,
+            self.enterprise_organizations_dir,
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -740,6 +746,24 @@ class JsonStore:
 
     def get_executive_planning_report(self, business_id: str) -> dict[str, Any]:
         return self._read(self.executive_planning_reports_dir / f"{business_id}.json")
+
+    def save_opportunity_discovery_report(self, report: dict[str, Any]) -> None:
+        self._write(self.opportunity_discovery_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_opportunity_discovery_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.opportunity_discovery_reports_dir / f"{business_id}.json")
+
+    def save_execution_optimization_report(self, report: dict[str, Any]) -> None:
+        self._write(self.execution_optimization_reports_dir / f"{report['businessId']}.json", report)
+
+    def get_execution_optimization_report(self, business_id: str) -> dict[str, Any]:
+        return self._read(self.execution_optimization_reports_dir / f"{business_id}.json")
+
+    def save_enterprise_organization(self, organization: dict[str, Any]) -> None:
+        self._write(self.enterprise_organizations_dir / f"{organization['organizationId']}.json", organization)
+
+    def get_enterprise_organization(self, organization_id: str) -> dict[str, Any]:
+        return self._read(self.enterprise_organizations_dir / f"{organization_id}.json")
 
     def save_product_knowledge(self, entry: dict[str, Any]) -> None:
         project_id = entry["projectId"]

@@ -301,6 +301,46 @@ class ApiHttpE2ETests(unittest.TestCase):
                     self.assertEqual(response.status, 200)
                     planning_report = json.loads(response.read().decode("utf-8"))
 
+                discovery_request = request.Request(
+                    f"http://{host}:{port}/v2/opportunity-discovery/generate",
+                    data=json.dumps({"businessId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(discovery_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    discovery_run = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/v2/opportunity-discovery/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    discovery_report = json.loads(response.read().decode("utf-8"))
+
+                optimization_request = request.Request(
+                    f"http://{host}:{port}/v2/optimization/generate",
+                    data=json.dumps({"businessId": project_id}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(optimization_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    optimization_run = json.loads(response.read().decode("utf-8"))
+                with request.urlopen(f"http://{host}:{port}/v2/optimization/{project_id}/report", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    optimization_report = json.loads(response.read().decode("utf-8"))
+
+                enterprise_request = request.Request(
+                    f"http://{host}:{port}/enterprise/organizations",
+                    data=json.dumps({"name": "Genesis Enterprise"}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                with request.urlopen(enterprise_request, timeout=10) as response:
+                    self.assertEqual(response.status, 201)
+                    enterprise_run = json.loads(response.read().decode("utf-8"))
+                organization_id = enterprise_run["enterpriseOrganization"]["organizationId"]
+                with request.urlopen(f"http://{host}:{port}/enterprise/{organization_id}", timeout=10) as response:
+                    self.assertEqual(response.status, 200)
+                    enterprise_organization = json.loads(response.read().decode("utf-8"))
+
                 self.assertEqual(report["reportType"], "RESEARCH_REPORT")
                 self.assertEqual(report["projectId"], project_id)
                 self.assertIn("executiveSummary", report)
@@ -369,6 +409,12 @@ class ApiHttpE2ETests(unittest.TestCase):
                 self.assertTrue(simulation_report["executiveRecommendation"]["bestScenarioSelected"])
                 self.assertEqual(planning_run["executivePlanningReport"]["reportType"], "EXECUTIVE_PLANNING_REPORT")
                 self.assertTrue(planning_report["completionStatus"]["executivePlanningMarkedComplete"])
+                self.assertEqual(discovery_run["opportunityDiscoveryReport"]["reportType"], "OPPORTUNITY_DISCOVERY_REPORT")
+                self.assertTrue(discovery_report["opportunityPipeline"]["created"])
+                self.assertEqual(optimization_run["executionOptimizationReport"]["reportType"], "EXECUTION_OPTIMIZATION_REPORT")
+                self.assertTrue(optimization_report["adaptiveGovernanceBoundary"]["governanceRulesProtected"])
+                self.assertEqual(enterprise_run["enterpriseOrganization"]["reportType"], "ENTERPRISE_ORGANIZATION")
+                self.assertTrue(enterprise_organization["completionStatus"]["enterprisePlatformOperational"])
                 self.assertIn("trendAnalysis", report)
                 self.assertIn("competitorAnalysis", report)
                 self.assertIn("customerAnalysis", report)

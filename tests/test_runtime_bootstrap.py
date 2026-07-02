@@ -40,6 +40,14 @@ class RuntimeBootstrapTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             load_runtime_config({"GENESIS_API_PORT": "not-a-port"})
 
+    def test_runtime_config_uses_render_port_fallback(self) -> None:
+        config = load_runtime_config({"PORT": "10000"})
+        self.assertEqual(config.api_port, 10000)
+
+    def test_runtime_config_prefers_explicit_genesis_api_port(self) -> None:
+        config = load_runtime_config({"PORT": "10000", "GENESIS_API_PORT": "9000"})
+        self.assertEqual(config.api_port, 9000)
+
     def test_worker_health_contains_queue(self) -> None:
         payload = worker_health(RuntimeConfig(worker_queue_name="test-queue"))
         self.assertEqual(payload["status"], "ok")

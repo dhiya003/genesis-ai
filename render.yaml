@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: genesis-ai-private-alpha
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: GENESIS_APP_NAME
+        value: genesis-ai
+      - key: GENESIS_ENV
+        value: private-alpha
+      - key: GENESIS_LOG_LEVEL
+        value: INFO
+      - key: GENESIS_API_HOST
+        value: 0.0.0.0
+      - key: GENESIS_DATA_DIR
+        value: /tmp/genesis-data
+      - key: GENESIS_AUTH_MODE
+        value: api_key
+      - key: GENESIS_API_KEYS
+        sync: false
+      - key: GENESIS_TENANT_ID
+        value: genesis-private-alpha
+      - key: GENESIS_REQUIRE_TENANT_HEADER
+        value: "true"
+      - key: GENESIS_RESEARCH_PROVIDER
+        value: deterministic
+      - key: GENESIS_CREATIVE_IMAGE_PROVIDER
+        value: deterministic
